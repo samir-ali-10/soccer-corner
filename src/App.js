@@ -1,8 +1,16 @@
+import { Route, Routes } from 'react-router';
 import './App.css';
+import Navigation from './components/Navigation';
+import AdminView from './views/AdminView';
 
 function App() {
   return (
-    <p>lreomsldfnlskdnflsndf</p>
+    <>
+      <Navigation />
+      <Routes>
+        <Route path="/adminSecret" element={<AdminView />} />
+      </Routes>
+    </>
   );
 }
 

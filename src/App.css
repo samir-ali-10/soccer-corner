@@ -1,3 +1,49 @@
-p {
-  color: blue;
+/************************************ Global *********************************/
+
+a {
+  text-decoration: none !important;
+}
+
+ul {
+  list-style: none;
+  padding: 0 !important;
+}
+
+/************************************ NavBar *********************************/
+.navigation {}
+
+.navigation .logo {
+  margin-right: 20px;
+}
+
+.navbar-nav {
+  --bs-nav-link-padding-y: 0 !important;
+}
+
+.navbar-nav > * {
+  margin-right: 20px;
+  color: black;
+}
+
+.navbar-collapse {
+  flex-grow: initial !important;
+}
+
+.navigation .drop_down .dropdown-menu {
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation .drop_down .dropdown-menu a {
+  color: black;
+}
+
+.navigation .actions {
+  margin-left: 100px;
+}
+
+.navigation .actions a {
+  margin-right: 15px;
+  color: black;
 }
