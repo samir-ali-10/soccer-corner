@@ -1,3 +1,7 @@
+:root {
+  --secondary-color: #f2eee7;
+}
+
 /************************************ Global *********************************/
 
 a {
@@ -10,7 +14,6 @@ ul {
 }
 
 /************************************ NavBar *********************************/
-.navigation {}
 
 .navigation .logo {
   margin-right: 20px;
@@ -20,7 +23,7 @@ ul {
   --bs-nav-link-padding-y: 0 !important;
 }
 
-.navbar-nav > * {
+.navbar-nav>* {
   margin-right: 20px;
   color: black;
 }
@@ -46,4 +49,117 @@ ul {
 .navigation .actions a {
   margin-right: 15px;
   color: black;
+}
+
+.navigation .navbar-toggler {
+  background-color: white;
+  padding: 10px;
+  vertical-align: top;
+  box-shadow: 2px 1px 2px gray;
+  margin: 4px 10px 4px 10px;
+}
+
+.navigation .navbar-toggler:focus {
+  box-shadow: 2px 1px 2px gray;
+}
+
+.navigation .navbar-toggler:active {
+  box-shadow: 0 0 0 white;
+  margin: 6px 10px 2px 10px;
+}
+
+/************************ Admin ***************************/
+
+.admin_home {
+  margin-top: 100px;
+}
+
+.admin_home .selections {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
+  gap: 20px;
+}
+
+.admin_home .selections .selection {
+  background-color: var(--secondary-color);
+  color: black;
+  min-height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.admin_home .selections .selection h3 {
+  background-color: #f8f9fa;
+  padding: 5px 15px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+
+.admin_home .selections .selection .icon {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin_home .selections .selection .icon svg {
+  font-size: 1.8rem;
+}
+
+/************************ Reviews Admin ***************************/
+
+.reviews_admin .reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
+  gap: 20px;
+}
+
+.reviews_admin .reviews .review {
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: fit-content;
+}
+
+.reviews_admin .reviews .review .content {
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+}
+
+.reviews_admin .reviews .review .info {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.reviews_admin .reviews .review .stars svg {
+  color: #fdcc0d;
+}
+
+
+
+
+/************************ Media Query ***************************/
+@media (max-width: 992px) {
+  .navigation .actions {
+    margin-left: 0;
+  }
+
+  .navbar-nav>* {
+    margin-bottom: 10px;
+  }
 }
