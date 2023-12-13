@@ -1,12 +1,14 @@
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { faLeftLong, faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Container } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
 
 export default function ReviewsAdmin() {
     return (
         <div className='reviews_admin mt-3'>
             <Container>
+                <NavLink to="/adminSecret" className="back_to_admin"><FontAwesomeIcon icon={faLeftLong} />Back to admin dashboard</NavLink>
                 <h1 className='text-center mb-5'>Reviews</h1>
                 <div className="reviews">
                     <div className="review">

@@ -1,5 +1,5 @@
 import { faEnvelope, faFaceAngry } from '@fortawesome/free-regular-svg-icons'
-import { faPlus, faWarehouse } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRotateLeft, faCartFlatbedSuitcase, faPlus, faWarehouse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Container } from 'react-bootstrap'
@@ -10,7 +10,7 @@ export default function AdminView() {
         <div className='admin_home'>
             <Container>
                 <div className="selections">
-                    <NavLink to="" className="selection">
+                    <NavLink to="/adminSecret/addProducts" className="selection">
                         <h3>Add a new products</h3>
                         <div className="icon">
                             <FontAwesomeIcon icon={faPlus} />
@@ -32,6 +32,18 @@ export default function AdminView() {
                         <h3>Complains</h3>
                         <div className="icon">
                             <FontAwesomeIcon icon={faFaceAngry} />
+                        </div>
+                    </NavLink>
+                    <NavLink to="" className="selection">
+                        <h3>New Orders</h3>
+                        <div className="icon">
+                            <FontAwesomeIcon icon={faCartFlatbedSuitcase} />
+                        </div>
+                    </NavLink>
+                    <NavLink to="" className="selection">
+                        <h3>Returns</h3>
+                        <div className="icon">
+                            <FontAwesomeIcon icon={faArrowRotateLeft} />
                         </div>
                     </NavLink>
                 </div>
