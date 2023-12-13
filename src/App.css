@@ -1,3 +1,286 @@
-p {
-  color: blue;
+:root {
+  --text-color: black;
+  --primary-color: white;
+  --secondary-color: #f2eee7;
+}
+
+/************************************ Global *********************************/
+
+a {
+  text-decoration: none !important;
+}
+
+ul {
+  list-style: none;
+  padding: 0 !important;
+}
+
+/************************************ NavBar *********************************/
+
+.navigation {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.navigation .logo {
+  margin-right: 20px;
+}
+
+.navbar-nav {
+  --bs-nav-link-padding-y: 0 !important;
+}
+
+.navbar-nav>* {
+  margin-right: 20px;
+  color: var(--text-color);
+}
+
+.navbar-collapse {
+  flex-grow: initial !important;
+  text-align: right;
+  align-items: unset;
+  margin-top: 10px;
+}
+
+.navigation .drop_down .dropdown-menu {
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation .drop_down .dropdown-menu a {
+  color: var(--text-color);
+}
+
+.navigation .actions {
+  margin-left: 100px;
+}
+
+.navigation .actions a {
+  margin-right: 15px;
+  color: var(--text-color);
+}
+
+.navigation .navbar-toggler {
+  background-color: var(--primary-color);
+  padding: 10px;
+  vertical-align: top;
+  box-shadow: 2px 1px 2px gray;
+  margin: 4px 10px 4px 10px;
+}
+
+.navigation .navbar-toggler:focus {
+  box-shadow: 2px 1px 2px gray;
+}
+
+.navigation .navbar-toggler:active {
+  box-shadow: 0 0 0 var(--primary-color);
+  margin: 6px 10px 2px 10px;
+}
+
+/************************ Admin ***************************/
+
+.admin_home {
+  margin-top: 100px;
+}
+
+.admin_home .selections {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
+  gap: 20px;
+}
+
+.admin_home .selections .selection {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  min-height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.admin_home .selections .selection h3 {
+  background-color: #f8f9fa;
+  padding: 5px 15px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+
+.admin_home .selections .selection .icon {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin_home .selections .selection .icon svg {
+  font-size: 2.5rem;
+}
+
+/************************ Reviews Admin ***************************/
+
+.reviews_admin .reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
+  gap: 20px;
+}
+
+.reviews_admin .back_to_admin {
+  color: var(--text-color);
+}
+
+.reviews_admin .back_to_admin svg {
+  margin-right: 10px;
+}
+
+.reviews_admin .back_to_admin:hover svg {
+  animation: animateArrow .3 ease-in-out;
+  -webkit-animation: animateArrow .3 ease-in-out;
+}
+
+.reviews_admin .reviews .review {
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: fit-content;
+}
+
+.reviews_admin .reviews .review .content {
+  border-bottom: 1px solid var(--text-color);
+  padding-bottom: 15px;
+}
+
+.reviews_admin .reviews .review .info {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.reviews_admin .reviews .review .stars svg {
+  color: #fdcc0d;
+}
+
+@keyframes animateArrow {
+  0% {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-10px);
+    -webkit-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    -ms-transform: translateX(-10px);
+    -o-transform: translateX(-10px);
+  }
+}
+
+/************************ Home ***************************/
+
+.home_page .carousel-item {
+  position: relative;
+  height: 750px;
+}
+
+.home_page .carousel-item::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.285);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home_page .carousel-item img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.home_page .carousel-caption {
+  top: 50%;
+}
+
+.home_page .carousel-caption h2 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.home_page .carousel-caption button {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.home_page .carousel-caption button:hover,
+.home_page .carousel-caption button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.home_page .carousel-caption button:hover {
+  transform: translateY(-1px);
+}
+
+.home_page .carousel-caption button:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+/************************ Add Products ***************************/
+
+.add_products .terms_and_conditions input {
+}
+
+
+/************************ Media Query ***************************/
+@media (max-width: 992px) {
+  .navigation .actions {
+    margin-left: 0;
+  }
+
+  .navbar-nav>* {
+    margin-bottom: 10px;
+  }
 }
