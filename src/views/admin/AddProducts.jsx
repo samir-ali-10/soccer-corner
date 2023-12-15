@@ -35,13 +35,12 @@ export default function AddProducts() {
 
     const schema = yup.object().shape({
         code: yup.string().required(),
-        name: yup.string().required(),
-        price: yup.number().required(),
+        name: yup.string(),
+        price: yup.number(),
         size: yup.string().required(),
         quantity: yup.number().required(),
-        description: yup.string().required(),
-        file: yup.mixed().required(),
-        terms: yup.bool().required().oneOf([true], 'terms must be accepted'),
+        description: yup.string(),
+        file: yup.mixed(),
     });
 
     let openAllFields = () => {
@@ -70,11 +69,11 @@ export default function AddProducts() {
                     initialValues={{
                         name: "",
                         code: "",
-                        price: undefined,
+                        price: "",
                         size: "",
-                        quantity: undefined,
+                        quantity: "",
                         description: "",
-                        file: null,
+                        file: undefined,
                         terms: false,
                     }}
                 >
@@ -90,6 +89,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="code"
+                                        required
                                         list='productsList'
                                         value={values.code}
                                         onChange={handleChange}
@@ -202,11 +202,10 @@ export default function AddProducts() {
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
-                            <Form.Group className="position-relative mb-3">
+                            <Form.Group className="position-relative mb-4">
                                 <Form.Label>Product Image</Form.Label>
                                 <Form.Control
                                     type="file"
-                                    required
                                     name="file"
                                     onChange={handleChange}
                                     isInvalid={!!errors.file}
@@ -216,27 +215,11 @@ export default function AddProducts() {
                                     {errors.file}
                                 </Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group className="position-relative mb-4">
-                                <Form.Check
-                                    required
-                                    name="terms"
-                                    label="Agree to terms and conditions"
-                                    onChange={handleChange}
-                                    onClick={() => setModalShow(true)}
-                                    isInvalid={!!errors.terms}
-                                    feedback={errors.terms}
-                                    feedbackType="invalid"
-                                    id="validationFormik106"
-                                    disabled={openFields ? true : false}
-                                    feedbackTooltip
-                                />
-                            </Form.Group>
                             <Button type="submit">Send To Stock</Button>
                         </Form>
                     )}
                 </Formik>
             </Container>
-            <Popup show={modalShow} onHide={() => setModalShow(false)} />
         </div>
     )
 }
