@@ -50,7 +50,6 @@ export default function AddProducts() {
 
     let closeFields = (value) => {
         codes.map(product =>
-                // console.log(product.productCode)
                 {
                     if(value === product.productCode) {
                         setOpenFields(true);
@@ -71,9 +70,9 @@ export default function AddProducts() {
                     initialValues={{
                         name: "",
                         code: "",
-                        price: 0,
+                        price: undefined,
                         size: "",
-                        quantity: 0,
+                        quantity: undefined,
                         description: "",
                         file: null,
                         terms: false,
@@ -81,7 +80,7 @@ export default function AddProducts() {
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
                         <Form noValidate onSubmit={handleSubmit}>
-                            <Row className="mb-3">
+                            <Row>
                                 <Form.Group
                                     as={Col}
                                     controlId="validationFormik101"
@@ -107,7 +106,7 @@ export default function AddProducts() {
                                     }
                                 </datalist>
                             </Row>
-                            <Row className="mb-3">
+                            <Row>
                                 <Form.Group
                                     as={Col}
                                     controlId="validationFormik101"
@@ -125,7 +124,7 @@ export default function AddProducts() {
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
-                            <Row className="mb-3">
+                            <Row>
                                 <Form.Group
                                     as={Col}
                                     controlId="validationFormik101"
@@ -143,7 +142,7 @@ export default function AddProducts() {
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
-                            <Row className="mb-3">
+                            <Row>
                                 <Form.Group
                                     as={Col}
                                     controlId="validationFormik101"
@@ -168,7 +167,7 @@ export default function AddProducts() {
                                     }
                                 </datalist>
                             </Row>
-                            <Row className="mb-3">
+                            <Row>
                                 <Form.Group
                                     as={Col}
                                     controlId="validationFormik101"
@@ -185,7 +184,7 @@ export default function AddProducts() {
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
-                            <Row className="mb-3">
+                            <Row>
                                 <Form.Group
                                     as={Col}
                                     controlId="validationFormik101"
@@ -217,7 +216,7 @@ export default function AddProducts() {
                                     {errors.file}
                                 </Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group className="position-relative mb-3">
+                            <Form.Group className="position-relative mb-4">
                                 <Form.Check
                                     required
                                     name="terms"
