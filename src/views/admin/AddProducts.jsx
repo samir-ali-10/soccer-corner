@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -11,28 +11,70 @@ import Popup from '../../components/Popup';
 
 export default function AddProducts() {
 
-    const [modalShow, setModalShow] = React.useState(false);
+    const [modalShow, setModalShow] = React.useState(false),
+        [openFields, setOpenFields] = useState(false);
 
     const { Formik } = formik;
 
+    const codes = [
+        {
+            productCode: "paris",
+            id: 1
+        },
+        {
+            productCode: "alahly",
+            id: 2
+        },
+        {
+            productCode: "zamalek",
+            id: 3
+        }
+    ];
+
+    const sizes = ["S", "M", "L", "XL", "XXL"];
+
     const schema = yup.object().shape({
-        label: yup.string().required(),
+        code: yup.string().required(),
+        name: yup.string().required(),
         price: yup.number().required(),
+        size: yup.string().required(),
         quantity: yup.number().required(),
+        description: yup.string().required(),
         file: yup.mixed().required(),
         terms: yup.bool().required().oneOf([true], 'terms must be accepted'),
     });
 
+    let openAllFields = () => {
+        setOpenFields(!openFields);
+    }
+
+    let closeFields = (value) => {
+        codes.map(product =>
+                // console.log(product.productCode)
+                {
+                    if(value === product.productCode) {
+                        setOpenFields(true);
+                    }
+                }
+            )
+    }
+
     return (
-        <div className='add_products mt-5'>
+        <div className='add_products mt-4'>
             <Container>
+                <div className='open_fields_container'>
+                    <button className='open_fields' onClick={openAllFields}>Open all fields</button>
+                </div>
                 <Formik
                     validationSchema={schema}
                     onSubmit={console.log}
                     initialValues={{
-                        label: '',
+                        name: "",
+                        code: "",
                         price: 0,
+                        size: "",
                         quantity: 0,
+                        description: "",
                         file: null,
                         terms: false,
                     }}
@@ -45,13 +87,40 @@ export default function AddProducts() {
                                     controlId="validationFormik101"
                                     className="position-relative"
                                 >
-                                    <Form.Label>Label</Form.Label>
+                                    <Form.Label>Code</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        name="label"
-                                        value={values.label}
+                                        name="code"
+                                        list='productsList'
+                                        value={values.code}
                                         onChange={handleChange}
-                                        isValid={touched.label && !errors.label}
+                                        onBlur={(val) => closeFields(val.target.value)}
+                                        isValid={touched.code && !errors.code}
+                                    />
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
+                                <datalist id='productsList'>
+                                    {
+                                        codes.map(product =>
+                                            <option key={product.id} value={product.productCode} />
+                                        )
+                                    }
+                                </datalist>
+                            </Row>
+                            <Row className="mb-3">
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>Name</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="name"
+                                        value={values.name}
+                                        onChange={handleChange}
+                                        isValid={touched.name && !errors.name}
+                                        disabled={openFields ? true : false}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
@@ -69,9 +138,35 @@ export default function AddProducts() {
                                         value={values.price}
                                         onChange={handleChange}
                                         isValid={touched.price && !errors.price}
+                                        disabled={openFields ? true : false}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
+                            </Row>
+                            <Row className="mb-3">
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>Size</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="size"
+                                        list='sizeList'
+                                        value={values.size}
+                                        onChange={handleChange}
+                                        isValid={touched.size && !errors.size}
+                                    />
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
+                                <datalist id='sizeList'>
+                                    {
+                                        sizes.map((size, index) =>
+                                            <option key={index} value={size}></option>
+                                        )
+                                    }
+                                </datalist>
                             </Row>
                             <Row className="mb-3">
                                 <Form.Group
@@ -90,6 +185,24 @@ export default function AddProducts() {
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
+                            <Row className="mb-3">
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>Description</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="description"
+                                        value={values.description}
+                                        onChange={handleChange}
+                                        isValid={touched.description && !errors.description}
+                                        disabled={openFields ? true : false}
+                                    />
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
                             <Form.Group className="position-relative mb-3">
                                 <Form.Label>Product Image</Form.Label>
                                 <Form.Control
@@ -98,6 +211,7 @@ export default function AddProducts() {
                                     name="file"
                                     onChange={handleChange}
                                     isInvalid={!!errors.file}
+                                    disabled={openFields ? true : false}
                                 />
                                 <Form.Control.Feedback type="invalid" tooltip>
                                     {errors.file}
@@ -114,6 +228,7 @@ export default function AddProducts() {
                                     feedback={errors.terms}
                                     feedbackType="invalid"
                                     id="validationFormik106"
+                                    disabled={openFields ? true : false}
                                     feedbackTooltip
                                 />
                             </Form.Group>

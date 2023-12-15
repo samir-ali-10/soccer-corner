@@ -22,6 +22,7 @@ ul {
   background-color: var(--secondary-color);
   border: none;
   outline: none !important;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 5px 7px 6px -2px;
 }
 
 .modal-footer button:hover {
@@ -312,6 +313,53 @@ ul {
 .add_products .btn:focus {
   background-color: var(--secondary-color) !important;
   color: initial !important;
+}
+
+.add_products .open_fields_container {
+  text-align: right;
+}
+
+.add_products .open_fields {
+  appearance: none;
+  background-color: var(--secondary-color);
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  color: var(--text-color);
+  cursor: pointer;
+  height: 48px;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  position: relative;
+  text-decoration: none;
+  transition: box-shadow .15s, transform .15s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 18px;
+  -webkit-transition: box-shadow .15s, transform .15s;
+  -moz-transition: box-shadow .15s, transform .15s;
+  -ms-transition: box-shadow .15s, transform .15s;
+  -o-transition: box-shadow .15s, transform .15s;
+}
+
+.add_products .open_fields:focus {
+  box-shadow: var(--secondary-color) 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, var(--secondary-color) 0 -3px 0 inset;
+}
+
+.add_products .open_fields:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, var(--secondary-color) 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.add_products .open_fields:active {
+  box-shadow: var(--secondary-color) 0 3px 7px inset;
+  transform: translateY(2px);
 }
 
 

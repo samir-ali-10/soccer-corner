@@ -1,3 +1,5 @@
+import { faFileCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -13,6 +15,7 @@ export default function Popup(props) {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
+                        <FontAwesomeIcon className='me-2' icon={faFileCircleExclamation} />
                         Terms & Conditions
                     </Modal.Title>
                 </Modal.Header>
