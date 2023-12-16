@@ -268,6 +268,7 @@ ul {
   touch-action: manipulation;
   vertical-align: baseline;
   width: auto;
+  text-transform: uppercase;
 }
 
 .home_page .carousel-caption button:hover,
@@ -287,6 +288,114 @@ ul {
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   color: rgba(0, 0, 0, 0.65);
   transform: translateY(0);
+}
+
+.home_page .about_section {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.home_page .about_section h2 {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.home_page .about_section p {
+  font-size: 1.2rem;
+  width: 60%;
+  margin: auto;
+}
+
+.home_page .new_collection {
+  margin-top: 150px;
+  text-align: center;
+}
+
+.home_page .new_collection p {
+  font-size: 1.6rem;
+  text-transform: capitalize;
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.home_page .new_collection p::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: calc(50% - 25px);
+  width: 50px;
+  height: 1px;
+  background-color: var(--text-color);
+}
+
+.home_page .new_collection .new_collection_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.home_page .new_collection .new_collection_container .item {
+  width: calc(85% / 3);
+  position: relative;
+  overflow: hidden;
+}
+
+.home_page .new_collection .new_collection_container .item a {
+  width: 100%;
+  position: relative;
+  height: 100%;
+  display: block;
+}
+
+
+.home_page .new_collection .new_collection_container .item a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  background-color: black;
+  opacity: .3;
+  transition: .5s;
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  -ms-transition: .5s;
+  -o-transition: .5s;
+}
+
+.home_page .new_collection .new_collection_container .item a:hover::after {
+  opacity: .5;
+}
+
+.home_page .new_collection .new_collection_container .item a:hover img {
+  scale: 1.1;
+}
+
+.home_page .new_collection .new_collection_container .item.half {
+  width: 45%;
+}
+
+.home_page .new_collection .new_collection_container .item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: top;
+  transition: .5s;
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  -ms-transition: .5s;
+  -o-transition: .5s;
+}
+
+.home_page .new_collection .new_collection_container .item .category {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--primary-color);
+  z-index: 1;
+  font-size: 2rem;
 }
 
 /************************ Add Products ***************************/

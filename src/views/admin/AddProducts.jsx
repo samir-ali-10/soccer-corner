@@ -7,12 +7,10 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import * as formik from 'formik';
 import * as yup from 'yup';
-import Popup from '../../components/Popup';
 
 export default function AddProducts() {
 
-    const [modalShow, setModalShow] = React.useState(false),
-        [openFields, setOpenFields] = useState(false);
+    const [openFields, setOpenFields] = useState(false);
 
     const { Formik } = formik;
 
