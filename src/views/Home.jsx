@@ -53,7 +53,7 @@ export default function Home() {
                 <div className="new_collection">
                     <p>new collection</p>
                     <div className="new_collection_container">
-                        <div className="item half">
+                        <div className="item half one_sm">
                             <NavLink to="/">
                                 <img src={image1} alt="Image1" />
                                 <div className="category">Alahly</div>
