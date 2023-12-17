@@ -5,6 +5,7 @@ import AdminView from './views/admin/AdminView';
 import ReviewsAdmin from './views/admin/ReviewsAdmin';
 import Home from './views/Home';
 import AddProducts from './views/admin/AddProducts';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/adminSecret/reviews" element={<ReviewsAdmin />} />
         <Route path="/adminSecret/addProducts" element={<AddProducts />} />
       </Routes>
+      <Footer />
     </>
   );
 }
