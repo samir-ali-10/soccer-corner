@@ -380,6 +380,7 @@ ul {
 .home_page .new_collection .new_collection_container .item img {
   width: 100%;
   height: 300px;
+  object-fit: cover;
   transition: .5s;
   -webkit-transition: .5s;
   -moz-transition: .5s;
@@ -395,6 +396,83 @@ ul {
   color: var(--primary-color);
   z-index: 1;
   font-size: 2rem;
+}
+
+/************************ Products ***************************/
+
+.products {
+  margin-top: 80px;
+}
+
+.products h2 {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: normal;
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.products h2::before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: calc(50% - 25px);
+  width: 50px;
+  height: 1px;
+  background-color: var(--text-color);
+}
+
+.products .item_container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
+  gap: 50px;
+}
+
+.products .item_container .item {
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  overflow: hidden;
+}
+
+.products .item_container .item .image {
+  overflow: hidden;
+  padding: 40px 60px;
+  background-color: var(--secondary-color);
+  transition: .3s;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
+}
+
+.products .item_container .item .image:hover {
+  opacity: .9;
+}
+
+.products .item_container .item img {
+  width: 100%;
+}
+
+.products .item_container .item .info {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f2eee754;
+  color: var(--text-color);
+  padding: 15px 25px;
+  text-transform: capitalize;
+  font-style: oblique;
+}
+
+.products .item_container .item .info h3 {
+  font-weight: normal;
+}
+
+.products .item_container .item .info p {
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 /************************ Add Products ***************************/
@@ -500,6 +578,7 @@ ul {
   font-size: 1.1rem;
   background-color: transparent;
 }
+
 .add_products .form-control:focus {
   border-color: var(--secondary-color);
   box-shadow: 0 0 0 0.25rem var(--secondary-color);

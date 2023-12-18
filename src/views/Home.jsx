@@ -54,31 +54,31 @@ export default function Home() {
                     <p>new collection</p>
                     <div className="new_collection_container">
                         <div className="item half one_sm">
-                            <NavLink to="/">
+                            <NavLink to="/products/alahly">
                                 <img src={image1} alt="Image1" />
                                 <div className="category">Alahly</div>
                             </NavLink>
                         </div>
                         <div className="item half">
-                            <NavLink to="/">
+                            <NavLink to="/products/zamalek">
                                 <img src={image2} alt="Image1" />
                                 <div className="category">Zamalek</div>
                             </NavLink>
                         </div>
                         <div className="item">
-                            <NavLink to="/">
+                            <NavLink to="/products/paris">
                                 <img src={image3} alt="Image1" />
                                 <div className="category">Paris</div>
                             </NavLink>
                         </div>
                         <div className="item">
-                            <NavLink to="/">
+                            <NavLink to="/products/barcelona">
                                 <img src={image1} alt="Image1" />
                                 <div className="category">Barcelona</div>
                             </NavLink>
                         </div>
                         <div className="item">
-                            <NavLink to="/">
+                            <NavLink to="/products/realMadrid">
                                 <img src={image3} alt="Image1" />
                                 <div className="category">Real Madrid</div>
                             </NavLink>
