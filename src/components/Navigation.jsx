@@ -22,13 +22,13 @@ export default function Navigation() {
                             navbarScroll
                         >
                             <NavLink to="/" href="#action1">Home</NavLink>
-                            <NavLink to="/" href="#action2">Link</NavLink>
                             <NavDropdown title="Categories" id="navbarScrollingDropdown">
-                                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action4">
+                                <NavDropdown.Item href="#action2">Action</NavDropdown.Item>
+                                <NavDropdown.Item href="#action3">
                                     Another action
                                 </NavDropdown.Item>
                             </NavDropdown>
+                            <NavLink to="/contactUs" href="#action4">Contact Us</NavLink>
                             <NavLink to="/adminSecret" href="#action1">Admin</NavLink>
                         </Nav>
                         <div className="actions">

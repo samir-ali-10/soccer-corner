@@ -477,7 +477,7 @@ ul {
 
 /************************ Product Details ***************************/
 
-.product_details  {
+.product_details {
   margin-top: 80px;
 }
 
@@ -485,7 +485,7 @@ ul {
   display: flex;
 }
 
-.product_details .product_container > div {
+.product_details .product_container>div {
   width: calc(90% / 2);
 }
 
@@ -551,6 +551,86 @@ ul {
 
 .product_details .product_container .infos .add_to_cart:hover {
   background-color: var(--secondary-color);
+}
+
+/************************ Contact Us ***************************/
+
+.contact_us {
+  margin-top: 80px;
+}
+
+.contact_us h2 {
+  font-weight: normal;
+  text-align: center;
+  position: relative;
+  margin-bottom: 100px;
+}
+
+.contact_us h2::before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: calc(50% - 25px);
+  width: 50px;
+  height: 1px;
+  background-color: var(--text-color);
+}
+
+.contact_us form {
+  text-align: center;
+  width: 50%;
+  margin: auto;
+}
+
+.contact_us form > div {
+  margin-bottom: 10px;
+}
+
+.contact_us form > div input,
+.contact_us form > div textarea {
+  padding: 5px 15px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  outline: none;
+  background-color: #7777771b;
+}
+
+.contact_us form > div input:focus,
+.contact_us form > div textarea:focus {
+  outline: 1px solid #d7c9b1;
+}
+
+.contact_us form .name_email {
+  display: flex;
+}
+
+.contact_us form .name_email > input {
+  width: calc(99% / 2);
+}
+
+.contact_us form .name_email > input:not(:last-child) {
+  margin-right: 10px;
+}
+
+.contact_us form .phone input,
+.contact_us form .message textarea {
+  width: 100%;
+}
+
+.contact_us form .send button {
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  font-size: 1.2rem;
+  padding: 10px 20px;
 }
 
 /************************ Add Products ***************************/
@@ -750,7 +830,7 @@ footer .copyright::before {
   .navbar-nav>* {
     margin-bottom: 10px;
   }
-  
+
   .product_details .product_container {
     flex-direction: column;
   }
@@ -759,7 +839,7 @@ footer .copyright::before {
     order: 2;
   }
 
-  .product_details .product_container > div {
+  .product_details .product_container>div {
     width: 100%;
   }
 

@@ -8,6 +8,7 @@ import AddProducts from './views/admin/AddProducts';
 import Footer from './components/Footer';
 import Products from './views/Products';
 import ProductDetails from './views/ProductDetails';
+import ContactUs from './views/ContactUs';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/products/:category" element={<Products />} />
         <Route path="/products/:category/:productId" element={<ProductDetails />} />
         <Route path="/adminSecret" element={<AdminView />} />
