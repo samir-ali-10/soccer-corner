@@ -12,17 +12,20 @@ export default function Products() {
         {
             image: image1,
             price: 300,
-            title: "t-shirt one alahly"
+            title: "t-shirt one alahly",
+            id: 1
         },
         {
             image: image2,
             price: 400,
-            title: "t-shirt two alahly"
+            title: "t-shirt two alahly",
+            id: 2
         },
         {
             image: image3,
             price: 500,
-            title: "t-shirt three alahly"
+            title: "t-shirt three alahly",
+            id: 3
         },
     ]
 
@@ -54,7 +57,7 @@ export default function Products() {
                         <h2>Alahly</h2>
                         <div className="item_container">
                             {alahlyAPI.map((item, index) =>
-                                <NavLink to="/" key={index} className='item'>
+                                <NavLink to={`/products/alahly/${item.id}`} key={index} className='item'>
                                     <div className="image">
                                         <img src={item.image} alt="image1" />
                                     </div>

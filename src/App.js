@@ -7,6 +7,7 @@ import Home from './views/Home';
 import AddProducts from './views/admin/AddProducts';
 import Footer from './components/Footer';
 import Products from './views/Products';
+import ProductDetails from './views/ProductDetails';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products/:category" element={<Products />} />
+        <Route path="/products/:category/:productId" element={<ProductDetails />} />
         <Route path="/adminSecret" element={<AdminView />} />
         <Route path="/adminSecret/reviews" element={<ReviewsAdmin />} />
         <Route path="/adminSecret/addProducts" element={<AddProducts />} />
