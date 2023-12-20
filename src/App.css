@@ -846,6 +846,10 @@ footer .copyright::before {
   .product_details .product_container .image {
     margin-bottom: 40px;
   }
+
+  .contact_us form {
+    width: 100%;
+  }
 }
 
 @media (max-width: 767px) {

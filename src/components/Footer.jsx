@@ -25,7 +25,7 @@ export default function Footer() {
                         <li><NavLink to=""><FontAwesomeIcon icon={faInstagram} /></NavLink></li>
                     </ul>
                 </div>
-                <div className="copyright">
+                <div className="copyright mb-3">
                     © 2023 Soccer Corner Sports. All rights reserved
                 </div>
             </Container>
