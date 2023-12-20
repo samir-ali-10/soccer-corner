@@ -428,14 +428,42 @@ ul {
   gap: 50px;
 }
 
+.products .item_container .item.sold_out {
+  opacity: .6;
+  cursor: initial;
+  pointer-events: none;
+  position: relative;
+}
+
+.products .item_container .item.sold_out::after{
+  content: "SOLD OUT";
+  position: absolute;
+  font-size: .9rem;
+  font-weight: 700;
+  top: -25px;
+  right: -35px;
+  width: 90px;
+  text-align: center;
+  height: 90px;
+  line-height: 90px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  rotate: 10deg;
+}
+
 .products .item_container .item {
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
-  overflow: hidden;
 }
+
 
 .products .item_container .item .image {
   overflow: hidden;
@@ -448,7 +476,7 @@ ul {
   -o-transition: .3s;
 }
 
-.products .item_container .item .image:hover {
+.products .item_container .item:not(.item.sold_out) .image:hover {
   opacity: .9;
 }
 
@@ -633,6 +661,55 @@ ul {
   padding: 10px 20px;
 }
 
+/************************ Cart ***************************/
+
+.cart {
+  margin-top: 80px;
+}
+
+.cart h2 {
+  position: relative;
+  font-weight: normal;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.cart h2::before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: calc(50% - 25px);
+  width: 50px;
+  height: 1px;
+  background-color: var(--text-color);
+}
+
+.cart .cart_items .cart_item {
+  padding: 50px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+  gap: 20px;
+  border-bottom: 1px solid #77777732;
+}
+
+.cart .cart_items .cart_item:nth-child(1) {
+  border-top: 1px solid #77777732;
+}
+
+.cart .cart_items .cart_item .info .image img {
+  width: 200px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.cart .cart_items .cart_item .quantity,
+.cart .cart_items .cart_item .price {
+  text-align: center;
+}
+
 /************************ Add Products ***************************/
 
 .add_products .btn {
@@ -773,7 +850,7 @@ footer .policies_socials {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
   gap: 70px;
-  text-align: left;
+  text-align: center;
 }
 
 footer .policies_socials .moto p {
@@ -799,6 +876,7 @@ footer .policies_socials ul li a:hover {
 
 footer .policies_socials .socials {
   display: flex;
+  justify-content: center;  
 }
 
 footer .policies_socials .socials a {

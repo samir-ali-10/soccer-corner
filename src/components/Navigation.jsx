@@ -33,7 +33,7 @@ export default function Navigation() {
                         </Nav>
                         <div className="actions">
                             <NavLink to="/"><FontAwesomeIcon className='fs-4' icon={faUser} /></NavLink>
-                            <NavLink to="/"><FontAwesomeIcon className='fs-4' icon={faCartShopping} /></NavLink>
+                            <NavLink to="/cart"><FontAwesomeIcon className='fs-4' icon={faCartShopping} /></NavLink>
                         </div>
                     </Navbar.Collapse>
                 </Container>
