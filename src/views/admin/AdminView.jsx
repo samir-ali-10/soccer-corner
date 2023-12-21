@@ -16,7 +16,7 @@ export default function AdminView() {
                             <FontAwesomeIcon icon={faPlus} />
                         </div>
                     </NavLink>
-                    <NavLink to="" className="selection">
+                    <NavLink to="/adminSecret/stock" className="selection">
                         <h3>Stock</h3>
                         <div className="icon">
                             <FontAwesomeIcon icon={faWarehouse} />

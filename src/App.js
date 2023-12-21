@@ -10,6 +10,7 @@ import Products from './views/Products';
 import ProductDetails from './views/ProductDetails';
 import ContactUs from './views/ContactUs';
 import Cart from './views/Cart';
+import Stock from './views/admin/Stock';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/adminSecret" element={<AdminView />} />
         <Route path="/adminSecret/reviews" element={<ReviewsAdmin />} />
         <Route path="/adminSecret/addProducts" element={<AddProducts />} />
+        <Route path="/adminSecret/stock" element={<Stock />} />
       </Routes>
       <Footer />
     </>
