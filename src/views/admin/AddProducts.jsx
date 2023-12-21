@@ -72,11 +72,10 @@ export default function AddProducts() {
                         quantity: "",
                         description: "",
                         file: undefined,
-                        terms: false,
                     }}
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
-                        <Form noValidate onSubmit={handleSubmit}>
+                        <Form noValidate action='/adminSecret/stock'>
                             <Row>
                                 <Form.Group
                                     as={Col}
