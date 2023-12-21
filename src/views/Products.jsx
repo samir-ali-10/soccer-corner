@@ -5,10 +5,12 @@ import image2 from "../images/carousel_2.jpeg"
 import image3 from "../images/carousel_3.jpeg"
 import { NavLink } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default function Products() {
 
-    const alahlyAPI = [
+    const egyptianLeague = [
         {
             image: image1,
             price: 300,
@@ -28,6 +30,20 @@ export default function Products() {
             price: 500,
             title: "t-shirt three alahly",
             id: 3,
+            quantity: 0
+        },
+        {
+            image: image1,
+            price: 500,
+            title: "t-shirt three alahly",
+            id: 4,
+            quantity: 0
+        },
+        {
+            image: image2,
+            price: 500,
+            title: "t-shirt three alahly",
+            id: 5,
             quantity: 0
         },
     ]
@@ -55,21 +71,29 @@ export default function Products() {
     return (
         <div className='products'>
             <Container>
-                {params.category === "alahly" &&
-                    <div className='alahly_products'>
-                        <h2>Alahly</h2>
-                        <div className="item_container">
-                            {alahlyAPI.map((item, index) =>
-                                <NavLink to={`/products/alahly/${item.id}`} key={index} className={item.quantity === 0 ? "item sold_out" : "item"}>
-                                    <div className="image">
-                                        <img src={item.image} alt="image1" />
-                                    </div>
-                                    <div className="info">
-                                        <h3>{item.title}</h3>
-                                        <p>{item.price}EGP</p>
-                                    </div>
-                                </NavLink>
-                            )}
+                {params.category === "footballJerseys" &&
+                    <div className='football_jerseys'>
+                        <div className="egyptian_league">
+                            <h2>Egyptian League</h2>
+                            <div className="add_cart">
+                                <button>All Products</button>
+                            </div>
+                            <div className="slider_container d-flex">
+                                {egyptianLeague.map(item =>
+                                    <NavLink key={item.id} className="item">
+                                        <div className="image">
+                                            <img src={item.image} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{item.title}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                <div className="price">{item.price}EGP</div>
+                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                )}
+                            </div>
                         </div>
                     </div>
                 }

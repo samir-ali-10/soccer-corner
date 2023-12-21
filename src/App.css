@@ -433,7 +433,7 @@ ul {
   font-size: 1.4rem;
 }
 
-.home_page .best_sellers .slider_container {
+.slider_container {
   padding: 30px 0;
   gap: 40px;
   width: 90%;
@@ -444,11 +444,12 @@ ul {
   border-bottom: 1px solid #77777732;
 }
 
-.home_page .best_sellers .slider_container::-webkit-scrollbar-button {
+.slider_container::-webkit-scrollbar-button {
   display: none;
+  opacity: 0;
 }
 
-.home_page .best_sellers .slider_container::-webkit-scrollbar-track {
+.slider_container::-webkit-scrollbar-track {
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -456,15 +457,15 @@ ul {
   -o-border-radius: 6px;
 }
 
-.home_page .best_sellers .slider_container .item {
+.slider_container .item {
   color: var(--text-color);
 }
 
-.home_page .best_sellers .slider_container .item .image {
+.slider_container .item .image {
   background-color: #77777732;
 }
 
-.home_page .best_sellers .slider_container .item .image img {
+.slider_container .item .image img {
   width: 300px;
   height: 200px;
   object-fit: contain;
@@ -472,12 +473,12 @@ ul {
   border-top-left-radius: 6px;
 }
 
-.home_page .best_sellers .slider_container .item .info {
+.slider_container .item .info {
   padding: 20px 20px 10px 20px;
   background-color: #77777732;
 }
 
-.home_page .best_sellers .slider_container .item .info .name {
+.slider_container .item .info .name {
   text-align: center;
   text-transform: capitalize;
   font-size: 1.2rem;
@@ -485,11 +486,11 @@ ul {
   margin-bottom: 15px;
 }
 
-.home_page .best_sellers .slider_container .item .info .price {
+.slider_container .item .info .price {
   font-weight: 600;
 }
 
-.home_page .best_sellers .slider_container .item .info .add_cart svg {
+.slider_container .item .info .add_cart svg {
   font-size: 1.2rem;
   cursor: pointer;
 }
@@ -518,7 +519,21 @@ ul {
   background-color: var(--text-color);
 }
 
-.products .item_container {
+.products .add_cart button {
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  background-color: transparent;
+  padding: 10px 20px;
+  border: 1px solid var(--text-color);
+  font-size: 1.4rem;
+}
+
+/* .products .item_container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
   gap: 50px;
@@ -597,7 +612,7 @@ ul {
 .products .item_container .item .info p {
   font-size: 1.3rem;
   font-weight: bold;
-}
+} */
 
 /************************ Product Details ***************************/
 
@@ -780,6 +795,12 @@ ul {
   background-color: var(--text-color);
 }
 
+.cart .image p {
+  margin-top: 40px;
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+
 .cart .cart_items .cart_item {
   padding: 50px 0;
   display: grid;
@@ -804,6 +825,59 @@ ul {
 .cart .cart_items .cart_item .quantity,
 .cart .cart_items .cart_item .price {
   text-align: center;
+}
+
+.cart .cart_items .cart_item .quantity .minus,
+.cart .cart_items .cart_item .quantity .plus {
+  display: inline-block;
+  cursor: pointer;
+  margin: 0 10px;
+  border: 1px solid var(--text-color);
+  width: 30px;
+  font-size: 1rem;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.cart .cart_items .cart_item .quantity .remove_item {
+  margin-top: 20px;
+}
+
+.cart .cart_items .cart_item .quantity .remove_item button {
+  background-color: transparent;
+  border: none;
+  border: 1px solid var(--text-color);
+  padding: 5px 15px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  text-transform: capitalize;
+}
+
+.cart .cart_items .cart_item .price {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.cart .cart_items .checkout {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.cart .cart_items .checkout a {
+  color: var(--text-color);
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 1.3rem;
 }
 
 /************************ Add Products ***************************/

@@ -6,6 +6,7 @@ import image2 from "../images/carousel_2.jpeg"
 import image3 from "../images/carousel_3.jpeg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from 'react-router-dom'
 
 export default function Cart() {
 
@@ -40,8 +41,9 @@ export default function Cart() {
                 {
                     alahlyAPI.length === 0
                         ?
-                        <div className="image">
+                        <div className="image text-center">
                             <img src={cartImage} alt="emptyCart" />
+                            <p>Your shopping bag is empty</p>
                         </div>
                         :
                         <div className="cart_items">
@@ -57,19 +59,22 @@ export default function Cart() {
                                             </div>
                                         </div>
                                         <div className="quantity">
-                                            <FontAwesomeIcon icon={faMinus} />
+                                            <div className='minus'><FontAwesomeIcon icon={faMinus} /></div>
                                             0
-                                            <FontAwesomeIcon icon={faPlus} />
+                                            <div className='plus'><FontAwesomeIcon icon={faPlus} /></div>
                                             <div className="remove_item">
                                                 <button>remove</button>
                                             </div>
                                         </div>
                                         <div className="price">
-                                            {item.price}
+                                            {item.price}EGP
                                         </div>
                                     </div>
                                 )
                             }
+                            <div className="checkout">
+                                <NavLink>Proceed To Checkout</NavLink>
+                            </div>
                         </div>
                 }
             </Container>
