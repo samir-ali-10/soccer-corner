@@ -1,9 +1,27 @@
 const express = require("express");
-
-const mongoConnect = require("./util/database").mongoConnect;
-
 const app = express();
+const mongoose = require("mongoose");
+const cors = require("cors");
+const adminRoutes = require("./routes/adminRoutes");
 
-mongoConnect(() => {
-  app.listen(3000);
-});
+app.use(cors());
+app.use(express.json());
+
+mongoose
+  .connect(
+    "mongodb+srv://yossifdiaa4:Facebook4@cluster0.veahqoj.mongodb.net/shop?retryWrites=true&w=majority"
+  )
+  .then((result) => {
+    app.listen(3001);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+app.use(adminRoutes);
+
+app.listen(3000);
+
+// const mongoConnect = require("./util/database").mongoConnect;
+// mongoConnect(() => {
+// });
