@@ -83,7 +83,7 @@ export default function Home() {
                         <button>All Products</button>
                     </div>
                     <div className="slider_container d-flex">
-                        <div className="item">
+                        <NavLink className="item">
                             <div className="image">
                                 <img src={image1} alt="image1" />
                             </div>
@@ -94,8 +94,8 @@ export default function Home() {
                                     <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="item">
+                        </NavLink>
+                        <NavLink className="item">
                             <div className="image">
                                 <img src={image2} alt="image2" />
                             </div>
@@ -106,8 +106,8 @@ export default function Home() {
                                     <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="item">
+                        </NavLink>
+                        <NavLink className="item">
                             <div className="image">
                                 <img src={image3} alt="image3" />
                             </div>
@@ -118,8 +118,8 @@ export default function Home() {
                                     <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="item">
+                        </NavLink>
+                        <NavLink className="item">
                             <div className="image">
                                 <img src={image2} alt="image1" />
                             </div>
@@ -130,8 +130,8 @@ export default function Home() {
                                     <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="item">
+                        </NavLink>
+                        <NavLink className="item">
                             <div className="image">
                                 <img src={image2} alt="image1" />
                             </div>
@@ -142,7 +142,7 @@ export default function Home() {
                                     <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
                                 </div>
                             </div>
-                        </div>
+                        </NavLink>
                     </div>
                 </div>
             </Container>
