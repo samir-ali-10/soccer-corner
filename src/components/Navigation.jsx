@@ -14,7 +14,7 @@ export default function Navigation() {
         <div className='navigation'>
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
-                    <h2 className='logo'>Logo</h2>
+                    <h2 className='logo'>Soccer Sports</h2>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -32,8 +32,8 @@ export default function Navigation() {
                             <NavLink to="/adminSecret" href="#action1">Admin</NavLink>
                         </Nav>
                         <div className="actions">
-                            <NavLink to="/"><FontAwesomeIcon className='fs-4' icon={faUser} /></NavLink>
-                            <NavLink to="/cart"><FontAwesomeIcon className='fs-4' icon={faCartShopping} /></NavLink>
+                            <NavLink to="/"><FontAwesomeIcon className='fs-5' icon={faUser} /></NavLink>
+                            <NavLink to="/cart"><FontAwesomeIcon className='fs-5' icon={faCartShopping} /></NavLink>
                         </div>
                     </Navbar.Collapse>
                 </Container>

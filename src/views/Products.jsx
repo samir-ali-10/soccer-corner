@@ -48,6 +48,44 @@ export default function Products() {
         },
     ]
 
+    const serieA = [
+        {
+            image: image2,
+            price: 300,
+            title: "t-shirt one alahly",
+            id: 1,
+            quantity: 2
+        },
+        {
+            image: image1,
+            price: 400,
+            title: "t-shirt two alahly",
+            id: 2,
+            quantity: 5
+        },
+        {
+            image: image3,
+            price: 500,
+            title: "t-shirt three alahly",
+            id: 3,
+            quantity: 0
+        },
+        {
+            image: image2,
+            price: 500,
+            title: "t-shirt three alahly",
+            id: 4,
+            quantity: 0
+        },
+        {
+            image: image3,
+            price: 500,
+            title: "t-shirt three alahly",
+            id: 5,
+            quantity: 0
+        },
+    ]
+
     const zamalekAPI = [
         {
             image: image2,
@@ -80,6 +118,28 @@ export default function Products() {
                             </div>
                             <div className="slider_container d-flex">
                                 {egyptianLeague.map(item =>
+                                    <NavLink key={item.id} className="item">
+                                        <div className="image">
+                                            <img src={item.image} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{item.title}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                <div className="price">{item.price}EGP</div>
+                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                )}
+                            </div>
+                        </div>
+                        <div className="serie_A">
+                            <h2>Serie A</h2>
+                            <div className="add_cart">
+                                <button>All Products</button>
+                            </div>
+                            <div className="slider_container d-flex">
+                                {serieA.map(item =>
                                     <NavLink key={item.id} className="item">
                                         <div className="image">
                                             <img src={item.image} alt="image1" />
