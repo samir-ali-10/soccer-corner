@@ -30,7 +30,7 @@ exports.postAddProduct = (req, res, next) => {
   product
     .save()
     .then((products) => {
-      console.log(products);
+      res.json(products);
     })
     .catch((err) => {
       console.log(err);

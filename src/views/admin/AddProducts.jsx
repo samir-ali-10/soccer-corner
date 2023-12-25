@@ -10,7 +10,6 @@ import * as yup from 'yup';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
 
 export default function AddProducts() {
 
@@ -117,7 +116,7 @@ export default function AddProducts() {
                         file: undefined,
                     }}
                     onSubmit={async (values) => {
-                        let response = await fetch(`http://localhost:3001/api/getProducts`, {
+                        let response = await fetch(`http://localhost:3001/api/products`, {
                             method: 'POST',
                             headers: {
                                 'Content-type': 'application/json; charset=UTF-8'
