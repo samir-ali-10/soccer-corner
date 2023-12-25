@@ -21,7 +21,3 @@ mongoose
 app.use(adminRoutes);
 
 app.listen(3000);
-
-// const mongoConnect = require("./util/database").mongoConnect;
-// mongoConnect(() => {
-// });
