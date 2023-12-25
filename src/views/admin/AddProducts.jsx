@@ -3,10 +3,14 @@ import { Container } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
+// import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
 import * as formik from 'formik';
 import * as yup from 'yup';
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 export default function AddProducts() {
 
@@ -46,24 +50,63 @@ export default function AddProducts() {
     }
 
     let closeFields = (value) => {
-        codes.map(product =>
-                {
-                    if(value === product.productCode) {
-                        setOpenFields(true);
-                    }
-                }
-            )
+        codes.map(product => {
+            if (value === product.productCode) {
+                setOpenFields(true);
+            }
+        }
+        )
     }
+
+    // async function sendData() {
+    //     let response = await fetch(`http://localhost:3001/api/getProducts`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-type': 'application/json; charset=UTF-8'
+    //         },
+    //         body: JSON.stringify({
+    //             title,
+    //             price,
+    //             description,
+    //             images
+    //         })
+    //     })
+    //     return response.json();
+
+    // }
+
+    // const sendData = async (values, { setSubmitting }) => {
+    //     const payload = {
+    //         data: {
+    //             code: values.code,
+    //             name: values.name,
+    //             price: values.price,
+    //             size: values.size,
+    //             quantity: values.quantity,
+    //             description: values.description
+    //         }
+    //     }
+    //     try {
+    //         const response = await axios.post('http://localhost:3001/api/getProducts', payload)
+    //         console.log(response.data)
+    //     } catch (e) {
+    //         console.log(e)
+    //     } finally {
+    //         setSubmitting(false)
+    //     }
+    // }
 
     return (
         <div className='add_products mt-4'>
             <Container>
+                <div className="back_to_admin">
+                    <NavLink to="/adminSecret" className="back_to_admin"><FontAwesomeIcon icon={faLeftLong} />Back to admin dashboard</NavLink>
+                </div>
                 <div className='open_fields_container'>
                     <button className='open_fields' onClick={openAllFields}>Open all fields</button>
                 </div>
                 <Formik
                     validationSchema={schema}
-                    onSubmit={console.log}
                     initialValues={{
                         name: "",
                         code: "",
@@ -73,9 +116,25 @@ export default function AddProducts() {
                         description: "",
                         file: undefined,
                     }}
+                    onSubmit={async (values) => {
+                        let response = await fetch(`http://localhost:3001/api/getProducts`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-type': 'application/json; charset=UTF-8'
+                            },
+                            body: JSON.stringify({
+                                name: values.name,
+                                code: values.code,
+                                price: values.price,
+                                size: values.size,
+                                quantity: values.quantity
+                            })
+                        })
+                        return response.json();
+                    }}
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
-                        <Form noValidate action='/adminSecret/stock'>
+                        <Form noValidate onSubmit={handleSubmit}>
                             <Row>
                                 <Form.Group
                                     as={Col}
