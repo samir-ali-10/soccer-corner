@@ -126,7 +126,8 @@ export default function AddProducts() {
                                 code: values.code,
                                 price: values.price,
                                 size: values.size,
-                                quantity: values.quantity
+                                quantity: values.quantity,
+                                description: values.description
                             })
                         })
                         return response.json();

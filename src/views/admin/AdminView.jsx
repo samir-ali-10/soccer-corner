@@ -1,19 +1,11 @@
 import { faEnvelope, faFaceAngry } from '@fortawesome/free-regular-svg-icons'
 import { faArrowRotateLeft, faCartFlatbedSuitcase, faPlus, faWarehouse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Container } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 
 export default function AdminView() {
-
-    let fetchData = () => {
-        fetch("http://localhost:3001/api/getProducts").then(res => res.json()).then(data => console.log(data))
-    }
-
-    useEffect(() => {
-        fetchData();
-    },[])
 
     return (
         <div className='admin_home'>
