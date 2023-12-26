@@ -167,6 +167,12 @@ ul {
   background-color: var(--text-color);
 }
 
+.stock .categories {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .stock .categories .teams {
   display: flex;
   gap: 20px;
@@ -182,6 +188,50 @@ ul {
   -o-border-radius: 6px;
   padding: 10px 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.stock .categories select {
+  background-color: var(--text-color);
+  color: var(--primary-color);
+  padding: 5px 10px;
+}
+
+.stock .products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+  gap: 20px;
+}
+
+.stock .products .product {
+  background-color: #77777732;
+  color: var(--text-color);
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+
+.stock .products .product .image {
+  height: 300px;
+  overflow: hidden;
+}
+
+.stock .products .product .image img {
+  width: 100%;
+}
+
+.stock .products .product .info {
+  padding: 10px 20px;
+}
+
+.stock .products .product .info div {
+  margin-bottom: 15px;
+}
+
+.stock .products .product .info div span {
+  font-style: italic;
+  font-weight: 700;
 }
 
 /************************ Reviews Admin ***************************/
@@ -501,7 +551,7 @@ ul {
 }
 
 .slider_container .item .image {
-  background-color: #77777732;
+  background-color: #f2eee778;
 }
 
 .slider_container .item .image img {
@@ -514,7 +564,7 @@ ul {
 
 .slider_container .item .info {
   padding: 20px 20px 10px 20px;
-  background-color: #77777732;
+  background-color: #f2eee778;
 }
 
 .slider_container .item .info .name {

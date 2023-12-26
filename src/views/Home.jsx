@@ -3,6 +3,9 @@ import Carousel from 'react-bootstrap/Carousel';
 import image1 from "../images/carousel_1.jpeg"
 import image2 from "../images/carousel_2.jpeg"
 import image3 from "../images/carousel_3.jpeg"
+import sportswearImage from "../images/sports_wear.jpeg"
+import jerseysImage from "../images/jerseys.jpeg"
+import studsTurfsImage from "../images/studs_turfs.jpeg"
 import { Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -52,19 +55,19 @@ export default function Home() {
                     <div className="new_collection_container">
                         <div className="item">
                             <NavLink to="/products/footballJerseys">
-                                <img src={image1} alt="Image1" />
+                                <img src={jerseysImage} alt="Image1" />
                                 <div className="category">Football Jerseys</div>
                             </NavLink>
                         </div>
                         <div className="item">
                             <NavLink to="/products/sportsWear">
-                                <img src={image2} alt="Image1" />
+                                <img src={sportswearImage} alt="Image1" />
                                 <div className="category">Sports Wear</div>
                             </NavLink>
                         </div>
                         <div className="item">
                             <NavLink to="/products/studs_turfs">
-                                <img src={image3} alt="Image1" />
+                                <img src={studsTurfsImage} alt="Image1" />
                                 <div className="category">Studs & Turfs</div>
                             </NavLink>
                         </div>

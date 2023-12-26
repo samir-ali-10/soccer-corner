@@ -3,6 +3,10 @@ import { useParams } from 'react-router'
 import image1 from "../images/carousel_1.jpeg"
 import image2 from "../images/carousel_2.jpeg"
 import image3 from "../images/carousel_3.jpeg"
+import studsTurfsOne from "../images/studs_turfs_1.jpeg"
+import studsTurfsTwo from "../images/studs_turfs_2.jpeg"
+import studsTurfsThree from "../images/studs_turfs_3.jpeg"
+import studsTurfsFour from "../images/studs_turfs_4.jpeg"
 import { NavLink } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -86,21 +90,36 @@ export default function Products() {
         },
     ]
 
-    const zamalekAPI = [
+    const studsTurfs = [
         {
-            image: image2,
+            image: studsTurfsOne,
             price: 300,
-            title: "t-shirt one zamalek"
+            title: "Studs and Turfs One",
+            id: 1
         },
         {
-            image: image3,
+            image: studsTurfsTwo,
             price: 400,
-            title: "t-shirt two zamalek"
+            title: "Studs and Turfs Two",
+            id: 2
         },
         {
-            image: image1,
+            image: studsTurfsThree,
             price: 500,
-            title: "t-shirt three zamalek"
+            title: "Studs and Turfs Three",
+            id: 3
+        },
+        {
+            image: studsTurfsFour,
+            price: 500,
+            title: "Studs and Turfs Four",
+            id: 4
+        },
+        {
+            image: studsTurfsTwo,
+            price: 500,
+            title: "Studs and Turfs Five",
+            id: 5
         },
     ]
 
@@ -157,7 +176,30 @@ export default function Products() {
                         </div>
                     </div>
                 }
-                {/* {params.category === "zamalek" && <p>zamalek</p>} */}
+                {params.category === "studs_turfs" &&
+                    <div className='studs_turfs'>
+                        <h2>Studs & Turfs</h2>
+                        <div className="add_cart">
+                            <button>All Products</button>
+                        </div>
+                        <div className="slider_container d-flex">
+                            {studsTurfs.map(item =>
+                                <NavLink key={item.id} className="item">
+                                    <div className="image">
+                                        <img src={item.image} alt="image1" />
+                                    </div>
+                                    <div className="info">
+                                        <div className="name">{item.title}</div>
+                                        <div className="inner_info d-flex justify-content-between">
+                                            <div className="price">{item.price}EGP</div>
+                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        </div>
+                                    </div>
+                                </NavLink>
+                            )}
+                        </div>
+                    </div>
+                }
             </Container>
         </div>
     )
