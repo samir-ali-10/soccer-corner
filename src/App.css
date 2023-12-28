@@ -741,6 +741,7 @@ ul {
 
 .products_all .items_container .item {
   margin-bottom: 50px;
+  color: var(--text-color);
 }
 
 .products_all .items_container .item .image {
@@ -755,6 +756,65 @@ ul {
 .products_all .items_container .item .info {
   text-align: center;
   margin-top: 30px;
+}
+
+.products_all .items_container .item .info .name {
+  font-size: 1.6rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.products_all .items_container .item .info .price {
+  font-size: 1.4rem;
+  font-weight: 600;
+  position: relative;
+  margin-bottom: 70px;
+}
+
+.products_all .items_container .item .info .price::before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: calc(50% - 25px);
+  width: 50px;
+  height: 1px;
+  background-color: var(--text-color);
+}
+
+.products_all .items_container .item .info .sizes {
+  margin-bottom: 40px;
+}
+
+.products_all .items_container .item .info .sizes button {
+  background-color: transparent;
+  border: none;
+  padding: 5px 15px;
+}
+
+.products_all .items_container .item .info .sizes button.active {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--text-color);
+}
+
+.products_all .items_container .item .info .sizes button:not(:last-child) {
+  margin-right: 15px;
+}
+
+.products_all .items_container .item .info .add_to_cart {
+  background-color: transparent;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-size: 1rem;
+  transition: .3s;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
+}
+
+.products_all .items_container .item .info .add_to_cart:hover {
+  background-color: var(--secondary-color);
 }
 
 /************************ Product Details ***************************/

@@ -18,10 +18,11 @@ export default function ProductsAll() {
 
     let params = useParams();
 
-    const [activeSize, setActiveSize] = useState();
+    const [activeSize, setActiveSize] = useState(false);
 
     let handleActive = (element) => {
-        setActiveSize(element)
+        // console.log(element.target.innerHTML);
+        // setActiveSize(!activeSize)
     }
 
     const egyptianLeague = [
@@ -30,35 +31,40 @@ export default function ProductsAll() {
             price: 300,
             title: "t-shirt one alahly",
             id: 1,
-            quantity: 2
+            quantity: 2,
+            sizes: ["s", "m", "l", "xl", "xxl"]
         },
         {
             image: image2,
             price: 400,
             title: "t-shirt two alahly",
             id: 2,
-            quantity: 5
+            quantity: 5,
+            sizes: ["s", "m", "l", "xl", "xxl"]
         },
         {
             image: image3,
             price: 500,
             title: "t-shirt three alahly",
             id: 3,
-            quantity: 0
+            quantity: 0,
+            sizes: ["s", "m", "l", "xl", "xxl"]
         },
         {
             image: image4,
             price: 500,
             title: "t-shirt three alahly",
             id: 4,
-            quantity: 0
+            quantity: 0,
+            sizes: ["s", "m", "l", "xl", "xxl"]
         },
         {
             image: image5,
             price: 500,
             title: "t-shirt three alahly",
             id: 5,
-            quantity: 0
+            quantity: 0,
+            sizes: ["s", "m", "l", "xl", "xxl"]
         },
     ]
 
@@ -183,11 +189,14 @@ export default function ProductsAll() {
                                             <div className="name">{item.title}</div>
                                             <div className="price">Price: {item.price}EGP</div>
                                             <div className="sizes">
-                                                <button className={activeSize === "s" ? "active" : ""} onClick={() => handleActive("s")}>S</button>
-                                                <button className={activeSize === "m" ? "active" : ""} onClick={() => handleActive("m")}>M</button>
-                                                <button className={activeSize === "l" ? "active" : ""} onClick={() => handleActive("l")}>L</button>
-                                                <button className={activeSize === "xl" ? "active" : ""} onClick={() => handleActive("xl")}>XL</button>
-                                                <button className={activeSize === "xxl" ? "active" : ""} onClick={() => handleActive("xxl")}>XXL</button>
+                                                {item.sizes.map((size, index) =>
+                                                    <button key={index} className={`${index === activeSize.activeIndex ? "active" : "" }`} onClick={e => setActiveSize({activeIndex: index})} >{size.toLocaleUpperCase()}</button>
+                                                )}
+                                                {/* <button value="s" className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
+                                                <button value="m" className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
+                                                <button value="l" className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
+                                                <button value="xl" className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
+                                                <button value="xxl" className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button> */}
                                             </div>
                                             <button className='add_to_cart'>Add to cart</button>
                                         </div>
@@ -197,10 +206,8 @@ export default function ProductsAll() {
                         </div>
                         <div className="serie_A">
                             <h2>Serie A</h2>
-                            <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">All Products</NavLink>
-                            </div>
-                            <div className="slider_container d-flex">
+
+                            <div className="items_container">
                                 {serieA.map(item =>
                                     <NavLink key={item.id} className="item">
                                         <div className="image">
@@ -208,10 +215,15 @@ export default function ProductsAll() {
                                         </div>
                                         <div className="info">
                                             <div className="name">{item.title}</div>
-                                            <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{item.price}EGP</div>
-                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            <div className="price">Price: {item.price}EGP</div>
+                                            <div className="sizes">
+                                                <button className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
+                                                <button className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
+                                                <button className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
+                                                <button className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
+                                                <button className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button>
                                             </div>
+                                            <button className='add_to_cart'>Add to cart</button>
                                         </div>
                                     </NavLink>
                                 )}
@@ -222,10 +234,7 @@ export default function ProductsAll() {
                 {params.category === "studs_turfs" &&
                     <div className='studs_turfs'>
                         <h2>Studs & Turfs</h2>
-                        <div className="all_products">
-                            <NavLink to="/products/studs_turfs/all">All Products</NavLink>
-                        </div>
-                        <div className="slider_container d-flex">
+                        <div className="items_container">
                             {studsTurfs.map(item =>
                                 <NavLink key={item.id} className="item">
                                     <div className="image">
@@ -233,10 +242,15 @@ export default function ProductsAll() {
                                     </div>
                                     <div className="info">
                                         <div className="name">{item.title}</div>
-                                        <div className="inner_info d-flex justify-content-between">
-                                            <div className="price">{item.price}EGP</div>
-                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        <div className="price">Price: {item.price}EGP</div>
+                                        <div className="sizes">
+                                            <button className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
+                                            <button className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
+                                            <button className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
+                                            <button className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
+                                            <button className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button>
                                         </div>
+                                        <button className='add_to_cart'>Add to cart</button>
                                     </div>
                                 </NavLink>
                             )}
@@ -246,10 +260,7 @@ export default function ProductsAll() {
                 {params.category === "sportsWear" &&
                     <div className='sports_wear'>
                         <h2>Sports Wear</h2>
-                        <div className="all_products">
-                            <NavLink to="/products/sportsWear/all">All Products</NavLink>
-                        </div>
-                        <div className="slider_container d-flex">
+                        <div className="items_container">
                             {sportsWear.map(item =>
                                 <NavLink key={item.id} className="item">
                                     <div className="image">
@@ -257,10 +268,15 @@ export default function ProductsAll() {
                                     </div>
                                     <div className="info">
                                         <div className="name">{item.title}</div>
-                                        <div className="inner_info d-flex justify-content-between">
-                                            <div className="price">{item.price}EGP</div>
-                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        <div className="price">Price: {item.price}EGP</div>
+                                        <div className="sizes">
+                                            <button className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
+                                            <button className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
+                                            <button className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
+                                            <button className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
+                                            <button className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button>
                                         </div>
+                                        <button className='add_to_cart'>Add to cart</button>
                                     </div>
                                 </NavLink>
                             )}
@@ -270,10 +286,7 @@ export default function ProductsAll() {
                 {params.category === "others" &&
                     <div className='others'>
                         <h2>Others</h2>
-                        <div className="all_products">
-                            <NavLink to="/products/others/all">All Products</NavLink>
-                        </div>
-                        <div className="slider_container d-flex">
+                        <div className="items_container">
                             {sportsWear.map(item =>
                                 <NavLink key={item.id} className="item">
                                     <div className="image">
@@ -281,10 +294,15 @@ export default function ProductsAll() {
                                     </div>
                                     <div className="info">
                                         <div className="name">{item.title}</div>
-                                        <div className="inner_info d-flex justify-content-between">
-                                            <div className="price">{item.price}EGP</div>
-                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        <div className="price">Price: {item.price}EGP</div>
+                                        <div className="sizes">
+                                            <button className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
+                                            <button className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
+                                            <button className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
+                                            <button className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
+                                            <button className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button>
                                         </div>
+                                        <button className='add_to_cart'>Add to cart</button>
                                     </div>
                                 </NavLink>
                             )}

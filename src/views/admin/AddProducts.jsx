@@ -36,6 +36,7 @@ export default function AddProducts() {
 
     const schema = yup.object().shape({
         code: yup.string().required(),
+        model: yup.string().required(),
         collectionName: yup.string(),
         price: yup.number(),
         size: yup.string().required(),
@@ -108,6 +109,7 @@ export default function AddProducts() {
                     validationSchema={schema}
                     initialValues={{
                         collectionName: "",
+                        model: "",
                         code: "",
                         price: "",
                         size: "",
@@ -124,6 +126,7 @@ export default function AddProducts() {
                             body: JSON.stringify({
                                 collectionName: values.collectionName,
                                 code: values.code,
+                                model: values.model,
                                 price: values.price,
                                 size: values.size,
                                 quantity: values.quantity,
@@ -162,6 +165,24 @@ export default function AddProducts() {
                                         )
                                     }
                                 </datalist>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>Model</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="model"
+                                        value={values.model}
+                                        onChange={handleChange}
+                                        isValid={touched.model && !errors.model}
+                                        disabled={openFields ? true : false}
+                                    />
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
                             </Row>
                             <Row>
                                 <Form.Group
