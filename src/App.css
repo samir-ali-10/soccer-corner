@@ -305,7 +305,7 @@ ul {
 
 .home_page .carousel-item {
   position: relative;
-  height: 750px;
+  height: 600px;
 }
 
 .home_page .carousel-item::before {
