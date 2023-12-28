@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
   code: String,
-  name: String,
+  collection: String,
   price: Number,
   size: String,
   quantity: Number,
   description: String,
-  image: String,
+  // image: String,
 });
 
 const ProductModel = mongoose.model("Products", ProductSchema);

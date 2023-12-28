@@ -19,5 +19,3 @@ mongoose
   });
 
 app.use(adminRoutes);
-
-app.listen(3000);
