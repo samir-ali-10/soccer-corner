@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import image1 from "../images/ahly_1.jpeg"
 import image2 from "../images/ahly_2.jpeg"
@@ -14,7 +14,15 @@ import { Container } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
-export default function Products() {
+export default function ProductsAll() {
+
+    let params = useParams();
+
+    const [activeSize, setActiveSize] = useState();
+
+    let handleActive = (element) => {
+        setActiveSize(element)
+    }
 
     const egyptianLeague = [
         {
@@ -158,19 +166,14 @@ export default function Products() {
         },
     ]
 
-    let params = useParams();
-
     return (
-        <div className='products'>
+        <div className='products_all'>
             <Container>
                 {params.category === "footballJerseys" &&
                     <div className='football_jerseys'>
                         <div className="egyptian_league">
                             <h2>Egyptian League</h2>
-                            <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">All Products</NavLink>
-                            </div>
-                            <div className="slider_container d-flex">
+                            <div className="items_container">
                                 {egyptianLeague.map(item =>
                                     <NavLink key={item.id} className="item">
                                         <div className="image">
@@ -178,10 +181,15 @@ export default function Products() {
                                         </div>
                                         <div className="info">
                                             <div className="name">{item.title}</div>
-                                            <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{item.price}EGP</div>
-                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            <div className="price">Price: {item.price}EGP</div>
+                                            <div className="sizes">
+                                                <button className={activeSize === "s" ? "active" : ""} onClick={() => handleActive("s")}>S</button>
+                                                <button className={activeSize === "m" ? "active" : ""} onClick={() => handleActive("m")}>M</button>
+                                                <button className={activeSize === "l" ? "active" : ""} onClick={() => handleActive("l")}>L</button>
+                                                <button className={activeSize === "xl" ? "active" : ""} onClick={() => handleActive("xl")}>XL</button>
+                                                <button className={activeSize === "xxl" ? "active" : ""} onClick={() => handleActive("xxl")}>XXL</button>
                                             </div>
+                                            <button className='add_to_cart'>Add to cart</button>
                                         </div>
                                     </NavLink>
                                 )}

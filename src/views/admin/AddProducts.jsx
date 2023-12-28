@@ -36,7 +36,7 @@ export default function AddProducts() {
 
     const schema = yup.object().shape({
         code: yup.string().required(),
-        collection: yup.string(),
+        collectionName: yup.string(),
         price: yup.number(),
         size: yup.string().required(),
         quantity: yup.number().required(),
@@ -107,7 +107,7 @@ export default function AddProducts() {
                 <Formik
                     validationSchema={schema}
                     initialValues={{
-                        collection: "",
+                        collectionName: "",
                         code: "",
                         price: "",
                         size: "",
@@ -122,7 +122,7 @@ export default function AddProducts() {
                                 'Content-type': 'application/json; charset=UTF-8'
                             },
                             body: JSON.stringify({
-                                collection: values.collection,
+                                collectionName: values.collectionName,
                                 code: values.code,
                                 price: values.price,
                                 size: values.size,
@@ -172,10 +172,10 @@ export default function AddProducts() {
                                     <Form.Label>Collection</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        name="collection"
-                                        value={values.collection}
+                                        name="collectionName"
+                                        value={values.collectionName}
                                         onChange={handleChange}
-                                        isValid={touched.collection && !errors.collection}
+                                        isValid={touched.collectionName && !errors.collectionName}
                                         disabled={openFields ? true : false}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>

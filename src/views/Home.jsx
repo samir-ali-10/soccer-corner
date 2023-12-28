@@ -82,9 +82,6 @@ export default function Home() {
 
                 <div className="best_sellers">
                     <h2>Best Sellers</h2>
-                    <div className="all_products">
-                        <button>All Products</button>
-                    </div>
                     <div className="slider_container d-flex">
                         <NavLink className="item">
                             <div className="image">

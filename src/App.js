@@ -11,6 +11,7 @@ import ProductDetails from './views/ProductDetails';
 import ContactUs from './views/ContactUs';
 import Cart from './views/Cart';
 import Stock from './views/admin/Stock';
+import ProductsAll from './views/ProductsAll';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products/:category" element={<Products />} />
+        <Route path="/products/:category/all" element={<ProductsAll />} />
         <Route path="/products/:category/:productId" element={<ProductDetails />} />
         <Route path="/adminSecret" element={<AdminView />} />
         <Route path="/adminSecret/reviews" element={<ReviewsAdmin />} />
