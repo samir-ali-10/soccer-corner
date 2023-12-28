@@ -1,8 +1,10 @@
 import React from 'react'
 import { useParams } from 'react-router'
-import image1 from "../images/carousel_1.jpeg"
-import image2 from "../images/carousel_2.jpeg"
-import image3 from "../images/carousel_3.jpeg"
+import image1 from "../images/ahly_1.jpeg"
+import image2 from "../images/ahly_2.jpeg"
+import image3 from "../images/ahly_3.jpeg"
+import image4 from "../images/ahly_4.jpeg"
+import image5 from "../images/ahly_5.jpeg"
 import studsTurfsOne from "../images/studs_turfs_1.jpeg"
 import studsTurfsTwo from "../images/studs_turfs_2.jpeg"
 import studsTurfsThree from "../images/studs_turfs_3.jpeg"
@@ -37,14 +39,14 @@ export default function Products() {
             quantity: 0
         },
         {
-            image: image1,
+            image: image4,
             price: 500,
             title: "t-shirt three alahly",
             id: 4,
             quantity: 0
         },
         {
-            image: image2,
+            image: image5,
             price: 500,
             title: "t-shirt three alahly",
             id: 5,
@@ -123,6 +125,39 @@ export default function Products() {
         },
     ]
 
+    const sportsWear = [
+        {
+            image: image1,
+            price: 300,
+            title: "Sports Wear One",
+            id: 1
+        },
+        {
+            image: image2,
+            price: 400,
+            title: "Sports Wear Two",
+            id: 2
+        },
+        {
+            image: image3,
+            price: 500,
+            title: "Sports Wear Three",
+            id: 3
+        },
+        {
+            image: image4,
+            price: 500,
+            title: "Sports Wear Four",
+            id: 4
+        },
+        {
+            image: image5,
+            price: 500,
+            title: "Sports Wear Five",
+            id: 5
+        },
+    ]
+
     let params = useParams();
 
     return (
@@ -184,6 +219,54 @@ export default function Products() {
                         </div>
                         <div className="slider_container d-flex">
                             {studsTurfs.map(item =>
+                                <NavLink key={item.id} className="item">
+                                    <div className="image">
+                                        <img src={item.image} alt="image1" />
+                                    </div>
+                                    <div className="info">
+                                        <div className="name">{item.title}</div>
+                                        <div className="inner_info d-flex justify-content-between">
+                                            <div className="price">{item.price}EGP</div>
+                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        </div>
+                                    </div>
+                                </NavLink>
+                            )}
+                        </div>
+                    </div>
+                }
+                {params.category === "sportsWear" &&
+                    <div className='sports_wear'>
+                        <h2>Sports Wear</h2>
+                        <div className="add_cart">
+                            <button>All Products</button>
+                        </div>
+                        <div className="slider_container d-flex">
+                            {sportsWear.map(item =>
+                                <NavLink key={item.id} className="item">
+                                    <div className="image">
+                                        <img src={item.image} alt="image1" />
+                                    </div>
+                                    <div className="info">
+                                        <div className="name">{item.title}</div>
+                                        <div className="inner_info d-flex justify-content-between">
+                                            <div className="price">{item.price}EGP</div>
+                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        </div>
+                                    </div>
+                                </NavLink>
+                            )}
+                        </div>
+                    </div>
+                }
+                {params.category === "others" &&
+                    <div className='others'>
+                        <h2>Others</h2>
+                        <div className="add_cart">
+                            <button>All Products</button>
+                        </div>
+                        <div className="slider_container d-flex">
+                            {sportsWear.map(item =>
                                 <NavLink key={item.id} className="item">
                                     <div className="image">
                                         <img src={item.image} alt="image1" />

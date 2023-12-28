@@ -36,7 +36,7 @@ export default function AddProducts() {
 
     const schema = yup.object().shape({
         code: yup.string().required(),
-        name: yup.string(),
+        collection: yup.string(),
         price: yup.number(),
         size: yup.string().required(),
         quantity: yup.number().required(),
@@ -107,7 +107,7 @@ export default function AddProducts() {
                 <Formik
                     validationSchema={schema}
                     initialValues={{
-                        name: "",
+                        collection: "",
                         code: "",
                         price: "",
                         size: "",
@@ -122,12 +122,13 @@ export default function AddProducts() {
                                 'Content-type': 'application/json; charset=UTF-8'
                             },
                             body: JSON.stringify({
-                                name: values.name,
+                                collection: values.collection,
                                 code: values.code,
                                 price: values.price,
                                 size: values.size,
                                 quantity: values.quantity,
-                                description: values.description
+                                description: values.description,
+                                file: values.file
                             })
                         })
                         return response.json();
@@ -168,13 +169,13 @@ export default function AddProducts() {
                                     controlId="validationFormik101"
                                     className="position-relative"
                                 >
-                                    <Form.Label>Name</Form.Label>
+                                    <Form.Label>Collection</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        name="name"
-                                        value={values.name}
+                                        name="collection"
+                                        value={values.collection}
                                         onChange={handleChange}
-                                        isValid={touched.name && !errors.name}
+                                        isValid={touched.collection && !errors.collection}
                                         disabled={openFields ? true : false}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>

@@ -14,7 +14,7 @@ export default function Navigation() {
         <div className='navigation'>
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
-                    <h2 className='logo'>Soccer Sports</h2>
+                    <h2 className='logo'>Soccer Corner</h2>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -23,13 +23,13 @@ export default function Navigation() {
                         >
                             <NavLink to="/" href="#action1">Home</NavLink>
                             <NavDropdown title="Categories" id="navbarScrollingDropdown">
-                                <NavDropdown.Item href="#action2">Action</NavDropdown.Item>
-                                <NavDropdown.Item href="#action3">
-                                    Another action
-                                </NavDropdown.Item>
+                                <NavDropdown.Item href="/products/footballJerseys">Jerseys</NavDropdown.Item>
+                                <NavDropdown.Item href="/products/sportsWear">Sports Wear</NavDropdown.Item>
+                                <NavDropdown.Item href="/products/studs_turfs">Studs & Turfs</NavDropdown.Item>
+                                <NavDropdown.Item href="/products/others">Other</NavDropdown.Item>
                             </NavDropdown>
-                            <NavLink to="/contactUs" href="#action4">Contact Us</NavLink>
-                            <NavLink to="/adminSecret" href="#action1">Admin</NavLink>
+                            <NavLink to="/contactUs">Contact Us</NavLink>
+                            <NavLink to="/adminSecret">Admin</NavLink>
                         </Nav>
                         <div className="actions">
                             <NavLink to="/"><FontAwesomeIcon className='fs-5' icon={faUser} /></NavLink>
