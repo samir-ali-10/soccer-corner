@@ -16,7 +16,12 @@ router.post("/api/products", ProductController.postAddProduct);
 
 
 // =>EDIT
-router.put('/api/products/edit-product/:code' , ProductController.editProduct);
+router.put('/api/products/edit-product/:code' , ProductController.editProduct); // edit Product by code
+
+
+// => DELETE
+router.delete('/api/products/delete-product/:code' , ProductController.deleteSingleProduct) // delete single product 
+router.delete('/api/products/delete-collection/:collectionName' , ProductController.deleteCollection) // delete Collection
 
 
 module.exports = router;

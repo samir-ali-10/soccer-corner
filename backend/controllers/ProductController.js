@@ -132,3 +132,29 @@ exports.editProduct = (req , res , next) => {
 }
 
 
+// => DELETE
+
+
+exports.deleteSingleProduct = (req , res , next ) => {
+  const code = req.params.code;
+  ProductModel.findOneAndDelete({code})
+  .then((result) => {
+    res.json('PRODUCT DELETED SUCCESSFULLY!')
+    console.log('PRODUCT DELETED SUCCESSFULLY!');
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+exports.deleteCollection = (req , res , next) => {
+  const collectionName = req.params.collectionName;
+  ProductModel.deleteMany({collectionName})
+  .then((result) => {
+    res.json('COLLECTION DELETED SUCCESSFULLY!')
+    console.log('COLLECTION DELETED SUCCESSFULLY!');
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
