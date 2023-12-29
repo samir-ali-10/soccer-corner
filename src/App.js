@@ -12,6 +12,7 @@ import ContactUs from './views/ContactUs';
 import Cart from './views/Cart';
 import Stock from './views/admin/Stock';
 import ProductsAll from './views/ProductsAll';
+import EditProduct from './views/admin/EditProduct';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/adminSecret" element={<AdminView />} />
         <Route path="/adminSecret/reviews" element={<ReviewsAdmin />} />
         <Route path="/adminSecret/addProducts" element={<AddProducts />} />
+        <Route path="/adminSecret/editProduct" element={<EditProduct />} />
         <Route path="/adminSecret/stock" element={<Stock />} />
       </Routes>
       <Footer />

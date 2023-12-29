@@ -234,6 +234,36 @@ ul {
   font-weight: 700;
 }
 
+.stock .products .product .info .delete_item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stock .products .product .info .delete_item button,
+.stock .products .product .info .delete_item a.edit_product,
+.stock .delete_all button {
+  border: none;
+  outline: none;
+  background-color: rgb(159, 0, 0);
+  color: var(--primary-color);
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+
+.stock .products .product .info .delete_item a.edit_product {
+  background-color: var(--text-color);
+  color: var(--primary-color);
+}
+
+.stock .delete_all button {
+  margin-top: 30px;
+}
+
 /************************ Reviews Admin ***************************/
 
 .reviews_admin .reviews .review {

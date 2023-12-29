@@ -1,14 +1,48 @@
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import image1 from "../../images/carousel_1.jpeg"
 import image2 from "../../images/carousel_2.jpeg"
 import image3 from "../../images/carousel_3.jpeg"
+import Spinner from 'react-bootstrap/Spinner';
+import axios from 'axios'
 
 
 export default function Stock() {
+
+    const [stock, setStock] = useState([]);
+
+    let getData = () => {
+        fetch(`http://localhost:3001/api/products`).then(res => res.json()).then(data => setStock(data))
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    let propagationNo = (event) => {
+        event.stopPropagation()
+        event.preventDefault();
+    }
+
+    const deleteItem = (itemName) => {
+        console.log(itemName);
+        axios.delete(`/api/products/delete-product/${itemName.code}`).then(() => {
+            let newList = stock.filter((el) => el.itemName !== itemName);
+
+            setStock(newList);
+        });
+    };
+
+    const deleteAllProducts = async () => {
+        const response = await fetch(`http://localhost:3001/api/products`, {
+            method: "DELETE",
+        });
+        return response.json();
+    }
+
     return (
         <div className='stock mt-4'>
             <Container>
@@ -38,106 +72,38 @@ export default function Stock() {
                         </select>
                     </div>
                 </div>
+                <div className="delete_all text-end">
+                    <button>Delete All Products</button>
+                </div>
                 <div className="products">
-                    <NavLink className="product" to="">
-                        <div className="image">
-                            <img src={image1} alt="image1" />
-                        </div>
-                        <div className="info">
-                            <div className="code">Product Code: <span>234232424</span></div>
-                            <div className="name">Product Name: <span>Ahly First</span></div>
-                            <div className="name">Product Description: <span>A very good quality product</span></div>
-                            <div className="price">Product Price: <span>300EGP</span></div>
-                        </div>
-                    </NavLink>
-                    <NavLink className="product" to="">
-                        <div className="image">
-                            <img src={image1} alt="image1" />
-                        </div>
-                        <div className="info">
-                            <div className="code">Product Code: <span>234232424</span></div>
-                            <div className="name">Product Name: <span>Ahly First</span></div>
-                            <div className="name">Product Description: <span>A very good quality product</span></div>
-                            <div className="price">Product Price: <span>300EGP</span></div>
-                        </div>
-                    </NavLink>
-                    <NavLink className="product" to="">
-                        <div className="image">
-                            <img src={image1} alt="image1" />
-                        </div>
-                        <div className="info">
-                            <div className="code">Product Code: <span>234232424</span></div>
-                            <div className="name">Product Name: <span>Ahly First</span></div>
-                            <div className="name">Product Description: <span>A very good quality product</span></div>
-                            <div className="price">Product Price: <span>300EGP</span></div>
-                        </div>
-                    </NavLink>
-                    <NavLink className="product" to="">
-                        <div className="image">
-                            <img src={image1} alt="image1" />
-                        </div>
-                        <div className="info">
-                            <div className="code">Product Code: <span>234232424</span></div>
-                            <div className="name">Product Name: <span>Ahly First</span></div>
-                            <div className="name">Product Description: <span>A very good quality product</span></div>
-                            <div className="price">Product Price: <span>300EGP</span></div>
-                        </div>
-                    </NavLink>
-                    <NavLink className="product" to="">
-                        <div className="image">
-                            <img src={image1} alt="image1" />
-                        </div>
-                        <div className="info">
-                            <div className="code">Product Code: <span>234232424</span></div>
-                            <div className="name">Product Name: <span>Ahly First</span></div>
-                            <div className="name">Product Description: <span>A very good quality product</span></div>
-                            <div className="price">Product Price: <span>300EGP</span></div>
-                        </div>
-                    </NavLink>
-                    <NavLink className="product" to="">
-                        <div className="image">
-                            <img src={image1} alt="image1" />
-                        </div>
-                        <div className="info">
-                            <div className="code">Product Code: <span>234232424</span></div>
-                            <div className="name">Product Name: <span>Ahly First</span></div>
-                            <div className="name">Product Description: <span>A very good quality product</span></div>
-                            <div className="price">Product Price: <span>300EGP</span></div>
-                        </div>
-                    </NavLink>
-                    <NavLink className="product" to="">
-                        <div className="image">
-                            <img src={image1} alt="image1" />
-                        </div>
-                        <div className="info">
-                            <div className="code">Product Code: <span>234232424</span></div>
-                            <div className="name">Product Name: <span>Ahly First</span></div>
-                            <div className="name">Product Description: <span>A very good quality product</span></div>
-                            <div className="price">Product Price: <span>300EGP</span></div>
-                        </div>
-                    </NavLink>
-                    <NavLink className="product" to="">
-                        <div className="image">
-                            <img src={image1} alt="image1" />
-                        </div>
-                        <div className="info">
-                            <div className="code">Product Code: <span>234232424</span></div>
-                            <div className="name">Product Name: <span>Ahly First</span></div>
-                            <div className="name">Product Description: <span>A very good quality product</span></div>
-                            <div className="price">Product Price: <span>300EGP</span></div>
-                        </div>
-                    </NavLink>
-                    <NavLink className="product" to="">
-                        <div className="image">
-                            <img src={image1} alt="image1" />
-                        </div>
-                        <div className="info">
-                            <div className="code">Product Code: <span>234232424</span></div>
-                            <div className="name">Product Name: <span>Ahly First</span></div>
-                            <div className="name">Product Description: <span>A very good quality product</span></div>
-                            <div className="price">Product Price: <span>300EGP</span></div>
-                        </div>
-                    </NavLink>
+                    {
+                        stock.length !== 0
+                            ?
+                            stock.map(item =>
+                                <NavLink key={item._id} className="product" to="">
+                                    <div className="image">
+                                        <img src={image1} alt="image1" />
+                                    </div>
+                                    <div className="info">
+                                        <div className="code">Product Code: <span>{item.code}</span></div>
+                                        <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                        <div className="name">Product Description: <span>{item.description}</span></div>
+                                        <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                        <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                        <div className="delete_item">
+                                            <button onClick={(e) => {
+                                                propagationNo(e)
+                                            }}>Delete Product</button>
+                                            <NavLink to="/adminSecret/editProduct" className='edit_product'>Edit Product</NavLink>
+                                        </div>
+                                    </div>
+                                </NavLink>
+                            )
+                            :
+                            <div className="loader text-center">
+                                <Spinner animation="border" />
+                            </div>
+                    }
                 </div>
             </Container>
         </div>
