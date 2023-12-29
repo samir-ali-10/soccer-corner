@@ -1,5 +1,7 @@
 const ProductModel = require("../models/ProductSchema");
 
+
+
 // => GET
 
 exports.getProducts = (req, res, next) => {
@@ -61,7 +63,11 @@ exports.getByModel = (req , res, next) => {
   })
 }
 
+
+
+
 // => POST
+
 exports.postAddProduct = (req, res, next) => {
   const code = req.body.code;
   const model = req.body.model;
@@ -90,3 +96,39 @@ exports.postAddProduct = (req, res, next) => {
       console.log(err);
     });
 };
+
+
+
+// => EDIT
+
+exports.editProduct = (req , res , next) => {
+  const code = req.params.code;
+  const UpdatedModel = req.body.model;
+  const UpdatedCollectionName = req.body.collectionName;
+  const UpdatedPrice = req.body.price;
+  const UpdatedSize = req.body.size;
+  const UpdatedQuantity = req.body.quantity;
+  const UpdatedDescription = req.body.description;
+  // const UpdatedImage = req.body.file;
+
+  ProductModel.find({code})
+    .then(product => {
+      product.model = UpdatedModel;
+      product.collectionName = UpdatedCollectionName;
+      product.price = UpdatedPrice;
+      product.size = UpdatedSize;
+      product.quantity = UpdatedQuantity;
+      product.description = UpdatedDescription;
+      // image : UpdatedImage
+      return ProductModel.save();
+  }).then(newProduct => {
+    res.json(newProduct);
+    console.log(newProduct);
+  })
+  .catch(err => {
+    console.log(err);
+  })
+
+}
+
+

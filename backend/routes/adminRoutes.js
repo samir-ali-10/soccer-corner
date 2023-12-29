@@ -8,8 +8,15 @@ router.get("/api/products/collection/:collectionName",ProductController.getColle
 router.get("/api/products/code/:code",ProductController.getSingleProduct); // get single product
 router.get("/api/products/size/:size", ProductController.getBySize); // get by size
 router.get("/api/products/model/:model",ProductController.getByModel); // get by model
-// router.get('/api/products/:collection/:size/:year') 
+
+
 // => POST
 router.post("/api/products", ProductController.postAddProduct);
+
+
+
+// =>EDIT
+router.put('/api/products/edit-product/:code' , ProductController.editProduct);
+
 
 module.exports = router;
