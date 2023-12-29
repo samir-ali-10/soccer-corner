@@ -20,8 +20,8 @@ router.put('/api/products/edit-product/:code' , ProductController.editProduct); 
 
 
 // => DELETE
-router.delete('/api/products/delete-product/:code' , ProductController.deleteSingleProduct) // delete single product 
-router.delete('/api/products/delete-collection/:collectionName' , ProductController.deleteCollection) // delete Collection
+router.get('/api/products/delete-product/:code' , ProductController.deleteSingleProduct) // delete single product 
+router.get('/api/products/delete-collection/:collectionName' , ProductController.deleteCollection) // delete all products
 
 
 module.exports = router;
