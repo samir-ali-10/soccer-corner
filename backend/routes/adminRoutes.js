@@ -21,7 +21,7 @@ router.put('/api/products/edit-product/:code' , ProductController.editProduct); 
 
 // => DELETE
 router.get('/api/products/delete-product/:code' , ProductController.deleteSingleProduct) // delete single product 
-router.get('/api/products/delete-collection/:collectionName' , ProductController.deleteCollection) // delete all products
+router.get('/api/products/delete-products' , ProductController.deleteAllProducts) // delete all products
 
 
 module.exports = router;

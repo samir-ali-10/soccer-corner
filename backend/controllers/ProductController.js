@@ -147,12 +147,11 @@ exports.deleteSingleProduct = (req , res , next ) => {
   })
 }
 
-exports.deleteCollection = (req , res , next) => {
-  const collectionName = req.params.collectionName;
-  ProductModel.deleteMany({collectionName})
+exports.deleteAllProducts = (req , res , next) => {
+  ProductModel.deleteMany()
   .then((result) => {
-    res.json('COLLECTION DELETED SUCCESSFULLY!')
-    console.log('COLLECTION DELETED SUCCESSFULLY!');
+    res.json('PRODUCTS DELETED SUCCESSFULLY!')
+    console.log('PRODUCTS DELETED SUCCESSFULLY!');
   })
   .catch(err => {
     console.log(err);
