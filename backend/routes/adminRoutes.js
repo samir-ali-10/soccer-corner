@@ -18,7 +18,7 @@ router.post("/api/products", ProductController.postAddProduct);
 
 
 // =>EDIT
-router.post('/api/products/edit-product/:code' , ProductController.editProduct); // edit Product by code
+router.get('/api/products/editProduct/:code' , ProductController.editProduct); // edit Product by code
 
 
 // => DELETE

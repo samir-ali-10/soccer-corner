@@ -155,6 +155,7 @@ exports.editProduct = (req , res , next) => {
   }).then(newProduct => {
     res.json(newProduct);
     console.log(newProduct);
+    console.log('PRODUCT EDITED');
   })
   .catch(err => {
     console.log(err);
