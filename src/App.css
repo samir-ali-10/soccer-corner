@@ -1360,12 +1360,12 @@ footer .copyright::before {
   }
 }
 
-/* @media (max-width: 767px) {
-  .home_page .new_collection .new_collection_container .item.one_sm {
-    width: 100%;
+@media (max-width: 767px) {
+  .stock .categories {
+    flex-direction: column;
   }
 
-  .home_page .new_collection .new_collection_container .item {
-    width: 45%;
+  .stock .categories .teams {
+    margin-bottom: 30px;
   }
-} */
+}
