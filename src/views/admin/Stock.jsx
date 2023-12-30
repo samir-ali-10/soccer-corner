@@ -7,6 +7,7 @@ import image1 from "../../images/carousel_1.jpeg"
 import image2 from "../../images/carousel_2.jpeg"
 import image3 from "../../images/carousel_3.jpeg"
 import Spinner from 'react-bootstrap/Spinner';
+import Swal from 'sweetalert2'
 // import axios from 'axios'
 
 
@@ -50,11 +51,47 @@ export default function Stock() {
 
 
     const deleteItem = (itemName) => {
-        fetch(`http://localhost:3001/api/products/delete-product/${itemName.code}`).then(res => res.json()).then(data => console.log(data))
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3001/api/products/delete-product/${itemName.code}`).then(res => res.json()).then(data => console.log(data))
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+            window.location.reload()
+        })
     }
 
     const deleteAllProducts = async () => {
-        fetch(`http://localhost:3001/api/products/delete-products`).then(res => res.json()).then(data => console.log(data))
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3001/api/products/delete-products`).then(res => res.json()).then(data => console.log(data))
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+            window.location.reload()
+        })
     }
 
     useEffect(() => {
@@ -94,7 +131,6 @@ export default function Stock() {
                 <div className="delete_all text-end">
                     <button onClick={() => {
                         deleteAllProducts()
-                        window.location.reload()
                     }}>Delete All Products</button>
                 </div>
                 <div className="products">
@@ -117,7 +153,6 @@ export default function Stock() {
                                             <button onClick={(e) => {
                                                 propagationNo(e)
                                                 deleteItem(item)
-                                                window.location.reload()
                                             }}>Delete Product</button>
                                             <button onClick={(e) => {
                                                 propagationNo(e)

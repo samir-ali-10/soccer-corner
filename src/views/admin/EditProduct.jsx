@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 export default function EditProduct() {
 
@@ -72,7 +73,7 @@ export default function EditProduct() {
 
     let getProduct = () => {
         fetch(`http://localhost:3001/api/products/code/${params.code}`).then(res => res.json()).then(data => {
-            // setProduct(data)
+            setProduct(data)
             setCode(data.code)
             setCollectionName(data.collectionName)
             setDescription(data.description)
@@ -83,25 +84,8 @@ export default function EditProduct() {
         })
     }
 
-    async function postData() {
-        let response = await fetch(`http://localhost:3001/api/products/edit-product/${params.code}`, {
-            method: 'PUT',
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            },
-            body: JSON.stringify({
-                // ...product,
-                code,
-                collectionName,
-                model,
-                price,
-                size,
-                quantity,
-                description
-            })
-        })
-        return response.json();
-
+    async function editProduct() {
+        fetch(`http://localhost:3001/api/editProduct/${params.code}`).then((res) => res.json()).then((data) => console.log(data))
     }
 
     useEffect(() => {
@@ -134,8 +118,7 @@ export default function EditProduct() {
 
     let handleEditProduct = (e) => {
         e.preventDefault();
-        postData()
-        console.log("new new");
+        editProduct()
         navigate('/adminSecret/stock')
     }
 
