@@ -51,17 +51,18 @@ exports.getBySize = (req, res, next) => {
     });
 };
 
-exports.getByModel = (req , res, next) => {
-  const model = req.params.model;
-  ProductModel.find({model})
-  .then(product => {
-    res.json(product)
-    console.log(product);
-  })
-  .catch(err => {
-    console.log(err);
-  })
-}
+// exports.getByModelAndSize = (req , res, next) => {
+//   const size = req.params.size;
+//   const model = req.params.model;
+//   ProductModel.find({model , size })
+//   .then(products => {
+//     res.json(products)
+//     console.log(products);
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   })
+// }
 
 
 
