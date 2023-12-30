@@ -12,7 +12,17 @@ import axios from 'axios'
 
 export default function Stock() {
 
-    const [stock, setStock] = useState([]);
+    const options = [
+        { value: '', text: '--Choose a Size--' },
+        { value: 's', text: 'S' },
+        { value: 'm', text: 'M' },
+        { value: 'l', text: 'L' },
+        { value: 'xl', text: 'XL' },
+        { value: 'xxl', text: 'XXL' },
+    ];
+
+    const [stock, setStock] = useState([]),
+        [selected, setSelected] = useState(options[0].value)
 
     let navigate = useNavigate();
 
@@ -22,6 +32,10 @@ export default function Stock() {
 
     let getCollection = (val) => {
         fetch(`http://localhost:3001/api/products/collection/${val.toLowerCase()}`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    let getCollectionSize = (val) => {
+        fetch(`http://localhost:3001/api/products/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
 
@@ -56,17 +70,18 @@ export default function Stock() {
                 <h2>Stock</h2>
                 <div className="categories mt-5">
                     <div className="teams">
+                        <button onClick={getData}>All</button>
                         <button onClick={(e) => getCollection(e.target.innerHTML)}>Ahly</button>
                         <button onClick={(e) => getCollection(e.target.innerHTML)}>Zamalek</button>
                         <button onClick={(e) => getCollection(e.target.innerHTML)}>Paris</button>
                     </div>
                     <div className="dropdowns">
-                        <select className='me-3' name="sizes" id="sizes">
-                            <option value="s">S</option>
-                            <option value="m">M</option>
-                            <option value="l">L</option>
-                            <option value="xl">XL</option>
-                            <option value="xxl">XXL</option>
+                        <select className='me-3' value={selected} onChange={getCollectionSize} name="sizes" id="sizes">
+                            {
+                                options.map(option =>
+                                    <option key={option.value} value={option.value}>{option.text}</option>
+                                )
+                            }
                         </select>
                         <select name="year" id="year">
                             <option value="2020">2020</option>
@@ -77,7 +92,10 @@ export default function Stock() {
                     </div>
                 </div>
                 <div className="delete_all text-end">
-                    <button onClick={() => deleteAllProducts()}>Delete All Products</button>
+                    <button onClick={() => {
+                        deleteAllProducts()
+                        window.location.reload()
+                    }}>Delete All Products</button>
                 </div>
                 <div className="products">
                     {
@@ -91,13 +109,15 @@ export default function Stock() {
                                     <div className="info">
                                         <div className="code">Product Code: <span>{item.code}</span></div>
                                         <div className="name">Product Name: <span>{item.collectionName}</span></div>
-                                        <div className="name">Product Description: <span>{item.description}</span></div>
                                         <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                        <div className="price">Product Size: <span>{item.size}</span></div>
+                                        <div className="name">Product Description: <span>{item.description}</span></div>
                                         <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                         <div className="delete_item">
                                             <button onClick={(e) => {
                                                 propagationNo(e)
                                                 deleteItem(item)
+                                                window.location.reload()
                                             }}>Delete Product</button>
                                             <button onClick={(e) => {
                                                 propagationNo(e)

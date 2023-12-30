@@ -32,7 +32,13 @@ export default function AddProducts() {
         }
     ];
 
-    const sizes = ["S", "M", "L", "XL", "XXL"];
+    const options = [
+        { value: 's', text: 'S' },
+        { value: 'm', text: 'M' },
+        { value: 'l', text: 'L' },
+        { value: 'xl', text: 'XL' },
+        { value: 'xxl', text: 'XXL' },
+    ];
 
     const schema = yup.object().shape({
         code: yup.string().required(),
@@ -239,8 +245,8 @@ export default function AddProducts() {
                                 </Form.Group>
                                 <datalist id='sizeList'>
                                     {
-                                        sizes.map((size, index) =>
-                                            <option key={index} value={size}></option>
+                                        options.map((option, index) =>
+                                            <option key={index} value={option.value}>{option.text}</option>
                                         )
                                     }
                                 </datalist>

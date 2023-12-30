@@ -72,7 +72,7 @@ export default function EditProduct() {
 
     let getProduct = () => {
         fetch(`http://localhost:3001/api/products/code/${params.code}`).then(res => res.json()).then(data => {
-            setProduct(data)
+            // setProduct(data)
             setCode(data.code)
             setCollectionName(data.collectionName)
             setDescription(data.description)
@@ -90,7 +90,7 @@ export default function EditProduct() {
                 'Content-type': 'application/json; charset=UTF-8'
             },
             body: JSON.stringify({
-                ...product,
+                // ...product,
                 code,
                 collectionName,
                 model,
@@ -135,6 +135,7 @@ export default function EditProduct() {
     let handleEditProduct = (e) => {
         e.preventDefault();
         postData()
+        console.log("new new");
         navigate('/adminSecret/stock')
     }
 
