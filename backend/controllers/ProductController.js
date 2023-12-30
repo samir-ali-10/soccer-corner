@@ -142,17 +142,15 @@ exports.editProduct = (req , res , next) => {
   const UpdatedDescription = req.body.description;
   // const UpdatedImage = req.body.file;
 
-  ProductModel.find({code})
-    .then(product => {
-      product.model = UpdatedModel;
-      product.collectionName = UpdatedCollectionName;
-      product.price = UpdatedPrice;
-      product.size = UpdatedSize;
-      product.quantity = UpdatedQuantity;
-      product.description = UpdatedDescription;
-      // image : UpdatedImage
-      return ProductModel.save();
-  }).then(newProduct => {
+  ProductModel.findOneAndUpdate({code} , {
+    model : UpdatedModel,
+    collectionName: UpdatedCollectionName,
+    price: UpdatedPrice,
+    quantity: UpdatedQuantity,
+    size: UpdatedSize,
+    description: UpdatedDescription,
+  })
+  .then(newProduct => {
     res.json(newProduct);
     console.log(newProduct);
     console.log('PRODUCT EDITED');
