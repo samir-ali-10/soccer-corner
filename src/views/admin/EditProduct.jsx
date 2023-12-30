@@ -45,31 +45,13 @@ export default function EditProduct() {
         }
     ];
 
-    const sizes = ["S", "M", "L", "XL", "XXL"];
-
-    const schema = yup.object().shape({
-        code: yup.string().required(),
-        model: yup.string().required(),
-        collectionName: yup.string(),
-        price: yup.number(),
-        size: yup.string().required(),
-        quantity: yup.number().required(),
-        description: yup.string(),
-        file: yup.mixed(),
-    });
-
-    let openAllFields = () => {
-        setOpenFields(!openFields);
-    }
-
-    let closeFields = (value) => {
-        codes.map(product => {
-            if (value === product.productCode) {
-                setOpenFields(true);
-            }
-        }
-        )
-    }
+    const options = [
+        { value: 's', text: 'S' },
+        { value: 'm', text: 'M' },
+        { value: 'l', text: 'L' },
+        { value: 'xl', text: 'XL' },
+        { value: 'xxl', text: 'XXL' },
+    ];
 
     let getProduct = () => {
         fetch(`http://localhost:3001/api/products/code/${params.code}`).then(res => res.json()).then(data => {
@@ -149,8 +131,8 @@ export default function EditProduct() {
                     </Form.Group>
                     <datalist id='sizeList'>
                         {
-                            sizes.map((size, index) =>
-                                <option key={index} value={size}></option>
+                            options.map((option, index) =>
+                                <option key={index} value={option.value}>{option.text}</option>
                             )
                         }
                     </datalist>
