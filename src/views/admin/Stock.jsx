@@ -7,7 +7,7 @@ import image1 from "../../images/carousel_1.jpeg"
 import image2 from "../../images/carousel_2.jpeg"
 import image3 from "../../images/carousel_3.jpeg"
 import Spinner from 'react-bootstrap/Spinner';
-import axios from 'axios'
+// import axios from 'axios'
 
 
 export default function Stock() {

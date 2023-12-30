@@ -51,14 +51,45 @@ exports.getBySize = (req, res, next) => {
     });
 };
 
-exports.getByModel = (req , res, next) => {
-  const model = req.params.model;
-  ProductModel.find({model})
-  .then(product => {
-    res.json(product)
-    console.log(product);
+
+exports.getCollectionAndModel = (req , res, next) => {
+  const collectionName = req.params.collectionName;
+  const model = req.params.model;  
+  ProductModel.find({ model , collectionName})
+  .then(products => {
+    res.json(products)
+    console.log(products);
   })
-  .catch(err => {
+  .catch(err => { 
+    console.log(err);
+  })
+}
+
+
+exports.getCollectionAndSize = (req , res, next) => {
+  const collectionName = req.params.collectionName;
+  const size = req.params.size;
+  ProductModel.find({ size , collectionName})
+  .then(products => {
+    res.json(products)
+    console.log(products);
+  })
+  .catch(err => { 
+    console.log(err);
+  })
+}
+
+
+exports.getCollectionAndModelAndSize = (req , res, next) => {
+  const collectionName = req.params.collectionName;
+  const size = req.params.size;
+  const model = req.params.model;
+  ProductModel.find({model , size , collectionName})
+  .then(products => {
+    res.json(products)
+    console.log(products);
+  })
+  .catch(err => { 
     console.log(err);
   })
 }
