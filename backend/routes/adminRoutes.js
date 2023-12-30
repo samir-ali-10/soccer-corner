@@ -7,8 +7,8 @@ router.get("/api/products", ProductController.getProducts); // get all products
 router.get("/api/products/collection/:collectionName",ProductController.getCollection); // get collection
 router.get("/api/products/code/:code",ProductController.getSingleProduct); // get single product
 router.get("/api/products/size/:size", ProductController.getBySize); // get by size
-router.get("/api/products/model/:model",ProductController.getByModel); // get by model
-
+// router.get("/api/products/modelAndSize/:model/:size",ProductController.getByModelAndSize); // get by model and size 
+// router.get('/api/products/edit-product/:code' , ProductController) //
 
 // => POST
 router.post("/api/products", ProductController.postAddProduct);
