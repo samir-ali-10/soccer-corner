@@ -255,7 +255,7 @@ ul {
   -o-border-radius: 6px;
 }
 
-.stock .products .product .info .delete_item a.edit_product {
+.stock .products .product .info .delete_item .edit_product {
   background-color: var(--text-color);
   color: var(--primary-color);
 }

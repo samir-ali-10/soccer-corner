@@ -28,7 +28,7 @@ function App() {
         <Route path="/adminSecret" element={<AdminView />} />
         <Route path="/adminSecret/reviews" element={<ReviewsAdmin />} />
         <Route path="/adminSecret/addProducts" element={<AddProducts />} />
-        <Route path="/adminSecret/editProduct" element={<EditProduct />} />
+        <Route path="/adminSecret/editProduct/:code" element={<EditProduct />} />
         <Route path="/adminSecret/stock" element={<Stock />} />
       </Routes>
       <Footer />

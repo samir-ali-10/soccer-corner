@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -7,13 +7,25 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import * as formik from 'formik';
 import * as yup from 'yup';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 export default function EditProduct() {
 
-    const [openFields, setOpenFields] = useState(false);
+    let params = useParams();
+
+    let navigate = useNavigate();
+
+    const [openFields, setOpenFields] = useState(false),
+        [product, setProduct] = useState(),
+        [collectionName, setCollectionName] = useState(),
+        [model, setModel] = useState(),
+        [code, setCode] = useState(),
+        [price, setPrice] = useState(),
+        [size, setSize] = useState(),
+        [quantity, setQuantity] = useState(),
+        [description, setDescription] = useState();
 
     const { Formik } = formik;
 
@@ -58,43 +70,134 @@ export default function EditProduct() {
         )
     }
 
+    let getProduct = () => {
+        fetch(`http://localhost:3001/api/products/code/${params.code}`).then(res => res.json()).then(data => {
+            setProduct(data)
+            setCode(data.code)
+            setCollectionName(data.collectionName)
+            setDescription(data.description)
+            setModel(data.model)
+            setPrice(data.price)
+            setQuantity(data.quantity)
+            setSize(data.size)
+        })
+    }
+
+    async function postData() {
+        let response = await fetch(`http://localhost:3001/api/products/edit-product/${params.code}`, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                ...product,
+                code,
+                collectionName,
+                model,
+                price,
+                size,
+                quantity,
+                description
+            })
+        })
+        return response.json();
+
+    }
+
+    useEffect(() => {
+        getProduct()
+    }, [])
+
+    let handleChange = (e) => {
+        if (e.target.name === "code") {
+            setCode(e.target.value)
+        }
+        else if (e.target.name === "price") {
+            setPrice(e.target.value)
+        }
+        else if (e.target.name === "description") {
+            setDescription(e.target.value)
+        }
+        else if (e.target.name === "model") {
+            setModel(e.target.value)
+        }
+        else if (e.target.name === "collectionName") {
+            setCollectionName(e.target.value)
+        }
+        else if (e.target.name === "size") {
+            setSize(e.target.value)
+        }
+        else if (e.target.name === "quantity") {
+            setQuantity(e.target.value)
+        }
+    }
+
+    let handleEditProduct = (e) => {
+        e.preventDefault();
+        postData()
+        navigate('/adminSecret/stock')
+    }
+
+
     return (
-        <div className='add_products mt-4'>
+        <div className='add_products mt-5'>
             <Container>
-                <div className='open_fields_container'>
+                <Form onSubmit={(e) => handleEditProduct(e)}>
+                    <Form.Group className="mb-4">
+                        <Form.Label className='mb-3'>Code</Form.Label>
+                        <Form.Control type="text" value={code} name='code' onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-4">
+                        <Form.Label className='mb-3'>Collection</Form.Label>
+                        <Form.Control type="text" value={collectionName} name='collectionName' onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-4">
+                        <Form.Label className='mb-3'>Model</Form.Label>
+                        <Form.Control type="text" value={model} name='model' onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-4">
+                        <Form.Label className='mb-3'>Price</Form.Label>
+                        <Form.Control type="number" value={price} name='price' onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-4">
+                        <Form.Label className='mb-3'>Size</Form.Label>
+                        <Form.Control list='sizeList' type="text" value={size} name='size' onChange={handleChange} />
+                    </Form.Group>
+                    <datalist id='sizeList'>
+                        {
+                            sizes.map((size, index) =>
+                                <option key={index} value={size}></option>
+                            )
+                        }
+                    </datalist>
+                    <Form.Group className="mb-4">
+                        <Form.Label className='mb-3'>Quantity</Form.Label>
+                        <Form.Control type="number" value={quantity} name='quantity' onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-4">
+                        <Form.Label className='mb-3'>Description</Form.Label>
+                        <Form.Control as="textarea" value={description} rows={3} name='description' onChange={handleChange} />
+                    </Form.Group>
+                    <Button variant="info" type="submit">
+                        Submit
+                    </Button>
+                </Form>
+                {/* <div className='open_fields_container'>
                     <button className='open_fields' onClick={openAllFields}>Open all fields</button>
                 </div>
                 <Formik
                     validationSchema={schema}
                     initialValues={{
-                        collectionName: "",
-                        model: "",
-                        code: "",
-                        price: "",
-                        size: "",
-                        quantity: "",
-                        description: "",
+                        collectionName: collectionName,
+                        model: model,
+                        code: code,
+                        price: price,
+                        size: size,
+                        quantity: quantity,
+                        description: description,
                         file: undefined,
                     }}
-                    onSubmit={async (values) => {
-                        let response = await fetch(`http://localhost:3001/api/products`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-type': 'application/json; charset=UTF-8'
-                            },
-                            body: JSON.stringify({
-                                collectionName: values.collectionName,
-                                code: values.code,
-                                model: values.model,
-                                price: values.price,
-                                size: values.size,
-                                quantity: values.quantity,
-                                description: values.description,
-                                file: values.file
-                            })
-                        })
-                        return response.json();
-                    }}
+                    onSubmit={console.log("skdjfbn")}
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
                         <Form noValidate onSubmit={handleSubmit}>
@@ -255,7 +358,7 @@ export default function EditProduct() {
                             <Button type="submit">Send To Stock</Button>
                         </Form>
                     )}
-                </Formik>
+                </Formik> */}
             </Container>
         </div>
     )

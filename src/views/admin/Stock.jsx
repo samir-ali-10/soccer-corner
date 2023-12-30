@@ -2,7 +2,7 @@ import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useRef, useState } from 'react'
 import { Container } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import image1 from "../../images/carousel_1.jpeg"
 import image2 from "../../images/carousel_2.jpeg"
 import image3 from "../../images/carousel_3.jpeg"
@@ -14,34 +14,38 @@ export default function Stock() {
 
     const [stock, setStock] = useState([]);
 
+    let navigate = useNavigate();
+
     let getData = () => {
-        fetch(`http://localhost:3001/api/products`).then(res => res.json()).then(data => setStock(data))
+        fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
-    useEffect(() => {
-        getData();
-    }, [])
+    let getCollection = (val) => {
+        fetch(`http://localhost:3001/api/products/collection/${val.toLowerCase()}`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
 
     let propagationNo = (event) => {
         event.stopPropagation()
         event.preventDefault();
     }
 
-    const deleteItem = (itemName) => {
-        console.log(itemName);
-        axios.delete(`/api/products/delete-product/${itemName.code}`).then(() => {
-            let newList = stock.filter((el) => el.itemName !== itemName);
+    let navigateToEdit = (item) => {
+        navigate(`/adminSecret/editProduct/${item.code}`);
+    }
 
-            setStock(newList);
-        });
-    };
+
+    const deleteItem = (itemName) => {
+        fetch(`http://localhost:3001/api/products/delete-product/${itemName.code}`).then(res => res.json()).then(data => console.log(data))
+    }
 
     const deleteAllProducts = async () => {
-        const response = await fetch(`http://localhost:3001/api/products`, {
-            method: "DELETE",
-        });
-        return response.json();
+        fetch(`http://localhost:3001/api/products/delete-products`).then(res => res.json()).then(data => console.log(data))
     }
+
+    useEffect(() => {
+        getData();
+    }, [])
 
     return (
         <div className='stock mt-4'>
@@ -52,9 +56,9 @@ export default function Stock() {
                 <h2>Stock</h2>
                 <div className="categories mt-5">
                     <div className="teams">
-                        <button>Ahly</button>
-                        <button>Zamalek</button>
-                        <button>Paris</button>
+                        <button onClick={(e) => getCollection(e.target.innerHTML)}>Ahly</button>
+                        <button onClick={(e) => getCollection(e.target.innerHTML)}>Zamalek</button>
+                        <button onClick={(e) => getCollection(e.target.innerHTML)}>Paris</button>
                     </div>
                     <div className="dropdowns">
                         <select className='me-3' name="sizes" id="sizes">
@@ -73,7 +77,7 @@ export default function Stock() {
                     </div>
                 </div>
                 <div className="delete_all text-end">
-                    <button>Delete All Products</button>
+                    <button onClick={() => deleteAllProducts()}>Delete All Products</button>
                 </div>
                 <div className="products">
                     {
@@ -93,8 +97,12 @@ export default function Stock() {
                                         <div className="delete_item">
                                             <button onClick={(e) => {
                                                 propagationNo(e)
+                                                deleteItem(item)
                                             }}>Delete Product</button>
-                                            <NavLink to="/adminSecret/editProduct" className='edit_product'>Edit Product</NavLink>
+                                            <button onClick={(e) => {
+                                                propagationNo(e)
+                                                navigateToEdit(item)
+                                            }} className='edit_product'>Edit Product</button>
                                         </div>
                                     </div>
                                 </NavLink>
