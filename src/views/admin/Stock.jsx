@@ -8,7 +8,6 @@ import image2 from "../../images/carousel_2.jpeg"
 import image3 from "../../images/carousel_3.jpeg"
 import Spinner from 'react-bootstrap/Spinner';
 import Swal from 'sweetalert2'
-// import axios from 'axios'
 
 
 export default function Stock() {

@@ -51,65 +51,11 @@ export default function AddProducts() {
         file: yup.mixed(),
     });
 
-    let openAllFields = () => {
-        setOpenFields(!openFields);
-    }
-
-    let closeFields = (value) => {
-        codes.map(product => {
-            if (value === product.productCode) {
-                setOpenFields(true);
-            }
-        }
-        )
-    }
-
-    // async function sendData() {
-    //     let response = await fetch(`http://localhost:3001/api/getProducts`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-type': 'application/json; charset=UTF-8'
-    //         },
-    //         body: JSON.stringify({
-    //             title,
-    //             price,
-    //             description,
-    //             images
-    //         })
-    //     })
-    //     return response.json();
-
-    // }
-
-    // const sendData = async (values, { setSubmitting }) => {
-    //     const payload = {
-    //         data: {
-    //             code: values.code,
-    //             name: values.name,
-    //             price: values.price,
-    //             size: values.size,
-    //             quantity: values.quantity,
-    //             description: values.description
-    //         }
-    //     }
-    //     try {
-    //         const response = await axios.post('http://localhost:3001/api/getProducts', payload)
-    //         console.log(response.data)
-    //     } catch (e) {
-    //         console.log(e)
-    //     } finally {
-    //         setSubmitting(false)
-    //     }
-    // }
-
     return (
         <div className='add_products mt-4'>
             <Container>
-                <div className="back_to_admin">
+                <div className="back_to_admin mb-5">
                     <NavLink to="/adminSecret" className="back_to_admin"><FontAwesomeIcon icon={faLeftLong} />Back to admin dashboard</NavLink>
-                </div>
-                <div className='open_fields_container'>
-                    <button className='open_fields' onClick={openAllFields}>Open all fields</button>
                 </div>
                 <Formik
                     validationSchema={schema}
@@ -159,7 +105,6 @@ export default function AddProducts() {
                                         list='productsList'
                                         value={values.code}
                                         onChange={handleChange}
-                                        onBlur={(val) => closeFields(val.target.value)}
                                         isValid={touched.code && !errors.code}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
@@ -299,7 +244,18 @@ export default function AddProducts() {
                                     {errors.file}
                                 </Form.Control.Feedback>
                             </Form.Group>
-                            <Button type="submit">Send To Stock</Button>
+                            <div className='clear_fields_container d-flex justify-content-between'>
+                                <Button type="submit">Send To Stock</Button>
+                                <button className='clear_fields' onClick={() => {
+                                    values.code = ""
+                                    values.collectionName = ""
+                                    values.description = ""
+                                    values.model = ""
+                                    values.price = ""
+                                    values.quantity = ""
+                                    values.size = ""
+                                }}>Clear all fields</button>
+                            </div>
                         </Form>
                     )}
                 </Formik>

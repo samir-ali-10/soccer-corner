@@ -1166,12 +1166,12 @@ ul {
   color: initial !important;
 }
 
-.add_products .open_fields_container {
+.add_products .clear_fields_container {
   text-align: right;
   margin-bottom: 30px;
 }
 
-.add_products .open_fields {
+.add_products .clear_fields {
   appearance: none;
   background-color: var(--secondary-color);
   border-radius: 4px;
@@ -1200,16 +1200,16 @@ ul {
   -o-transition: box-shadow .15s, transform .15s;
 }
 
-.add_products .open_fields:focus {
+.add_products .clear_fields:focus {
   box-shadow: var(--secondary-color) 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, var(--secondary-color) 0 -3px 0 inset;
 }
 
-.add_products .open_fields:hover {
+.add_products .clear_fields:hover {
   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, var(--secondary-color) 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 
-.add_products .open_fields:active {
+.add_products .clear_fields:active {
   box-shadow: var(--secondary-color) 0 3px 7px inset;
   transform: translateY(2px);
 }
