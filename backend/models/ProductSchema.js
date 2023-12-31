@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const ProductSchema = new Schema({
   code: String,
   model : String,
+  league : String,
   collectionName: String,
   price: Number,
   size: String,
@@ -12,6 +13,9 @@ const ProductSchema = new Schema({
   // image: String,
 });
 
+
+
 const ProductModel = mongoose.model("Products", ProductSchema);
+
 
 module.exports = ProductModel;

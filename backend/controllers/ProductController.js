@@ -1,4 +1,5 @@
 const ProductModel = require("../models/ProductSchema");
+const CollectionName = require('../models/CollectionSchema');
 
 
 
@@ -102,15 +103,22 @@ exports.getCollectionAndModelAndSize = (req , res, next) => {
 exports.postAddProduct = (req, res, next) => {
   const code = req.body.code;
   const model = req.body.model;
+  const league = req.body.league;
   const collectionName = req.body.collectionName;
   const price = req.body.price;
   const size = req.body.size;
   const quantity = req.body.quantity;
   const description = req.body.description;
   // const image = req.body.file;
+
+  const collectionArray = new CollectionName();
+  collectionArray.collectionNames.push(collectionName);
+  collectionArray.save();
+
   const product = new ProductModel({
     code: code,
     model : model,
+    league : league,
     collectionName: collectionName,
     price: price,
     quantity: quantity,
@@ -135,6 +143,7 @@ exports.postAddProduct = (req, res, next) => {
 exports.editProduct = (req , res , next) => {
   const code = req.params.code;
   const UpdatedModel = req.body.model;
+  const Updatedleague = req.body.league;
   const UpdatedCollectionName = req.body.collectionName;
   const UpdatedPrice = req.body.price;
   const UpdatedSize = req.body.size;
@@ -144,6 +153,7 @@ exports.editProduct = (req , res , next) => {
 
   ProductModel.findOneAndUpdate({code} , {
     model : UpdatedModel,
+    league : Updatedleague,
     collectionName: UpdatedCollectionName,
     price: UpdatedPrice,
     quantity: UpdatedQuantity,
@@ -187,3 +197,32 @@ exports.deleteAllProducts = (req , res , next) => {
     console.log(err);
   })
 }
+
+
+
+exports.getCollectionName = (req , res , next ) => {
+
+  CollectionName.find()
+  .then(collection => {
+    res.json(collection)
+    console.log(collection)
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
+// exports.postNewCollectionName = (req , res , next) => {
+//   const collectionName = req.params.collectionName; 
+//   const collectionArray = new CollectionName();
+
+//   collectionArray.collectionNames.push(collectionName);
+//   collectionArray.save()
+//   .then(collectionName => {
+//     res.json(collectionName)
+//     console.log('collection is added');
+//   }).catch(err => {
+//     console.log(err);
+//   });
+// }
+
+
