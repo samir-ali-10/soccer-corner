@@ -29,19 +29,19 @@ export default function AdminView() {
                             <FontAwesomeIcon icon={faEnvelope} />
                         </div>
                     </NavLink>
-                    <NavLink to="" className="selection">
+                    <NavLink to="/adminSecret/complains" className="selection">
                         <h3>Complains</h3>
                         <div className="icon">
                             <FontAwesomeIcon icon={faFaceAngry} />
                         </div>
                     </NavLink>
-                    <NavLink to="" className="selection">
+                    <NavLink to="/adminSecret/newOrders" className="selection">
                         <h3>New Orders</h3>
                         <div className="icon">
                             <FontAwesomeIcon icon={faCartFlatbedSuitcase} />
                         </div>
                     </NavLink>
-                    <NavLink to="" className="selection">
+                    <NavLink to="/adminSecret/returns" className="selection">
                         <h3>Returns</h3>
                         <div className="icon">
                             <FontAwesomeIcon icon={faArrowRotateLeft} />

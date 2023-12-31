@@ -1,6 +1,6 @@
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import image1 from "../../images/carousel_1.jpeg"
