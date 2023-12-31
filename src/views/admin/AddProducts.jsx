@@ -44,6 +44,7 @@ export default function AddProducts() {
         code: yup.string().required(),
         model: yup.string().required(),
         collectionName: yup.string(),
+        league: yup.string(),
         price: yup.number(),
         size: yup.string().required(),
         quantity: yup.number().required(),
@@ -61,6 +62,7 @@ export default function AddProducts() {
                     validationSchema={schema}
                     initialValues={{
                         collectionName: "",
+                        league: "",
                         model: "",
                         code: "",
                         price: "",
@@ -77,6 +79,7 @@ export default function AddProducts() {
                             },
                             body: JSON.stringify({
                                 collectionName: values.collectionName,
+                                league: values.league,
                                 code: values.code,
                                 model: values.model,
                                 price: values.price,
@@ -130,6 +133,24 @@ export default function AddProducts() {
                                         value={values.model}
                                         onChange={handleChange}
                                         isValid={touched.model && !errors.model}
+                                        disabled={openFields ? true : false}
+                                    />
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>League</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="league"
+                                        value={values.league}
+                                        onChange={handleChange}
+                                        isValid={touched.league && !errors.league}
                                         disabled={openFields ? true : false}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
