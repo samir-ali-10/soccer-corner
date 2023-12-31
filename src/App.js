@@ -13,6 +13,9 @@ import Cart from './views/Cart';
 import Stock from './views/admin/Stock';
 import ProductsAll from './views/ProductsAll';
 import EditProduct from './views/admin/EditProduct';
+import ComplainsAdmin from "./views/admin/ComplainsAdmin"
+import NewOrders from "./views/admin/NewOrders"
+import Returns from "./views/admin/Returns"
 
 function App() {
   return (
@@ -28,8 +31,11 @@ function App() {
         <Route path="/adminSecret" element={<AdminView />} />
         <Route path="/adminSecret/reviews" element={<ReviewsAdmin />} />
         <Route path="/adminSecret/addProducts" element={<AddProducts />} />
-        <Route path="/adminSecret/editProduct/:code" element={<EditProduct />} />
         <Route path="/adminSecret/stock" element={<Stock />} />
+        <Route path="/adminSecret/complains" element={<ComplainsAdmin/>} />
+        <Route path="/adminSecret/newOrders" element={<NewOrders/>} />
+        <Route path="/adminSecret/returns" element={<Returns/>} />
+        <Route path="/adminSecret/editProduct/:code" element={<EditProduct />} />
       </Routes>
       <Footer />
     </>

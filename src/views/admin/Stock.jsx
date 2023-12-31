@@ -1,6 +1,6 @@
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { NavLink, useNavigate } from 'react-router-dom'
 import image1 from "../../images/carousel_1.jpeg"
@@ -8,12 +8,11 @@ import image2 from "../../images/carousel_2.jpeg"
 import image3 from "../../images/carousel_3.jpeg"
 import Spinner from 'react-bootstrap/Spinner';
 import Swal from 'sweetalert2'
-// import axios from 'axios'
 
 
 export default function Stock() {
 
-    const options = [
+    const sizeOptions = [
         { value: '', text: '--Choose a Size--' },
         { value: 's', text: 'S' },
         { value: 'm', text: 'M' },
@@ -22,8 +21,19 @@ export default function Stock() {
         { value: 'xxl', text: 'XXL' },
     ];
 
+    const modelOptions = [
+        { text: '--Choose a model--' },
+        { text: '2020' },
+        { text: '2021' },
+        { text: '2022' },
+        { text: '2023' },
+    ];
+
     const [stock, setStock] = useState([]),
-        [selected, setSelected] = useState(options[0].value)
+        [sizeSelected, setSizeSelected] = useState(sizeOptions[0].value),
+        [modelSelected, setModelSelected] = useState(sizeOptions[0].value),
+        [size, setSize] = useState(),
+        [collectionName, setCollectionName] = useState();
 
     let navigate = useNavigate();
 
@@ -32,11 +42,22 @@ export default function Stock() {
     }
 
     let getCollection = (val) => {
+        setCollectionName(val.toLowerCase());
         fetch(`http://localhost:3001/api/products/collection/${val.toLowerCase()}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
     let getCollectionSize = (val) => {
-        fetch(`http://localhost:3001/api/products/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+        setSize(val.target.value);
+        if (collectionName === "") {
+            fetch(`http://localhost:3001/api/products/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+        }
+        else {
+            fetch(`http://localhost:3001/api/products/collection/${collectionName}/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+        }
+    }
+
+    let getCollectionSizeModel = (val) => {
+        fetch(`http://localhost:3001/api/products/collection/${collectionName}/model/${val.target.value}/size/${size}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
 
@@ -107,24 +128,29 @@ export default function Stock() {
                 <h2>Stock</h2>
                 <div className="categories mt-5">
                     <div className="teams">
-                        <button onClick={getData}>All</button>
+                        <button onClick={() => {
+                            getData()
+                            setCollectionName("")
+                        }}>All</button>
                         <button onClick={(e) => getCollection(e.target.innerHTML)}>Ahly</button>
                         <button onClick={(e) => getCollection(e.target.innerHTML)}>Zamalek</button>
                         <button onClick={(e) => getCollection(e.target.innerHTML)}>Paris</button>
+                        <button onClick={(e) => getCollection(e.target.innerHTML)}>Barcelona</button>
                     </div>
                     <div className="dropdowns">
-                        <select className='me-3' value={selected} onChange={getCollectionSize} name="sizes" id="sizes">
+                        <select className='me-3' value={sizeSelected} onChange={getCollectionSize} name="sizes" id="sizes">
                             {
-                                options.map(option =>
+                                sizeOptions.map(option =>
                                     <option key={option.value} value={option.value}>{option.text}</option>
                                 )
                             }
                         </select>
-                        <select name="year" id="year">
-                            <option value="2020">2020</option>
-                            <option value="2021">2021</option>
-                            <option value="2022">2022</option>
-                            <option value="2023">2023</option>
+                        <select value={modelSelected} onChange={getCollectionSizeModel} name="year" id="year">
+                            {
+                                modelOptions.map(option =>
+                                    <option key={option.text} value={option.text}>{option.text}</option>
+                                )
+                            }
                         </select>
                     </div>
                 </div>
@@ -144,6 +170,7 @@ export default function Stock() {
                                     </div>
                                     <div className="info">
                                         <div className="code">Product Code: <span>{item.code}</span></div>
+                                        <div className="code">Product Model: <span>{item.model}</span></div>
                                         <div className="name">Product Name: <span>{item.collectionName}</span></div>
                                         <div className="price">Product Price: <span>{item.price}EGP</span></div>
                                         <div className="price">Product Size: <span>{item.size}</span></div>
