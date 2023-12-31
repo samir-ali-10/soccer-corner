@@ -67,7 +67,23 @@ export default function EditProduct() {
     }
 
     async function editProduct() {
-        fetch(`http://localhost:3001/api/editProduct/${params.code}`).then((res) => res.json()).then((data) => console.log(data))
+        let response = await fetch(`http://localhost:3001/api/products/editProduct/${params.code}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                ...product,
+                code,
+                collectionName,
+                description,
+                model,
+                price,
+                quantity,
+                size
+            })
+        })
+        return response.json();
     }
 
     useEffect(() => {
