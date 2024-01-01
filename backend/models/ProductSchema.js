@@ -8,6 +8,7 @@ const ProductSchema = new Schema({
   collectionName: String,
   price: Number,
   size: String,
+  sizes: Array,
   quantity: Number,
   description: String,
   // image: String,

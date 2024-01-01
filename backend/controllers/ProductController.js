@@ -107,13 +107,14 @@ exports.postAddProduct = (req, res, next) => {
   const collectionName = req.body.collectionName;
   const price = req.body.price;
   const size = req.body.size;
+  const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   const quantity = req.body.quantity;
   const description = req.body.description;
   // const image = req.body.file;
 
-  const collectionArray = new CollectionName();
-  collectionArray.collectionNames.push(collectionName);
-  collectionArray.save();
+  // const collectionArray = new CollectionName();
+  // collectionArray.collectionNames.push(collectionName);
+  // collectionArray.save();
 
   const product = new ProductModel({
     code: code,
@@ -123,6 +124,7 @@ exports.postAddProduct = (req, res, next) => {
     price: price,
     quantity: quantity,
     size: size,
+    sizes : sizes,
     description: description,
     // image: image,
   });
