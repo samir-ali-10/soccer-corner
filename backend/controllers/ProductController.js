@@ -1,5 +1,5 @@
 const ProductModel = require("../models/ProductSchema");
-const CollectionName = require('../models/CollectionSchema');
+const NameOfCollection = require("../models/NavBarSchema");
 
 
 
@@ -96,11 +96,22 @@ exports.getCollectionAndModelAndSize = (req , res, next) => {
 }
 
 
+exports.getCollectionsNames = (req , res , next ) => {
+
+  NameOfCollection.find()
+  .then(collectionNames => {
+    res.json(collectionNames)
+    console.log(collectionNames)
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
 
 
 // => POST
 
-exports.postAddProduct = (req, res, next) => {
+exports.postAddProduct = async (req, res, next) => {
   const code = req.body.code;
   const model = req.body.model;
   const league = req.body.league;
@@ -112,9 +123,20 @@ exports.postAddProduct = (req, res, next) => {
   const description = req.body.description;
   // const image = req.body.file;
 
-  // const collectionArray = new CollectionName();
-  // collectionArray.collectionNames.push(collectionName);
-  // collectionArray.save();
+  const existingCollectionName = await NameOfCollection.findOne({ Name: collectionName});
+
+  if (existingCollectionName) {
+    console.log('NavBar already exists. No action taken.');
+  } else {
+    const newNameOfCollection = new NameOfCollection({
+      Name: collectionName,
+    });
+    newNameOfCollection.save();
+    console.log('New NavBar added:', newNameOfCollection);
+  }
+
+
+  
 
   const product = new ProductModel({
     code: code,
@@ -202,16 +224,6 @@ exports.deleteAllProducts = (req , res , next) => {
 
 
 
-exports.getCollectionName = (req , res , next ) => {
-
-  CollectionName.find()
-  .then(collection => {
-    res.json(collection)
-    console.log(collection)
-  }).catch(err => {
-    console.log(err);
-  })
-}
 
 // exports.postNewCollectionName = (req , res , next) => {
 //   const collectionName = req.params.collectionName; 

@@ -12,8 +12,7 @@ router.get("/api/products/size/:size", ProductController.getBySize); // get by s
 router.get("/api/products/collection/:collectionName/model/:model",ProductController.getCollectionAndModel); // get collection and  model 
 router.get("/api/products/collection/:collectionName/size/:size",ProductController.getCollectionAndSize); // get collection and size 
 router.get("/api/products/collection/:collectionName/model/:model/size/:size",ProductController.getCollectionAndModelAndSize); // get collection , model and size 
-router.get('/api/products/collectionNames' , ProductController.getCollectionName);
-// router.get('/api/products/edit-product/:code' , ProductController) //
+router.get('/api/products/CollectionsNames' , ProductController.getCollectionsNames); // Get collectionsNames
 
 // => POST
 router.post("/api/products", ProductController.postAddProduct);
