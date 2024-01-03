@@ -114,9 +114,10 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="code"
+                                        disabled
                                         required
                                         list='productsList'
-                                        value={values.code}
+                                        value={`${values.collectionName} ${values.model}`}
                                         onChange={handleChange}
                                         isValid={touched.code && !errors.code}
                                     />
@@ -129,6 +130,24 @@ export default function AddProducts() {
                                         )
                                     }
                                 </datalist>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>Collection</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="collectionName"
+                                        value={values.collectionName}
+                                        onChange={handleChange}
+                                        isValid={touched.collectionName && !errors.collectionName}
+                                        disabled={openFields ? true : false}
+                                    />
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
                             </Row>
                             <Row>
                                 <Form.Group
@@ -161,24 +180,6 @@ export default function AddProducts() {
                                         value={values.league}
                                         onChange={handleChange}
                                         isValid={touched.league && !errors.league}
-                                        disabled={openFields ? true : false}
-                                    />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
-                                </Form.Group>
-                            </Row>
-                            <Row>
-                                <Form.Group
-                                    as={Col}
-                                    controlId="validationFormik101"
-                                    className="position-relative"
-                                >
-                                    <Form.Label>Collection</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="collectionName"
-                                        value={values.collectionName}
-                                        onChange={handleChange}
-                                        isValid={touched.collectionName && !errors.collectionName}
                                         disabled={openFields ? true : false}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
@@ -277,7 +278,7 @@ export default function AddProducts() {
                             </Form.Group>
                             <div className='clear_fields_container d-flex justify-content-between'>
                                 <Button type="submit">Send To Stock</Button>
-                                <button className='clear_fields' onClick={() => {
+                                <button type='button' className='clear_fields' onClick={() => {
                                     values.code = ""
                                     values.collectionName = ""
                                     values.league = ""

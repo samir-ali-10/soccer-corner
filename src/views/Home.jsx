@@ -52,7 +52,7 @@ export default function Home() {
             <Container>
                 <div className="new_collection">
                     <p>new collection</p>
-                    <div className="new_collection_container">
+                    <div className="important_collection">
                         <div className="item">
                             <NavLink to="/products/footballJerseys">
                                 <img src={jerseysImage} alt="Image1" />
@@ -63,6 +63,14 @@ export default function Home() {
                             <NavLink to="/products/sportsWear">
                                 <img src={sportswearImage} alt="Image1" />
                                 <div className="category">Sports Wear</div>
+                            </NavLink>
+                        </div>
+                    </div>
+                    <div className="new_collection_container">
+                        <div className="item">
+                            <NavLink to="/products/sportsWear">
+                                <img src={image3} alt="Image1" />
+                                <div className="category">Classic De7k</div>
                             </NavLink>
                         </div>
                         <div className="item">

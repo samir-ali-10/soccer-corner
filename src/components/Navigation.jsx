@@ -26,6 +26,7 @@ export default function Navigation() {
                                 <NavDropdown.Item href="/products/footballJerseys">Jerseys</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/sportsWear">Sports Wear</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/studs_turfs">Studs & Turfs</NavDropdown.Item>
+                                <NavDropdown.Item href="/products/others">Classic De7k</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/others">Other</NavDropdown.Item>
                             </NavDropdown>
                             <NavLink to="/contactUs">Contact Us</NavLink>
