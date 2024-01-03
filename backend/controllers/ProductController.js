@@ -166,6 +166,7 @@ exports.postAddProduct = async (req, res, next) => {
 
 exports.editProduct = (req , res , next) => {
   const code = req.params.code;
+  const UpdatedCode = req.body.code;
   const UpdatedModel = req.body.model;
   const Updatedleague = req.body.league;
   const UpdatedCollectionName = req.body.collectionName;
@@ -176,6 +177,7 @@ exports.editProduct = (req , res , next) => {
   // const UpdatedImage = req.body.file;
 
   ProductModel.findOneAndUpdate({code} , {
+    code : UpdatedCode,
     model : UpdatedModel,
     league : Updatedleague,
     collectionName: UpdatedCollectionName,
