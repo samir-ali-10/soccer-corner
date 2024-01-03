@@ -52,6 +52,31 @@ export default function AddProducts() {
         file: yup.mixed(),
     });
 
+    let handleSub = async (values) => {
+        let response = await fetch(`http://localhost:3001/api/products`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                collectionName: values.collectionName,
+                league: values.league,
+                code: values.code,
+                model: values.model,
+                price: values.price,
+                size: values.size,
+                quantity: values.quantity,
+                description: values.description,
+                file: values.file
+            })
+        })
+        return response.json();
+    }
+
+    let handleCollectionNames = () => {
+        fetch(`http://localhost:3001/api/products/CollectionsNames`).then((res) => res.json()).then((data) => console.log(data));
+    }
+
     return (
         <div className='add_products mt-4'>
             <Container>
@@ -71,26 +96,11 @@ export default function AddProducts() {
                         description: "",
                         file: undefined,
                     }}
-                    onSubmit={async (values) => {
-                        let response = await fetch(`http://localhost:3001/api/products`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-type': 'application/json; charset=UTF-8'
-                            },
-                            body: JSON.stringify({
-                                collectionName: values.collectionName,
-                                league: values.league,
-                                code: values.code,
-                                model: values.model,
-                                price: values.price,
-                                size: values.size,
-                                quantity: values.quantity,
-                                description: values.description,
-                                file: values.file
-                            })
-                        })
-                        return response.json();
-                    }}
+                    onSubmit={(values) => {
+                        handleSub(values);
+                        handleCollectionNames();
+                    }
+                    }
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
                         <Form noValidate onSubmit={handleSubmit}>
@@ -270,6 +280,7 @@ export default function AddProducts() {
                                 <button className='clear_fields' onClick={() => {
                                     values.code = ""
                                     values.collectionName = ""
+                                    values.league = ""
                                     values.description = ""
                                     values.model = ""
                                     values.price = ""

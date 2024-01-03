@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import image1 from "../images/ahly_1.jpeg"
 import image2 from "../images/ahly_2.jpeg"
@@ -18,12 +18,11 @@ export default function ProductsAll() {
 
     let params = useParams();
 
-    const [activeSize, setActiveSize] = useState(false);
+    const [stock, setStock] = useState([]);
 
-    let handleActive = (element) => {
-        // console.log(element.target.innerHTML);
-        // setActiveSize(!activeSize)
-    }
+    let sizes = ["S", "M", "L", "XL", "XXL"]
+
+    const [activeSize, setActiveSize] = useState(null);
 
     const egyptianLeague = [
         {
@@ -172,6 +171,18 @@ export default function ProductsAll() {
         },
     ]
 
+    let getData = () => {
+        fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    let handleActive = (index) => {
+        setActiveSize(index === activeSize ? null : index);
+    }
+
     return (
         <div className='products_all'>
             <Container>
@@ -180,52 +191,75 @@ export default function ProductsAll() {
                         <div className="egyptian_league">
                             <h2>Egyptian League</h2>
                             <div className="items_container">
-                                {egyptianLeague.map(item =>
-                                    <NavLink key={item.id} className="item">
+                                {stock.map((egypt) => egypt.league === "egyptian"
+                                    ?
+                                    <NavLink key={egypt.code} className="item">
                                         <div className="image">
-                                            <img src={item.image} alt="image1" />
+                                            <img src={image1} alt="image1" />
                                         </div>
                                         <div className="info">
-                                            <div className="name">{item.title}</div>
-                                            <div className="price">Price: {item.price}EGP</div>
+                                            <div className="name">{egypt.code}</div>
+                                            <div className="price">{egypt.price}EGP</div>
                                             <div className="sizes">
-                                                {item.sizes.map((size, index) =>
-                                                    <button key={index} className={`${index === activeSize.activeIndex ? "active" : "" }`} onClick={e => setActiveSize({activeIndex: index})} >{size.toLocaleUpperCase()}</button>
+                                                {sizes.map((size, index) =>
+                                                    <button key={index} className={index === activeSize ? "active" : ""} onClick={() => handleActive(index)} >{size.toLocaleUpperCase()}</button>
                                                 )}
-                                                {/* <button value="s" className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
-                                                <button value="m" className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
-                                                <button value="l" className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
-                                                <button value="xl" className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
-                                                <button value="xxl" className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button> */}
                                             </div>
                                             <button className='add_to_cart'>Add to cart</button>
                                         </div>
                                     </NavLink>
+                                    :
+                                    null
                                 )}
                             </div>
                         </div>
-                        <div className="serie_A">
+                        <div className="serie_a">
                             <h2>Serie A</h2>
-
                             <div className="items_container">
-                                {serieA.map(item =>
-                                    <NavLink key={item.id} className="item">
+                                {stock.map((serieA) => serieA.league === "serie a"
+                                    ?
+                                    <NavLink key={serieA.code} className="item">
                                         <div className="image">
-                                            <img src={item.image} alt="image1" />
+                                            <img src={image1} alt="image1" />
                                         </div>
                                         <div className="info">
-                                            <div className="name">{item.title}</div>
-                                            <div className="price">Price: {item.price}EGP</div>
+                                            <div className="name">{serieA.code}</div>
+                                            <div className="price">{serieA.price}EGP</div>
                                             <div className="sizes">
-                                                <button className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
-                                                <button className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
-                                                <button className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
-                                                <button className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
-                                                <button className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button>
+                                                {sizes.map((size, index) =>
+                                                    <button key={index} className={index === activeSize ? "active" : ""} onClick={() => handleActive(index)} >{size.toLocaleUpperCase()}</button>
+                                                )}
                                             </div>
                                             <button className='add_to_cart'>Add to cart</button>
                                         </div>
                                     </NavLink>
+                                    :
+                                    null
+                                )}
+                            </div>
+                        </div>
+                        <div className="spanish_league">
+                            <h2>Spanish League</h2>
+                            <div className="items_container">
+                                {stock.map((spanish) => spanish.league === "spanish"
+                                    ?
+                                    <NavLink key={spanish.code} className="item">
+                                        <div className="image">
+                                            <img src={image1} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{spanish.code}</div>
+                                            <div className="price">{spanish.price}EGP</div>
+                                            <div className="sizes">
+                                                {sizes.map((size, index) =>
+                                                    <button key={index} className={index === activeSize ? "active" : ""} onClick={() => handleActive(index)} >{size.toLocaleUpperCase()}</button>
+                                                )}
+                                            </div>
+                                            <button className='add_to_cart'>Add to cart</button>
+                                        </div>
+                                    </NavLink>
+                                    :
+                                    null
                                 )}
                             </div>
                         </div>
@@ -244,11 +278,11 @@ export default function ProductsAll() {
                                         <div className="name">{item.title}</div>
                                         <div className="price">Price: {item.price}EGP</div>
                                         <div className="sizes">
-                                            <button className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
-                                            <button className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
-                                            <button className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
-                                            <button className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
-                                            <button className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button>
+                                            <button className={activeSize === "s" ? "active" : ""} onClick={() => handleActive("s")}>S</button>
+                                            <button className={activeSize === "m" ? "active" : ""} onClick={() => handleActive("m")}>M</button>
+                                            <button className={activeSize === "l" ? "active" : ""} onClick={() => handleActive("l")}>L</button>
+                                            <button className={activeSize === "xl" ? "active" : ""} onClick={() => handleActive("xl")}>XL</button>
+                                            <button className={activeSize === "xxl" ? "active" : ""} onClick={() => handleActive("xxl")}>XXL</button>
                                         </div>
                                         <button className='add_to_cart'>Add to cart</button>
                                     </div>

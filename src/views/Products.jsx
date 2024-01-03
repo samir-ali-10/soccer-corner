@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import image1 from "../images/ahly_1.jpeg"
 import image2 from "../images/ahly_2.jpeg"
@@ -15,6 +15,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default function Products() {
+
+
+    const [stock, setStock] = useState([]),
+        [league, setLeague] = useState();
 
     const egyptianLeague = [
         {
@@ -160,6 +164,16 @@ export default function Products() {
 
     let params = useParams();
 
+    let getData = () => {
+        fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    console.log(stock);
+
     return (
         <div className='products'>
             <Container>
@@ -171,19 +185,23 @@ export default function Products() {
                                 <NavLink to="/products/footballJerseys/all">All Products</NavLink>
                             </div>
                             <div className="slider_container d-flex">
-                                {egyptianLeague.map(item =>
-                                    <NavLink key={item.id} className="item">
+                                {stock.map(egypt =>
+                                    egypt.league === "egyptian"
+                                    ?
+                                    <NavLink to={`/products/${params.category}/${egypt.code}`} key={egypt.code} className="item">
                                         <div className="image">
-                                            <img src={item.image} alt="image1" />
+                                            <img src={image1} alt="image1" />
                                         </div>
                                         <div className="info">
-                                            <div className="name">{item.title}</div>
+                                            <div className="name">{egypt.code}</div>
                                             <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{item.price}EGP</div>
+                                                <div className="price">{egypt.price}EGP</div>
                                                 <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
                                             </div>
                                         </div>
                                     </NavLink>
+                                    :
+                                    null
                                 )}
                             </div>
                         </div>
@@ -193,19 +211,49 @@ export default function Products() {
                                 <NavLink to="/products/footballJerseys/all">All Products</NavLink>
                             </div>
                             <div className="slider_container d-flex">
-                                {serieA.map(item =>
-                                    <NavLink key={item.id} className="item">
+                            {stock.map(serieA =>
+                                    serieA.league === "serie a"
+                                    ?
+                                    <NavLink to={`/products/${params.category}/${serieA.code}`} key={serieA.code} className="item">
                                         <div className="image">
-                                            <img src={item.image} alt="image1" />
+                                            <img src={image1} alt="image1" />
                                         </div>
                                         <div className="info">
-                                            <div className="name">{item.title}</div>
+                                            <div className="name">{serieA.code}</div>
                                             <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{item.price}EGP</div>
+                                                <div className="price">{serieA.price}EGP</div>
                                                 <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
                                             </div>
                                         </div>
                                     </NavLink>
+                                    :
+                                    null
+                                )}
+                            </div>
+                        </div>
+                        <div className="spanish_league">
+                            <h2>Spanish League</h2>
+                            <div className="all_products">
+                                <NavLink to="/products/footballJerseys/all">All Products</NavLink>
+                            </div>
+                            <div className="slider_container d-flex">
+                            {stock.map(spanish =>
+                                    spanish.league === "spanish"
+                                    ?
+                                    <NavLink to={`/products/${params.category}/${spanish.code}`} key={spanish.code} className="item">
+                                        <div className="image">
+                                            <img src={image1} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{spanish.code}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                <div className="price">{spanish.price}EGP</div>
+                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                    :
+                                    null
                                 )}
                             </div>
                         </div>

@@ -20,6 +20,7 @@ export default function EditProduct() {
 
     const [product, setProduct] = useState(),
         [collectionName, setCollectionName] = useState(),
+        [league, setLeague] = useState(),
         [model, setModel] = useState(),
         [code, setCode] = useState(),
         [price, setPrice] = useState(),
@@ -57,6 +58,7 @@ export default function EditProduct() {
             setProduct(data)
             setCode(data.code)
             setCollectionName(data.collectionName)
+            setLeague(data.league)
             setDescription(data.description)
             setModel(data.model)
             setPrice(data.price)
@@ -75,6 +77,7 @@ export default function EditProduct() {
                 ...product,
                 code,
                 collectionName,
+                league,
                 description,
                 model,
                 price,
@@ -105,6 +108,9 @@ export default function EditProduct() {
         else if (e.target.name === "collectionName") {
             setCollectionName(e.target.value)
         }
+        else if (e.target.name === "league") {
+            setLeague(e.target.value)
+        }
         else if (e.target.name === "size") {
             setSize(e.target.value)
         }
@@ -127,6 +133,10 @@ export default function EditProduct() {
                     <Form.Group className="mb-4">
                         <Form.Label className='mb-3'>Code</Form.Label>
                         <Form.Control type="text" value={code} name='code' onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-4">
+                        <Form.Label className='mb-3'>League</Form.Label>
+                        <Form.Control type="text" value={league} name='league' onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-4">
                         <Form.Label className='mb-3'>Collection</Form.Label>

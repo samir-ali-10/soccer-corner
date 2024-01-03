@@ -27,7 +27,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/products/:category" element={<Products />} />
         <Route path="/products/:category/all" element={<ProductsAll />} />
-        <Route path="/products/:category/:productId" element={<ProductDetails />} />
+        <Route path="/products/:category/:code" element={<ProductDetails />} />
         <Route path="/adminSecret" element={<AdminView />} />
         <Route path="/adminSecret/reviews" element={<ReviewsAdmin />} />
         <Route path="/adminSecret/addProducts" element={<AddProducts />} />

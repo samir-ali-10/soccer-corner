@@ -73,7 +73,8 @@ export default function Cart() {
                                 )
                             }
                             <div className="checkout">
-                                <NavLink>Proceed To Checkout</NavLink>
+                                <NavLink className="me-4">Proceed To Checkout</NavLink>
+                                <button>Clear Cart</button>
                             </div>
                         </div>
                 }

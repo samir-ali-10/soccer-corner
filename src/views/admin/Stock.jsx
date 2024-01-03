@@ -30,9 +30,12 @@ export default function Stock() {
     ];
 
     const [stock, setStock] = useState([]),
-        [sizeSelected, setSizeSelected] = useState(sizeOptions[0].value),
-        [modelSelected, setModelSelected] = useState(sizeOptions[0].value),
+        [categories, setCategories] = useState([]),
+        [categorySelected, setCategorySelected] = useState(),
+        [sizeSelected, setSizeSelected] = useState(),
+        [modelSelected, setModelSelected] = useState(),
         [size, setSize] = useState(),
+        [model, setModel] = useState(),
         [collectionName, setCollectionName] = useState();
 
     let navigate = useNavigate();
@@ -42,8 +45,12 @@ export default function Stock() {
     }
 
     let getCollection = (val) => {
-        setCollectionName(val.toLowerCase());
-        fetch(`http://localhost:3001/api/products/collection/${val.toLowerCase()}`).then((res) => res.json()).then((data) => setStock(data))
+        setCollectionName(val.target.value);
+        fetch(`http://localhost:3001/api/products/collection/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    let getLeague = (val) => {
+        console.log(val);
     }
 
     let getCollectionSize = (val) => {
@@ -57,7 +64,12 @@ export default function Stock() {
     }
 
     let getCollectionSizeModel = (val) => {
+        setModel(val.target.value);
         fetch(`http://localhost:3001/api/products/collection/${collectionName}/model/${val.target.value}/size/${size}`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    let getCategories = () => {
+        fetch(`http://localhost:3001/api/products/CollectionsNames`).then((res) => res.json()).then((data) => setCategories(data));
     }
 
 
@@ -117,6 +129,7 @@ export default function Stock() {
 
     useEffect(() => {
         getData();
+        getCategories();
     }, [])
 
     return (
@@ -129,13 +142,16 @@ export default function Stock() {
                 <div className="categories mt-5">
                     <div className="teams">
                         <button onClick={() => {
-                            getData()
+                            getData();
                             setCollectionName("")
                         }}>All</button>
-                        <button onClick={(e) => getCollection(e.target.innerHTML)}>Ahly</button>
-                        <button onClick={(e) => getCollection(e.target.innerHTML)}>Zamalek</button>
-                        <button onClick={(e) => getCollection(e.target.innerHTML)}>Paris</button>
-                        <button onClick={(e) => getCollection(e.target.innerHTML)}>Barcelona</button>
+                        <select value={categorySelected} onChange={getCollection} name="categories" id="categories">
+                            {
+                                categories.map(category =>
+                                    <option key={category.Name} value={category.Name}>{category.Name}</option>
+                                )
+                            }
+                        </select>
                     </div>
                     <div className="dropdowns">
                         <select className='me-3' value={sizeSelected} onChange={getCollectionSize} name="sizes" id="sizes">
@@ -163,35 +179,44 @@ export default function Stock() {
                     {
                         stock.length !== 0
                             ?
-                            stock.map(item =>
-                                <NavLink key={item._id} className="product" to="">
-                                    <div className="image">
-                                        <img src={image1} alt="image1" />
-                                    </div>
-                                    <div className="info">
-                                        <div className="code">Product Code: <span>{item.code}</span></div>
-                                        <div className="code">Product Model: <span>{item.model}</span></div>
-                                        <div className="name">Product Name: <span>{item.collectionName}</span></div>
-                                        <div className="price">Product Price: <span>{item.price}EGP</span></div>
-                                        <div className="price">Product Size: <span>{item.size}</span></div>
-                                        <div className="name">Product Description: <span>{item.description}</span></div>
-                                        <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
-                                        <div className="delete_item">
-                                            <button onClick={(e) => {
-                                                propagationNo(e)
-                                                deleteItem(item)
-                                            }}>Delete Product</button>
-                                            <button onClick={(e) => {
-                                                propagationNo(e)
-                                                navigateToEdit(item)
-                                            }} className='edit_product'>Edit Product</button>
-                                        </div>
-                                    </div>
-                                </NavLink>
-                            )
+                            <>
+                                {collectionName ? <h3>{collectionName}</h3> : "" }
+                                <p>{model}</p>
+                                <div className="products_container">
+                                    {
+                                        stock.map(item =>
+                                            <NavLink key={item._id} className="product" to="">
+                                                <div className="image">
+                                                    <img src={image1} alt="image1" />
+                                                </div>
+                                                <div className="info">
+                                                    <div className="code">Product Code: <span>{item.code}</span></div>
+                                                    <div className="code">Product League: <span>{item.league}</span></div>
+                                                    <div className="code">Product Model: <span>{item.model}</span></div>
+                                                    <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                    <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                                    <div className="price">Product Size: <span>{item.size}</span></div>
+                                                    <div className="name">Product Description: <span>{item.description}</span></div>
+                                                    <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                    <div className="delete_item">
+                                                        <button onClick={(e) => {
+                                                            propagationNo(e)
+                                                            deleteItem(item)
+                                                        }}>Delete Product</button>
+                                                        <button onClick={(e) => {
+                                                            propagationNo(e)
+                                                            navigateToEdit(item)
+                                                        }} className='edit_product'>Edit Product</button>
+                                                    </div>
+                                                </div>
+                                            </NavLink>
+                                        )
+                                    }
+                                </div>
+                            </>
                             :
-                            <div className="loader text-center">
-                                <Spinner animation="border" />
+                            <div className="empty text-center fs-1">
+                                No products in the list yet!
                             </div>
                     }
                 </div>
