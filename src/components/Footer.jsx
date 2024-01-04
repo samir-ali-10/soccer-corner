@@ -14,11 +14,13 @@ export default function Footer() {
                         <h3>Soccer Corner Sports</h3>
                         <p>Our goal is the bring to your a very well developed and quality product in the field of football and sport. By reviving the spirit of collaboration and sportiveness</p>
                     </div>
-                    <ul className='policies'>
+                    <ul className='policies text-capitalize'>
                         <li><NavLink to="">shipping policy</NavLink></li>
-                        <li><NavLink to="">refund policy</NavLink></li>
-                        <li><NavLink to="">terms & conditions</NavLink></li>
-                        <li><NavLink to="">privacy policy</NavLink></li>
+                        <li><NavLink to="">refund & exchange policy</NavLink></li>
+                        <li><NavLink to="">our clients</NavLink></li>
+                        <li><NavLink to="">size chart</NavLink></li>
+                        <li><NavLink to="">washing methods</NavLink></li>
+                        <li><NavLink to="">feedback</NavLink></li>
                     </ul>
                     <ul className='socials'>
                         <li><NavLink to=""><FontAwesomeIcon icon={faFacebook} /></NavLink></li>

@@ -51,7 +51,7 @@ export default function Cart() {
                                 alahlyAPI.map(item =>
                                     <div key={item.id} className="cart_item">
                                         <div className="info d-flex">
-                                            <div className="image me-4">
+                                            <div className="image">
                                                 <img src={item.image} alt="image1" />
                                             </div>
                                             <div className="content">
