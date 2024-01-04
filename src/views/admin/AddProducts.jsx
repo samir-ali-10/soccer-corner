@@ -13,8 +13,6 @@ import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 export default function AddProducts() {
 
-    const [openFields, setOpenFields] = useState(false);
-
     const { Formik } = formik;
 
     const codes = [
@@ -43,6 +41,7 @@ export default function AddProducts() {
     const schema = yup.object().shape({
         code: yup.string().required(),
         model: yup.string().required(),
+        kit: yup.string().required(),
         collectionName: yup.string(),
         league: yup.string(),
         price: yup.number(),
@@ -60,6 +59,7 @@ export default function AddProducts() {
             },
             body: JSON.stringify({
                 collectionName: values.collectionName,
+                kit: values.kit,
                 league: values.league,
                 code: values.code,
                 model: values.model,
@@ -87,6 +87,7 @@ export default function AddProducts() {
                     validationSchema={schema}
                     initialValues={{
                         collectionName: "",
+                        kit: "",
                         league: "",
                         model: "",
                         code: "",
@@ -143,7 +144,23 @@ export default function AddProducts() {
                                         value={values.collectionName}
                                         onChange={handleChange}
                                         isValid={touched.collectionName && !errors.collectionName}
-                                        disabled={openFields ? true : false}
+                                    />
+                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>Kit</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="kit"
+                                        value={values.kit}
+                                        onChange={handleChange}
+                                        isValid={touched.kit && !errors.kit}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
@@ -161,7 +178,7 @@ export default function AddProducts() {
                                         value={values.model}
                                         onChange={handleChange}
                                         isValid={touched.model && !errors.model}
-                                        disabled={openFields ? true : false}
+
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
@@ -179,7 +196,6 @@ export default function AddProducts() {
                                         value={values.league}
                                         onChange={handleChange}
                                         isValid={touched.league && !errors.league}
-                                        disabled={openFields ? true : false}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
@@ -197,7 +213,6 @@ export default function AddProducts() {
                                         value={values.price}
                                         onChange={handleChange}
                                         isValid={touched.price && !errors.price}
-                                        disabled={openFields ? true : false}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
@@ -257,7 +272,6 @@ export default function AddProducts() {
                                         value={values.description}
                                         onChange={handleChange}
                                         isValid={touched.description && !errors.description}
-                                        disabled={openFields ? true : false}
                                     />
                                     <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
                                 </Form.Group>
@@ -269,7 +283,6 @@ export default function AddProducts() {
                                     name="file"
                                     onChange={handleChange}
                                     isInvalid={!!errors.file}
-                                    disabled={openFields ? true : false}
                                 />
                                 <Form.Control.Feedback type="invalid" tooltip>
                                     {errors.file}
