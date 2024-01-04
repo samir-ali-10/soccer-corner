@@ -114,10 +114,9 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="code"
-                                        disabled
                                         required
                                         list='productsList'
-                                        value={`${values.collectionName} ${values.model}`}
+                                        value={values.code}
                                         onChange={handleChange}
                                         isValid={touched.code && !errors.code}
                                     />

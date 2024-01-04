@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import image1 from "../images/carousel_1.jpeg"
 import image2 from "../images/carousel_2.jpeg"
@@ -12,6 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
+
+
     return (
         <div className='home_page'>
             <Carousel>
@@ -52,21 +54,19 @@ export default function Home() {
             <Container>
                 <div className="new_collection">
                     <p>new collection</p>
-                    <div className="important_collection">
-                        <div className="item">
+                    <div className="new_collection_container">
+                        <div className="item smsc-w100 lgsc-w50">
                             <NavLink to="/products/footballJerseys">
                                 <img src={jerseysImage} alt="Image1" />
                                 <div className="category">Football Jerseys</div>
                             </NavLink>
                         </div>
-                        <div className="item">
+                        <div className="item lgsc-w50">
                             <NavLink to="/products/sportsWear">
                                 <img src={sportswearImage} alt="Image1" />
                                 <div className="category">Sports Wear</div>
                             </NavLink>
                         </div>
-                    </div>
-                    <div className="new_collection_container">
                         <div className="item">
                             <NavLink to="/products/sportsWear">
                                 <img src={image3} alt="Image1" />
