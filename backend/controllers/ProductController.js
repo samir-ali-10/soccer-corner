@@ -1,7 +1,6 @@
 const ProductModel = require("../models/ProductSchema");
 const NameOfCollection = require("../models/NavBarSchema");
-
-
+const Cart = require("../models/CartSchema");
 
 // => GET
 
@@ -16,12 +15,34 @@ exports.getProducts = (req, res, next) => {
     });
 };
 
+// exports.getProductsOnCart = (req, res, next) => {
+//   Cart.find()
+//     .then((products) => {
+//       res.json(products);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
+
 exports.getCollection = (req, res, next) => {
   const collectionName = req.params.collectionName;
   ProductModel.find({ collectionName })
     .then((products) => {
       res.json(products);
       console.log(products);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.getByLeague = (req, res, next) => {
+  const league = req.params.league;
+  ProductModel.find({ league })
+    .then((product) => {
+      res.json(product);
+      console.log(product);
     })
     .catch((err) => {
       console.log(err);
@@ -160,11 +181,30 @@ exports.postAddProduct = async (req, res, next) => {
     });
 };
 
+// exports.getProductsOnCartTest = (req, res, next) => {
+//   const code = req.params.code;
 
+//   // const existingProductInCart = await Cart.find({ code });
+//   // if (existingProductInCart) {
+//   //   console.log("Product already exists");
+//   // } else {
+//     ProductModel.find({ code }).
+//       .then((product) => {
+//         const newProductToCart = new Cart(product);
+//         newProductToCart.save();
+//         console.log('product saaved');
+//         res.json(product)
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   // }
+
+// };
 
 // => EDIT
 
-exports.editProduct = (req , res , next) => {
+exports.editProduct = (req, res, next) => {
   const code = req.params.code;
   const UpdatedCode = req.body.code;
   const UpdatedModel = req.body.model;
@@ -176,69 +216,51 @@ exports.editProduct = (req , res , next) => {
   const UpdatedDescription = req.body.description;
   // const UpdatedImage = req.body.file;
 
-  ProductModel.findOneAndUpdate({code} , {
-    code : UpdatedCode,
-    model : UpdatedModel,
-    league : Updatedleague,
-    collectionName: UpdatedCollectionName,
-    price: UpdatedPrice,
-    quantity: UpdatedQuantity,
-    size: UpdatedSize,
-    description: UpdatedDescription,
-  })
-  .then(newProduct => {
-    res.json(newProduct);
-    console.log(newProduct);
-    console.log('PRODUCT EDITED');
-  })
-  .catch(err => {
-    console.log(err);
-  })
-
-}
-
+  ProductModel.findOneAndUpdate(
+    { code },
+    {
+      code: UpdatedCode,
+      model: UpdatedModel,
+      league: Updatedleague,
+      collectionName: UpdatedCollectionName,
+      price: UpdatedPrice,
+      quantity: UpdatedQuantity,
+      size: UpdatedSize,
+      description: UpdatedDescription,
+    }
+  )
+    .then((newProduct) => {
+      res.json(newProduct);
+      console.log(newProduct);
+      console.log("PRODUCT EDITED");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 // => DELETE
 
-
-exports.deleteSingleProduct = (req , res , next ) => {
+exports.deleteSingleProduct = (req, res, next) => {
   const code = req.params.code;
-  ProductModel.findOneAndDelete({code})
-  .then((result) => {
-    res.json('PRODUCT DELETED SUCCESSFULLY!')
-    console.log('PRODUCT DELETED SUCCESSFULLY!');
-  })
-  .catch(err => {
-    console.log(err);
-  })
-}
+  ProductModel.findOneAndDelete({ code })
+    .then((result) => {
+      res.json("PRODUCT DELETED SUCCESSFULLY!");
+      console.log("PRODUCT DELETED SUCCESSFULLY!");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-exports.deleteAllProducts = (req , res , next) => {
+exports.deleteAllProducts = (req, res, next) => {
   ProductModel.deleteMany()
-  .then((result) => {
-    res.json('PRODUCTS DELETED SUCCESSFULLY!')
-    console.log('PRODUCTS DELETED SUCCESSFULLY!');
-  })
-  .catch(err => {
-    console.log(err);
-  })
-}
-
-
-
-
-// exports.postNewCollectionName = (req , res , next) => {
-//   const collectionName = req.params.collectionName; 
-//   const collectionArray = new CollectionName();
-
-//   collectionArray.collectionNames.push(collectionName);
-//   collectionArray.save()
-//   .then(collectionName => {
-//     res.json(collectionName)
-//     console.log('collection is added');
-//   }).catch(err => {
-//     console.log(err);
-//   });
-// }
-
+    .then((result) => {
+      res.json("PRODUCTS DELETED SUCCESSFULLY!");
+      console.log("PRODUCTS DELETED SUCCESSFULLY!");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
