@@ -16,6 +16,7 @@ import EditProduct from './views/admin/EditProduct';
 import ComplainsAdmin from "./views/admin/ComplainsAdmin"
 import NewOrders from "./views/admin/NewOrders"
 import Returns from "./views/admin/Returns"
+import Checkout from './views/Checkout';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/products/:category" element={<Products />} />
         <Route path="/products/:category/all" element={<ProductsAll />} />
         <Route path="/products/:category/:code" element={<ProductDetails />} />
