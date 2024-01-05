@@ -65,7 +65,7 @@ export default function Stock() {
 
     let getCollectionSizeModel = (val) => {
         setModel(val.target.value);
-        fetch(`http://localhost:3001/api/products/collection/${collectionName}/model/${val.target.value}/size/${size}`).then((res) => res.json()).then((data) => setStock(data))
+        fetch(`http://localhost:3001/api/products/collection/${collectionName}/model/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
     let getCategories = () => {
@@ -144,6 +144,7 @@ export default function Stock() {
                         <button onClick={() => {
                             getData();
                             setCollectionName("")
+                            setModel("")
                         }}>All</button>
                         <select value={categorySelected} onChange={getCollection} name="categories" id="categories">
                             {
@@ -180,39 +181,158 @@ export default function Stock() {
                         stock.length !== 0
                             ?
                             <>
-                                {collectionName ? <h3>{collectionName}</h3> : "" }
-                                <p>{model}</p>
-                                <div className="products_container">
-                                    {
-                                        stock.map(item =>
-                                            <NavLink key={item._id} className="product" to="">
-                                                <div className="image">
-                                                    <img src={image1} alt="image1" />
-                                                </div>
-                                                <div className="info">
-                                                    <div className="code">Product Code: <span>{item.code}</span></div>
-                                                    <div className="code">Product League: <span>{item.league}</span></div>
-                                                    <div className="code">Product Model: <span>{item.model}</span></div>
-                                                    <div className="name">Product Name: <span>{item.collectionName}</span></div>
-                                                    <div className="price">Product Price: <span>{item.price}EGP</span></div>
-                                                    <div className="price">Product Size: <span>{item.size}</span></div>
-                                                    <div className="name">Product Description: <span>{item.description}</span></div>
-                                                    <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
-                                                    <div className="delete_item">
-                                                        <button onClick={(e) => {
-                                                            propagationNo(e)
-                                                            deleteItem(item)
-                                                        }}>Delete Product</button>
-                                                        <button onClick={(e) => {
-                                                            propagationNo(e)
-                                                            navigateToEdit(item)
-                                                        }} className='edit_product'>Edit Product</button>
-                                                    </div>
-                                                </div>
-                                            </NavLink>
-                                        )
-                                    }
-                                </div>
+                                {
+                                    collectionName === ""
+                                        ?
+                                        <>
+                                            {collectionName ? <h3>{collectionName}</h3> : <h3>All Products</h3>}
+                                            <h2 className='league'>Egyptian League</h2>
+                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            <div className="products_container mb-5">
+                                                {
+                                                    stock.map((item) => item.league === "egyptian"
+                                                        ?
+                                                        <NavLink key={item._id} className="product" to="">
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="code">Product Code: <span>{item.code}</span></div>
+                                                                <div className="code">Product League: <span>{item.league}</span></div>
+                                                                <div className="code">Product Model: <span>{item.model}</span></div>
+                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                                                <div className="price">Product Size: <span>{item.size}</span></div>
+                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                <div className="delete_item">
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        deleteItem(item)
+                                                                    }}>Delete Product</button>
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        navigateToEdit(item)
+                                                                    }} className='edit_product'>Edit Product</button>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null,
+                                                        <p>noskjnka</p>
+                                                    )
+                                                }
+                                            </div>
+                                            <h2 className='league'>Serie A</h2>
+                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            <div className="products_container mb-5">
+                                                {
+                                                    stock.map((item) => item.league === "serie a"
+                                                        ?
+                                                        <NavLink key={item._id} className="product" to="">
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="code">Product Code: <span>{item.code}</span></div>
+                                                                <div className="code">Product League: <span>{item.league}</span></div>
+                                                                <div className="code">Product Model: <span>{item.model}</span></div>
+                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                                                <div className="price">Product Size: <span>{item.size}</span></div>
+                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                <div className="delete_item">
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        deleteItem(item)
+                                                                    }}>Delete Product</button>
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        navigateToEdit(item)
+                                                                    }} className='edit_product'>Edit Product</button>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null
+                                                    )
+                                                }
+                                            </div>
+                                            <h2 className='league'>Spanish League</h2>
+                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            <div className="products_container mb-5">
+                                                {
+                                                    stock.map((item) => item.league === "spanish"
+                                                        ?
+                                                        <NavLink key={item._id} className="product" to="">
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="code">Product Code: <span>{item.code}</span></div>
+                                                                <div className="code">Product League: <span>{item.league}</span></div>
+                                                                <div className="code">Product Model: <span>{item.model}</span></div>
+                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                                                <div className="price">Product Size: <span>{item.size}</span></div>
+                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                <div className="delete_item">
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        deleteItem(item)
+                                                                    }}>Delete Product</button>
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        navigateToEdit(item)
+                                                                    }} className='edit_product'>Edit Product</button>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null
+                                                    )
+                                                }
+                                            </div>
+                                        </>
+                                        :
+                                        <>
+                                            {collectionName ? <h3>{collectionName}</h3> : <h3>All Products</h3>}
+                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            <div className="products_container mb-5">
+                                                {
+                                                    stock.map(item =>
+                                                        <NavLink key={item._id} className="product" to="">
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="code">Product Code: <span>{item.code}</span></div>
+                                                                <div className="code">Product League: <span>{item.league}</span></div>
+                                                                <div className="code">Product Model: <span>{item.model}</span></div>
+                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                                                <div className="price">Product Size: <span>{item.size}</span></div>
+                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                <div className="delete_item">
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        deleteItem(item)
+                                                                    }}>Delete Product</button>
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        navigateToEdit(item)
+                                                                    }} className='edit_product'>Edit Product</button>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                    )
+                                                }
+                                            </div>
+                                        </>
+                                }
                             </>
                             :
                             <div className="empty text-center fs-1">

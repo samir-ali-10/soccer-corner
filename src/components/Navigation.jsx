@@ -8,13 +8,16 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Container } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import logo from "../images/logo.jpeg";
 
 export default function Navigation() {
     return (
         <div className='navigation'>
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
-                    <h2 className='logo'>Soccer Corner</h2>
+                    <div className="logo">
+                        <img src={logo} alt="logo" />
+                    </div>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -26,6 +29,7 @@ export default function Navigation() {
                                 <NavDropdown.Item href="/products/footballJerseys">Jerseys</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/sportsWear">Sports Wear</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/studs_turfs">Studs & Turfs</NavDropdown.Item>
+                                <NavDropdown.Item href="/products/others">Classic De7k</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/others">Other</NavDropdown.Item>
                             </NavDropdown>
                             <NavLink to="/contactUs">Contact Us</NavLink>

@@ -47,7 +47,14 @@ ul {
 }
 
 .navigation .logo {
+  width: 150px;
+  height: 50px;
   margin-right: 20px;
+}
+
+.navigation .logo img {
+  width: 100%;
+  height: 100%;
 }
 
 .navbar-nav {
@@ -196,9 +203,6 @@ ul {
   padding: 5px 10px;
 }
 
-.stock .products {
-}
-
 .stock .products h3 {
   text-align: center;
   text-transform: capitalize;
@@ -215,6 +219,27 @@ ul {
   width: 50px;
   height: 1px;
   background-color: var(--text-color);
+}
+
+.stock .products p {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.stock .products p::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: calc(50% - 25px);
+  width: 50px;
+  height: 1px;
+  background-color: var(--text-color);
+}
+
+.stock .products .league {
+  font-style: italic;
 }
 
 .stock .products .products_container {
@@ -236,6 +261,11 @@ ul {
 .stock .products .product .image {
   height: 300px;
   overflow: hidden;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
 }
 
 .stock .products .product .image img {
@@ -450,6 +480,9 @@ ul {
 .home_page .new_collection {
   margin-top: 150px;
   text-align: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .home_page .new_collection p {
@@ -470,16 +503,21 @@ ul {
 }
 
 .home_page .new_collection .new_collection_container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
-  justify-content: center;
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+
 .home_page .new_collection .new_collection_container .item {
-  /* width: calc(85% / 3); */
+  width: calc(100% / 3);
   position: relative;
   overflow: hidden;
+  margin-bottom: 20px;
+  padding-right: 20px;
+}
+
+.home_page .new_collection .new_collection_container .lgsc-w50 {
+  width: 50%;
 }
 
 .home_page .new_collection .new_collection_container .item a {
@@ -487,8 +525,8 @@ ul {
   position: relative;
   height: 100%;
   display: block;
+  overflow: hidden;
 }
-
 
 .home_page .new_collection .new_collection_container .item a::after {
   content: "";
@@ -521,6 +559,7 @@ ul {
   width: 100%;
   height: 300px;
   object-fit: cover;
+  object-position: center;
   transition: .5s;
   -webkit-transition: .5s;
   -moz-transition: .5s;
@@ -584,6 +623,10 @@ ul {
   border-bottom: 1px solid #77777732;
 }
 
+.slider_container::-webkit-scrollbar {
+  display: none;
+}
+
 .slider_container::-webkit-scrollbar-button {
   display: none;
   opacity: 0;
@@ -603,12 +646,14 @@ ul {
 
 .slider_container .item .image {
   background-color: #f2eee778;
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
 }
 
 .slider_container .item .image img {
-  width: 300px;
-  height: 200px;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
 }
@@ -1057,14 +1102,17 @@ ul {
 
 .cart .cart_items .cart_item {
   padding: 50px 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
-  gap: 20px;
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid #77777732;
 }
 
 .cart .cart_items .cart_item:nth-child(1) {
   border-top: 1px solid #77777732;
+}
+
+.cart .cart_items .cart_item .info .image {
+  margin-right: 20px;
 }
 
 .cart .cart_items .cart_item .info .image img {
@@ -1366,6 +1414,34 @@ footer .copyright::before {
     margin-bottom: 10px;
   }
 
+  .navigation .actions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .navigation .actions a:not(:last-child) {
+    margin-bottom: 15px;
+  }
+
+  .home_page .new_collection {
+    width: 100%;
+  }
+
+  .home_page .new_collection .new_collection_container .item {
+    width: calc(100% / 2);
+    height: 200px;
+    padding-right: 0;
+  }
+
+  .home_page .new_collection .new_collection_container .item:nth-child(2),
+  .home_page .new_collection .new_collection_container .item:nth-child(4) {
+    padding-right: 20px;
+  }
+
+  .home_page .new_collection .new_collection_container .smsc-w100 {
+    width: 100%;
+  }
+
   .product_details .product_container {
     flex-direction: column;
   }
@@ -1384,6 +1460,27 @@ footer .copyright::before {
 
   .contact_us form {
     width: 100%;
+  }
+
+  /***************** Cart ******************/
+
+  .cart .cart_items .cart_item {
+    flex-direction: column;
+  }
+
+  .cart .cart_items .cart_item .info {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .cart .cart_items .cart_item .info .image {
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
+
+  .cart .cart_items .cart_item .quantity {
+    margin-bottom: 30px;
   }
 }
 

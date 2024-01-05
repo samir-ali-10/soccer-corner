@@ -172,8 +172,6 @@ export default function Products() {
         getData();
     }, [])
 
-    console.log(stock);
-
     return (
         <div className='products'>
             <Container>
@@ -187,21 +185,21 @@ export default function Products() {
                             <div className="slider_container d-flex">
                                 {stock.map(egypt =>
                                     egypt.league === "egyptian"
-                                    ?
-                                    <NavLink to={`/products/${params.category}/${egypt.code}`} key={egypt.code} className="item">
-                                        <div className="image">
-                                            <img src={image1} alt="image1" />
-                                        </div>
-                                        <div className="info">
-                                            <div className="name">{egypt.code}</div>
-                                            <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{egypt.price}EGP</div>
-                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        ?
+                                        <NavLink to={`/products/${params.category}/${egypt.code}`} key={egypt._id} className="item">
+                                            <div className="image">
+                                                <img src={image1} alt="image1" />
                                             </div>
-                                        </div>
-                                    </NavLink>
-                                    :
-                                    null
+                                            <div className="info">
+                                                <div className="name">{egypt.code}</div>
+                                                <div className="inner_info d-flex justify-content-between">
+                                                    <div className="price">{egypt.price}EGP</div>
+                                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        :
+                                        null
                                 )}
                             </div>
                         </div>
@@ -211,23 +209,23 @@ export default function Products() {
                                 <NavLink to="/products/footballJerseys/all">All Products</NavLink>
                             </div>
                             <div className="slider_container d-flex">
-                            {stock.map(serieA =>
+                                {stock.map(serieA =>
                                     serieA.league === "serie a"
-                                    ?
-                                    <NavLink to={`/products/${params.category}/${serieA.code}`} key={serieA.code} className="item">
-                                        <div className="image">
-                                            <img src={image1} alt="image1" />
-                                        </div>
-                                        <div className="info">
-                                            <div className="name">{serieA.code}</div>
-                                            <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{serieA.price}EGP</div>
-                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        ?
+                                        <NavLink to={`/products/${params.category}/${serieA.code}`} key={serieA._id} className="item">
+                                            <div className="image">
+                                                <img src={image1} alt="image1" />
                                             </div>
-                                        </div>
-                                    </NavLink>
-                                    :
-                                    null
+                                            <div className="info">
+                                                <div className="name">{serieA.code}</div>
+                                                <div className="inner_info d-flex justify-content-between">
+                                                    <div className="price">{serieA.price}EGP</div>
+                                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        :
+                                        null
                                 )}
                             </div>
                         </div>
@@ -237,23 +235,23 @@ export default function Products() {
                                 <NavLink to="/products/footballJerseys/all">All Products</NavLink>
                             </div>
                             <div className="slider_container d-flex">
-                            {stock.map(spanish =>
+                                {stock.map(spanish =>
                                     spanish.league === "spanish"
-                                    ?
-                                    <NavLink to={`/products/${params.category}/${spanish.code}`} key={spanish.code} className="item">
-                                        <div className="image">
-                                            <img src={image1} alt="image1" />
-                                        </div>
-                                        <div className="info">
-                                            <div className="name">{spanish.code}</div>
-                                            <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{spanish.price}EGP</div>
-                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        ?
+                                        <NavLink to={`/products/${params.category}/${spanish.code}`} key={spanish._id} className="item">
+                                            <div className="image">
+                                                <img src={image1} alt="image1" />
                                             </div>
-                                        </div>
-                                    </NavLink>
-                                    :
-                                    null
+                                            <div className="info">
+                                                <div className="name">{spanish.code}</div>
+                                                <div className="inner_info d-flex justify-content-between">
+                                                    <div className="price">{spanish.price}EGP</div>
+                                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        :
+                                        null
                                 )}
                             </div>
                         </div>

@@ -179,8 +179,8 @@ export default function ProductsAll() {
         getData();
     }, [])
 
-    let handleActive = (index) => {
-        setActiveSize(index === activeSize ? null : index);
+    let handleActive = (size) => {
+        setActiveSize(size)
     }
 
     return (
@@ -201,8 +201,8 @@ export default function ProductsAll() {
                                             <div className="name">{egypt.code}</div>
                                             <div className="price">{egypt.price}EGP</div>
                                             <div className="sizes">
-                                                {sizes.map((size, index) =>
-                                                    <button key={index} className={index === activeSize ? "active" : ""} onClick={() => handleActive(index)} >{size.toLocaleUpperCase()}</button>
+                                                {egypt.sizes.map((size) =>
+                                                    <button key={size} className={size === activeSize ? "active" : ""} onClick={() => handleActive(size)} >{size.toLocaleUpperCase()}</button>
                                                 )}
                                             </div>
                                             <button className='add_to_cart'>Add to cart</button>
