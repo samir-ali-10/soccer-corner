@@ -29,14 +29,23 @@ export default function Stock() {
         { text: '2023' },
     ];
 
+    const leagues = [
+        { text: "egyptian" },
+        { text: "serie a" },
+        { text: "spanish" },
+        { text: "saudi" },
+    ]
+
     const [stock, setStock] = useState([]),
         [categories, setCategories] = useState([]),
         [categorySelected, setCategorySelected] = useState(),
+        [leagueSelected, setLeagueSelected] = useState(),
         [sizeSelected, setSizeSelected] = useState(),
         [modelSelected, setModelSelected] = useState(),
         [size, setSize] = useState(),
         [model, setModel] = useState(),
-        [collectionName, setCollectionName] = useState();
+        [league, setLeague] = useState(),
+        [collectionName, setCollectionName] = useState("");
 
     let navigate = useNavigate();
 
@@ -50,7 +59,9 @@ export default function Stock() {
     }
 
     let getLeague = (val) => {
-        console.log(val);
+        // console.log(val.target.value);
+        setLeague(val.target.value);
+        fetch(`http://localhost:3001/api/products/league/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
     let getCollectionSize = (val) => {
@@ -150,6 +161,13 @@ export default function Stock() {
                             {
                                 categories.map(category =>
                                     <option key={category.Name} value={category.Name}>{category.Name}</option>
+                                )
+                            }
+                        </select>
+                        <select value={leagueSelected} onChange={getLeague} name="league" id="league">
+                            {
+                                leagues.map(league =>
+                                    <option key={league.text} value={league.text}>{league.text}</option>
                                 )
                             }
                         </select>
