@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  /* font-family: "Artttnorm"; */
+  font-family: "Artttnorm";
 }
 
 body {
@@ -21,6 +21,6 @@ code {
 @font-face {
   font-family: "Artttnorm";
   src: local("Artttnorm"),
-  url("./fonts/Art\ ttnorm\ Regular.ttf") format("opentype");
+  url("./fonts/Art-ttnorm-Regular.otf") format("opentype");
   font-weight: normal;
 }

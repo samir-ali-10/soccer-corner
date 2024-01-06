@@ -673,6 +673,7 @@ ul {
 
 .slider_container .item .info .price {
   font-weight: 600;
+  letter-spacing: 3px;
 }
 
 .slider_container .item .info .add_cart svg {
