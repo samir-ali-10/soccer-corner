@@ -7,6 +7,7 @@ import sportswearImage from "../images/sports_wear.jpeg"
 import jerseysImage from "../images/jerseys.jpeg"
 import studsTurfsImage from "../images/studs_turfs.jpeg"
 import previousSeasons from "../images/previous_seasons.jpeg"
+import classicJerseys from "../images/classic_jerseys.jpeg"
 import { Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,7 +26,6 @@ export default function Home() {
                         alt="First slide"
                     />
                     <Carousel.Caption>
-                        <h2>Soccer Corner</h2>
                         <button>Shop Now</button>
                     </Carousel.Caption>
                 </Carousel.Item>
@@ -36,7 +36,6 @@ export default function Home() {
                         alt="Second slide"
                     />
                     <Carousel.Caption>
-                        <h2>Soccer Corner</h2>
                         <button>Shop Now</button>
                     </Carousel.Caption>
                 </Carousel.Item>
@@ -47,14 +46,13 @@ export default function Home() {
                         alt="Third slide"
                     />
                     <Carousel.Caption>
-                        <h2>Soccer Corner</h2>
                         <button>Shop Now</button>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
             <Container>
                 <div className="new_collection">
-                    <p>new collection</p>
+                    <p>our products</p>
                     <div className="new_collection_container">
                         <div className="item smsc-w100 lgsc-w50">
                             <NavLink to="/products/footballJerseys">
@@ -70,8 +68,8 @@ export default function Home() {
                         </div>
                         <div className="item">
                             <NavLink to="/products/sportsWear">
-                                <img src={image3} alt="Image1" />
-                                <div className="category">Classic De7k</div>
+                                <img src={classicJerseys} alt="Image1" />
+                                <div className="category">Classic Jerseys</div>
                             </NavLink>
                         </div>
                         <div className="item">
