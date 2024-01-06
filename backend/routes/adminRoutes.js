@@ -14,11 +14,12 @@ router.get("/api/products/collection/:collectionName/size/:size",ProductControll
 router.get("/api/products/collection/:collectionName/model/:model/size/:size",ProductController.getCollectionAndModelAndSize); // get collection , model and size 
 router.get('/api/products/CollectionsNames' , ProductController.getCollectionsNames); // Get collectionsNames
 router.get('/api/products/league/:league' , ProductController.getByLeague) // get by league
-// router.get('/api/products/cart', ProductController.getProductsOnCart)
-// router.get('/api/products/cart/:code' , ProductController.getProductsOnCartTest);
+router.get('/api/products/cart', ProductController.getProductsOnCart)
 
 // => POST
 router.post("/api/products", ProductController.postAddProduct);
+router.post('/api/products/cart/:code' , ProductController.postProductsOnCart);
+
 
 
 // =>EDIT

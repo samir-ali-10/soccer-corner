@@ -15,15 +15,15 @@ exports.getProducts = (req, res, next) => {
     });
 };
 
-// exports.getProductsOnCart = (req, res, next) => {
-//   Cart.find()
-//     .then((products) => {
-//       res.json(products);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
+exports.getProductsOnCart = (req, res, next) => {
+  Cart.find()
+    .then((products) => {
+      res.json(products);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 exports.getCollection = (req, res, next) => {
   const collectionName = req.params.collectionName;
@@ -136,6 +136,7 @@ exports.postAddProduct = async (req, res, next) => {
   const code = req.body.code;
   const model = req.body.model;
   const league = req.body.league;
+  const kit = req.body.kit;
   const collectionName = req.body.collectionName;
   const price = req.body.price;
   const size = req.body.size;
@@ -156,51 +157,69 @@ exports.postAddProduct = async (req, res, next) => {
     console.log('New NavBar added:', newNameOfCollection);
   }
 
+  const existingProduct = await ProductModel.find({ code : code});
+  if(existingProduct) {
+    console.log('product exist');
+  } else {
+    const product = new ProductModel({
+      code: code,
+      model : model,
+      league : league,
+      kit : kit,
+      collectionName: collectionName,
+      price: price,
+      quantity: quantity,
+      size: size,
+      sizes : sizes,
+      description: description,
+      // image: image,
+    });
+    product
+      .save()
+      .then((products) => {
+        console.log(products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
 
   
 
-  const product = new ProductModel({
-    code: code,
-    model : model,
-    league : league,
-    collectionName: collectionName,
-    price: price,
-    quantity: quantity,
-    size: size,
-    sizes : sizes,
-    description: description,
-    // image: image,
-  });
-  product
-    .save()
-    .then((products) => {
-      console.log(products);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
 };
 
-// exports.getProductsOnCartTest = (req, res, next) => {
-//   const code = req.params.code;
+exports.postProductsOnCart = async (req, res, next) => {
+  const code = req.params.code;
 
-//   // const existingProductInCart = await Cart.find({ code });
-//   // if (existingProductInCart) {
-//   //   console.log("Product already exists");
-//   // } else {
-//     ProductModel.find({ code }).
-//       .then((product) => {
-//         const newProductToCart = new Cart(product);
-//         newProductToCart.save();
-//         console.log('product saaved');
-//         res.json(product)
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   // }
+  const existingProductInDB = await ProductModel.find({code})
+  if (existingProductInDB) {
+    const cartProduct = new Cart(existingProductInDB);
+    await cartProduct.save();
+    res.json('product saved')
+    console.log('product saved :' , existingProductInDB);
+    return cartProduct;
+  } else {
+    throw new Error('product not found in DB')
+  }
 
-// };
+  const existingProductInCart = await Cart.find({ code });
+  if (existingProductInCart) {
+    console.log("Product already exists");
+  } else {
+    ProductModel.find({ code })
+      .then((product) => {
+        const newProductToCart = new Cart(product);
+        newProductToCart.save();
+        console.log('product saaved');
+        res.json(product)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+};
 
 // => EDIT
 
@@ -209,6 +228,7 @@ exports.editProduct = (req, res, next) => {
   const UpdatedCode = req.body.code;
   const UpdatedModel = req.body.model;
   const Updatedleague = req.body.league;
+  const UpdatedKit = req.body.kit;
   const UpdatedCollectionName = req.body.collectionName;
   const UpdatedPrice = req.body.price;
   const UpdatedSize = req.body.size;
@@ -222,6 +242,7 @@ exports.editProduct = (req, res, next) => {
       code: UpdatedCode,
       model: UpdatedModel,
       league: Updatedleague,
+      kit : UpdatedKit,
       collectionName: UpdatedCollectionName,
       price: UpdatedPrice,
       quantity: UpdatedQuantity,

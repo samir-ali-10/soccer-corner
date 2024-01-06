@@ -5,11 +5,12 @@ const CartSchema = new Schema({
     code: String,
     model : String,
     league : String,
+    kit : String,
     collectionName: String,
     price: Number,
     size: String,
-    sizes: Array,
     quantity: Number,
+    selectedQuantity : Number, 
     description: String,
     // image: String,
   });

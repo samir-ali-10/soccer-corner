@@ -5,6 +5,7 @@ const ProductSchema = new Schema({
   code: String,
   model : String,
   league : String,
+  kit : String,
   collectionName: String,
   price: Number,
   size: String,
