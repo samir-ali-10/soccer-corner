@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  font-family: "Artttnorm";
 }
 
 body {
@@ -15,4 +16,11 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: "Artttnorm";
+  src: local("Artttnorm"),
+  url("./fonts/Art-ttnorm-Regular.otf") format("opentype");
+  font-weight: normal;
 }

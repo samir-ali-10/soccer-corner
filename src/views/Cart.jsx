@@ -58,22 +58,27 @@ export default function Cart() {
                                                 <h5>{item.title}</h5>
                                             </div>
                                         </div>
-                                        <div className="quantity">
-                                            <div className='minus'><FontAwesomeIcon icon={faMinus} /></div>
-                                            0
-                                            <div className='plus'><FontAwesomeIcon icon={faPlus} /></div>
-                                            <div className="remove_item">
-                                                <button>remove</button>
+                                        <div className="actions">
+                                            <div className="quantity">
+                                                <div className='minus'><FontAwesomeIcon icon={faMinus} /></div>
+                                                0
+                                                <div className='plus'><FontAwesomeIcon icon={faPlus} /></div>
+                                                <div className="remove_item">
+                                                    <button>remove</button>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="price">
-                                            {item.price}EGP
+                                            <div className="price">
+                                                {item.price}EGP
+                                            </div>
                                         </div>
                                     </div>
                                 )
                             }
+                            <div className="sub_total mt-2 text-end">
+                                subtotal<span>1000EGP</span>
+                            </div>
                             <div className="checkout">
-                                <NavLink className="me-4">Proceed To Checkout</NavLink>
+                                <NavLink to="/checkout" className="me-4">Proceed To Checkout</NavLink>
                                 <button>Clear Cart</button>
                             </div>
                         </div>
