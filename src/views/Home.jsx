@@ -6,6 +6,7 @@ import image3 from "../images/carousel_3.jpeg"
 import sportswearImage from "../images/sports_wear.jpeg"
 import jerseysImage from "../images/jerseys.jpeg"
 import studsTurfsImage from "../images/studs_turfs.jpeg"
+import previousSeasons from "../images/previous_seasons.jpeg"
 import { Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -58,7 +59,7 @@ export default function Home() {
                         <div className="item smsc-w100 lgsc-w50">
                             <NavLink to="/products/footballJerseys">
                                 <img src={jerseysImage} alt="Image1" />
-                                <div className="category">Football Jerseys</div>
+                                <div className="category">2023 - 24 Jerseys</div>
                             </NavLink>
                         </div>
                         <div className="item lgsc-w50">
@@ -81,8 +82,8 @@ export default function Home() {
                         </div>
                         <div className="item">
                             <NavLink to="/products/others">
-                                <img src={image1} alt="Image1" />
-                                <div className="category">Others</div>
+                                <img src={previousSeasons} alt="Image1" />
+                                <div className="category">Previous Seasons</div>
                             </NavLink>
                         </div>
                     </div>

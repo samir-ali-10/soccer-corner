@@ -17,6 +17,8 @@ import ComplainsAdmin from "./views/admin/ComplainsAdmin"
 import NewOrders from "./views/admin/NewOrders"
 import Returns from "./views/admin/Returns"
 import Checkout from './views/Checkout';
+import Shipping from './views/policies/Shipping';
+import Refund from './views/policies/Refund';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
         <Route path="/adminSecret/newOrders" element={<NewOrders/>} />
         <Route path="/adminSecret/returns" element={<Returns/>} />
         <Route path="/adminSecret/editProduct/:code" element={<EditProduct />} />
+        <Route path="/shippingPolicy" element={<Shipping />} />
+        <Route path="/refund&exchangePolicy" element={<Refund />} />
       </Routes>
       <Footer />
     </>

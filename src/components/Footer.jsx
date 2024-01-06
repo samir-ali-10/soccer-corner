@@ -15,8 +15,8 @@ export default function Footer() {
                         <p>Our goal is the bring to your a very well developed and quality product in the field of football and sport. By reviving the spirit of collaboration and sportiveness</p>
                     </div>
                     <ul className='policies text-capitalize'>
-                        <li><NavLink to="">shipping policy</NavLink></li>
-                        <li><NavLink to="">refund & exchange policy</NavLink></li>
+                        <li><NavLink to="/shippingPolicy">shipping policy</NavLink></li>
+                        <li><NavLink to="/refund&exchangePolicy">refund & exchange policy</NavLink></li>
                         <li><NavLink to="">our clients</NavLink></li>
                         <li><NavLink to="">size chart</NavLink></li>
                         <li><NavLink to="">washing methods</NavLink></li>
