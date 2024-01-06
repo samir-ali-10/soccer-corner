@@ -1,7 +1,7 @@
 const ProductModel = require("../models/ProductSchema");
 const NameOfCollection = require("../models/NavBarSchema");
 const Cart = require("../models/CartSchema");
-
+const LeagueNames = require('../models/LeagueSchema')
 // => GET
 
 exports.getProducts = (req, res, next) => {
@@ -128,6 +128,16 @@ exports.getCollectionsNames = (req , res , next ) => {
   })
 }
 
+exports.getLeagueNames = (req , res , next) => {
+  LeagueNames.find()
+  .then(leagueNames => {
+    res.json(leagueNames)
+    console.log(leagueNames)
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
 
 
 // => POST
@@ -145,22 +155,45 @@ exports.postAddProduct = async (req, res, next) => {
   const description = req.body.description;
   // const image = req.body.file;
 
-  const existingCollectionName = await NameOfCollection.findOne({ Name: collectionName});
+  const existingProduct = await ProductModel.findOne({ code });
+
+  if (existingProduct) {
+    console.log('Product is already exist ');
+    return res.json("product already exist")
+  }
+
+  const existingCollectionName = await NameOfCollection.findOne({ Name: collectionName });
 
   if (existingCollectionName) {
-    console.log('NavBar already exists. No action taken.');
-  } else {
+    console.log('collectionName is already exist');
+  }
+   else {
+    // If collectionName does not exist, add it to the collection
     const newNameOfCollection = new NameOfCollection({
       Name: collectionName,
     });
-    newNameOfCollection.save();
-    console.log('New NavBar added:', newNameOfCollection);
+    await newNameOfCollection.save();
+    console.log('New collectionName added:', newNameOfCollection);
   }
 
-  const existingProduct = await ProductModel.find({ code : code});
-  if(existingProduct) {
-    console.log('product exist');
-  } else {
+
+
+  const existingLeagueName = await LeagueNames.findOne({ leagueName: league });
+
+  if (existingLeagueName) {
+    console.log('league is already exist');
+  }
+   else {
+    const newLeagueName = new LeagueNames({
+      leagueName: league,
+    });
+    await newLeagueName.save();
+    console.log('New league added:', newLeagueName);
+  }
+
+
+
+
     const product = new ProductModel({
       code: code,
       model : model,
@@ -174,51 +207,49 @@ exports.postAddProduct = async (req, res, next) => {
       description: description,
       // image: image,
     });
-    product
-      .save()
-      .then((products) => {
-        console.log(products);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-
-  
-
-
+    await product.save();
+    console.log('New product added:', product);
 };
+
+
 
 exports.postProductsOnCart = async (req, res, next) => {
   const code = req.params.code;
+  const existingProduct = await ProductModel.findOne({ code });
 
-  const existingProductInDB = await ProductModel.find({code})
-  if (existingProductInDB) {
-    const cartProduct = new Cart(existingProductInDB);
-    await cartProduct.save();
-    res.json('product saved')
-    console.log('product saved :' , existingProductInDB);
-    return cartProduct;
-  } else {
-    throw new Error('product not found in DB')
-  }
 
-  const existingProductInCart = await Cart.find({ code });
-  if (existingProductInCart) {
-    console.log("Product already exists");
-  } else {
-    ProductModel.find({ code })
-      .then((product) => {
-        const newProductToCart = new Cart(product);
-        newProductToCart.save();
-        console.log('product saaved');
-        res.json(product)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  if (existingProduct) {
+    // Check if the product is already in the cart
+    const productInCart = await Cart.findOne({ code });
+
+    if (!productInCart) {
+      const productData = {
+        code: existingProduct.code,
+        model: existingProduct.model,
+        league: existingProduct.league,
+        kit: existingProduct.kit,
+        collectionName: existingProduct.collectionName,
+        price: existingProduct.price,
+        size: existingProduct.size,
+        quantity: existingProduct.quantity,
+        selectedQuantity : 0,
+        description: existingProduct.description,
+      };
+
+      const cartProduct = new Cart(productData);
+      await cartProduct.save();
+      console.log('Product saved:', existingProduct);
+      res.json('Product saved');
+      return cartProduct;
+    } else {
+      console.log('Product already exists in the cart');
+      res.json('Product already exists in the cart');   
+    }
   }
+else {
+  console.log('Product not found in DB');
+}
+
 };
 
 // => EDIT
@@ -284,4 +315,29 @@ exports.deleteAllProducts = (req, res, next) => {
       console.log(err);
     });
 };
+
+
+exports.deleteProductFromCart = (req , res , next) => {
+  const code = req.params.code;
+  Cart.findOneAndDelete({ code })
+    .then((result) => {
+      res.json("PRODUCT DELETED SUCCESSFULLY!");
+      console.log("PRODUCT DELETED SUCCESSFULLY!");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+exports.deleteAllProductsFromCart = (req , res , next) => {
+  Cart.deleteMany()
+  .then((result) => {
+    res.json("PRODUCTS DELETED SUCCESSFULLY!");
+    console.log("PRODUCTS DELETED SUCCESSFULLY!");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+}
+
 
