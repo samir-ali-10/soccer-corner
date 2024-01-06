@@ -60,9 +60,11 @@ export default function Cart() {
                                         </div>
                                         <div className="actions">
                                             <div className="quantity">
-                                                <div className='minus'><FontAwesomeIcon icon={faMinus} /></div>
-                                                0
-                                                <div className='plus'><FontAwesomeIcon icon={faPlus} /></div>
+                                                <div className="quantity_icons d-flex">
+                                                    <div className='minus'><FontAwesomeIcon icon={faMinus} /></div>
+                                                    0
+                                                    <div className='plus'><FontAwesomeIcon icon={faPlus} /></div>
+                                                </div>
                                                 <div className="remove_item">
                                                     <button>remove</button>
                                                 </div>
@@ -77,7 +79,10 @@ export default function Cart() {
                             <div className="sub_total mt-2 text-end">
                                 subtotal<span>1000EGP</span>
                             </div>
-                            <div className="checkout">
+                            <div className="tax text-end mt-4 fs-5">
+                                Tax included and shipping calculated at checkout
+                            </div>
+                            <div className="checkout_btn">
                                 <NavLink to="/checkout" className="me-4">Proceed To Checkout</NavLink>
                                 <button>Clear Cart</button>
                             </div>

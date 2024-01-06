@@ -92,6 +92,26 @@ ul {
   color: var(--text-color);
 }
 
+.navigation .actions .cart_icon {
+  position: relative;
+}
+
+.navigation .actions .cart_icon::before {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  background-color: #d5c5a9;
+  outline: 2px solid var(--secondary-color);
+}
+
 .navigation .navbar-toggler {
   background-color: var(--primary-color);
   padding: 10px;
@@ -281,7 +301,6 @@ ul {
 }
 
 .stock .products .product .info div span {
-  font-style: italic;
   font-weight: 700;
 }
 
@@ -1199,13 +1218,13 @@ ul {
   font-weight: 800;
 }
 
-.cart .cart_items .checkout {
+.cart .cart_items .checkout_btn {
   text-align: center;
   margin-top: 30px;
 }
 
-.cart .cart_items .checkout a,
-.cart .cart_items .checkout button {
+.cart .cart_items .checkout_btn a,
+.cart .cart_items .checkout_btn button {
   color: var(--text-color);
   background-color: transparent;
   border: 1px solid var(--text-color);
@@ -1223,12 +1242,12 @@ ul {
   -o-transition: .3s;
 }
 
-.cart .cart_items .checkout button {
+.cart .cart_items .checkout_btn button {
   padding: 8px 20px;
 }
 
-.cart .cart_items .checkout a:hover,
-.cart .cart_items .checkout button:hover {
+.cart .cart_items .checkout_btn a:hover,
+.cart .cart_items .checkout_btn button:hover {
   background-color: var(--secondary-color);
 }
 
@@ -1360,6 +1379,16 @@ ul {
   padding-bottom: 0.7rem !important;
 }
 
+/************************ Checkout ***************************/
+
+.checkout input {
+  padding: 15px;
+}
+
+.form-check-input[type=checkbox] {
+  padding: initial;
+}
+
 /************************ Footer ***************************/
 
 footer {
@@ -1437,9 +1466,6 @@ footer .copyright::before {
 
 /************************ Media Query ***************************/
 @media (max-width: 992px) {
-  :root {
-    font-size: 13px;
-  }
 
 
   .navigation .actions {
@@ -1526,6 +1552,7 @@ footer .copyright::before {
 
   .cart .cart_items .cart_item .actions {
     justify-content: space-between;
+    width: 90%;
   }
 
   .cart .cart_items .cart_item .info .image {
@@ -1533,8 +1560,15 @@ footer .copyright::before {
     height: 300px;
     margin-bottom: 20px;
   }
+}
 
-  .cart .cart_items .cart_item .quantity {
-    margin-left: 40px;
+@media (max-width: 576px) {
+
+  .home_page .new_collection .new_collection_container .smsc-w100 {
+    height: 220px;
+  }
+
+  .home_page .new_collection .new_collection_container .item:not(.smsc-w100) {
+    height: 140px;
   }
 }

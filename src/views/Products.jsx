@@ -168,6 +168,19 @@ export default function Products() {
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
+    let addToCart = async (product) => {
+        // console.log(product);
+        let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
+    }
+
     useEffect(() => {
         getData();
     }, [])
@@ -194,7 +207,10 @@ export default function Products() {
                                                 <div className="name">{egypt.code}</div>
                                                 <div className="inner_info d-flex justify-content-between">
                                                     <div className="price">{egypt.price}EGP</div>
-                                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                    <div className="add_cart" onClick={(e) => {
+                                                        e.preventDefault();
+                                                        addToCart(egypt.code)
+                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                                 </div>
                                             </div>
                                         </NavLink>
