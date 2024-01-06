@@ -30,6 +30,7 @@ export default function Stock() {
     ];
 
     const leagues = [
+        { text: '--Choose a league--' },
         { text: "egyptian" },
         { text: "serie a" },
         { text: "spanish" },
@@ -50,16 +51,29 @@ export default function Stock() {
     let navigate = useNavigate();
 
     let getData = () => {
+        setCollectionName("")
+        // setCategorySelected("")
+        setModel("")
+        // setModelSelected("")
+        setSize("")
+        // setSizeSelected("")
+        setLeague("")
+        // setLeagueSelected("")
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
     let getCollection = (val) => {
+        setLeague("")
+        setLeagueSelected("");
         setCollectionName(val.target.value);
         fetch(`http://localhost:3001/api/products/collection/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
     let getLeague = (val) => {
-        // console.log(val.target.value);
+        setSizeSelected("")
+        setCollectionName("")
+        setCategorySelected("")
+        setModelSelected("")
         setLeague(val.target.value);
         fetch(`http://localhost:3001/api/products/league/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
@@ -152,12 +166,9 @@ export default function Stock() {
                 <h2>Stock</h2>
                 <div className="categories mt-5">
                     <div className="teams">
-                        <button onClick={() => {
-                            getData();
-                            setCollectionName("")
-                            setModel("")
-                        }}>All</button>
+                        <button onClick={getData}>All</button>
                         <select value={categorySelected} onChange={getCollection} name="categories" id="categories">
+                            <option value={"--Choose a Collection--"} >--Choose a Collection--</option>
                             {
                                 categories.map(category =>
                                     <option key={category.Name} value={category.Name}>{category.Name}</option>
@@ -204,7 +215,7 @@ export default function Stock() {
                                         ?
                                         <>
                                             {collectionName ? <h3>{collectionName}</h3> : <h3>All Products</h3>}
-                                            <h2 className='league'>Egyptian League</h2>
+                                            {collectionName === "" || league === "egyptian" ? <h2 className='league'>Egyptian League</h2> : <h3>{collectionName}</h3>}
                                             {model ? <p className='text-center'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
