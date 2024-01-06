@@ -1223,6 +1223,11 @@ ul {
   margin-top: 30px;
 }
 
+.cart .cart_items .checkout_btn a {
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
 .cart .cart_items .checkout_btn a,
 .cart .cart_items .checkout_btn button {
   color: var(--text-color);
@@ -1563,10 +1568,6 @@ footer .copyright::before {
 }
 
 @media (max-width: 576px) {
-
-  .home_page .new_collection .new_collection_container .smsc-w100 {
-    height: 220px;
-  }
 
   .home_page .new_collection .new_collection_container .item:not(.smsc-w100) {
     height: 140px;
