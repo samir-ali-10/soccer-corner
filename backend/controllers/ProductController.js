@@ -269,7 +269,7 @@ exports.postProductsOnCart = async (req, res, next) => {
         collectionName: existingProduct.collectionName,
         price: existingProduct.price,
         size: existingProduct.size,
-        quantity: existingProduct.quantity,
+        quantity: 1,
         description: existingProduct.description,
       };
 

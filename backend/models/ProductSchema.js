@@ -10,7 +10,10 @@ const ProductSchema = new Schema({
   price: Number,
   size: String,
   sizes: Array,
-  quantity: Number,
+  quantity: {
+    type : Number,
+    default : 1,
+  },
   description: String,
   // image: String,
 });
