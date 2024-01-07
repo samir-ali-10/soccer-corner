@@ -15,13 +15,13 @@ export default function Cart() {
     const [cart, setCart] = useState([]),
         [totalPrice, setTotalPrice] = useState();
 
-    const cartRtk = useSelector((state) => state.cart)
-    const dispatch = useDispatch()
+    // const cartRtk = useSelector((state) => state.cart)
+    // const dispatch = useDispatch()
 
 
-    // let getCartItems = () => {
-    //     fetch(`http://localhost:3001/api/products/cart`).then((res) => res.json()).then((data) => setCart(data));
-    // }
+    let getCartItems = () => {
+        fetch(`http://localhost:3001/api/products/cart`).then((res) => res.json()).then((data) => setCart(data));
+    }
 
     let removeSingleProduct = (product) => {
         fetch(`http://localhost:3001/api/products/cart/delete-product/${product}`).then((res) => res.json()).then((data) => console.log(data));
@@ -33,25 +33,25 @@ export default function Cart() {
         window.location.reload()
     }
 
-    let handleIncreaseCartQuantity = (item) => {
-        dispatch(increaseQuantity(item));
-    }
+    // let handleIncreaseCartQuantity = (item) => {
+    //     dispatch(increaseQuantity(item));
+    // }
 
-    let handleDecreaseCartQuantity = (item) => {
-        dispatch(decreaseQuantity(item));
-    }
+    // let handleDecreaseCartQuantity = (item) => {
+    //     dispatch(decreaseQuantity(item));
+    // }
 
     useEffect(() => {
-        // getCartItems();
-        dispatch(getTotals())
-    }, [dispatch])
+        getCartItems();
+        // dispatch(getTotals())
+    }, [])
 
     return (
         <div className='cart'>
             <h2>Shopping Cart</h2>
             <Container>
                 {
-                    cartRtk.cartItems.length === 0
+                    cart.length === 0
                         ?
                         <div className="image text-center">
                             <img src={cartImage} alt="emptyCart" />
@@ -60,7 +60,7 @@ export default function Cart() {
                         :
                         <div className="cart_items">
                             {
-                                cartRtk.cartItems.map(item =>
+                                cart.map(item =>
                                     <div key={item._id} className="cart_item">
                                         <div className="info d-flex">
                                             <div className="image">
@@ -73,12 +73,12 @@ export default function Cart() {
                                         <div className="actions">
                                             <div className="quantity">
                                                 <div className="quantity_icons d-flex">
-                                                    {item.cartQuantity === 1 ? <button disabled className='minus' onClick={() => handleDecreaseCartQuantity(item)}><FontAwesomeIcon icon={faMinus} /></button> : <button className='minus' onClick={() => handleDecreaseCartQuantity(item)}><FontAwesomeIcon icon={faMinus} /></button>}
-                                                    <span>{item.cartQuantity}</span>
-                                                    {item.cartQuantity === item.quantity ? <button disabled className='plus' onClick={() => handleIncreaseCartQuantity(item)}><FontAwesomeIcon icon={faPlus} /></button> : <button className='plus' onClick={() => handleIncreaseCartQuantity(item)}><FontAwesomeIcon icon={faPlus} /></button>}
+                                                    <button className='minus'><FontAwesomeIcon icon={faMinus} /></button>
+                                                    <span>{item.quantity}</span>
+                                                    <button className='plus' ><FontAwesomeIcon icon={faPlus} /></button>
                                                 </div>
                                                 <div className="remove_item">
-                                                    {/* <button onClick={() => removeSingleProduct(item.code)}>remove</button> */}
+                                                    <button onClick={() => removeSingleProduct(item.code)}>remove</button>
                                                 </div>
                                             </div>
                                             <div className="price">
@@ -88,17 +88,16 @@ export default function Cart() {
                                     </div>
                                 )
                             }
-                            {/* <button>get total price</button> */}
                             <div className="sub_total mt-4 text-end">
-                                <button className='me-5' onClick={() => window.location.reload()}>Update Cart</button>
-                                subtotal<span>{cartRtk.cartTotalAmount}EGP</span>
+                                <button className='update_cart me-5' onClick={() => window.location.reload()}>Update Cart</button>
+                                subtotal<span>1000EGP</span>
                             </div>
                             <div className="tax text-end mt-4 fs-5">
                                 Tax included and shipping calculated at checkout
                             </div>
                             <div className="checkout_btn">
                                 <NavLink to="/checkout" className="me-4">Proceed To Checkout</NavLink>
-                                {/* <button onClick={removeAllProducts}>Clear Cart</button> */}
+                                <button onClick={removeAllProducts}>Clear Cart</button>
                             </div>
                         </div>
                 }

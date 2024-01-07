@@ -28,8 +28,8 @@ export default function Checkout() {
     // };
 
     return (
-        <div className='checkout mt-5'>
-            <Container>
+        <div className='checkout'>
+            <div className='containing d-flex'>
                 <Formik
                     validationSchema={schema}
                     initialValues={{
@@ -45,7 +45,7 @@ export default function Checkout() {
                     onSubmit={console.log()}
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
-                        <Form noValidate onSubmit={handleSubmit}>
+                        <Form className='mt-5' noValidate onSubmit={handleSubmit}>
                             <Row className='contact mb-5'>
                                 <div className="headlines d-flex justify-content-between align-items-center">
                                     <h2>Contact</h2>
@@ -65,7 +65,7 @@ export default function Checkout() {
                                         isInvalid={!!errors.receiverName}
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.state}
+                                        {errors.receiverName}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <Form.Group
@@ -83,7 +83,7 @@ export default function Checkout() {
                                         isInvalid={!!errors.email}
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.state}
+                                        {errors.email}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
@@ -103,7 +103,7 @@ export default function Checkout() {
                                         isInvalid={!!errors.zone}
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.state}
+                                        {errors.zone}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
@@ -122,7 +122,7 @@ export default function Checkout() {
                                         isInvalid={!!errors.area}
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.state}
+                                        {errors.area}
                                     </Form.Control.Feedback>
                                     {/* <Form.Select defaultValue="Choose...">
                                         <option>Choose...</option>
@@ -145,7 +145,7 @@ export default function Checkout() {
                                         isInvalid={!!errors.phone}
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.state}
+                                        {errors.phone}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
@@ -164,7 +164,7 @@ export default function Checkout() {
                                         isInvalid={!!errors.address}
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.state}
+                                        {errors.address}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
@@ -184,9 +184,6 @@ export default function Checkout() {
                                         onChange={handleChange}
                                         isInvalid={!!errors.note}
                                     />
-                                    <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.state}
-                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
                             <Row>
@@ -197,31 +194,30 @@ export default function Checkout() {
                                         name="terms"
                                         label="Agree to terms and conditions"
                                         onChange={handleChange}
-                                        isInvalid={!!errors.terms}
-                                        feedback={errors.terms}
+                                        isInvalid={!!errors.termsCondition}
+                                        feedback={errors.termsCondition}
                                         feedbackType="invalid"
                                         id="validationFormik106"
                                         feedbackTooltip
                                     />
                                 </Form.Group>
                             </Row>
-                            <div className='clear_fields_container d-flex justify-content-between'>
-                                <Button type="submit">Send To Stock</Button>
-                                <button type='button' className='clear_fields' onClick={() => {
-                                    values.code = ""
-                                    values.collectionName = ""
-                                    values.league = ""
-                                    values.description = ""
-                                    values.model = ""
-                                    values.price = ""
-                                    values.quantity = ""
-                                    values.size = ""
-                                }}>Clear all fields</button>
+                            <div className="shipping_price mt-5">
+                                <h2>Shipping Prices</h2>
+                                <p className='m-0'>Enter your shipping address to view available shipping Prices</p>
+                            </div>
+                            <div className='buy_products mt-5'>
+                                <Button className='w-100 pt-2 pb-2 fs-5' type="submit">Buy Now</Button>
                             </div>
                         </Form>
                     )}
                 </Formik>
-            </Container>
+                <div className="floating_receipt pt-4 pb-4">
+                    <div className="content">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, cum nesciunt optio quisquam expedita facere cupiditate, ex ipsum cumque, eligendi deserunt? Iure qui consectetur quas aliquid! Itaque rem inventore quas.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

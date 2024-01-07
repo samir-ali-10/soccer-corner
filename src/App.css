@@ -1248,7 +1248,8 @@ ul {
 }
 
 .cart .cart_items .checkout_btn a,
-.cart .cart_items .checkout_btn button {
+.cart .cart_items .checkout_btn button,
+.cart .cart_items .update_cart {
   color: var(--text-color);
   background-color: transparent;
   border: 1px solid var(--text-color);
@@ -1273,20 +1274,6 @@ ul {
 .cart .cart_items .checkout_btn a:hover,
 .cart .cart_items .checkout_btn button:hover {
   background-color: var(--secondary-color);
-}
-
-.floating_reciept {
-  width: 600px;
-  position: sticky;
-  display: block;
-  background-color: red;
-  top: -1px;
-  padding: 20px;
-  margin-left: auto;
-}
-
-.floating_reciept p {
-  margin: 0 !important;
 }
 
 /************************ Add Products ***************************/
@@ -1409,8 +1396,52 @@ ul {
   padding: 15px;
 }
 
+.checkout .containing {
+  gap: 50px;
+}
+
+.checkout form {
+  margin-left: auto;
+  width: 40%;
+}
+
+.checkout .headlines a {
+  color: var(--brightGrey-color);
+  text-decoration: underline !important;
+}
+
 .form-check-input[type=checkbox] {
   padding: initial;
+}
+
+.checkout .shipping_price h2 {
+  margin-bottom: 20px;
+}
+
+.checkout .shipping_price p {
+  background-color: var(--secondary-color);
+  padding: 20px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+
+.checkout .buy_products button {
+  background-color: var(--secondary-color);
+  border: none;
+  color: var(--text-color);
+}
+
+.checkout .floating_receipt {
+  background-color: #77777732;
+  width: 40%;
+}
+
+.checkout .floating_receipt .content {
+  width: 80%;
+  margin: auto;
 }
 
 /************************ Policies ***************************/
@@ -1600,6 +1631,37 @@ footer .copyright::before {
   .contact_us form {
     width: 100%;
   }
+
+  /************ Checkout *************/
+
+  .checkout {
+    padding: 0 40px;
+  }
+
+  .checkout .containing {
+    flex-direction: column;
+  }
+
+  .checkout .containing form {
+    width: 100%;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #77777732;
+  }
+
+  .checkout .containing .floating_receipt {
+    width: 100%;
+    position: relative;
+    margin-top: 40px;
+  }
+
+  .checkout .containing .floating_receipt::before {
+    content: "Order Summary";
+    position: absolute;
+    font-size: calc(1.325rem + .9vw);
+    top: -45px;
+    left: 0;
+  }
+
 }
 
 @media (max-width: 767px) {
