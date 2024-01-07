@@ -9,8 +9,10 @@ const CartSchema = new Schema({
     collectionName: String,
     price: Number,
     size: String,
-    quantity: Number,
-    selectedQuantity : Number, 
+    quantity: {
+      type : Number,
+      default : 1,
+    },
     description: String,
     // image: String,
   });

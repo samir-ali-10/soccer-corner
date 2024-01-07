@@ -219,7 +219,6 @@ exports.postProductsOnCart = async (req, res, next) => {
 
 
   if (existingProduct) {
-    // Check if the product is already in the cart
     const productInCart = await Cart.findOne({ code });
 
     if (!productInCart) {
@@ -232,7 +231,6 @@ exports.postProductsOnCart = async (req, res, next) => {
         price: existingProduct.price,
         size: existingProduct.size,
         quantity: existingProduct.quantity,
-        selectedQuantity : 0,
         description: existingProduct.description,
       };
 
@@ -242,6 +240,10 @@ exports.postProductsOnCart = async (req, res, next) => {
       res.json('Product saved');
       return cartProduct;
     } else {
+
+      const quantityChange = req.body.increase ? 1 : -1; // Increase by 1 or decrease by 1
+      productInCart.quantity += quantityChange;
+      await productInCart.save();
       console.log('Product already exists in the cart');
       res.json('Product already exists in the cart');   
     }
