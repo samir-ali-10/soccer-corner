@@ -211,6 +211,45 @@ exports.postAddProduct = async (req, res, next) => {
     console.log('New product added:', product);
 };
 
+exports.increaseQuantity = async (req, res) => {
+  const code = req.params.code;
+  try {
+    const productInCart = await Cart.findOne({ code: code });
+
+    if (productInCart) {
+      productInCart.quantity += 1; // Increase quantity by 1 (or any desired value)
+      await productInCart.save();
+      console.log('Product quantity increased:', productInCart);
+      return res.json('Product quantity increased');
+    } else {
+      console.log('Product not found in the cart');
+      return res.status(404).json('Product not found in the cart');
+    }
+  } catch (error) {
+    console.error('Error increasing quantity:', error.message);
+    return res.status(500).json('Internal Server Error');
+  }
+}
+
+exports.decreaseQuantity =  async (req, res) => {
+  const productCode = req.params.code;
+  try {
+    const productInCart = await Cart.findOne({ code: productCode });
+
+    if (productInCart && productInCart.quantity > 0) {
+      productInCart.quantity -= 1; // Decrease quantity by 1 (or any desired value)
+      await productInCart.save();
+      console.log('Product quantity decreased:', productInCart);
+      return res.json('Product quantity decreased');
+    } else {
+      console.log('Invalid operation. Minimum quantity reached.');
+      return res.status(400).json('Invalid operation. Minimum quantity reached.');
+    }
+  } catch (error) {
+    console.error('Error decreasing quantity:', error.message);
+    return res.status(500).json('Internal Server Error');
+  }
+}
 
 
 exports.postProductsOnCart = async (req, res, next) => {
@@ -240,10 +279,6 @@ exports.postProductsOnCart = async (req, res, next) => {
       res.json('Product saved');
       return cartProduct;
     } else {
-
-      const quantityChange = req.body.increase ? 1 : -1; // Increase by 1 or decrease by 1
-      productInCart.quantity += quantityChange;
-      await productInCart.save();
       console.log('Product already exists in the cart');
       res.json('Product already exists in the cart');   
     }

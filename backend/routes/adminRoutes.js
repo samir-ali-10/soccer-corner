@@ -20,12 +20,13 @@ router.get('/api/products/cart', ProductController.getProductsOnCart)
 // => POST
 router.post("/api/products", ProductController.postAddProduct);
 router.post('/api/products/cart/:code' , ProductController.postProductsOnCart);
+router.post('/api/products/cart/increase/:code' , ProductController.increaseQuantity)
+router.post('/api/products/cart/decrease/:code' , ProductController.decreaseQuantity)
 
 
 
 // =>EDIT
 router.post('/api/products/editProduct/:code' , ProductController.editProduct); // edit Product by code
-// router.post('/api/products/cart/increaseProductQuantity/:code' , ProductController.)
 
 // => DELETE
 
