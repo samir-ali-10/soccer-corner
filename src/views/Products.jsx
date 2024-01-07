@@ -172,8 +172,17 @@ export default function Products() {
 
     const dispatch = useDispatch()
 
-    let addToCart = (product) => {
-        dispatch(increaseQuantity(product))
+    let addToCart = async (product) => {
+        // dispatch(increaseQuantity(product))
+        let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
     }
 
     // let addToCart = async (product) => {
@@ -217,7 +226,7 @@ export default function Products() {
                                                     <div className="price">{egypt.price}EGP</div>
                                                     <div className="add_cart" onClick={(e) => {
                                                         e.preventDefault();
-                                                        addToCart(egypt)
+                                                        addToCart(egypt.code)
                                                     }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                                 </div>
                                             </div>
@@ -246,7 +255,7 @@ export default function Products() {
                                                     <div className="price">{serieA.price}EGP</div>
                                                     <div className="add_cart" onClick={(e) => {
                                                         e.preventDefault();
-                                                        addToCart(serieA)
+                                                        addToCart(serieA.code)
                                                     }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                                 </div>
                                             </div>

@@ -29,16 +29,17 @@ export default function Stock() {
         { text: '2023' },
     ];
 
-    const leagues = [
-        { text: '--Choose a league--' },
-        { text: "egyptian" },
-        { text: "serie a" },
-        { text: "spanish" },
-        { text: "saudi" },
-    ]
+    // const leagues = [
+    //     { text: '--Choose a league--' },
+    //     { text: "egyptian" },
+    //     { text: "serie a" },
+    //     { text: "spanish" },
+    //     { text: "saudi" },
+    // ]
 
     const [stock, setStock] = useState([]),
         [categories, setCategories] = useState([]),
+        [leagues, setLeagues] = useState([]),
         [categorySelected, setCategorySelected] = useState(),
         [leagueSelected, setLeagueSelected] = useState(),
         [sizeSelected, setSizeSelected] = useState(),
@@ -95,6 +96,10 @@ export default function Stock() {
 
     let getCategories = () => {
         fetch(`http://localhost:3001/api/products/CollectionsNames`).then((res) => res.json()).then((data) => setCategories(data));
+    }
+
+    let getLeagues = () => {
+        fetch(`http://localhost:3001/api/products/LeagueNames`).then((res) => res.json()).then((data) => setLeagues(data));
     }
 
 
@@ -155,7 +160,10 @@ export default function Stock() {
     useEffect(() => {
         getData();
         getCategories();
+        getLeagues();
     }, [])
+
+    console.log(leagues);
 
     return (
         <div className='stock mt-4'>
@@ -176,9 +184,10 @@ export default function Stock() {
                             }
                         </select>
                         <select value={leagueSelected} onChange={getLeague} name="league" id="league">
+                            <option value={"--Choose a League--"} >--Choose a League--</option>
                             {
                                 leagues.map(league =>
-                                    <option key={league.text} value={league.text}>{league.text}</option>
+                                    <option key={league.leagueName} value={league.leagueName}>{league.leagueName}</option>
                                 )
                             }
                         </select>
@@ -288,11 +297,83 @@ export default function Stock() {
                                                     )
                                                 }
                                             </div>
-                                            <h2 className='league'>Spanish League</h2>
+                                            <h2 className='league'>La Liga</h2>
                                             {model ? <p className='text-center'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
-                                                    stock.map((item) => item.league === "spanish"
+                                                    stock.map((item) => item.league === "La Liga"
+                                                        ?
+                                                        <NavLink key={item._id} className="product" to="">
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="code">Product Code: <span>{item.code}</span></div>
+                                                                <div className="code">Product League: <span>{item.league}</span></div>
+                                                                <div className="code">Product Model: <span>{item.model}</span></div>
+                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                                                <div className="price">Product Size: <span>{item.size}</span></div>
+                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                <div className="delete_item">
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        deleteItem(item)
+                                                                    }}>Delete Product</button>
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        navigateToEdit(item)
+                                                                    }} className='edit_product'>Edit Product</button>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null
+                                                    )
+                                                }
+                                            </div>
+                                            <h2 className='league'>Premier League</h2>
+                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            <div className="products_container mb-5">
+                                                {
+                                                    stock.map((item) => item.league === "premier"
+                                                        ?
+                                                        <NavLink key={item._id} className="product" to="">
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="code">Product Code: <span>{item.code}</span></div>
+                                                                <div className="code">Product League: <span>{item.league}</span></div>
+                                                                <div className="code">Product Model: <span>{item.model}</span></div>
+                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                                                <div className="price">Product Size: <span>{item.size}</span></div>
+                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                <div className="delete_item">
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        deleteItem(item)
+                                                                    }}>Delete Product</button>
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        navigateToEdit(item)
+                                                                    }} className='edit_product'>Edit Product</button>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null
+                                                    )
+                                                }
+                                            </div>
+                                            <h2 className='league'>Saudi League</h2>
+                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            <div className="products_container mb-5">
+                                                {
+                                                    stock.map((item) => item.league === "saudi"
                                                         ?
                                                         <NavLink key={item._id} className="product" to="">
                                                             <div className="image">

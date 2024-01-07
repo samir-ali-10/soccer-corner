@@ -42,13 +42,13 @@ export default function AddProducts() {
         code: yup.string().required(),
         model: yup.string().required(),
         kit: yup.string().required(),
-        collectionName: yup.string(),
-        league: yup.string(),
-        price: yup.number(),
+        collectionName: yup.string().required(),
+        league: yup.string().required(),
+        price: yup.number().required(),
         size: yup.string().required(),
         quantity: yup.number().required(),
         description: yup.string(),
-        file: yup.mixed(),
+        file: yup.mixed().required(),
     });
 
     let handleSub = async (values) => {
@@ -119,9 +119,11 @@ export default function AddProducts() {
                                         list='productsList'
                                         value={values.code}
                                         onChange={handleChange}
-                                        isValid={touched.code && !errors.code}
+                                        isInvalid={!!errors.code}
                                     />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.code}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                                 <datalist id='productsList'>
                                     {
@@ -143,9 +145,11 @@ export default function AddProducts() {
                                         name="collectionName"
                                         value={values.collectionName}
                                         onChange={handleChange}
-                                        isValid={touched.collectionName && !errors.collectionName}
+                                        isInvalid={!!errors.collectionName}
                                     />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.collectionName}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
                             <Row>
@@ -160,9 +164,11 @@ export default function AddProducts() {
                                         name="kit"
                                         value={values.kit}
                                         onChange={handleChange}
-                                        isValid={touched.kit && !errors.kit}
+                                        isInvalid={!!errors.kit}
                                     />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.kit}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
                             <Row>
@@ -177,10 +183,11 @@ export default function AddProducts() {
                                         name="model"
                                         value={values.model}
                                         onChange={handleChange}
-                                        isValid={touched.model && !errors.model}
-
+                                        isInvalid={!!errors.model}
                                     />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.model}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
                             <Row>
@@ -195,9 +202,11 @@ export default function AddProducts() {
                                         name="league"
                                         value={values.league}
                                         onChange={handleChange}
-                                        isValid={touched.league && !errors.league}
+                                        isInvalid={!!errors.league}
                                     />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.league}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
                             <Row>
@@ -212,9 +221,11 @@ export default function AddProducts() {
                                         name="price"
                                         value={values.price}
                                         onChange={handleChange}
-                                        isValid={touched.price && !errors.price}
+                                        isInvalid={!!errors.price}
                                     />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.price}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
                             <Row>
@@ -230,9 +241,11 @@ export default function AddProducts() {
                                         list='sizeList'
                                         value={values.size}
                                         onChange={handleChange}
-                                        isValid={touched.size && !errors.size}
+                                        isInvalid={!!errors.size}
                                     />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.code}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                                 <datalist id='sizeList'>
                                     {
@@ -254,9 +267,11 @@ export default function AddProducts() {
                                         name="quantity"
                                         value={values.quantity}
                                         onChange={handleChange}
-                                        isValid={touched.quantity && !errors.quantity}
+                                        isInvalid={!!errors.quantity}
                                     />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.quantity}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
                             <Row>
@@ -271,9 +286,11 @@ export default function AddProducts() {
                                         name="description"
                                         value={values.description}
                                         onChange={handleChange}
-                                        isValid={touched.description && !errors.description}
+                                        isInvalid={!!errors.description}
                                     />
-                                    <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.description}
+                                    </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
                             <Form.Group className="position-relative mb-4">
