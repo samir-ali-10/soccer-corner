@@ -1170,7 +1170,8 @@ ul {
   -o-transition: .3s;
 }
 
-.cart .cart_items .cart_item .quantity>div:hover {
+.cart .cart_items .cart_item .quantity .quantity_icons>button:hover,
+.cart .cart_items .cart_item .quantity .remove_item button:hover {
   background-color: var(--secondary-color);
 }
 
@@ -1179,12 +1180,18 @@ ul {
   display: inline-block;
   cursor: pointer;
   margin: 0 10px;
+  background-color: transparent;
   border: 1px solid var(--text-color);
   width: 30px;
   font-size: 1rem;
   height: 30px;
   text-align: center;
   line-height: 30px;
+  transition: .3s;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
 }
 
 .cart .cart_items .cart_item .quantity .remove_item {
@@ -1203,11 +1210,16 @@ ul {
   border: 1px solid var(--text-color);
   padding: 5px 15px;
   border-radius: 6px;
+  transition: .3s;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
   text-transform: capitalize;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
 }
 
 .cart .cart_items .cart_item .price {

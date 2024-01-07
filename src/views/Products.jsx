@@ -13,6 +13,8 @@ import { NavLink } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch } from 'react-redux'
+import { increaseQuantity } from '../rtk/features/cart/cartSlice'
 
 export default function Products() {
 
@@ -168,18 +170,24 @@ export default function Products() {
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
-    let addToCart = async (product) => {
-        // console.log(product);
-        let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            },
-            body: JSON.stringify({
-            })
-        })
-        return response.json();
+    const dispatch = useDispatch()
+
+    let addToCart = (product) => {
+        dispatch(increaseQuantity(product))
     }
+
+    // let addToCart = async (product) => {
+    //     // console.log(product);
+    //     let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-type': 'application/json; charset=UTF-8'
+    //         },
+    //         body: JSON.stringify({
+    //         })
+    //     })
+    //     return response.json();
+    // }
 
     useEffect(() => {
         getData();
@@ -209,7 +217,7 @@ export default function Products() {
                                                     <div className="price">{egypt.price}EGP</div>
                                                     <div className="add_cart" onClick={(e) => {
                                                         e.preventDefault();
-                                                        addToCart(egypt.code)
+                                                        addToCart(egypt)
                                                     }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                                 </div>
                                             </div>
@@ -236,7 +244,10 @@ export default function Products() {
                                                 <div className="name">{serieA.code}</div>
                                                 <div className="inner_info d-flex justify-content-between">
                                                     <div className="price">{serieA.price}EGP</div>
-                                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                    <div className="add_cart" onClick={(e) => {
+                                                        e.preventDefault();
+                                                        addToCart(serieA)
+                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                                 </div>
                                             </div>
                                         </NavLink>
