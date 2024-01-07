@@ -13,10 +13,17 @@ import { decreaseQuantity, getTotals, increaseQuantity } from '../rtk/features/c
 export default function Cart() {
 
     const [cart, setCart] = useState([]),
-        [totalPrice, setTotalPrice] = useState();
+        [totalPrice, setTotalPrice] = useState(),
+        [quantitySelected, setQuantitySelected] = useState();
 
     // const cartRtk = useSelector((state) => state.cart)
     // const dispatch = useDispatch()
+
+    let handleChange = (e) => {
+        if (e.target.name === "quantity_selected") {
+            setQuantitySelected(e.target.value)
+        }
+    }
 
 
     let getCartItems = () => {
@@ -33,6 +40,30 @@ export default function Cart() {
         window.location.reload()
     }
 
+    let increaseQuantity = async (product) => {
+        let response = await fetch(`http://localhost:3001/api/products/cart/increase/${product}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
+    }
+
+    let decreaseQuantity = async (product) => {
+        let response = await fetch(`http://localhost:3001/api/products/cart/decrease/${product}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
+    }
+
     // let handleIncreaseCartQuantity = (item) => {
     //     dispatch(increaseQuantity(item));
     // }
@@ -41,10 +72,19 @@ export default function Cart() {
     //     dispatch(decreaseQuantity(item));
     // }
 
+    let getTotal = () => {
+        return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    }
+
+    // useEffect(() => {
+    //     getTotal();
+    // }, [])
+
     useEffect(() => {
         getCartItems();
         // dispatch(getTotals())
-    }, [])
+    }, [cart])
+
 
     return (
         <div className='cart'>
@@ -73,9 +113,9 @@ export default function Cart() {
                                         <div className="actions">
                                             <div className="quantity">
                                                 <div className="quantity_icons d-flex">
-                                                    <button className='minus'><FontAwesomeIcon icon={faMinus} /></button>
-                                                    <span>{item.quantity}</span>
-                                                    <button className='plus' ><FontAwesomeIcon icon={faPlus} /></button>
+                                                    <button onClick={() => decreaseQuantity(item.code)} className='minus'><FontAwesomeIcon icon={faMinus} /></button>
+                                                    {item.quantity}
+                                                    <button onClick={() => increaseQuantity(item.code)} className='plus' ><FontAwesomeIcon icon={faPlus} /></button>
                                                 </div>
                                                 <div className="remove_item">
                                                     <button onClick={() => removeSingleProduct(item.code)}>remove</button>
@@ -89,8 +129,7 @@ export default function Cart() {
                                 )
                             }
                             <div className="sub_total mt-4 text-end">
-                                <button className='update_cart me-5' onClick={() => window.location.reload()}>Update Cart</button>
-                                subtotal<span>1000EGP</span>
+                                subtotal<span>${getTotal()}EGP</span>
                             </div>
                             <div className="tax text-end mt-4 fs-5">
                                 Tax included and shipping calculated at checkout

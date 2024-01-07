@@ -207,7 +207,7 @@ export default function Checkout() {
                                 <p className='m-0'>Enter your shipping address to view available shipping Prices</p>
                             </div>
                             <div className='buy_products mt-5'>
-                                <Button className='w-100 pt-2 pb-2 fs-5' type="submit">Buy Now</Button>
+                                <Button className='w-100 pt-2 pb-2 fs-5' type="submit">Order Now</Button>
                             </div>
                         </Form>
                     )}

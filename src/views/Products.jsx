@@ -272,7 +272,7 @@ export default function Products() {
                             </div>
                             <div className="slider_container d-flex">
                                 {stock.map(spanish =>
-                                    spanish.league === "spanish"
+                                    spanish.league === "La Liga"
                                         ?
                                         <NavLink to={`/products/${params.category}/${spanish.code}`} key={spanish._id} className="item">
                                             <div className="image">

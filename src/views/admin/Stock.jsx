@@ -236,13 +236,14 @@ export default function Stock() {
                                                             </div>
                                                             <div className="info">
                                                                 <div className="code">Product Code: <span>{item.code}</span></div>
-                                                                <div className="code">Product League: <span>{item.league}</span></div>
-                                                                <div className="code">Product Model: <span>{item.model}</span></div>
-                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="league">Product League: <span>{item.league}</span></div>
+                                                                <div className="model">Product Model: <span>{item.model}</span></div>
+                                                                <div className="collectionName">Product Name: <span>{item.collectionName}</span></div>
                                                                 <div className="price">Product Price: <span>{item.price}EGP</span></div>
-                                                                <div className="price">Product Size: <span>{item.size}</span></div>
-                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="size">Product Size: <span>{item.size}</span></div>
+                                                                <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                {item.sale ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null }
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
                                                                         propagationNo(e)
@@ -273,12 +274,12 @@ export default function Stock() {
                                                             </div>
                                                             <div className="info">
                                                                 <div className="code">Product Code: <span>{item.code}</span></div>
-                                                                <div className="code">Product League: <span>{item.league}</span></div>
-                                                                <div className="code">Product Model: <span>{item.model}</span></div>
-                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="league">Product League: <span>{item.league}</span></div>
+                                                                <div className="model">Product Model: <span>{item.model}</span></div>
+                                                                <div className="collectionName">Product Name: <span>{item.collectionName}</span></div>
                                                                 <div className="price">Product Price: <span>{item.price}EGP</span></div>
-                                                                <div className="price">Product Size: <span>{item.size}</span></div>
-                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="size">Product Size: <span>{item.size}</span></div>
+                                                                <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -309,12 +310,12 @@ export default function Stock() {
                                                             </div>
                                                             <div className="info">
                                                                 <div className="code">Product Code: <span>{item.code}</span></div>
-                                                                <div className="code">Product League: <span>{item.league}</span></div>
-                                                                <div className="code">Product Model: <span>{item.model}</span></div>
-                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="league">Product League: <span>{item.league}</span></div>
+                                                                <div className="model">Product Model: <span>{item.model}</span></div>
+                                                                <div className="collectionName">Product Name: <span>{item.collectionName}</span></div>
                                                                 <div className="price">Product Price: <span>{item.price}EGP</span></div>
-                                                                <div className="price">Product Size: <span>{item.size}</span></div>
-                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="size">Product Size: <span>{item.size}</span></div>
+                                                                <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -345,12 +346,12 @@ export default function Stock() {
                                                             </div>
                                                             <div className="info">
                                                                 <div className="code">Product Code: <span>{item.code}</span></div>
-                                                                <div className="code">Product League: <span>{item.league}</span></div>
-                                                                <div className="code">Product Model: <span>{item.model}</span></div>
-                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="league">Product League: <span>{item.league}</span></div>
+                                                                <div className="model">Product Model: <span>{item.model}</span></div>
+                                                                <div className="collectionName">Product Name: <span>{item.collectionName}</span></div>
                                                                 <div className="price">Product Price: <span>{item.price}EGP</span></div>
-                                                                <div className="price">Product Size: <span>{item.size}</span></div>
-                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="size">Product Size: <span>{item.size}</span></div>
+                                                                <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -381,12 +382,12 @@ export default function Stock() {
                                                             </div>
                                                             <div className="info">
                                                                 <div className="code">Product Code: <span>{item.code}</span></div>
-                                                                <div className="code">Product League: <span>{item.league}</span></div>
-                                                                <div className="code">Product Model: <span>{item.model}</span></div>
-                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="league">Product League: <span>{item.league}</span></div>
+                                                                <div className="model">Product Model: <span>{item.model}</span></div>
+                                                                <div className="collectionName">Product Name: <span>{item.collectionName}</span></div>
                                                                 <div className="price">Product Price: <span>{item.price}EGP</span></div>
-                                                                <div className="price">Product Size: <span>{item.size}</span></div>
-                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="size">Product Size: <span>{item.size}</span></div>
+                                                                <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -419,12 +420,12 @@ export default function Stock() {
                                                             </div>
                                                             <div className="info">
                                                                 <div className="code">Product Code: <span>{item.code}</span></div>
-                                                                <div className="code">Product League: <span>{item.league}</span></div>
-                                                                <div className="code">Product Model: <span>{item.model}</span></div>
-                                                                <div className="name">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="league">Product League: <span>{item.league}</span></div>
+                                                                <div className="model">Product Model: <span>{item.model}</span></div>
+                                                                <div className="collectionName">Product Name: <span>{item.collectionName}</span></div>
                                                                 <div className="price">Product Price: <span>{item.price}EGP</span></div>
-                                                                <div className="price">Product Size: <span>{item.size}</span></div>
-                                                                <div className="name">Product Description: <span>{item.description}</span></div>
+                                                                <div className="size">Product Size: <span>{item.size}</span></div>
+                                                                <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
