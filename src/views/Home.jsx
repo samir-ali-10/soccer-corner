@@ -152,6 +152,72 @@ export default function Home() {
                         </NavLink>
                     </div>
                 </div>
+
+                <div className="best_sellers">
+                    <h2>New Collection</h2>
+                    <div className="slider_container d-flex">
+                        <NavLink className="item">
+                            <div className="image">
+                                <img src={image3} alt="image1" />
+                            </div>
+                            <div className="info">
+                                <div className="name">Zamalek t-shirt one</div>
+                                <div className="inner_info d-flex justify-content-between">
+                                    <div className="price">300EGP</div>
+                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                </div>
+                            </div>
+                        </NavLink>
+                        <NavLink className="item">
+                            <div className="image">
+                                <img src={image2} alt="image2" />
+                            </div>
+                            <div className="info">
+                                <div className="name">Zamalek t-shirt one</div>
+                                <div className="inner_info d-flex justify-content-between">
+                                    <div className="price">300EGP</div>
+                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                </div>
+                            </div>
+                        </NavLink>
+                        <NavLink className="item">
+                            <div className="image">
+                                <img src={image1} alt="image3" />
+                            </div>
+                            <div className="info">
+                                <div className="name">Zamalek t-shirt one</div>
+                                <div className="inner_info d-flex justify-content-between">
+                                    <div className="price">300EGP</div>
+                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                </div>
+                            </div>
+                        </NavLink>
+                        <NavLink className="item">
+                            <div className="image">
+                                <img src={image2} alt="image1" />
+                            </div>
+                            <div className="info">
+                                <div className="name">Zamalek t-shirt one</div>
+                                <div className="inner_info d-flex justify-content-between">
+                                    <div className="price">300EGP</div>
+                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                </div>
+                            </div>
+                        </NavLink>
+                        <NavLink className="item">
+                            <div className="image">
+                                <img src={image3} alt="image1" />
+                            </div>
+                            <div className="info">
+                                <div className="name">Zamalek t-shirt one</div>
+                                <div className="inner_info d-flex justify-content-between">
+                                    <div className="price">300EGP</div>
+                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                </div>
+                            </div>
+                        </NavLink>
+                    </div>
+                </div>
             </Container>
         </div>
     )

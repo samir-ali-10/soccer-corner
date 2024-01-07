@@ -45,6 +45,8 @@ export default function AddProducts() {
         collectionName: yup.string().required(),
         league: yup.string().required(),
         price: yup.number().required(),
+        sale: yup.number(),
+        newCollection: yup.string(),
         size: yup.string().required(),
         quantity: yup.number().required(),
         description: yup.string(),
@@ -64,6 +66,8 @@ export default function AddProducts() {
                 code: values.code,
                 model: values.model,
                 price: values.price,
+                sale: values.sale,
+                newCollection: values.newCollection,
                 size: values.size,
                 quantity: values.quantity,
                 description: values.description,
@@ -92,6 +96,8 @@ export default function AddProducts() {
                         model: "",
                         code: "",
                         price: "",
+                        sale: "",
+                        newCollection: "",
                         size: "",
                         quantity: "",
                         description: "",
@@ -225,6 +231,44 @@ export default function AddProducts() {
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
                                         {errors.price}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>Sale</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        name="sale"
+                                        value={values.sale}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.sale}
+                                    />
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.sale}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>New Collection</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        name="newCollection"
+                                        value={values.newCollection}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.newCollection}
+                                    />
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.newCollection}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
