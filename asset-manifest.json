@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "/soccer-corner/static/css/main.8c0037fb.css",
+    "main.js": "/soccer-corner/static/js/main.2f872921.js",
+    "static/js/787.e6694ebc.chunk.js": "/soccer-corner/static/js/787.e6694ebc.chunk.js",
+    "static/media/ahly_4.jpeg": "/soccer-corner/static/media/ahly_4.d21d1d2236d5a8512fb9.jpeg",
+    "static/media/previous_seasons.jpeg": "/soccer-corner/static/media/previous_seasons.bfae2640f58bb8270e5d.jpeg",
+    "static/media/studs_turfs.jpeg": "/soccer-corner/static/media/studs_turfs.48c208a9333e83b7c972.jpeg",
+    "static/media/ahly_3.jpeg": "/soccer-corner/static/media/ahly_3.3d276232a1afe86374b9.jpeg",
+    "static/media/ahly_2.jpeg": "/soccer-corner/static/media/ahly_2.ddea4e1a2d174e39fbdc.jpeg",
+    "static/media/studs_turfs_3.jpeg": "/soccer-corner/static/media/studs_turfs_3.377a21fe1d931a7a7fce.jpeg",
+    "static/media/studs_turfs_2.jpeg": "/soccer-corner/static/media/studs_turfs_2.61367326e3a25e507bf0.jpeg",
+    "static/media/studs_turfs_1.jpeg": "/soccer-corner/static/media/studs_turfs_1.d9579bbf8a930a20d7d9.jpeg",
+    "static/media/ahly_1.jpeg": "/soccer-corner/static/media/ahly_1.4447e6cfe1772cf0c6d8.jpeg",
+    "static/media/studs_turfs_4.jpeg": "/soccer-corner/static/media/studs_turfs_4.505d010ece87ac719be3.jpeg",
+    "static/media/carousel_3.jpeg": "/soccer-corner/static/media/carousel_3.2dd288459ace9961a61d.jpeg",
+    "static/media/carousel_2.jpeg": "/soccer-corner/static/media/carousel_2.6125cdf8afdd45edff8c.jpeg",
+    "static/media/carousel_1.jpeg": "/soccer-corner/static/media/carousel_1.8bc919a628cb8fc2ae2c.jpeg",
+    "static/media/jerseys.jpeg": "/soccer-corner/static/media/jerseys.6266076c97b749dd9965.jpeg",
+    "static/media/ahly_5.jpeg": "/soccer-corner/static/media/ahly_5.7d021216b70196535e40.jpeg",
+    "static/media/classic_jerseys.jpeg": "/soccer-corner/static/media/classic_jerseys.ab93be59d703db5f99d6.jpeg",
+    "static/media/sports_wear.jpeg": "/soccer-corner/static/media/sports_wear.e2384dc26b18ed5da888.jpeg",
+    "static/media/Art-ttnorm-Regular.otf": "/soccer-corner/static/media/Art-ttnorm-Regular.67a366895f79a01cac1b.otf",
+    "static/media/logo.jpeg": "/soccer-corner/static/media/logo.d67a27f50c8bf0af80ef.jpeg",
+    "index.html": "/soccer-corner/index.html",
+    "main.8c0037fb.css.map": "/soccer-corner/static/css/main.8c0037fb.css.map",
+    "main.2f872921.js.map": "/soccer-corner/static/js/main.2f872921.js.map",
+    "787.e6694ebc.chunk.js.map": "/soccer-corner/static/js/787.e6694ebc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8c0037fb.css",
+    "static/js/main.2f872921.js"
+  ]
+}
