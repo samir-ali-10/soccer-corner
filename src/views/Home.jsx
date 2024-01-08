@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import image1 from "../images/carousel_1.jpeg"
 import image2 from "../images/carousel_2.jpeg"
@@ -13,8 +13,18 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
-export default function Home() {
+export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
 
+    const [stock, setStock] = useState([]);
+
+    let getData = () => {
+        fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    useEffect(() => {
+        getData();
+        setAppearLoginSignup(true)
+    }, [])
 
     return (
         <div className='home_page'>
@@ -156,19 +166,25 @@ export default function Home() {
                 <div className="best_sellers">
                     <h2>New Collection</h2>
                     <div className="slider_container d-flex">
-                        <NavLink className="item">
-                            <div className="image">
-                                <img src={image3} alt="image1" />
-                            </div>
-                            <div className="info">
-                                <div className="name">Zamalek t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="item">
+                        {stock.map(newCollection =>
+                            newCollection.newCollection === "new"
+                                ?
+                                <NavLink className="item">
+                                    <div className="image">
+                                        <img src={image2} alt="image2" />
+                                    </div>
+                                    <div className="info">
+                                        <div className="name">{newCollection.code}</div>
+                                        <div className="inner_info d-flex justify-content-between">
+                                            <div className="price">{newCollection.price}EGP</div>
+                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                        </div>
+                                    </div>
+                                </NavLink>
+                                :
+                                null
+                        )}
+                        {/* <NavLink className="item">
                             <div className="image">
                                 <img src={image2} alt="image2" />
                             </div>
@@ -215,7 +231,7 @@ export default function Home() {
                                     <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
                                 </div>
                             </div>
-                        </NavLink>
+                        </NavLink> */}
                     </div>
                 </div>
             </Container>
