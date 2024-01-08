@@ -35,4 +35,9 @@ router.get('/api/products/cart/delete-products' , ProductController.deleteAllPro
 router.get('/api/auth/getUsers' , authController.getUsers)
 router.post('/api/auth/signUp' ,authController.signUp)
 router.post('/api/auth/logIn' , authController.logIn)
+
+// REVIEWS
+
+router.get('/api/reviews' , authController.getReviews)
+router.post('/api/reviews' , authController.postReviews)
 module.exports = router;
