@@ -50,7 +50,7 @@ export default function AddProducts() {
         size: yup.string().required(),
         quantity: yup.number().required(),
         description: yup.string(),
-        file: yup.mixed().required(),
+        file: yup.mixed(),
     });
 
     let handleSub = async (values) => {
@@ -288,7 +288,7 @@ export default function AddProducts() {
                                         isInvalid={!!errors.size}
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.code}
+                                        {errors.size}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                                 <datalist id='sizeList'>

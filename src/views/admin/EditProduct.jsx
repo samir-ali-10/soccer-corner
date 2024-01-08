@@ -24,6 +24,7 @@ export default function EditProduct() {
         [model, setModel] = useState(),
         [code, setCode] = useState(),
         [price, setPrice] = useState(),
+        [sale, setSale] = useState(),
         [size, setSize] = useState(),
         [quantity, setQuantity] = useState(),
         [description, setDescription] = useState();
@@ -62,6 +63,7 @@ export default function EditProduct() {
             setDescription(data.description)
             setModel(data.model)
             setPrice(data.price)
+            setSale(data.sale)
             setQuantity(data.quantity)
             setSize(data.size)
         })
@@ -81,6 +83,7 @@ export default function EditProduct() {
                 description,
                 model,
                 price,
+                sale,
                 quantity,
                 size
             })
@@ -98,6 +101,9 @@ export default function EditProduct() {
         }
         else if (e.target.name === "price") {
             setPrice(e.target.value)
+        }
+        else if (e.target.name === "sale") {
+            setSale(e.target.value)
         }
         else if (e.target.name === "description") {
             setDescription(e.target.value)
@@ -149,6 +155,10 @@ export default function EditProduct() {
                     <Form.Group className="mb-4">
                         <Form.Label className='mb-3'>Price</Form.Label>
                         <Form.Control type="number" value={price} name='price' onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-4">
+                        <Form.Label className='mb-3'>sale</Form.Label>
+                        <Form.Control type="number" value={sale} name='sale' onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-4">
                         <Form.Label className='mb-3'>Size</Form.Label>
