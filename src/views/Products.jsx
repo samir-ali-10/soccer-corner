@@ -170,8 +170,6 @@ export default function Products() {
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
-    const dispatch = useDispatch()
-
     let addToCart = async (product) => {
         // dispatch(increaseQuantity(product))
         let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
@@ -185,18 +183,16 @@ export default function Products() {
         return response.json();
     }
 
-    // let addToCart = async (product) => {
-    //     // console.log(product);
-    //     let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-type': 'application/json; charset=UTF-8'
-    //         },
-    //         body: JSON.stringify({
-    //         })
-    //     })
-    //     return response.json();
-    // }
+    const calculateSalePrice = (product) => {
+        // Ensure that price and sale are valid numbers
+        if (typeof product.price !== 'number' || typeof product.sale !== 'number') {
+            return 'Invalid input';
+        }
+
+        // Calculate the sale price
+        const salePrice = product.price - (product.price * product.sale) / 100;
+        return salePrice.toFixed(2); // Adjust decimal places as needed
+    };
 
     useEffect(() => {
         getData();
@@ -224,6 +220,8 @@ export default function Products() {
                                                 <div className="name">{egypt.code}</div>
                                                 <div className="inner_info d-flex justify-content-between">
                                                     <div className="price">{egypt.price}EGP</div>
+                                                    {/* {console.log(calculateSalePrice(egypt))} */}
+                                                    {calculateSalePrice(egypt) !== 'Invalid input' ? <span>{calculateSalePrice(egypt)}EGP</span> : null }
                                                     <div className="add_cart" onClick={(e) => {
                                                         e.preventDefault();
                                                         addToCart(egypt.code)
@@ -253,6 +251,7 @@ export default function Products() {
                                                 <div className="name">{serieA.code}</div>
                                                 <div className="inner_info d-flex justify-content-between">
                                                     <div className="price">{serieA.price}EGP</div>
+                                                    {calculateSalePrice(serieA) !== 'Invalid input' ? <span>{calculateSalePrice(serieA)}EGP</span> : null }
                                                     <div className="add_cart" onClick={(e) => {
                                                         e.preventDefault();
                                                         addToCart(serieA.code)
@@ -282,6 +281,34 @@ export default function Products() {
                                                 <div className="name">{spanish.code}</div>
                                                 <div className="inner_info d-flex justify-content-between">
                                                     <div className="price">{spanish.price}EGP</div>
+                                                    {calculateSalePrice(spanish) !== 'Invalid input' ? <span>{calculateSalePrice(spanish)}EGP</span> : null }
+                                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        :
+                                        null
+                                )}
+                            </div>
+                        </div>
+                        <div className="saudi_league">
+                            <h2>Saudi League</h2>
+                            <div className="all_products">
+                                <NavLink to="/products/footballJerseys/all">All Products</NavLink>
+                            </div>
+                            <div className="slider_container d-flex">
+                                {stock.map(saudi =>
+                                    saudi.league === "saudi"
+                                        ?
+                                        <NavLink to={`/products/${params.category}/${saudi.code}`} key={saudi._id} className="item">
+                                            <div className="image">
+                                                <img src={image1} alt="image1" />
+                                            </div>
+                                            <div className="info">
+                                                <div className="name">{saudi.code}</div>
+                                                <div className="inner_info d-flex justify-content-between">
+                                                    {calculateSalePrice(saudi) === 'Invalid input' ? <div className="price">{saudi.price}EGP</div> : <div className="price_dashed">{saudi.price}EGP</div> }
+                                                    {calculateSalePrice(saudi) !== 'Invalid input' ? <span>{calculateSalePrice(saudi)}EGP</span> : null }
                                                     <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
                                                 </div>
                                             </div>

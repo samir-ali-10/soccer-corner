@@ -224,7 +224,7 @@ export default function Signup({ appearLoginSignupm, setAppearLoginSignup }) {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
-                                <div className='d-flex justify-content-between align-items-center'>
+                                <div className='check d-flex justify-content-between align-items-center'>
                                     <Button className='submit' type="submit">Submit</Button>
                                     <NavLink>Already have an account?</NavLink>
                                 </div>

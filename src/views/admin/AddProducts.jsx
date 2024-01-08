@@ -261,7 +261,7 @@ export default function AddProducts() {
                                 >
                                     <Form.Label>New Collection</Form.Label>
                                     <Form.Control
-                                        type="number"
+                                        type="string"
                                         name="newCollection"
                                         value={values.newCollection}
                                         onChange={handleChange}

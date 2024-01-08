@@ -255,8 +255,8 @@ export default function Stock() {
                                                                 <div className="size">Product Size: <span>{item.size}</span></div>
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
-                                                                {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
-                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {item.sale !== null  ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -295,8 +295,8 @@ export default function Stock() {
                                                                 <div className="size">Product Size: <span>{item.size}</span></div>
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
-                                                                {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
-                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {item.sale !== null  ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -334,8 +334,8 @@ export default function Stock() {
                                                                 <div className="size">Product Size: <span>{item.size}</span></div>
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
-                                                                {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
-                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -373,8 +373,8 @@ export default function Stock() {
                                                                 <div className="size">Product Size: <span>{item.size}</span></div>
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
-                                                                {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
-                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -413,7 +413,7 @@ export default function Stock() {
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}%</span></div> : null}
-                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.sale !== null  ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {

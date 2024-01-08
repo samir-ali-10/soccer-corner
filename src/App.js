@@ -19,21 +19,21 @@ import Returns from "./views/admin/Returns"
 import Checkout from './views/Checkout';
 import Shipping from './views/policies/Shipping';
 import Refund from './views/policies/Refund';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Signup from './components/Signup';
+import Signin from './components/Signin';
 
 function App() {
 
   const [appearLoginSignup, setAppearLoginSignup] = useState(true);
-
-
 
   return (
     <>
       {!appearLoginSignup ? null : <Navigation />}
       <Routes>
         <Route path="/signup" element={<Signup appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Signin appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
+        <Route path="/home" element={<Home appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />

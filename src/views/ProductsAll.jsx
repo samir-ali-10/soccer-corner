@@ -20,90 +20,9 @@ export default function ProductsAll() {
 
     const [stock, setStock] = useState([]);
 
-    let sizes = ["S", "M", "L", "XL", "XXL"]
+    // let sizes = ["S", "M", "L", "XL", "XXL"]
 
     const [activeSize, setActiveSize] = useState(null);
-
-    const egyptianLeague = [
-        {
-            image: image1,
-            price: 300,
-            title: "t-shirt one alahly",
-            id: 1,
-            quantity: 2,
-            sizes: ["s", "m", "l", "xl", "xxl"]
-        },
-        {
-            image: image2,
-            price: 400,
-            title: "t-shirt two alahly",
-            id: 2,
-            quantity: 5,
-            sizes: ["s", "m", "l", "xl", "xxl"]
-        },
-        {
-            image: image3,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 3,
-            quantity: 0,
-            sizes: ["s", "m", "l", "xl", "xxl"]
-        },
-        {
-            image: image4,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 4,
-            quantity: 0,
-            sizes: ["s", "m", "l", "xl", "xxl"]
-        },
-        {
-            image: image5,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 5,
-            quantity: 0,
-            sizes: ["s", "m", "l", "xl", "xxl"]
-        },
-    ]
-
-    const serieA = [
-        {
-            image: image2,
-            price: 300,
-            title: "t-shirt one alahly",
-            id: 1,
-            quantity: 2
-        },
-        {
-            image: image1,
-            price: 400,
-            title: "t-shirt two alahly",
-            id: 2,
-            quantity: 5
-        },
-        {
-            image: image3,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 3,
-            quantity: 0
-        },
-        {
-            image: image2,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 4,
-            quantity: 0
-        },
-        {
-            image: image3,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 5,
-            quantity: 0
-        },
-    ]
 
     const studsTurfs = [
         {
@@ -179,9 +98,16 @@ export default function ProductsAll() {
         getData();
     }, [])
 
+    
     let handleActive = (size) => {
-        setActiveSize(size)
+        // setActiveSize(size)
+        // console.log(`selected ${size}`);
+        console.log(activeSize);
     }
+    
+    useEffect(() => {
+        handleActive();
+    },[activeSize])
 
     return (
         <div className='products_all'>
@@ -193,7 +119,7 @@ export default function ProductsAll() {
                             <div className="items_container">
                                 {stock.map((egypt) => egypt.league === "egyptian"
                                     ?
-                                    <NavLink key={egypt.code} className="item">
+                                    <NavLink key={egypt._id} className="item">
                                         <div className="image">
                                             <img src={image1} alt="image1" />
                                         </div>
@@ -202,7 +128,7 @@ export default function ProductsAll() {
                                             <div className="price">{egypt.price}EGP</div>
                                             <div className="sizes">
                                                 {egypt.sizes.map((size) =>
-                                                    <button key={size} className={size === activeSize ? "active" : ""} onClick={() => handleActive(size)} >{size.toLocaleUpperCase()}</button>
+                                                    <button key={size} className={activeSize === size ? 'active' : ''} onClick={() => setActiveSize(size)} >{size.toLocaleUpperCase()}</button>
                                                 )}
                                             </div>
                                             <button className='add_to_cart'>Add to cart</button>
@@ -218,7 +144,7 @@ export default function ProductsAll() {
                             <div className="items_container">
                                 {stock.map((serieA) => serieA.league === "serie a"
                                     ?
-                                    <NavLink key={serieA.code} className="item">
+                                    <NavLink key={serieA._id} className="item">
                                         <div className="image">
                                             <img src={image1} alt="image1" />
                                         </div>
@@ -226,7 +152,7 @@ export default function ProductsAll() {
                                             <div className="name">{serieA.code}</div>
                                             <div className="price">{serieA.price}EGP</div>
                                             <div className="sizes">
-                                                {sizes.map((size, index) =>
+                                                {serieA.sizes.map((size, index) =>
                                                     <button key={index} className={index === activeSize ? "active" : ""} onClick={() => handleActive(index)} >{size.toLocaleUpperCase()}</button>
                                                 )}
                                             </div>
@@ -241,9 +167,9 @@ export default function ProductsAll() {
                         <div className="spanish_league">
                             <h2>Spanish League</h2>
                             <div className="items_container">
-                                {stock.map((spanish) => spanish.league === "spanish"
+                                {stock.map((spanish) => spanish.league === "La Liga"
                                     ?
-                                    <NavLink key={spanish.code} className="item">
+                                    <NavLink key={spanish._id} className="item">
                                         <div className="image">
                                             <img src={image1} alt="image1" />
                                         </div>
@@ -251,7 +177,7 @@ export default function ProductsAll() {
                                             <div className="name">{spanish.code}</div>
                                             <div className="price">{spanish.price}EGP</div>
                                             <div className="sizes">
-                                                {sizes.map((size, index) =>
+                                                {spanish.sizes.map((size, index) =>
                                                     <button key={index} className={index === activeSize ? "active" : ""} onClick={() => handleActive(index)} >{size.toLocaleUpperCase()}</button>
                                                 )}
                                             </div>
