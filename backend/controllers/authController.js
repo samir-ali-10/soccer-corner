@@ -81,27 +81,27 @@ exports.logIn = (req , res , next) => {
             const error = new Error('A user with this email could not be found')
             console.log('A user with this email could not be found');
         }
-        user = loadedUser ;
-        return bcrypt.compare(password , user.password);
+        loadedUser = user;
+        bcrypt.compare(password , user.password);
     })
-    .then(isEqual => {
-      if (!isEqual) {
-        console.log('Wrong password!');
-        const error = new Error('Wrong password!')
-        error.statusCode = 401;
-        throw error
+    .then(doMatch => {
+      if (doMatch) {
+        return res.redirect('/home')
+      } else {
+      console.log('Wrong password!');
+      const error = new Error('Wrong password!')
+      error.statusCode = 401;
+      throw error
       }
-      const token = jwt.sign({
-          email : loadedUser.email ,
-          userId : loadedUser._id.toString()
-        },'somesupersecretsecret' , {expiresIn : '1h'})
-        res.status(200).json({token : token , userId: loadedUser._id.toString()});
+      // const token = jwt.sign({
+      //     email : loadedUser.email ,
+      //     userId : loadedUser._id.toString()
+      //   },'somesupersecretsecret' , {expiresIn : '1h'})
+      //   res.status(200).json({token : token , userId: loadedUser._id.toString()});
     })
     .catch(err => {
-        if (!err.statusCode) {
-            err.statusCode = 500;
-        }
-        next(err);
+      console.log(err);
+      res.redirect('/')
     })
 
 }
