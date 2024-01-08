@@ -40,41 +40,42 @@ ul {
   color: initial !important;
 }
 
-/************************************ Sign Up *********************************/
+/************************************ Authentication *********************************/
 
-.signup {
+.signup,
+.signin {
   margin: 100px 0;
 }
 
-.signup .card {
+.card_auth {
   max-width: 500px;
   margin: auto;
   padding: 40px 30px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.signup .card .row {
+.card_auth .row {
   margin-bottom: 30px;
 }
 
-.signup .card .row .col {
+.card_auth .row .col {
   text-align: left;
 }
 
-.signup .card .logo {
+.card_auth .logo {
   max-width: 300px;
   margin: auto;
 }
 
-.signup .card .logo img {
+.card_auth .logo img {
   width: 100%;
 }
 
-.signup .card h2 {
+.card_auth h2 {
   position: relative;
 }
 
-.signup .card h2::before {
+.card_auth h2::before {
   content: "";
   position: absolute;
   bottom: -10px;
@@ -84,7 +85,7 @@ ul {
   background-color: var(--text-color);
 }
 
-.signup .submit {
+.card_auth .submit {
   background-color: var(--secondary-color);
   color: var(--text-color);
   border: none;
@@ -97,12 +98,12 @@ ul {
   -o-transition: .3s;
 }
 
-.signup .submit:hover {
+.card_auth .submit:hover {
   background-color: #dbd4c6;
   color: var(--text-color);
 }
 
-.signup .check a {
+.card_auth .check a {
   text-decoration: underline !important;
 }
 
@@ -1117,6 +1118,7 @@ ul {
 
 .contact_us form>div {
   margin-bottom: 10px;
+  text-align: left;
 }
 
 .contact_us form>div input,
@@ -1137,16 +1139,8 @@ ul {
   outline: 1px solid #d7c9b1;
 }
 
-.contact_us form .name_email {
-  display: flex;
-}
-
-.contact_us form .name_email>input {
-  width: calc(99% / 2);
-}
-
-.contact_us form .name_email>input:not(:last-child) {
-  margin-right: 10px;
+.contact_us form .name_email input {
+  width: 100%;
 }
 
 .contact_us form .phone input,
@@ -1156,6 +1150,7 @@ ul {
 
 .contact_us form .send button {
   background-color: var(--secondary-color);
+  color: var(--text-color);
   border: none;
   border-radius: 6px;
   -webkit-border-radius: 6px;

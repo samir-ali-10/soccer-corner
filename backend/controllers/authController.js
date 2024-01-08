@@ -78,7 +78,6 @@ exports.logIn = (req , res , next) => {
     User.findOne({email : email})
     .then(user => {
         if (!user) {
-            const error = new Error('A user with this email could not be found')
             console.log('A user with this email could not be found');
         }
         loadedUser = user;

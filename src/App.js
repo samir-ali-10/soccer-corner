@@ -25,14 +25,15 @@ import Signin from './components/Signin';
 
 function App() {
 
-  const [appearLoginSignup, setAppearLoginSignup] = useState(true);
+  const [appearLoginSignup, setAppearLoginSignup] = useState(true),
+    [loggedIn, setLoggedIn] = useState(false);
 
   return (
     <>
       {!appearLoginSignup ? null : <Navigation />}
       <Routes>
         <Route path="/signup" element={<Signup appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
-        <Route path="/" element={<Signin appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
+        <Route path="/" element={<Signin appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
         <Route path="/home" element={<Home appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />

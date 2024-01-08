@@ -51,7 +51,7 @@ export default function Signup({ appearLoginSignupm, setAppearLoginSignup }) {
     return (
         <div className='signup'>
             <Container>
-                <div className="card text-center">
+                <div className="card_auth text-center">
                     <div className="logo">
                         <img src={logo} alt="logo" />
                     </div>
@@ -226,7 +226,7 @@ export default function Signup({ appearLoginSignupm, setAppearLoginSignup }) {
                                 </Row>
                                 <div className='check d-flex justify-content-between align-items-center'>
                                     <Button className='submit' type="submit">Submit</Button>
-                                    <NavLink>Already have an account?</NavLink>
+                                    <NavLink to="/">Already have an account?</NavLink>
                                 </div>
                             </Form>
                         )}

@@ -55,7 +55,7 @@ export default function Navigation() {
                                 <NavDropdown.Item href="/products/others">Classic De7k</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/others">Other</NavDropdown.Item>
                             </NavDropdown>
-                            <NavLink to="/contactUs">Contact Us</NavLink>
+                            <NavLink to="/contactUs">Make A Review</NavLink>
                             <NavLink to="/adminSecret">Admin</NavLink>
                         </Nav>
                     </Navbar.Collapse>
