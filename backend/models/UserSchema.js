@@ -3,12 +3,20 @@ const schema = mongoose.Schema;
 
 
 const userSchema = new schema({
+    name : {
+        type : String,
+        required : true
+    },
     email : {
         type: String,
         required: true
-    }, 
-    name : {
+    },
+    password : {
         type : String,
+        required : true
+    },
+    confirmPassword : {
+        type : String ,
         required : true
     },
     zone : {
@@ -26,8 +34,8 @@ const userSchema = new schema({
     address : {
         type : String,
         required : true
-    }
-    
+    },
+
 })
 
 

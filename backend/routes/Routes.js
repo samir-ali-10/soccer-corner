@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const ProductController = require("../controllers/ProductController");
+const authController = require('../controllers/authController')
 
 
-// => GET
+// => PRODUCTS
 
 router.get("/api/products", ProductController.getProducts); // get all products
+router.post("/api/products", ProductController.postAddProduct);
 router.get("/api/products/collection/:collectionName",ProductController.getCollection); // get collection
 router.get("/api/products/code/:code",ProductController.getSingleProduct); // get single product
 router.get("/api/products/size/:size", ProductController.getBySize); // get by size
@@ -15,27 +17,21 @@ router.get("/api/products/collection/:collectionName/size/:size/model/:model",Pr
 router.get('/api/products/CollectionsNames' , ProductController.getCollectionsNames); // Get collectionsNames
 router.get('/api/products/LeagueNames' , ProductController.getLeagueNames)
 router.get('/api/products/league/:league' , ProductController.getByLeague) // get by league
-router.get('/api/products/cart', ProductController.getProductsOnCart)
+router.get('/api/products/delete-product/:code' , ProductController.deleteSingleProduct) // delete single product 
+router.get('/api/products/delete-products' , ProductController.deleteAllProducts) // delete all products
+router.post('/api/products/editProduct/:code' , ProductController.editProduct); // edit Product by code
 
-// => POST
-router.post("/api/products", ProductController.postAddProduct);
+// Cart
+router.get('/api/products/cart', ProductController.getProductsOnCart)
 router.post('/api/products/cart/:code' , ProductController.postProductsOnCart);
 router.post('/api/products/cart/increase/:code' , ProductController.increaseQuantity)
 router.post('/api/products/cart/decrease/:code' , ProductController.decreaseQuantity)
-
-
-
-// =>EDIT
-router.post('/api/products/editProduct/:code' , ProductController.editProduct); // edit Product by code
-
-// => DELETE
-
-// products
-router.get('/api/products/delete-product/:code' , ProductController.deleteSingleProduct) // delete single product 
-router.get('/api/products/delete-products' , ProductController.deleteAllProducts) // delete all products
-
-// Cart
 router.get('/api/products/cart/delete-product/:code' , ProductController.deleteProductFromCart)
 router.get('/api/products/cart/delete-products' , ProductController.deleteAllProductsFromCart)
 
+
+// AUTHENTICATION
+
+router.put('api/auth/signUp' ,authController.signUp)
+// router.post('api/auth/loginIn' , authController.)
 module.exports = router;
