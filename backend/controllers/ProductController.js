@@ -2,6 +2,7 @@ const ProductModel = require("../models/ProductSchema");
 const NameOfCollection = require("../models/NavBarSchema");
 const Cart = require("../models/CartSchema");
 const LeagueNames = require('../models/LeagueSchema')
+const user = require('../models/UserSchema')
 // => GET
 
 exports.getProducts = (req, res, next) => {
@@ -147,6 +148,8 @@ exports.postAddProduct = async (req, res, next) => {
   const model = req.body.model;
   const league = req.body.league;
   const kit = req.body.kit;
+  const newCollection = req.body.newCollection;
+  const sale = req.body.sale;
   const collectionName = req.body.collectionName;
   const price = req.body.price;
   const size = req.body.size;
@@ -199,7 +202,9 @@ exports.postAddProduct = async (req, res, next) => {
       model : model,
       league : league,
       kit : kit,
+      newCollection : newCollection,
       collectionName: collectionName,
+      sale : sale,
       price: price,
       quantity: quantity,
       size: size,
@@ -297,6 +302,7 @@ exports.editProduct = (req, res, next) => {
   const UpdatedModel = req.body.model;
   const Updatedleague = req.body.league;
   const UpdatedKit = req.body.kit;
+  const UpdatedSale = req.body.sale;
   const UpdatedCollectionName = req.body.collectionName;
   const UpdatedPrice = req.body.price;
   const UpdatedSize = req.body.size;
@@ -312,6 +318,7 @@ exports.editProduct = (req, res, next) => {
       league: Updatedleague,
       kit : UpdatedKit,
       collectionName: UpdatedCollectionName,
+      sale : UpdatedSale,
       price: UpdatedPrice,
       quantity: UpdatedQuantity,
       size: UpdatedSize,

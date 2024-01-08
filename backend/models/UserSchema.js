@@ -10,6 +10,22 @@ const userSchema = new schema({
     name : {
         type : String,
         required : true
+    },
+    zone : {
+        type : String ,
+        required : true
+    },
+    area : {
+        type : String ,
+        required : true 
+    },
+    phoneNumber : {
+        type : String,
+        required : true
+    },
+    address : {
+        type : String,
+        required : true
     }
     
 })
