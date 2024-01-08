@@ -157,6 +157,18 @@ export default function Stock() {
         })
     }
 
+    const calculateSalePrice = (product) => {
+        // Ensure that price and sale are valid numbers
+        if (typeof product.price !== 'number' || typeof product.sale !== 'number') {
+            return 'Invalid input';
+        }
+
+        // Calculate the sale price
+        const salePrice = product.price - (product.price * product.sale) / 100;
+        return salePrice.toFixed(2); // Adjust decimal places as needed
+    };
+
+
     useEffect(() => {
         getData();
         getCategories();
@@ -243,8 +255,8 @@ export default function Stock() {
                                                                 <div className="size">Product Size: <span>{item.size}</span></div>
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
-                                                                {item.sale === "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
-                                                                {item.newCollection === "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
+                                                                {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
                                                                         propagationNo(e)
@@ -282,6 +294,9 @@ export default function Stock() {
                                                                 <div className="size">Product Size: <span>{item.size}</span></div>
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                <p>{calculateSalePrice(item)}</p>
+                                                                {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
                                                                         propagationNo(e)
@@ -318,6 +333,8 @@ export default function Stock() {
                                                                 <div className="size">Product Size: <span>{item.size}</span></div>
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
                                                                         propagationNo(e)
@@ -354,6 +371,8 @@ export default function Stock() {
                                                                 <div className="size">Product Size: <span>{item.size}</span></div>
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
                                                                         propagationNo(e)
@@ -390,6 +409,9 @@ export default function Stock() {
                                                                 <div className="size">Product Size: <span>{item.size}</span></div>
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}%</span></div> : null}
+                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
                                                                         propagationNo(e)

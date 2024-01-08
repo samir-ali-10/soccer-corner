@@ -182,7 +182,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--text-color);
+  background-color: var(--primary-color);
 }
 
 .stock .categories {
@@ -229,7 +229,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--text-color);
+  background-color: var(--primary-color);
 }
 
 .stock .products p {
@@ -246,7 +246,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--text-color);
+  background-color: var(--primary-color);
 }
 
 .stock .products .league {
@@ -353,7 +353,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--text-color);
+  background-color: var(--primary-color);
 }
 
 .back_to_admin {
@@ -509,7 +509,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--text-color);
+  background-color: var(--primary-color);
 }
 
 .home_page .new_collection .new_collection_container {
@@ -606,7 +606,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--text-color);
+  background-color: var(--primary-color);
 }
 
 .home_page .best_sellers .all_products button {
@@ -1511,7 +1511,7 @@ footer h2::before {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--text-color);
+  background-color: var(--primary-color);
 }
 
 footer .policies_socials {
