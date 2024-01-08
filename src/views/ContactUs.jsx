@@ -13,20 +13,14 @@ export default function ContactUs() {
     });
 
     const handleReview = async (values) => {
-        let response = await fetch(`http://localhost:3001/api/auth/signUp`, {
+        let response = await fetch(`http://localhost:3001/api/reviews`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             },
             body: JSON.stringify({
-                email: values.email,
-                password: values.password,
-                confirmPassword: values.confirmPassword,
                 name: values.name,
-                zone: values.zone,
-                area: values.area,
-                phoneNumber: values.phoneNumber,
-                address: values.address
+                message: values.message
             })
         })
         return response.json();

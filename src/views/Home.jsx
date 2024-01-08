@@ -169,7 +169,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                         {stock.map(newCollection =>
                             newCollection.newCollection === "new"
                                 ?
-                                <NavLink className="item">
+                                <NavLink key={newCollection._id} className="item">
                                     <div className="image">
                                         <img src={image2} alt="image2" />
                                     </div>

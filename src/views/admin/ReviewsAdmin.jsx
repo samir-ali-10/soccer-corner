@@ -1,10 +1,21 @@
 import { faLeftLong, faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 
 export default function ReviewsAdmin() {
+
+    const [reviews, setReviews] = useState([]);
+
+    let getReviews = () => {
+        fetch(`http://localhost:3001/api/reviews`).then((res) => res.json()).then((data) => setReviews(data));
+    }
+
+    useEffect(() => {
+        getReviews();
+    }, [reviews])
+
     return (
         <div className='reviews_admin mt-3'>
             <Container>
@@ -13,146 +24,24 @@ export default function ReviewsAdmin() {
                 </div>
                 <h1 className='text-center'>Reviews</h1>
                 <div className="reviews">
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
+                    {
+                        reviews.map((review) =>
+                            <div className="review">
+                                <div className="info">
+                                    <div className="name">{review.name}</div>
+                                    <div className="stars">
+                                        <FontAwesomeIcon icon={faStar} />
+                                        <FontAwesomeIcon icon={faStar} />
+                                        <FontAwesomeIcon icon={faStar} />
+                                        <FontAwesomeIcon icon={faStar} />
+                                    </div>
+                                </div>
+                                <div className="content">
+                                    <q>{review.message}</q>
+                                </div>
                             </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                            </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                            </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                            </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                            </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                            </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                            </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                            </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                            </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
-                    <div className="review">
-                        <div className="info">
-                            <div className="name">Yossef Fekry</div>
-                            <div className="stars">
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                                <FontAwesomeIcon icon={faStar} />
-                            </div>
-                        </div>
-                        <div className="content">
-                            <q>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, error et eos natus mollitia at accusantium facilis vitae harum aliquid id veniam quia a deserunt nam iusto dignissimos. Sit, quo.</q>
-                        </div>
-                    </div>
+                        )
+                    }
                 </div>
             </Container>
         </div>
