@@ -19,8 +19,30 @@ import Returns from "./views/admin/Returns"
 import Checkout from './views/Checkout';
 import Shipping from './views/policies/Shipping';
 import Refund from './views/policies/Refund';
+import { useEffect, useState } from 'react';
 
 function App() {
+
+  const [checkCart, setCheckCart] = useState([]);
+
+  let getCartItems = () => {
+    fetch(`http://localhost:3001/api/products/cart`).then((res) => res.json()).then((data) => setCheckCart(data));
+  }
+
+  let checkForIcon = () => {
+    if(checkCart.length !== 0) {
+      console.log("items found");
+    }
+    else {
+      console.log("items not found");
+    }
+  }
+
+  useEffect(() => {
+    getCartItems();
+    checkForIcon();
+  },[])
+
   return (
     <>
       <Navigation />
@@ -36,9 +58,9 @@ function App() {
         <Route path="/adminSecret/reviews" element={<ReviewsAdmin />} />
         <Route path="/adminSecret/addProducts" element={<AddProducts />} />
         <Route path="/adminSecret/stock" element={<Stock />} />
-        <Route path="/adminSecret/complains" element={<ComplainsAdmin/>} />
-        <Route path="/adminSecret/newOrders" element={<NewOrders/>} />
-        <Route path="/adminSecret/returns" element={<Returns/>} />
+        <Route path="/adminSecret/complains" element={<ComplainsAdmin />} />
+        <Route path="/adminSecret/newOrders" element={<NewOrders />} />
+        <Route path="/adminSecret/returns" element={<Returns />} />
         <Route path="/adminSecret/editProduct/:code" element={<EditProduct />} />
         <Route path="/shippingPolicy" element={<Shipping />} />
         <Route path="/refund&exchangePolicy" element={<Refund />} />
