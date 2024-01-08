@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavLink } from 'react-router-dom';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -11,6 +11,29 @@ import Navbar from 'react-bootstrap/Navbar';
 import logo from "../images/logo.jpeg";
 
 export default function Navigation() {
+
+    const [totalQuantity, setTotalQuantity] = useState(0),
+        [cart, setCart] = useState([]);
+
+
+    let getCartItems = () => {
+        fetch(`http://localhost:3001/api/products/cart`).then((res) => res.json()).then((data) => setCart(data));
+    }
+
+    let calculateTotalQuantity = () => {
+        const total = cart.reduce((accumulator, item) => {
+            return accumulator + item.quantity;
+        }, 0);
+
+        // Update the state with the total quantity
+        setTotalQuantity(total);
+    }
+
+    useEffect(() => {
+        getCartItems();
+        calculateTotalQuantity();
+    }, [cart])
+
     return (
         <div className='navigation'>
             <Navbar expand="lg" className="bg-body-tertiary">
@@ -38,7 +61,10 @@ export default function Navigation() {
                     </Navbar.Collapse>
                     <div className="actions">
                         <NavLink to="/"><FontAwesomeIcon className='fs-5' icon={faUser} /></NavLink>
-                        <NavLink className="cart_icon" to="/cart"><FontAwesomeIcon className='fs-5' icon={faCartShopping} /></NavLink>
+                        <div className="cart_action">
+                            <NavLink className="cart_icon" to="/cart"><FontAwesomeIcon className='fs-5' icon={faCartShopping} /></NavLink>
+                            <span className='total_cart_quantity'>{totalQuantity}</span>
+                        </div>
                     </div>
                 </Container>
             </Navbar>

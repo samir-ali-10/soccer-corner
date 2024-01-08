@@ -14,16 +14,10 @@ export default function Cart() {
 
     const [cart, setCart] = useState([]),
         [totalPrice, setTotalPrice] = useState(),
-        [quantitySelected, setQuantitySelected] = useState();
+        [totalQuantity, setTotalQuantity] = useState(0);
 
     // const cartRtk = useSelector((state) => state.cart)
     // const dispatch = useDispatch()
-
-    let handleChange = (e) => {
-        if (e.target.name === "quantity_selected") {
-            setQuantitySelected(e.target.value)
-        }
-    }
 
 
     let getCartItems = () => {
@@ -64,25 +58,22 @@ export default function Cart() {
         return response.json();
     }
 
-    // let handleIncreaseCartQuantity = (item) => {
-    //     dispatch(increaseQuantity(item));
-    // }
-
-    // let handleDecreaseCartQuantity = (item) => {
-    //     dispatch(decreaseQuantity(item));
-    // }
-
     let getTotal = () => {
         return cart.reduce((total, item) => total + item.price * item.quantity, 0);
     }
 
-    // useEffect(() => {
-    //     getTotal();
-    // }, [])
+    let calculateTotalQuantity = () => {
+        const total = cart.reduce((accumulator, item) => {
+            return accumulator + item.quantity;
+        }, 0);
+
+        // Update the state with the total quantity
+        setTotalQuantity(total);
+    }
 
     useEffect(() => {
         getCartItems();
-        // dispatch(getTotals())
+        calculateTotalQuantity();
     }, [cart])
 
 
@@ -129,7 +120,8 @@ export default function Cart() {
                                 )
                             }
                             <div className="sub_total mt-4 text-end">
-                                subtotal<span>${getTotal()}EGP</span>
+                                subtotal<span>{getTotal()}EGP</span>
+                                <p>{totalQuantity}</p>
                             </div>
                             <div className="tax text-end mt-4 fs-5">
                                 Tax included and shipping calculated at checkout
