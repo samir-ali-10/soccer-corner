@@ -32,6 +32,7 @@ router.get('/api/products/cart/delete-products' , ProductController.deleteAllPro
 
 // AUTHENTICATION
 
-router.post('api/auth/signUp' ,authController.signUp)
+router.get('/api/auth/getUsers' , authController.getUsers)
+router.post('/api/auth/signUp' ,authController.signUp)
 // router.post('api/auth/loginIn' , authController.)
 module.exports = router;

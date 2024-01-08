@@ -2,7 +2,6 @@ const ProductModel = require("../models/ProductSchema");
 const NameOfCollection = require("../models/NavBarSchema");
 const Cart = require("../models/CartSchema");
 const LeagueNames = require('../models/LeagueSchema')
-const user = require('../models/UserSchema')
 // => GET
 
 exports.getProducts = (req, res, next) => {
