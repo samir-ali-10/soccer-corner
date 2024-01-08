@@ -121,7 +121,6 @@ export default function Cart() {
                             }
                             <div className="sub_total mt-4 text-end">
                                 subtotal<span>{getTotal()}EGP</span>
-                                <p>{totalQuantity}</p>
                             </div>
                             <div className="tax text-end mt-4 fs-5">
                                 Tax included and shipping calculated at checkout

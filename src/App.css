@@ -40,6 +40,68 @@ ul {
   color: initial !important;
 }
 
+/************************************ Sign Up *********************************/
+
+.signup {
+  margin: 100px 0;
+}
+
+.signup .card {
+  max-width: 500px;
+  margin: auto;
+  padding: 40px 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.signup .card .row {
+  margin-bottom: 30px;
+}
+
+.signup .card .row .col {
+  text-align: left;
+}
+
+.signup .card .logo {
+  max-width: 300px;
+  margin: auto;
+}
+
+.signup .card .logo img {
+  width: 100%;
+}
+
+.signup .card h2 {
+  position: relative;
+}
+
+.signup .card h2::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: calc(50% - 25px);
+  width: 50px;
+  height: 1px;
+  background-color: var(--text-color);
+}
+
+.signup .submit {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  padding: 5px 20px;
+  font-size: 1.5rem;
+  transition: .3s;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
+}
+
+.signup .submit:hover {
+  background-color: #dbd4c6;
+  color: var(--text-color);
+}
+
 /************************************ NavBar *********************************/
 
 .navigation {
@@ -182,7 +244,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
 }
 
 .stock .categories {
@@ -229,7 +291,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
 }
 
 .stock .products p {
@@ -246,7 +308,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
 }
 
 .stock .products .league {
@@ -353,7 +415,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
 }
 
 .back_to_admin {
@@ -509,7 +571,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
 }
 
 .home_page .new_collection .new_collection_container {
@@ -606,7 +668,7 @@ ul {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
 }
 
 .home_page .best_sellers .all_products button {
@@ -1511,7 +1573,7 @@ footer h2::before {
   left: calc(50% - 25px);
   width: 50px;
   height: 1px;
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
 }
 
 footer .policies_socials {
@@ -1664,6 +1726,9 @@ footer .copyright::before {
 }
 
 @media (max-width: 767px) {
+  /******************* Sign UP *********************/
+
+
   .stock .categories {
     flex-direction: column;
   }

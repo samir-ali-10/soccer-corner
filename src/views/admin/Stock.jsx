@@ -256,6 +256,7 @@ export default function Stock() {
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -295,7 +296,7 @@ export default function Stock() {
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
-                                                                <p>{calculateSalePrice(item)}</p>
+                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -334,6 +335,7 @@ export default function Stock() {
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -372,6 +374,7 @@ export default function Stock() {
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 {item.sale !== "" ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                {calculateSalePrice !== undefined ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
