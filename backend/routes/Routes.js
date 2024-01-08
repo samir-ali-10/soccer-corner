@@ -34,5 +34,5 @@ router.get('/api/products/cart/delete-products' , ProductController.deleteAllPro
 
 router.get('/api/auth/getUsers' , authController.getUsers)
 router.post('/api/auth/signUp' ,authController.signUp)
-// router.post('api/auth/loginIn' , authController.)
+router.post('/api/auth/logIn' , authController.logIn)
 module.exports = router;
