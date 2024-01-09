@@ -20,83 +20,7 @@ export default function Products() {
 
 
     const [stock, setStock] = useState([]),
-        [league, setLeague] = useState();
-
-    const egyptianLeague = [
-        {
-            image: image1,
-            price: 300,
-            title: "t-shirt one alahly",
-            id: 1,
-            quantity: 2
-        },
-        {
-            image: image2,
-            price: 400,
-            title: "t-shirt two alahly",
-            id: 2,
-            quantity: 5
-        },
-        {
-            image: image3,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 3,
-            quantity: 0
-        },
-        {
-            image: image4,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 4,
-            quantity: 0
-        },
-        {
-            image: image5,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 5,
-            quantity: 0
-        },
-    ]
-
-    const serieA = [
-        {
-            image: image2,
-            price: 300,
-            title: "t-shirt one alahly",
-            id: 1,
-            quantity: 2
-        },
-        {
-            image: image1,
-            price: 400,
-            title: "t-shirt two alahly",
-            id: 2,
-            quantity: 5
-        },
-        {
-            image: image3,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 3,
-            quantity: 0
-        },
-        {
-            image: image2,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 4,
-            quantity: 0
-        },
-        {
-            image: image3,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 5,
-            quantity: 0
-        },
-    ]
+        [leagues, setLeagues] = useState([]);
 
     const studsTurfs = [
         {
@@ -170,6 +94,10 @@ export default function Products() {
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
+    let getLeagues = () => {
+        fetch(`http://localhost:3001/api/products/LeagueNames`).then((res) => res.json()).then((data) => setLeagues(data));
+    }
+
     let addToCart = async (product) => {
         // dispatch(increaseQuantity(product))
         let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
@@ -206,7 +134,7 @@ export default function Products() {
                         <div className="egyptian_league">
                             <h2>Egyptian League</h2>
                             <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">All Products</NavLink>
+                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
                             </div>
                             <div className="slider_container d-flex">
                                 {stock.map(egypt =>
@@ -236,7 +164,7 @@ export default function Products() {
                         <div className="serie_A">
                             <h2>Serie A</h2>
                             <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">All Products</NavLink>
+                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
                             </div>
                             <div className="slider_container d-flex">
                                 {stock.map(serieA =>
@@ -266,7 +194,7 @@ export default function Products() {
                         <div className="spanish_league">
                             <h2>Spanish League</h2>
                             <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">All Products</NavLink>
+                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
                             </div>
                             <div className="slider_container d-flex">
                                 {stock.map(spanish =>
@@ -296,7 +224,7 @@ export default function Products() {
                         <div className="saudi_league">
                             <h2>Saudi League</h2>
                             <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">All Products</NavLink>
+                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
                             </div>
                             <div className="slider_container d-flex">
                                 {stock.map(saudi =>
@@ -327,28 +255,80 @@ export default function Products() {
                 }
                 {params.category === "studs_turfs" &&
                     <div className='studs_turfs'>
-                        <h2>Studs & Turfs</h2>
-                        <div className="all_products">
-                            <NavLink to="/products/studs_turfs/all">All Products</NavLink>
-                        </div>
-                        <div className="slider_container d-flex">
-                            {studsTurfs.map(item =>
-                                <NavLink key={item.id} className="item">
-                                    <div className="image">
-                                        <img src={item.image} alt="image1" />
-                                    </div>
-                                    <div className="info">
-                                        <div className="name">{item.title}</div>
-                                        <div className="inner_info d-flex justify-content-between">
-                                            <div className="price">{item.price}EGP</div>
-                                            <div className="add_cart" onClick={(e) => {
-                                                e.preventDefault();
-                                                addToCart(item.code)
-                                            }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                        <div className="puma">
+                            <h2>Puma</h2>
+                            <div className="all_products">
+                                <NavLink to="/products/studs_turfs/all">See All</NavLink>
+                            </div>
+                            <div className="slider_container d-flex">
+                                {studsTurfs.map(item =>
+                                    <NavLink key={item.id} className="item">
+                                        <div className="image">
+                                            <img src={item.image} alt="image1" />
                                         </div>
-                                    </div>
-                                </NavLink>
-                            )}
+                                        <div className="info">
+                                            <div className="name">{item.title}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                <div className="price">{item.price}EGP</div>
+                                                <div className="add_cart" onClick={(e) => {
+                                                    e.preventDefault();
+                                                    addToCart(item.code)
+                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                )}
+                            </div>
+                        </div>
+                        <div className="adidas">
+                            <h2>Adidas</h2>
+                            <div className="all_products">
+                                <NavLink to="/products/studs_turfs/all">See All</NavLink>
+                            </div>
+                            <div className="slider_container d-flex">
+                                {studsTurfs.map(item =>
+                                    <NavLink key={item.id} className="item">
+                                        <div className="image">
+                                            <img src={item.image} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{item.title}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                <div className="price">{item.price}EGP</div>
+                                                <div className="add_cart" onClick={(e) => {
+                                                    e.preventDefault();
+                                                    addToCart(item.code)
+                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                )}
+                            </div>
+                        </div>
+                        <div className="nike">
+                            <h2>Nike</h2>
+                            <div className="all_products">
+                                <NavLink to="/products/studs_turfs/all">See All</NavLink>
+                            </div>
+                            <div className="slider_container d-flex">
+                                {studsTurfs.map(item =>
+                                    <NavLink key={item.id} className="item">
+                                        <div className="image">
+                                            <img src={item.image} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{item.title}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                <div className="price">{item.price}EGP</div>
+                                                <div className="add_cart" onClick={(e) => {
+                                                    e.preventDefault();
+                                                    addToCart(item.code)
+                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                )}
+                            </div>
                         </div>
                     </div>
                 }
@@ -356,7 +336,7 @@ export default function Products() {
                     <div className='sports_wear'>
                         <h2>Sports Wear</h2>
                         <div className="all_products">
-                            <NavLink to="/products/sportsWear/all">All Products</NavLink>
+                            <NavLink to="/products/sportsWear/all">See All</NavLink>
                         </div>
                         <div className="slider_container d-flex">
                             {sportsWear.map(item =>
@@ -380,7 +360,7 @@ export default function Products() {
                     <div className='others'>
                         <h2>Others</h2>
                         <div className="all_products">
-                            <NavLink to="/products/others/all">All Products</NavLink>
+                            <NavLink to="/products/others/all">See All</NavLink>
                         </div>
                         <div className="slider_container d-flex">
                             {sportsWear.map(item =>

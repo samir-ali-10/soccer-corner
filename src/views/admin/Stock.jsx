@@ -66,6 +66,8 @@ export default function Stock() {
     let getCollection = (val) => {
         setLeague("")
         setLeagueSelected("");
+        setSizeSelected("")
+        setModelSelected("")
         setCollectionName(val.target.value);
         fetch(`http://localhost:3001/api/products/collection/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
@@ -188,7 +190,7 @@ export default function Stock() {
                     <div className="teams">
                         <button onClick={getData}>All</button>
                         <select value={categorySelected} onChange={getCollection} name="categories" id="categories">
-                            <option value={"--Choose a Collection--"} >--Choose a Collection--</option>
+                            <option value={"--Choose a Collection--"} >--Choose a Product Type--</option>
                             {
                                 categories.map(category =>
                                     <option key={category.Name} value={category.Name}>{category.Name}</option>
@@ -203,12 +205,11 @@ export default function Stock() {
                                 )
                             }
                         </select>
-                    </div>
-                    <div className="dropdowns">
-                        <select className='me-3' value={sizeSelected} onChange={getCollectionSize} name="sizes" id="sizes">
+                        <select value={categorySelected} onChange={getCollection} name="categories" id="categories">
+                            <option value={"--Choose a Collection--"} >--Choose a Collection--</option>
                             {
-                                sizeOptions.map(option =>
-                                    <option key={option.value} value={option.value}>{option.text}</option>
+                                categories.map(category =>
+                                    <option key={category.Name} value={category.Name}>{category.Name}</option>
                                 )
                             }
                         </select>
@@ -216,6 +217,13 @@ export default function Stock() {
                             {
                                 modelOptions.map(option =>
                                     <option key={option.text} value={option.text}>{option.text}</option>
+                                )
+                            }
+                        </select>
+                        <select value={sizeSelected} onChange={getCollectionSize} name="sizes" id="sizes">
+                            {
+                                sizeOptions.map(option =>
+                                    <option key={option.value} value={option.value}>{option.text}</option>
                                 )
                             }
                         </select>
@@ -256,7 +264,7 @@ export default function Stock() {
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
-                                                                {item.sale !== null  ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -276,7 +284,7 @@ export default function Stock() {
                                                     )
                                                 }
                                             </div>
-                                            <h2 className='league'>Serie A</h2>
+                                            {collectionName === "" || league === "serie a" ? <h2 className='league'>Serie A</h2> : <h3>{collectionName}</h3>}
                                             {model ? <p className='text-center'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
@@ -296,7 +304,7 @@ export default function Stock() {
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
-                                                                {item.sale !== null  ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {
@@ -315,7 +323,7 @@ export default function Stock() {
                                                     )
                                                 }
                                             </div>
-                                            <h2 className='league'>La Liga</h2>
+                                            {collectionName === "" || league === "La Liga" ? <h2 className='league'>La Liga</h2> : <h3>{collectionName}</h3>}
                                             {model ? <p className='text-center'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
@@ -354,7 +362,7 @@ export default function Stock() {
                                                     )
                                                 }
                                             </div>
-                                            <h2 className='league'>Premier League</h2>
+                                            {collectionName === "" || league === "premier" ? <h2 className='league'>Premier League</h2> : <h3>{collectionName}</h3>}
                                             {model ? <p className='text-center'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
@@ -393,7 +401,7 @@ export default function Stock() {
                                                     )
                                                 }
                                             </div>
-                                            <h2 className='league'>Saudi League</h2>
+                                            {collectionName === "" || league === "saudi" ? <h2 className='league'>Saudi League</h2> : <h3>{collectionName}</h3>}
                                             {model ? <p className='text-center'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
@@ -413,7 +421,7 @@ export default function Stock() {
                                                                 <div className="description">Product Description: <span>{item.description}</span></div>
                                                                 <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
                                                                 {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}%</span></div> : null}
-                                                                {item.sale !== null  ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
                                                                 {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
                                                                 <div className="delete_item">
                                                                     <button onClick={(e) => {

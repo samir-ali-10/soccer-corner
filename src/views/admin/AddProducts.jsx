@@ -27,6 +27,7 @@ export default function AddProducts() {
         code: yup.string().required(),
         model: yup.string().required(),
         kit: yup.string().required(),
+        type: yup.string().required(),
         collectionName: yup.string().required(),
         league: yup.string().required(),
         price: yup.number().required(),
@@ -47,6 +48,7 @@ export default function AddProducts() {
             body: JSON.stringify({
                 collectionName: values.collectionName,
                 kit: values.kit,
+                type: values.type,
                 league: values.league,
                 code: values.code,
                 model: values.model,
@@ -73,6 +75,7 @@ export default function AddProducts() {
         [league, setLeague] = useState(),
         [model, setModel] = useState(),
         [kit, setKit] = useState(),
+        [type, setType] = useState(),
         [code, setCode] = useState(),
         [price, setPrice] = useState(),
         [sale, setSale] = useState(),
@@ -98,6 +101,7 @@ export default function AddProducts() {
             setSale(data.sale)
             setNewCollection(data.newCollection)
             setKit(data.kit)
+            setType(data.type)
             setQuantity(data.quantity)
             setSize(data.size)
         })
@@ -118,6 +122,7 @@ export default function AddProducts() {
                     initialValues={{
                         collectionName: "",
                         kit: "",
+                        type: "",
                         league: "",
                         model: "",
                         code: "",
@@ -238,6 +243,25 @@ export default function AddProducts() {
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
                                         {errors.league}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>Type</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="type"
+                                        value={values.type === "" ? type : values.type }
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.type}
+                                    />
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.type}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
