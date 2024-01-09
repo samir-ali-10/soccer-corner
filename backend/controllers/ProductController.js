@@ -150,6 +150,7 @@ exports.postAddProduct = async (req, res, next) => {
   const model = req.body.model;
   const league = req.body.league;
   const kit = req.body.kit;
+  const type = req.body.type; 
   const newCollection = req.body.newCollection;
   const sale = req.body.sale;
   const collectionName = req.body.collectionName;
@@ -207,6 +208,7 @@ exports.postAddProduct = async (req, res, next) => {
       kit : kit,
       newCollection : newCollection,
       collectionName: collectionName,
+      type : type,
       sale : sale,
       price: price,
       quantity: quantity,
@@ -306,6 +308,7 @@ exports.editProduct = (req, res, next) => {
   const UpdatedModel = req.body.model;
   const Updatedleague = req.body.league;
   const UpdatedKit = req.body.kit;
+  const UpdatedType = req.body.type;
   const UpdatedSale = req.body.sale;
   const UpdatedCollectionName = req.body.collectionName;
   const UpdatedPrice = req.body.price;
@@ -324,6 +327,7 @@ exports.editProduct = (req, res, next) => {
       collectionName: UpdatedCollectionName,
       sale : UpdatedSale,
       price: UpdatedPrice,
+      type: UpdatedType,
       quantity: UpdatedQuantity,
       size: UpdatedSize,
       description: UpdatedDescription,
