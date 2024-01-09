@@ -29,12 +29,6 @@ export default function ReviewsAdmin() {
                             <div className="review">
                                 <div className="info">
                                     <div className="name">{review.name}</div>
-                                    <div className="stars">
-                                        <FontAwesomeIcon icon={faStar} />
-                                        <FontAwesomeIcon icon={faStar} />
-                                        <FontAwesomeIcon icon={faStar} />
-                                        <FontAwesomeIcon icon={faStar} />
-                                    </div>
                                 </div>
                                 <div className="content">
                                     <q>{review.message}</q>

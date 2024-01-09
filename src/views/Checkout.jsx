@@ -68,24 +68,6 @@ export default function Checkout() {
                                         {errors.receiverName}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <Form.Group
-                                    as={Col}
-                                    controlId="validationFormik101"
-                                    className="position-relative"
-                                >
-                                    {/* <Form.Label>Code</Form.Label> */}
-                                    <Form.Control
-                                        type="email"
-                                        name="email"
-                                        placeholder='Email Address'
-                                        value={values.email}
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.email}
-                                    />
-                                    <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.email}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
                             </Row>
                             <Row>
                                 <h2>Delivery</h2>

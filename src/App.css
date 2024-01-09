@@ -691,12 +691,13 @@ ul {
 }
 
 .slider_container {
-  padding: 30px 0;
+  padding: 30px 30px;
   gap: 40px;
   width: 90%;
   margin: auto;
   overflow-y: scroll;
   scroll-behavior: smooth;
+  border: 15px solid #77777732;
   border-top: 1px solid #77777732;
   border-bottom: 1px solid #77777732;
 }
@@ -810,7 +811,8 @@ ul {
   font-size: 1.4rem;
 }
 
-.products .football_jerseys>div {
+.products .football_jerseys>div,
+.products .studs_turfs>div {
   margin-bottom: 100px;
 }
 
@@ -921,16 +923,18 @@ ul {
 
 .products_all .items_container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(450px, 100%), 1fr));
   gap: 20px;
 }
 
-.products_all .items_container .item {
+.products_all .items_container .item  {
   margin-bottom: 50px;
   color: var(--text-color);
 }
 
 .products_all .items_container .item .image {
+  margin: auto;
+  width: 400px;
   height: 400px;
 }
 
