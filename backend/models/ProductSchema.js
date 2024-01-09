@@ -9,6 +9,7 @@ const ProductSchema = new Schema({
   collectionName: String,
   price: Number,
   size: String,
+  type: String,
   sizes: Array,
   sale : Number,
   newCollection : String,
