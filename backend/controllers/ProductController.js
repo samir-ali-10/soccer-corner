@@ -2,6 +2,9 @@ const ProductModel = require("../models/ProductSchema");
 const NameOfCollection = require("../models/NavBarSchema");
 const Cart = require("../models/CartSchema");
 const LeagueNames = require('../models/LeagueSchema')
+
+
+
 // => GET
 
 exports.getProducts = (req, res, next) => {
@@ -155,7 +158,8 @@ exports.postAddProduct = async (req, res, next) => {
   const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   const quantity = req.body.quantity;
   const description = req.body.description;
-  // const image = req.body.file;
+  const image = req.file; 
+  console.log(image);
 
   const existingProduct = await ProductModel.findOne({ code });
 
@@ -209,7 +213,7 @@ exports.postAddProduct = async (req, res, next) => {
       size: size,
       sizes : sizes,
       description: description,
-      // image: image,
+      image: image,
     });
     await product.save();
     console.log('New product added:', product);
@@ -273,6 +277,7 @@ exports.postProductsOnCart = async (req, res, next) => {
         collectionName: existingProduct.collectionName,
         price: existingProduct.price,
         size: existingProduct.size,
+        sale : existingProduct.sale,
         quantity: 1,
         description: existingProduct.description,
       };

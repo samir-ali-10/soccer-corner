@@ -8,6 +8,7 @@ const CartSchema = new Schema({
     kit : String,
     collectionName: String,
     price: Number,
+    sale : Number,
     size: String,
     quantity: {
       type : Number,

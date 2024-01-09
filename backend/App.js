@@ -3,19 +3,14 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Routes = require("./routes/Routes");
+const bodyParser = require('body-parser')
 
+app.use(bodyParser.urlencoded({extended : false}));
 app.use(cors());
 app.use(express.json());
 
 app.use(Routes);
 
-app.use((error , req , res, next) => {
-  console.log(error);
-  const status = error.statusCode || 500;
-  const message = error.message;
-  const data = error.data;
-  res.status(status).json({message : message , data: data});
-})
 
 mongoose
   .connect(

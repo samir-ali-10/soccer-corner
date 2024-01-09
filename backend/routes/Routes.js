@@ -2,18 +2,27 @@ const express = require("express");
 const router = express.Router();
 const ProductController = require("../controllers/ProductController");
 const authController = require('../controllers/authController')
-
+const multer = require('multer');
+const fileStorage = multer.diskStorage({
+    destination : (req , file , cb) => {
+        cb(null , 'images' );
+    },
+    filename : (req ,file , cb) => {
+        cb(null , new Date().toISOString() + '-' + file.originalname);
+    }
+})
+const upload = multer({ storage: fileStorage}); 
 
 // => PRODUCTS
 
 router.get("/api/products", ProductController.getProducts); // get all products
-router.post("/api/products", ProductController.postAddProduct);
+router.post("/api/products", upload.single('file'), ProductController.postAddProduct);
 router.get("/api/products/collection/:collectionName",ProductController.getCollection); // get collection
 router.get("/api/products/code/:code",ProductController.getSingleProduct); // get single product
 router.get("/api/products/size/:size", ProductController.getBySize); // get by size
 router.get("/api/products/collection/:collectionName/model/:model",ProductController.getCollectionAndModel); // get collection and  model 
 router.get("/api/products/collection/:collectionName/size/:size",ProductController.getCollectionAndSize); // get collection and size 
-router.get("/api/products/collection/:collectionName/size/:size/model/:model",ProductController.getCollectionAndModelAndSize); // get collection , model and size 
+router.get("/api/products/league/:league/model/:model/collection/:collectionName/size/:size",ProductController.getCollectionAndModelAndSize); // get collection , model and size 
 router.get('/api/products/CollectionsNames' , ProductController.getCollectionsNames); // Get collectionsNames
 router.get('/api/products/LeagueNames' , ProductController.getLeagueNames)
 router.get('/api/products/league/:league' , ProductController.getByLeague) // get by league
@@ -33,8 +42,8 @@ router.get('/api/products/cart/delete-products' , ProductController.deleteAllPro
 // AUTHENTICATION
 
 router.get('/api/auth/getUsers' , authController.getUsers)
-router.post('/api/auth/signUp' ,authController.signUp)
 router.post('/api/auth/logIn' , authController.logIn)
+router.post('/api/auth/signUp' ,authController.signUp)
 
 // REVIEWS
 

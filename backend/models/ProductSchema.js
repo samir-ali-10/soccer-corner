@@ -17,7 +17,7 @@ const ProductSchema = new Schema({
     default : 1,
   }, 
   description: String,
-  // image: String,
+  image:  Buffer, // Binary data for the image
 });
 
 
