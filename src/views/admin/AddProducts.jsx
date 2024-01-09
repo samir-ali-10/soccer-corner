@@ -28,6 +28,7 @@ export default function AddProducts() {
         model: yup.string().required(),
         kit: yup.string().required(),
         type: yup.string().required(),
+        BrandName: yup.string().required(),
         collectionName: yup.string().required(),
         league: yup.string().required(),
         price: yup.number().required(),
@@ -49,6 +50,7 @@ export default function AddProducts() {
                 collectionName: values.collectionName,
                 kit: values.kit,
                 type: values.type,
+                BrandName: values.BrandName,
                 league: values.league,
                 code: values.code,
                 model: values.model,
@@ -76,6 +78,7 @@ export default function AddProducts() {
         [model, setModel] = useState(),
         [kit, setKit] = useState(),
         [type, setType] = useState(),
+        [BrandName, setBrandName] = useState(),
         [code, setCode] = useState(),
         [price, setPrice] = useState(),
         [sale, setSale] = useState(),
@@ -102,6 +105,7 @@ export default function AddProducts() {
             setNewCollection(data.newCollection)
             setKit(data.kit)
             setType(data.type)
+            setBrandName(data.BrandName)
             setQuantity(data.quantity)
             setSize(data.size)
         })
@@ -123,6 +127,7 @@ export default function AddProducts() {
                         collectionName: "",
                         kit: "",
                         type: "",
+                        BrandName: "",
                         league: "",
                         model: "",
                         code: "",
@@ -141,7 +146,7 @@ export default function AddProducts() {
                     }
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
-                        <Form noValidate onSubmit={handleSubmit}>
+                        <Form noValidate onSubmit={handleSubmit} encType='multipart/form-data'>
                             <Row className='code_info'>
                                 <Form.Group
                                     as={Col}
@@ -153,7 +158,7 @@ export default function AddProducts() {
                                         type="text"
                                         name="code"
                                         list='productsList'
-                                        value={values.code === "" ? code : values.code }
+                                        value={values.code === "" ? code : values.code}
                                         onChange={handleChange}
                                         isInvalid={!!errors.code}
                                     />
@@ -180,7 +185,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="collectionName"
-                                        value={values.collectionName === "" ? collectionName : values.collectionName }
+                                        value={values.collectionName === "" ? collectionName : values.collectionName}
                                         onChange={handleChange}
                                         isInvalid={!!errors.collectionName}
                                     />
@@ -199,7 +204,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="kit"
-                                        value={values.kit === "" ? kit : values.kit }
+                                        value={values.kit === "" ? kit : values.kit}
                                         onChange={handleChange}
                                         isInvalid={!!errors.kit}
                                     />
@@ -218,7 +223,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="model"
-                                        value={values.model === "" ? model : values.model }
+                                        value={values.model === "" ? model : values.model}
                                         onChange={handleChange}
                                         isInvalid={!!errors.model}
                                     />
@@ -237,7 +242,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="league"
-                                        value={values.league === "" ? league : values.league }
+                                        value={values.league === "" ? league : values.league}
                                         onChange={handleChange}
                                         isInvalid={!!errors.league}
                                     />
@@ -256,7 +261,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="type"
-                                        value={values.type === "" ? type : values.type }
+                                        value={values.type === "" ? type : values.type}
                                         onChange={handleChange}
                                         isInvalid={!!errors.type}
                                     />
@@ -271,11 +276,30 @@ export default function AddProducts() {
                                     controlId="validationFormik101"
                                     className="position-relative"
                                 >
+                                    <Form.Label>Brand Name</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="BrandName"
+                                        value={values.BrandName === "" ? BrandName : values.BrandName}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.BrandName}
+                                    />
+                                    <Form.Control.Feedback BrandName="invalid" tooltip>
+                                        {errors.BrandName}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
                                     <Form.Label>Price</Form.Label>
                                     <Form.Control
                                         type="number"
                                         name="price"
-                                        value={values.price === "" ? price : values.price }
+                                        value={values.price === "" ? price : values.price}
                                         onChange={handleChange}
                                         isInvalid={!!errors.price}
                                     />
@@ -294,7 +318,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="number"
                                         name="sale"
-                                        value={values.sale === "" ? sale : values.sale }
+                                        value={values.sale === "" ? sale : values.sale}
                                         onChange={handleChange}
                                         isInvalid={!!errors.sale}
                                     />
@@ -313,7 +337,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="string"
                                         name="newCollection"
-                                        value={values.newCollection === "" ? newCollection : values.newCollection }
+                                        value={values.newCollection === "" ? newCollection : values.newCollection}
                                         onChange={handleChange}
                                         isInvalid={!!errors.newCollection}
                                     />
@@ -333,7 +357,7 @@ export default function AddProducts() {
                                         type="text"
                                         name="size"
                                         list='sizeList'
-                                        value={values.size === "" ? size : values.size }
+                                        value={values.size === "" ? size : values.size}
                                         onChange={handleChange}
                                         isInvalid={!!errors.size}
                                     />
@@ -359,7 +383,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="number"
                                         name="quantity"
-                                        value={values.quantity === "" ? quantity : values.quantity }
+                                        value={values.quantity === "" ? quantity : values.quantity}
                                         onChange={handleChange}
                                         isInvalid={!!errors.quantity}
                                     />
@@ -378,7 +402,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="description"
-                                        value={values.description === "" ? description : values.description }
+                                        value={values.description === "" ? description : values.description}
                                         onChange={handleChange}
                                         isInvalid={!!errors.description}
                                     />
@@ -405,6 +429,9 @@ export default function AddProducts() {
                                     values.code = ""
                                     values.collectionName = ""
                                     values.league = ""
+                                    values.BrandName= ""
+                                    values.kit= ""
+                                    values.type= ""
                                     values.description = ""
                                     values.model = ""
                                     values.price = ""

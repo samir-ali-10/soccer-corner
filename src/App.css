@@ -1,6 +1,6 @@
 :root {
-  --text-color: black;
-  --primary-color: white;
+  --text-color: white;
+  --primary-color: black;
   --secondary-color: #f2eee7;
   --brightGrey-color: #777;
 }
@@ -73,6 +73,8 @@ ul {
 
 .card_auth h2 {
   position: relative;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .card_auth h2::before {
@@ -85,8 +87,17 @@ ul {
   background-color: var(--text-color);
 }
 
+.card_auth .form-label {
+  color: var(--text-color);
+}
+
+.card_auth .form-control {
+  background-color: #333;
+  border: none;
+}
+
 .card_auth .submit {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   color: var(--text-color);
   border: none;
   padding: 5px 20px;
@@ -111,6 +122,18 @@ ul {
 
 .navigation {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.navbar {
+  background-color: #222;
+}
+
+.navigation .dropdown a {
+  color: var(--text-color);
+}
+
+.navigation .dropdown .dropdown-item {
+  color: var(--primary-color);
 }
 
 .navigation .logo {
@@ -168,10 +191,11 @@ ul {
   position: absolute;
   right: 5px;
   top: -15px;
+  color: var(--text-color);
 }
 
 .navigation .navbar-toggler {
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
   padding: 10px;
   vertical-align: top;
   box-shadow: 2px 1px 2px gray;
@@ -200,7 +224,7 @@ ul {
 }
 
 .admin_home .selections .selection {
-  background-color: var(--secondary-color);
+  background-color: #333;
   color: var(--text-color);
   min-height: 200px;
   padding: 20px;
@@ -215,6 +239,7 @@ ul {
 
 .admin_home .selections .selection h3 {
   background-color: #f8f9fa;
+  color: var(--primary-color);
   padding: 5px 15px;
   border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -240,6 +265,8 @@ ul {
   text-align: center;
   font-weight: normal;
   position: relative;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .stock h2::before {
@@ -277,7 +304,7 @@ ul {
 
 .stock .categories select {
   background-color: var(--secondary-color);
-  color: var(--text-color);
+  color: var(--primary-color);
   padding: 5px 10px;
 }
 
@@ -287,6 +314,8 @@ ul {
   font-size: 2.6rem;
   margin-bottom: 60px;
   position: relative;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .stock .products h3::before {
@@ -400,6 +429,7 @@ ul {
   border-top: 1px solid #77777732;
   padding: 20px 0;
   display: grid;
+  color: var(--text-color);
   grid-template-columns: repeat(auto-fill, minmax(min(500px, 100%), 1fr));
 }
 
@@ -411,6 +441,8 @@ ul {
   font-weight: normal;
   position: relative;
   margin-bottom: 100px;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .reviews_admin h1::before {
@@ -463,7 +495,7 @@ ul {
 
 .home_page .carousel-item {
   position: relative;
-  height: 600px;
+  height: 800px;
 }
 
 .home_page .carousel-item::before {
@@ -567,6 +599,8 @@ ul {
   text-transform: capitalize;
   position: relative;
   margin-bottom: 80px;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .home_page .new_collection p::before {
@@ -650,9 +684,10 @@ ul {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--primary-color);
+  color: var(--text-color);
+  font-family: "Artttnorm";
   z-index: 1;
-  font-size: 2rem;
+  font-size: 2.3rem;
 }
 
 .home_page .best_sellers {
@@ -664,6 +699,8 @@ ul {
   margin-bottom: 50px;
   text-align: center;
   position: relative;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .home_page .best_sellers h2::before {
@@ -691,7 +728,7 @@ ul {
 }
 
 .slider_container {
-  background-color: #efefef;
+  background-color: #333;
   padding: 30px 30px;
   gap: 40px;
   width: 90%;
@@ -779,6 +816,8 @@ ul {
   font-weight: normal;
   position: relative;
   margin-bottom: 80px;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .products h2::before {
@@ -904,6 +943,8 @@ ul {
   font-weight: normal;
   position: relative;
   margin-bottom: 80px;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .products_all h2::before {
@@ -925,7 +966,7 @@ ul {
 .products_all .items_container .item {
   margin-bottom: 50px;
   color: var(--text-color);
-  background-color: #efefef;
+  background-color: #333;
   padding: 20px 0;
 }
 
@@ -1071,6 +1112,7 @@ ul {
   font-weight: normal;
   text-transform: uppercase;
   margin-bottom: 30px;
+  color: var(--text-color);
 }
 
 .product_details .product_container .infos .price {
@@ -1078,6 +1120,7 @@ ul {
   font-weight: 600;
   position: relative;
   margin-bottom: 70px;
+  color: var(--text-color);
 }
 
 .product_details .product_container .infos .price::before {
@@ -1092,18 +1135,19 @@ ul {
 
 .product_details .product_container .infos .sizes {
   margin-bottom: 40px;
+  color: var(--text-color);
 }
 
 .product_details .product_container .infos .sizes button {
   background-color: transparent;
   border: none;
   padding: 5px 15px;
-
+  color: var(--text-color);
 }
 
 .product_details .product_container .infos .sizes button.active {
   background-color: var(--secondary-color);
-  border: 1px solid var(--text-color);
+  color: var(--primary-color);
 }
 
 .product_details .product_container .infos .sizes button:not(:last-child) {
@@ -1120,10 +1164,17 @@ ul {
   -moz-transition: .3s;
   -ms-transition: .3s;
   -o-transition: .3s;
+  color: var(--text-color);
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
 }
 
 .product_details .product_container .infos .add_to_cart:hover {
   background-color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 /************************ Contact Us ***************************/
@@ -1137,6 +1188,8 @@ ul {
   text-align: center;
   position: relative;
   margin-bottom: 100px;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .contact_us h2::before {
@@ -1147,6 +1200,10 @@ ul {
   width: 50px;
   height: 1px;
   background-color: var(--text-color);
+}
+
+.contact_us .form-label {
+  color: var(--text-color);
 }
 
 .contact_us form {
@@ -1188,8 +1245,8 @@ ul {
 }
 
 .contact_us form .send button {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
+  background-color: var(--text-color);
+  color: var(--primary-color);
   border: none;
   border-radius: 6px;
   -webkit-border-radius: 6px;
@@ -1205,6 +1262,12 @@ ul {
 .cart {
   margin-top: 80px;
   position: relative;
+  font-family: Montserrat, sans-serif;
+}
+
+.cart .container {
+  max-width: 50%;
+  margin: auto;
 }
 
 .cart h2 {
@@ -1212,6 +1275,8 @@ ul {
   font-weight: normal;
   text-align: center;
   margin-bottom: 100px;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 .cart h2::before {
@@ -1224,6 +1289,11 @@ ul {
   background-color: var(--text-color);
 }
 
+.cart .top_heading h4:last-child {
+  margin-right: 20px;
+  margin-left: 100px;
+}
+
 .cart .image p {
   margin-top: 40px;
   font-size: 2rem;
@@ -1231,20 +1301,22 @@ ul {
 }
 
 .cart .cart_items .cart_item {
-  padding: 50px 0;
+  color: var(--text-color);
+  padding: 30px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #77777732;
+  border-bottom: 1px solid #777;
 }
 
 .cart .cart_items .cart_item:nth-child(1) {
-  border-top: 1px solid #77777732;
+  border-top: 1px solid #777;
 }
 
 .cart .cart_items .cart_item .info .image {
   margin-right: 20px;
-  width: 200px;
+  width: 150px;
+  height: 150px;
 }
 
 .cart .cart_items .cart_item .info .image img {
@@ -1255,8 +1327,25 @@ ul {
 
 .cart .cart_items .cart_item .actions {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
   width: 50%;
+}
+
+.cart .cart_items .cart_item .content .remove_item button {
+  color: var(--text-color);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  transform: translateY(-10px);
+  -webkit-transform: translateY(-10px);
+  -moz-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  -o-transform: translateY(-10px);
+}
+
+.cart .cart_items .cart_item .content h5 {
+  font-style: italic;
 }
 
 .cart .cart_items .cart_item .quantity,
@@ -1283,21 +1372,10 @@ ul {
 
 .cart .cart_items .cart_item .quantity .minus,
 .cart .cart_items .cart_item .quantity .plus {
-  display: inline-block;
-  cursor: pointer;
-  margin: 0 10px;
+  color: var(--text-color);
+  border: none;
+  padding: 0 10px;
   background-color: transparent;
-  border: 1px solid var(--text-color);
-  width: 30px;
-  font-size: 1rem;
-  height: 30px;
-  text-align: center;
-  line-height: 30px;
-  transition: .3s;
-  -webkit-transition: .3s;
-  -moz-transition: .3s;
-  -ms-transition: .3s;
-  -o-transition: .3s;
 }
 
 .cart .cart_items .cart_item .quantity .remove_item {
@@ -1336,22 +1414,26 @@ ul {
 }
 
 .cart .cart_items .cart_item .price {
-  font-weight: 700;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
 }
 
 .cart .cart_items .sub_total {
   font-size: 1.5rem;
   text-transform: uppercase;
+  color: var(--text-color);
 }
 
 .cart .cart_items .sub_total span {
   margin-left: 50px;
-  font-weight: 800;
+  /* font-weight: 800; */
+}
+
+.cart .cart_items .tax {
+  color: var(--text-color);
 }
 
 .cart .cart_items .checkout_btn {
-  text-align: center;
+  text-align: right;
   margin-top: 30px;
 }
 
@@ -1361,18 +1443,17 @@ ul {
 }
 
 .cart .cart_items .checkout_btn a,
-.cart .cart_items .checkout_btn button,
-.cart .cart_items .update_cart {
+.cart .cart_items .checkout_btn button {
   color: var(--text-color);
-  background-color: transparent;
-  border: 1px solid var(--text-color);
+  background-color: black;
+  border: 1px solid var(--primary-color);
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
   padding: 10px 20px;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   transition: .3s;
   -webkit-transition: .3s;
   -moz-transition: .3s;
@@ -1387,12 +1468,13 @@ ul {
 .cart .cart_items .checkout_btn a:hover,
 .cart .cart_items .checkout_btn button:hover {
   background-color: var(--secondary-color);
+  color: var(--text-color);
 }
 
 /************************ Add Products ***************************/
 
 .add_products .btn {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   color: var(--text-color);
   border: none;
   outline: none;
@@ -1410,7 +1492,7 @@ ul {
 }
 
 .add_products .btn:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   color: initial;
   scale: 1.1;
 }
@@ -1427,10 +1509,9 @@ ul {
 
 .add_products .clear_fields {
   appearance: none;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   border-radius: 4px;
   border-width: 0;
-  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
   color: var(--text-color);
   cursor: pointer;
   height: 48px;
@@ -1496,6 +1577,7 @@ ul {
   left: 0;
   font-size: 1.1rem;
   background-color: transparent;
+  color: var(--text-color);
 }
 
 .add_products .form-control:focus {
@@ -1506,14 +1588,27 @@ ul {
 .add_products .form-control {
   padding-top: 0.7rem !important;
   padding-bottom: 0.7rem !important;
+  background-color: #333;
+  border: none;
 }
 
 /************************ Checkout ***************************/
 
-.checkout input {
+.checkout input,
+.checkout textarea {
   padding: 15px;
+  background-color: #333;
+  border: none;
 }
 
+.checkout input::placeholder,
+.checkout textarea::placeholder {
+  color: var(--text-color);
+}
+
+.checkout label {
+  color: var(--text-color);
+}
 
 .checkout .containing {
   gap: 50px;
@@ -1522,6 +1617,11 @@ ul {
 .checkout form {
   margin-left: auto;
   width: 40%;
+}
+
+.checkout .headlines p,
+.checkout h2 {
+  color: var(--text-color);
 }
 
 .checkout .headlines a {
@@ -1548,7 +1648,7 @@ ul {
 }
 
 .checkout .buy_products button {
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   border: none;
   color: var(--text-color);
 }
@@ -1618,6 +1718,8 @@ footer h2 {
   font-weight: normal;
   position: relative;
   margin-bottom: 80px;
+  color: var(--text-color);
+  font-family: "Artttnorm";
 }
 
 footer h2::before {
@@ -1635,6 +1737,10 @@ footer .policies_socials {
   grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
   gap: 70px;
   text-align: center;
+}
+
+footer .policies_socials .moto h3 {
+  color: var(--text-color);
 }
 
 footer .policies_socials .moto p {
@@ -1804,12 +1910,24 @@ footer .copyright::before {
 
   /***************** Cart ******************/
 
+  .cart h2 {
+    margin-bottom: 50px;
+  }
+
+  .cart .container {
+    max-width: 100% !important;
+  }
+
+  .cart .top_heading {
+    display: none !important;
+  }
+
   .cart .cart_items .cart_item {
     flex-direction: column;
   }
 
   .cart .cart_items .cart_item .info {
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     width: 100%;
   }
 
@@ -1820,7 +1938,7 @@ footer .copyright::before {
 
   .cart .cart_items .cart_item .info .image {
     width: 200px;
-    height: 300px;
+    height: 200px;
     margin-bottom: 20px;
   }
 

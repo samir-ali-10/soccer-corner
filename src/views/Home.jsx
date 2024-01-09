@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel';
 import image1 from "../images/carousel_1.jpeg"
-import image2 from "../images/carousel_2.jpeg"
-import image3 from "../images/carousel_3.jpeg"
+import image2 from "../images/temp-2.jpeg"
+import image3 from "../images/previous_seasons.jpeg"
 import sportswearImage from "../images/sports_wear.jpeg"
 import jerseysImage from "../images/jerseys.jpeg"
 import studsTurfsImage from "../images/studs_turfs.jpeg"

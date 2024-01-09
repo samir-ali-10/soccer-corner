@@ -5,7 +5,7 @@ import image1 from "../images/carousel_1.jpeg"
 import image2 from "../images/carousel_2.jpeg"
 import image3 from "../images/carousel_3.jpeg"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faCaretUp, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { decreaseQuantity, getTotals, increaseQuantity } from '../rtk/features/cart/cartSlice'
@@ -100,6 +100,10 @@ export default function Cart() {
         <div className='cart'>
             <h2>Shopping Cart</h2>
             <Container>
+            <div className="top_heading d-flex justify-content-end me-5">
+                <h4>Quantity</h4>
+                <h4>Total</h4>
+            </div>
                 {
                     cart.length === 0
                         ?
@@ -112,23 +116,26 @@ export default function Cart() {
                             {
                                 cart.map(item =>
                                     <div key={item._id} className="cart_item">
-                                        <div className="info d-flex">
+                                        <div className="info d-flex align-items-center">
                                             <div className="image">
                                                 <img src={image3} alt="image1" />
                                             </div>
                                             <div className="content">
-                                                <h5>{item.code}</h5>
+                                                <div className="code">
+                                                    <h5>{item.code}</h5>
+                                                </div>
+                                                <p>{item.size.toUpperCase()}</p>
+                                                <div className="remove_item">
+                                                    <button onClick={() => removeSingleProduct(item.code)}>remove</button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="actions">
                                             <div className="quantity">
                                                 <div className="quantity_icons d-flex">
-                                                    <button onClick={() => decreaseQuantity(item.code)} className='minus'><FontAwesomeIcon icon={faMinus} /></button>
+                                                    <button onClick={() => decreaseQuantity(item.code)} className='minus'><FontAwesomeIcon icon={faCaretDown} /></button>
                                                     {item.quantity}
-                                                    <button onClick={() => increaseQuantity(item.code)} className='plus' ><FontAwesomeIcon icon={faPlus} /></button>
-                                                </div>
-                                                <div className="remove_item">
-                                                    <button onClick={() => removeSingleProduct(item.code)}>remove</button>
+                                                    <button onClick={() => increaseQuantity(item.code)} className='plus' ><FontAwesomeIcon icon={faCaretUp} /></button>
                                                 </div>
                                             </div>
                                             <div className="price">
@@ -143,7 +150,7 @@ export default function Cart() {
                             <div className="sub_total mt-4 text-end">
                                 subtotal<span>{getTotal()}EGP</span>
                             </div>
-                            <div className="tax text-end mt-4 fs-5">
+                            <div className="tax text-end mt-4 fs-6">
                                 Tax included and shipping calculated at checkout
                             </div>
                             <div className="checkout_btn">

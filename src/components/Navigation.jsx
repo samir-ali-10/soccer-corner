@@ -36,7 +36,7 @@ export default function Navigation() {
 
     return (
         <div className='navigation'>
-            <Navbar expand="lg" className="bg-body-tertiary">
+            <Navbar expand="lg" className="">
                 <Container>
                     <div className="logo">
                         <img src={logo} alt="logo" />
