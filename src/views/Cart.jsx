@@ -58,6 +58,25 @@ export default function Cart() {
         return response.json();
     }
 
+    const calculateSalePrice = (product) => {
+        // console.log(product.price);
+        return product.sale
+        // if(product.sale !== null) {
+        // }
+
+        // else {
+        //     return product.price
+        // }
+        // // Ensure that price and sale are valid numbers
+        // if (typeof product.price !== 'number' || typeof product.sale !== 'number') {
+        //     return 'Invalid input';
+        // }
+
+        // // Calculate the sale price
+        // const salePrice = product.price - (product.price * product.sale) / 100;
+        // return salePrice.toFixed(2); // Adjust decimal places as needed
+    };
+
     let getTotal = () => {
         return cart.reduce((total, item) => total + item.price * item.quantity, 0);
     }
@@ -115,6 +134,8 @@ export default function Cart() {
                                             <div className="price">
                                                 {item.price}EGP
                                             </div>
+                                            {/* {calculateSalePrice(item) === 'Invalid input' ? <div className="price">{item.price}EGP</div> : <div className="price_dashed">{item.price}EGP</div>}
+                                            {calculateSalePrice(item) !== 'Invalid input' ? <span>{calculateSalePrice(item)}EGP</span> : null} */}
                                         </div>
                                     </div>
                                 )

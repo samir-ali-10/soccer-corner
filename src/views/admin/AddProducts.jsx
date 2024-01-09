@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -14,21 +14,6 @@ import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
 export default function AddProducts() {
 
     const { Formik } = formik;
-
-    const codes = [
-        {
-            productCode: "paris",
-            id: 1
-        },
-        {
-            productCode: "alahly",
-            id: 2
-        },
-        {
-            productCode: "zamalek",
-            id: 3
-        }
-    ];
 
     const options = [
         { value: 's', text: 'S' },
@@ -81,6 +66,47 @@ export default function AddProducts() {
         fetch(`http://localhost:3001/api/products/CollectionsNames`).then((res) => res.json()).then((data) => console.log(data));
     }
 
+    const [stock, setStock] = useState([]),
+        [selectedCode, setSelectedCode] = useState(),
+        [product, setProduct] = useState(),
+        [collectionName, setCollectionName] = useState(),
+        [league, setLeague] = useState(),
+        [model, setModel] = useState(),
+        [kit, setKit] = useState(),
+        [code, setCode] = useState(),
+        [price, setPrice] = useState(),
+        [sale, setSale] = useState(),
+        [newCollection, setNewCollection] = useState(),
+        [size, setSize] = useState(),
+        [quantity, setQuantity] = useState(),
+        [description, setDescription] = useState();
+
+    let getData = () => {
+        fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    let getProduct = (val) => {
+        // console.log(val.target.value);
+        fetch(`http://localhost:3001/api/products/code/${val.target.value}`).then(res => res.json()).then(data => {
+            setProduct(data)
+            setCode(data.code)
+            setCollectionName(data.collectionName)
+            setLeague(data.league)
+            setDescription(data.description)
+            setModel(data.model)
+            setPrice(data.price)
+            setSale(data.sale)
+            setNewCollection(data.newCollection)
+            setKit(data.kit)
+            setQuantity(data.quantity)
+            setSize(data.size)
+        })
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
+
     return (
         <div className='add_products mt-4'>
             <Container>
@@ -111,19 +137,18 @@ export default function AddProducts() {
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
                         <Form noValidate onSubmit={handleSubmit}>
-                            <Row>
+                            <Row className='code_info'>
                                 <Form.Group
                                     as={Col}
                                     controlId="validationFormik101"
-                                    className="position-relative"
+                                    className="position-relative mb-0"
                                 >
                                     <Form.Label>Code</Form.Label>
                                     <Form.Control
                                         type="text"
                                         name="code"
-                                        required
                                         list='productsList'
-                                        value={values.code}
+                                        value={values.code === "" ? code : values.code }
                                         onChange={handleChange}
                                         isInvalid={!!errors.code}
                                     />
@@ -131,13 +156,14 @@ export default function AddProducts() {
                                         {errors.code}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <datalist id='productsList'>
+                                <select className='code_list mb-5' value={selectedCode} onChange={getProduct} name="code_list" id="code_list">
+                                    <option value={"--Choose Existing Code--"} >--Choose Existing Code--</option>
                                     {
-                                        codes.map(product =>
-                                            <option key={product.id} value={product.productCode} />
+                                        stock.map(product =>
+                                            <option key={product._id} value={product.code} >{product.code}</option>
                                         )
                                     }
-                                </datalist>
+                                </select>
                             </Row>
                             <Row>
                                 <Form.Group
@@ -149,7 +175,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="collectionName"
-                                        value={values.collectionName}
+                                        value={values.collectionName === "" ? collectionName : values.collectionName }
                                         onChange={handleChange}
                                         isInvalid={!!errors.collectionName}
                                     />
@@ -168,7 +194,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="kit"
-                                        value={values.kit}
+                                        value={values.kit === "" ? kit : values.kit }
                                         onChange={handleChange}
                                         isInvalid={!!errors.kit}
                                     />
@@ -187,7 +213,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="model"
-                                        value={values.model}
+                                        value={values.model === "" ? model : values.model }
                                         onChange={handleChange}
                                         isInvalid={!!errors.model}
                                     />
@@ -206,7 +232,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="league"
-                                        value={values.league}
+                                        value={values.league === "" ? league : values.league }
                                         onChange={handleChange}
                                         isInvalid={!!errors.league}
                                     />
@@ -225,7 +251,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="number"
                                         name="price"
-                                        value={values.price}
+                                        value={values.price === "" ? price : values.price }
                                         onChange={handleChange}
                                         isInvalid={!!errors.price}
                                     />
@@ -244,7 +270,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="number"
                                         name="sale"
-                                        value={values.sale}
+                                        value={values.sale === "" ? sale : values.sale }
                                         onChange={handleChange}
                                         isInvalid={!!errors.sale}
                                     />
@@ -263,7 +289,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="string"
                                         name="newCollection"
-                                        value={values.newCollection}
+                                        value={values.newCollection === "" ? newCollection : values.newCollection }
                                         onChange={handleChange}
                                         isInvalid={!!errors.newCollection}
                                     />
@@ -283,7 +309,7 @@ export default function AddProducts() {
                                         type="text"
                                         name="size"
                                         list='sizeList'
-                                        value={values.size}
+                                        value={values.size === "" ? size : values.size }
                                         onChange={handleChange}
                                         isInvalid={!!errors.size}
                                     />
@@ -309,7 +335,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="number"
                                         name="quantity"
-                                        value={values.quantity}
+                                        value={values.quantity === "" ? quantity : values.quantity }
                                         onChange={handleChange}
                                         isInvalid={!!errors.quantity}
                                     />
@@ -328,7 +354,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="description"
-                                        value={values.description}
+                                        value={values.description === "" ? description : values.description }
                                         onChange={handleChange}
                                         isInvalid={!!errors.description}
                                     />

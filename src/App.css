@@ -1365,6 +1365,11 @@ ul {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 5px 7px 6px -2px;
 }
 
+.add_products .code_info .code_list {
+  width: 250px;
+  height: 48px;
+}
+
 .add_products .btn:hover {
   background-color: var(--secondary-color);
   color: initial;
@@ -1745,6 +1750,17 @@ footer .copyright::before {
 
   .stock .categories .teams {
     margin-bottom: 30px;
+  }
+
+  /***************** Add Products ******************/
+
+  .add_products .code_info {
+    flex-direction: column;
+  }
+
+  .add_products .code_info .code_list {
+    margin-left: auto;
+    margin-right: 15px;
   }
 
   /***************** Cart ******************/

@@ -219,9 +219,8 @@ export default function Products() {
                                             <div className="info">
                                                 <div className="name">{egypt.code}</div>
                                                 <div className="inner_info d-flex justify-content-between">
-                                                    <div className="price">{egypt.price}EGP</div>
-                                                    {/* {console.log(calculateSalePrice(egypt))} */}
-                                                    {calculateSalePrice(egypt) !== 'Invalid input' ? <span>{calculateSalePrice(egypt)}EGP</span> : null }
+                                                    {calculateSalePrice(egypt) === 'Invalid input' ? <div className="price">{egypt.price}EGP</div> : <div className="price_dashed">{egypt.price}EGP</div>}
+                                                    {calculateSalePrice(egypt) !== 'Invalid input' ? <span>{calculateSalePrice(egypt)}EGP</span> : null}
                                                     <div className="add_cart" onClick={(e) => {
                                                         e.preventDefault();
                                                         addToCart(egypt.code)
@@ -250,8 +249,8 @@ export default function Products() {
                                             <div className="info">
                                                 <div className="name">{serieA.code}</div>
                                                 <div className="inner_info d-flex justify-content-between">
-                                                    <div className="price">{serieA.price}EGP</div>
-                                                    {calculateSalePrice(serieA) !== 'Invalid input' ? <span>{calculateSalePrice(serieA)}EGP</span> : null }
+                                                    {calculateSalePrice(serieA) === 'Invalid input' ? <div className="price">{serieA.price}EGP</div> : <div className="price_dashed">{serieA.price}EGP</div>}
+                                                    {calculateSalePrice(serieA) !== 'Invalid input' ? <span>{calculateSalePrice(serieA)}EGP</span> : null}
                                                     <div className="add_cart" onClick={(e) => {
                                                         e.preventDefault();
                                                         addToCart(serieA.code)
@@ -280,9 +279,12 @@ export default function Products() {
                                             <div className="info">
                                                 <div className="name">{spanish.code}</div>
                                                 <div className="inner_info d-flex justify-content-between">
-                                                    <div className="price">{spanish.price}EGP</div>
-                                                    {calculateSalePrice(spanish) !== 'Invalid input' ? <span>{calculateSalePrice(spanish)}EGP</span> : null }
-                                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                    {calculateSalePrice(spanish) === 'Invalid input' ? <div className="price">{spanish.price}EGP</div> : <div className="price_dashed">{spanish.price}EGP</div>}
+                                                    {calculateSalePrice(spanish) !== 'Invalid input' ? <span>{calculateSalePrice(spanish)}EGP</span> : null}
+                                                    <div className="add_cart" onClick={(e) => {
+                                                        e.preventDefault();
+                                                        addToCart(spanish.code)
+                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                                 </div>
                                             </div>
                                         </NavLink>
@@ -307,9 +309,12 @@ export default function Products() {
                                             <div className="info">
                                                 <div className="name">{saudi.code}</div>
                                                 <div className="inner_info d-flex justify-content-between">
-                                                    {calculateSalePrice(saudi) === 'Invalid input' ? <div className="price">{saudi.price}EGP</div> : <div className="price_dashed">{saudi.price}EGP</div> }
-                                                    {calculateSalePrice(saudi) !== 'Invalid input' ? <span>{calculateSalePrice(saudi)}EGP</span> : null }
-                                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                    {calculateSalePrice(saudi) === 'Invalid input' ? <div className="price">{saudi.price}EGP</div> : <div className="price_dashed">{saudi.price}EGP</div>}
+                                                    {calculateSalePrice(saudi) !== 'Invalid input' ? <span>{calculateSalePrice(saudi)}EGP</span> : null}
+                                                    <div className="add_cart" onClick={(e) => {
+                                                        e.preventDefault();
+                                                        addToCart(saudi.code)
+                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                                 </div>
                                             </div>
                                         </NavLink>
@@ -336,7 +341,10 @@ export default function Products() {
                                         <div className="name">{item.title}</div>
                                         <div className="inner_info d-flex justify-content-between">
                                             <div className="price">{item.price}EGP</div>
-                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            <div className="add_cart" onClick={(e) => {
+                                                e.preventDefault();
+                                                addToCart(item.code)
+                                            }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                         </div>
                                     </div>
                                 </NavLink>

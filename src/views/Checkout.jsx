@@ -49,7 +49,7 @@ export default function Checkout() {
                             <Row className='contact mb-5'>
                                 <div className="headlines d-flex justify-content-between align-items-center">
                                     <h2>Contact</h2>
-                                    <p className='m-0'>Have an account? <NavLink>Log in</NavLink></p>
+                                    <p className='m-0'>Have an account? <NavLink to="/">Log in</NavLink></p>
                                 </div>
                                 <Form.Group
                                     as={Col}
