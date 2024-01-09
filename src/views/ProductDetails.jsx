@@ -53,6 +53,9 @@ export default function ProductDetails() {
                     product !== undefined
                         ?
                         <div className="product_container">
+                            <div className="image text-center">
+                                <img src={image3} alt="image3" />
+                            </div>
                             <div className="infos text-center">
                                 <h3 className="title">
                                     {product.code}
@@ -68,9 +71,6 @@ export default function ProductDetails() {
                                     <button className={activeSize === "xxl" ? "active" : ""} onClick={() => handleActive("xxl")}>XXL</button>
                                 </div>
                                 <button className='add_to_cart'>Add to cart</button>
-                            </div>
-                            <div className="image text-center">
-                                <img src={image3} alt="image3" />
                             </div>
                         </div>
                         :

@@ -189,6 +189,14 @@ export default function Stock() {
                 <div className="categories mt-5">
                     <div className="teams">
                         <button onClick={getData}>All</button>
+                        <select value={categorySelected} onChange={getCollection} name="categories" id="categories">
+                            <option value={"--Choose a Collection--"} >--Choose a Product Type--</option>
+                            {
+                                categories.map(category =>
+                                    <option key={category.Name} value={category.Name}>{category.Name}</option>
+                                )
+                            }
+                        </select>
                         <select value={leagueSelected} onChange={getLeague} name="league" id="league">
                             <option value={"--Choose a League--"} >--Choose a League--</option>
                             {
@@ -205,19 +213,17 @@ export default function Stock() {
                                 )
                             }
                         </select>
-                    </div>
-                    <div className="dropdowns">
-                        <select className='me-3' value={sizeSelected} onChange={getCollectionSize} name="sizes" id="sizes">
-                            {
-                                sizeOptions.map(option =>
-                                    <option key={option.value} value={option.value}>{option.text}</option>
-                                )
-                            }
-                        </select>
                         <select value={modelSelected} onChange={getCollectionSizeModel} name="year" id="year">
                             {
                                 modelOptions.map(option =>
                                     <option key={option.text} value={option.text}>{option.text}</option>
+                                )
+                            }
+                        </select>
+                        <select value={sizeSelected} onChange={getCollectionSize} name="sizes" id="sizes">
+                            {
+                                sizeOptions.map(option =>
+                                    <option key={option.value} value={option.value}>{option.text}</option>
                                 )
                             }
                         </select>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import image1 from "../images/ahly_1.jpeg"
+import image1 from "../images/carousel_3.jpeg"
 import image2 from "../images/ahly_2.jpeg"
 import image3 from "../images/ahly_3.jpeg"
 import image4 from "../images/ahly_4.jpeg"
@@ -126,12 +126,6 @@ export default function ProductsAll() {
                                         <div className="info">
                                             <div className="name">{egypt.code}</div>
                                             <div className="price">{egypt.price}EGP</div>
-                                            <div className="sizes">
-                                                {egypt.sizes.map((size) =>
-                                                    <button key={size} className={activeSize === size ? 'active' : ''} onClick={() => setActiveSize(size)} >{size.toLocaleUpperCase()}</button>
-                                                )}
-                                            </div>
-                                            <button className='add_to_cart'>Add to cart</button>
                                         </div>
                                     </NavLink>
                                     :
@@ -151,12 +145,6 @@ export default function ProductsAll() {
                                         <div className="info">
                                             <div className="name">{serieA.code}</div>
                                             <div className="price">{serieA.price}EGP</div>
-                                            <div className="sizes">
-                                                {serieA.sizes.map((size, index) =>
-                                                    <button key={index} className={index === activeSize ? "active" : ""} onClick={() => handleActive(index)} >{size.toLocaleUpperCase()}</button>
-                                                )}
-                                            </div>
-                                            <button className='add_to_cart'>Add to cart</button>
                                         </div>
                                     </NavLink>
                                     :
