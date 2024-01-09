@@ -16,6 +16,7 @@ const upload = multer({ storage: fileStorage});
 // => PRODUCTS
 
 router.get('/api/products/type/:type' , ProductController.getBytype)
+router.get('/api/products/types' , ProductController.getTypes)
 router.get("/api/products", ProductController.getProducts); // get all products
 router.get("/api/products/collection/:collectionName",ProductController.getCollection); // get collection
 router.get("/api/products/code/:code",ProductController.getSingleProduct); // get single product
