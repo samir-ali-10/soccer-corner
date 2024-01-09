@@ -1,11 +1,41 @@
-const ProductModel = require("../models/ProductSchema");
+const types = require('../models/TypesSchema')
 const NameOfCollection = require("../models/NavBarSchema");
 const Cart = require("../models/CartSchema");
 const LeagueNames = require('../models/LeagueSchema')
+const ProductModel = require('../models/ProductSchema')
 
 
+// const Stud = require('../models/StudSchema')
+// const SportsWear = require('../models/SportsWearSchema')
+// const ClassicJerseys = require('../models/ClassicJerseysSchema')
+// const PerviousSeasons = require('../models/PerviousSeasonsSchema')
+// const NewJerseys  = require("../models/NewJerseysSchema");
 
 // => GET
+
+
+exports.getTypes = (req ,res , next) => {
+  types.find()
+  .then(types => {
+    res.json(types)
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
+
+exports.getBytype = (req , res , next) => {
+
+  const type = req.params.type;
+  ProductModel.find({ type })
+  .then(product => {
+    res.json(product)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
 
 exports.getProducts = (req, res, next) => {
   ProductModel.find()
@@ -148,6 +178,7 @@ exports.getLeagueNames = (req , res , next) => {
 exports.postAddProduct = async (req, res, next) => {
   const code = req.body.code;
   const model = req.body.model;
+  const BrandName = req.body.BrandName;
   const league = req.body.league;
   const kit = req.body.kit;
   const type = req.body.type; 
@@ -208,6 +239,7 @@ exports.postAddProduct = async (req, res, next) => {
       kit : kit,
       newCollection : newCollection,
       collectionName: collectionName,
+      BrandName : BrandName,
       type : type,
       sale : sale,
       price: price,
@@ -262,10 +294,12 @@ exports.decreaseQuantity =  async (req, res) => {
 }
 
 
+
+
+
 exports.postProductsOnCart = async (req, res, next) => {
   const code = req.params.code;
   const existingProduct = await ProductModel.findOne({ code });
-
 
   if (existingProduct) {
     const productInCart = await Cart.findOne({ code });
@@ -276,6 +310,7 @@ exports.postProductsOnCart = async (req, res, next) => {
         model: existingProduct.model,
         league: existingProduct.league,
         kit: existingProduct.kit,
+        BrandName : existingProduct.BrandName,
         collectionName: existingProduct.collectionName,
         price: existingProduct.price,
         size: existingProduct.size,
@@ -307,6 +342,7 @@ exports.editProduct = (req, res, next) => {
   const UpdatedCode = req.body.code;
   const UpdatedModel = req.body.model;
   const Updatedleague = req.body.league;
+  const UpdatedBrandName = req.body.BrandName;
   const UpdatedKit = req.body.kit;
   const UpdatedType = req.body.type;
   const UpdatedSale = req.body.sale;
@@ -325,6 +361,7 @@ exports.editProduct = (req, res, next) => {
       league: Updatedleague,
       kit : UpdatedKit,
       collectionName: UpdatedCollectionName,
+      BrandName : UpdatedBrandName,
       sale : UpdatedSale,
       price: UpdatedPrice,
       type: UpdatedType,
@@ -392,4 +429,50 @@ exports.deleteAllProductsFromCart = (req , res , next) => {
   });
 }
 
+
+
+
+
+
+
+
+// exports.getPerviousSeasons = (req ,res , next) => {
+//   PerviousSeasons.find()
+//   .then(products => {
+//     res.json(products)
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   })
+// }
+
+
+// exports.getClassicJerseys = (req ,res, next) => {
+//   ClassicJerseys.find().then(products => {
+//     res.json(products)
+//   }).catch(err => {
+//     console.log(err);
+//   })
+// }
+
+
+
+
+// exports.getStuds = (req , res , next) => {
+//   Stud.find().then( stud => {
+//     res.json(stud)
+//   }).catch(err => {
+//     console.log(err);
+//   })
+// }
+
+
+
+// exports.getSportsWears = (req , res , next) => {
+//   SportsWear.find().then( sportsWears => {
+//     res.json(sportsWears)
+//   }).catch(err => {
+//     console.log(err);
+//   })
+// }
 
