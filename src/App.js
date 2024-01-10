@@ -26,6 +26,7 @@ import Signin from './components/Signin';
 function App() {
 
   const [appearLoginSignup, setAppearLoginSignup] = useState(true),
+    [appearFooter, setAppearFooter] = useState(true),
     [loggedIn, setLoggedIn] = useState(false);
 
   return (
@@ -37,7 +38,7 @@ function App() {
         <Route path="/home" element={<Home appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/checkout" element={<Checkout setAppearFooter={setAppearFooter} />} />
         <Route path="/products/:category" element={<Products />} />
         <Route path="/products/:category/all" element={<ProductsAll />} />
         <Route path="/products/:category/:code" element={<ProductDetails />} />
@@ -52,7 +53,7 @@ function App() {
         <Route path="/shippingPolicy" element={<Shipping />} />
         <Route path="/refund&exchangePolicy" element={<Refund />} />
       </Routes>
-      {!appearLoginSignup ? null : <Footer />}
+      {!appearLoginSignup || !appearFooter ? null : <Footer />}
     </>
   );
 }

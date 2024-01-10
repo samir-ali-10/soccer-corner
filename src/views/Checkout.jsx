@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as formik from 'formik';
 import * as yup from 'yup';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import image3 from "../images/carousel_3.jpeg"
 
-export default function Checkout() {
+export default function Checkout({ setAppearFooter }) {
 
     const [phone, setPhone] = useState('');
+
+    useEffect(() => {
+        setAppearFooter(false)
+    }, [])
 
     const { Formik } = formik;
 
@@ -172,8 +177,8 @@ export default function Checkout() {
                                 <Form.Group className="position-relative mb-3">
                                     <Form.Check
                                         required
-                                        className='terms'
-                                        name="terms"
+                                        className='termsCondition'
+                                        name="termsCondition"
                                         label="Agree to terms and conditions"
                                         onChange={handleChange}
                                         isInvalid={!!errors.termsCondition}
@@ -188,7 +193,7 @@ export default function Checkout() {
                                 <h2>Shipping Prices</h2>
                                 <p className='m-0'>Enter your shipping address to view available shipping Prices</p>
                             </div>
-                            <div className='buy_products mt-5'>
+                            <div className='buy_products lg mt-5'>
                                 <Button className='w-100 pt-2 pb-2 fs-5' type="submit">Order Now</Button>
                             </div>
                         </Form>
@@ -196,8 +201,40 @@ export default function Checkout() {
                 </Formik>
                 <div className="floating_receipt pt-4 pb-4">
                     <div className="content">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, cum nesciunt optio quisquam expedita facere cupiditate, ex ipsum cumque, eligendi deserunt? Iure qui consectetur quas aliquid! Itaque rem inventore quas.</p>
+                        <div className="item">
+                            <div className="info d-flex align-items-center">
+                                <div className="top d-flex">
+                                    <div className="image">
+                                        <img src={image3} alt="image1" />
+                                    </div>
+                                    <div className="title">
+                                        <h5>Real Madrid Full 2023</h5>
+                                        <p>L</p>
+                                    </div>
+                                </div>
+                                <div className="price">
+                                    600EGP
+                                </div>
+                            </div>
+                            <div className="totals">
+                                <div className="subtotal">
+                                    <span>Subtotal</span>
+                                    <p>600EGP</p>
+                                </div>
+                                <div className="shipping">
+                                    <span>Shipping</span>
+                                    <p>50EGP</p>
+                                </div>
+                                <div className="total">
+                                    <span>Total</span>
+                                    <p>650EGP</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div className='buy_products sm mt-2'>
+                    <Button className='w-100 pt-2 pb-2 fs-5' type="submit">Order Now</Button>
                 </div>
             </div>
         </div>

@@ -3,11 +3,13 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import logo from "../images/logo.jpeg"
 import * as formik from 'formik';
 import * as yup from 'yup';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Signup({ appearLoginSignupm, setAppearLoginSignup }) {
 
     const { Formik } = formik;
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setAppearLoginSignup(false)
@@ -27,6 +29,10 @@ export default function Signup({ appearLoginSignupm, setAppearLoginSignup }) {
         address: yup.string().required(),
     });
 
+    let navigateToLogin = () => {
+        navigate('/login');
+    }
+
     const handleSignup = async (values) => {
         let response = await fetch(`http://localhost:3001/api/auth/signUp`, {
             method: 'POST',
@@ -44,8 +50,10 @@ export default function Signup({ appearLoginSignupm, setAppearLoginSignup }) {
                 address: values.address
             })
         })
+        navigateToLogin();
         return response.json();
     }
+
 
 
     return (

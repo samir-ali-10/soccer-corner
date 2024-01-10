@@ -200,7 +200,7 @@ export default function Products() {
                                 {stock.map(spanish =>
                                     spanish.league === "La Liga"
                                         ?
-                                        <NavLink to={`/products/${params.category}/${spanish.code}`} key={spanish._id} className="item">
+                                        <NavLink to={`/products/${params.category}/${spanish.code}`} key={spanish._id} className={calculateSalePrice(spanish) === 'Invalid input' ? "item" : "item sale"}>
                                             <div className="image">
                                                 <img src={image1} alt="image1" />
                                             </div>
@@ -230,7 +230,7 @@ export default function Products() {
                                 {stock.map(saudi =>
                                     saudi.league === "saudi"
                                         ?
-                                        <NavLink to={`/products/${params.category}/${saudi.code}`} key={saudi._id} className="item">
+                                        <NavLink to={`/products/${params.category}/${saudi.code}`} key={saudi._id} className={calculateSalePrice(saudi) === 'Invalid input' ? "item" : "item sale"}>
                                             <div className="image">
                                                 <img src={image1} alt="image1" />
                                             </div>

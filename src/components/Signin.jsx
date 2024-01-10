@@ -41,6 +41,8 @@ export default function Signin({ appearLoginSignupm, setAppearLoginSignup, logge
 
             const { token } = await response.json();
 
+            sessionStorage.setItem('token', token);
+
             setLoggedIn(true);
         } catch (error) {
             console.error('Login failed:', error.message);
