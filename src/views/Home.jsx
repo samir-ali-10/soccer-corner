@@ -98,73 +98,39 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                 </div>
 
                 <div className="best_sellers">
-                    <h2>Best Sellers</h2>
+                    <h2>Offers</h2>
+                    <div className="all_products">
+                        <NavLink to="/products/footballJerseys/all">See All</NavLink>
+                    </div>
                     <div className="slider_container d-flex">
-                        <NavLink className="item">
-                            <div className="image">
-                                <img src={image1} alt="image1" />
-                            </div>
-                            <div className="info">
-                                <div className="name">ahly t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="item">
-                            <div className="image">
-                                <img src={image2} alt="image2" />
-                            </div>
-                            <div className="info">
-                                <div className="name">ahly t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="item">
-                            <div className="image">
-                                <img src={image3} alt="image3" />
-                            </div>
-                            <div className="info">
-                                <div className="name">ahly t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="item">
-                            <div className="image">
-                                <img src={image2} alt="image1" />
-                            </div>
-                            <div className="info">
-                                <div className="name">ahly t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="item">
-                            <div className="image">
-                                <img src={image2} alt="image1" />
-                            </div>
-                            <div className="info">
-                                <div className="name">ahly t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink>
+                        {
+                            stock.map(product =>
+                                product.sale !== null || 0
+                                    ?
+                                    <NavLink className="item">
+                                        <div className="image">
+                                            <img src={image1} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{product.code}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                <div className="price">{product.price}EGP</div>
+                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                    :
+                                    null
+                            )
+                        }
                     </div>
                 </div>
 
                 <div className="best_sellers">
                     <h2>New Collection</h2>
+                    <div className="all_products">
+                        <NavLink to="/products/footballJerseys/all">See All</NavLink>
+                    </div>
                     <div className="slider_container d-flex">
                         {stock.map(newCollection =>
                             newCollection.newCollection === "new"

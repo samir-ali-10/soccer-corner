@@ -40,6 +40,8 @@ export default function Stock() {
     const [stock, setStock] = useState([]),
         [categories, setCategories] = useState([]),
         [leagues, setLeagues] = useState([]),
+        [types, setTypes] = useState([]),
+        [typeSelected, setTypeSelected] = useState(),
         [categorySelected, setCategorySelected] = useState(),
         [leagueSelected, setLeagueSelected] = useState(),
         [sizeSelected, setSizeSelected] = useState(),
@@ -47,6 +49,7 @@ export default function Stock() {
         [size, setSize] = useState(),
         [model, setModel] = useState(),
         [league, setLeague] = useState(),
+        [type, setType] = useState(),
         [collectionName, setCollectionName] = useState("");
 
     let navigate = useNavigate();
@@ -61,6 +64,16 @@ export default function Stock() {
         setLeague("")
         // setLeagueSelected("")
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    let getType = (val) => {
+        setLeague("")
+        setLeagueSelected("");
+        setSizeSelected("")
+        setModelSelected("")
+        setCollectionName("")
+        setType(val.target.value)
+        fetch(`http://localhost:3001/api/products/type/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
     let getCollection = (val) => {
@@ -102,6 +115,10 @@ export default function Stock() {
 
     let getLeagues = () => {
         fetch(`http://localhost:3001/api/products/LeagueNames`).then((res) => res.json()).then((data) => setLeagues(data));
+    }
+
+    let getTypes = () => {
+        fetch(`http://localhost:3001/api/products/types`).then((res) => res.json()).then((data) => setTypes(data));
     }
 
 
@@ -175,9 +192,8 @@ export default function Stock() {
         getData();
         getCategories();
         getLeagues();
+        getTypes();
     }, [])
-
-    console.log(leagues);
 
     return (
         <div className='stock mt-4'>
@@ -189,11 +205,11 @@ export default function Stock() {
                 <div className="categories mt-5">
                     <div className="teams">
                         <button onClick={getData}>All</button>
-                        <select value={categorySelected} onChange={getCollection} name="categories" id="categories">
+                        <select value={typeSelected} onChange={getType} name="categories" id="categories">
                             <option value={"--Choose a Collection--"} >--Choose a Product Type--</option>
                             {
-                                categories.map(category =>
-                                    <option key={category.Name} value={category.Name}>{category.Name}</option>
+                                types.map(type =>
+                                    <option key={type.type} value={type.type}>{type.type}</option>
                                 )
                             }
                         </select>
@@ -279,8 +295,38 @@ export default function Stock() {
                                                             </div>
                                                         </NavLink>
                                                         :
-                                                        null,
-                                                        <p>noskjnka</p>
+                                                        stock.type === typeSelected
+                                                            ?
+                                                            <NavLink key={item._id} className="product" to="">
+                                                                <div className="image">
+                                                                    <img src={image1} alt="image1" />
+                                                                </div>
+                                                                <div className="info">
+                                                                    <div className="code">Product Code: <span>{item.code}</span></div>
+                                                                    <div className="league">Product League: <span>{item.league}</span></div>
+                                                                    <div className="model">Product Model: <span>{item.model}</span></div>
+                                                                    <div className="collectionName">Product Name: <span>{item.collectionName}</span></div>
+                                                                    <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                                                    <div className="size">Product Size: <span>{item.size}</span></div>
+                                                                    <div className="description">Product Description: <span>{item.description}</span></div>
+                                                                    <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                    {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
+                                                                    {item.sale !== null ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                    {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
+                                                                    <div className="delete_item">
+                                                                        <button onClick={(e) => {
+                                                                            propagationNo(e)
+                                                                            deleteItem(item)
+                                                                        }}>Delete Product</button>
+                                                                        <button onClick={(e) => {
+                                                                            propagationNo(e)
+                                                                            navigateToEdit(item)
+                                                                        }} className='edit_product'>Edit Product</button>
+                                                                    </div>
+                                                                </div>
+                                                            </NavLink>
+                                                            :
+                                                            null
                                                     )
                                                 }
                                             </div>

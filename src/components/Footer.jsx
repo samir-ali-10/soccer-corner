@@ -23,8 +23,8 @@ export default function Footer() {
                         <li><NavLink to="">feedback</NavLink></li>
                     </ul>
                     <ul className='socials'>
-                        <li><NavLink to=""><FontAwesomeIcon icon={faFacebook} /></NavLink></li>
-                        <li><NavLink to=""><FontAwesomeIcon icon={faInstagram} /></NavLink></li>
+                        <li><NavLink target='_blank' to="https://www.facebook.com/profile.php?id=100076016882186&mibextid=9R9pXO"><FontAwesomeIcon icon={faFacebook} /></NavLink></li>
+                        <li><NavLink target='_blank' to="https://www.instagram.com/soccer.corner.sports?igsh=dW1mNzJnZ2piemps&utm_source=qr"><FontAwesomeIcon icon={faInstagram} /></NavLink></li>
                     </ul>
                 </div>
                 <div className="copyright mb-3">
