@@ -30,7 +30,7 @@ export default function AdminView() {
                         </div>
                     </NavLink>
                     <NavLink to="/adminSecret/newOrders" className="selection">
-                        <h3>New Orders</h3>
+                        <h3>Orders</h3>
                         <div className="icon">
                             <FontAwesomeIcon icon={faCartFlatbedSuitcase} />
                         </div>

@@ -18,11 +18,20 @@ export default function ProductsAll() {
 
     let params = useParams();
 
-    const [stock, setStock] = useState([]);
+    const [stock, setStock] = useState([]),
+        [activeSize, setActiveSize] = useState(null),
+        [sizeSelected, setSizeSelected] = useState(),
+        [size, setSize] = useState();
 
-    // let sizes = ["S", "M", "L", "XL", "XXL"]
 
-    const [activeSize, setActiveSize] = useState(null);
+    const sizeOptions = [
+        { value: '', text: '--Choose By Size--' },
+        { value: 's', text: 'S' },
+        { value: 'm', text: 'M' },
+        { value: 'l', text: 'L' },
+        { value: 'xl', text: 'XL' },
+        { value: 'xxl', text: 'XXL' },
+    ];
 
     const studsTurfs = [
         {
@@ -94,24 +103,26 @@ export default function ProductsAll() {
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
+    let getProductsBySize = (val) => {
+        fetch(`http://localhost:3001/api/products/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
     useEffect(() => {
         getData();
     }, [])
 
-    
-    let handleActive = (size) => {
-        // setActiveSize(size)
-        // console.log(`selected ${size}`);
-        console.log(activeSize);
-    }
-    
-    useEffect(() => {
-        handleActive();
-    },[activeSize])
-
     return (
         <div className='products_all'>
             <Container>
+                <div className="drop_down text-center mb-5">
+                    <select value={sizeSelected} onChange={getProductsBySize} name="sizes" id="sizes">
+                        {
+                            sizeOptions.map(option =>
+                                <option key={option.value} value={option.value}>{option.text}</option>
+                            )
+                        }
+                    </select>
+                </div>
                 {params.category === "footballJerseys" &&
                     <div className='football_jerseys'>
                         <div className="egyptian_league">
@@ -164,12 +175,6 @@ export default function ProductsAll() {
                                         <div className="info">
                                             <div className="name">{spanish.code}</div>
                                             <div className="price">{spanish.price}EGP</div>
-                                            <div className="sizes">
-                                                {spanish.sizes.map((size, index) =>
-                                                    <button key={index} className={index === activeSize ? "active" : ""} onClick={() => handleActive(index)} >{size.toLocaleUpperCase()}</button>
-                                                )}
-                                            </div>
-                                            <button className='add_to_cart'>Add to cart</button>
                                         </div>
                                     </NavLink>
                                     :
@@ -190,15 +195,7 @@ export default function ProductsAll() {
                                     </div>
                                     <div className="info">
                                         <div className="name">{item.title}</div>
-                                        <div className="price">Price: {item.price}EGP</div>
-                                        <div className="sizes">
-                                            <button className={activeSize === "s" ? "active" : ""} onClick={() => handleActive("s")}>S</button>
-                                            <button className={activeSize === "m" ? "active" : ""} onClick={() => handleActive("m")}>M</button>
-                                            <button className={activeSize === "l" ? "active" : ""} onClick={() => handleActive("l")}>L</button>
-                                            <button className={activeSize === "xl" ? "active" : ""} onClick={() => handleActive("xl")}>XL</button>
-                                            <button className={activeSize === "xxl" ? "active" : ""} onClick={() => handleActive("xxl")}>XXL</button>
-                                        </div>
-                                        <button className='add_to_cart'>Add to cart</button>
+                                        <div className="price">{item.price}EGP</div>
                                     </div>
                                 </NavLink>
                             )}
@@ -216,15 +213,7 @@ export default function ProductsAll() {
                                     </div>
                                     <div className="info">
                                         <div className="name">{item.title}</div>
-                                        <div className="price">Price: {item.price}EGP</div>
-                                        <div className="sizes">
-                                            <button className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
-                                            <button className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
-                                            <button className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
-                                            <button className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
-                                            <button className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button>
-                                        </div>
-                                        <button className='add_to_cart'>Add to cart</button>
+                                        <div className="price">{item.price}EGP</div>
                                     </div>
                                 </NavLink>
                             )}
@@ -242,15 +231,7 @@ export default function ProductsAll() {
                                     </div>
                                     <div className="info">
                                         <div className="name">{item.title}</div>
-                                        <div className="price">Price: {item.price}EGP</div>
-                                        <div className="sizes">
-                                            <button className={activeSize === "s" ? "active" : ""} onClick={(item) => handleActive("s")}>S</button>
-                                            <button className={activeSize === "m" ? "active" : ""} onClick={(item) => handleActive("m")}>M</button>
-                                            <button className={activeSize === "l" ? "active" : ""} onClick={(item) => handleActive("l")}>L</button>
-                                            <button className={activeSize === "xl" ? "active" : ""} onClick={(item) => handleActive("xl")}>XL</button>
-                                            <button className={activeSize === "xxl" ? "active" : ""} onClick={(item) => handleActive("xxl")}>XXL</button>
-                                        </div>
-                                        <button className='add_to_cart'>Add to cart</button>
+                                        <div className="price">{item.price}EGP</div>
                                     </div>
                                 </NavLink>
                             )}

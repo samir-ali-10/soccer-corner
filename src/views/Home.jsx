@@ -26,6 +26,30 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
         setAppearLoginSignup(true)
     }, [])
 
+    let addToCart = async (product) => {
+        // dispatch(increaseQuantity(product))
+        let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
+    }
+
+    const calculateSalePrice = (product) => {
+        // Ensure that price and sale are valid numbers
+        if (typeof product.price !== 'number' || typeof product.sale !== 'number') {
+            return 'Invalid input';
+        }
+
+        // Calculate the sale price
+        const salePrice = product.price - (product.price * product.sale) / 100;
+        return salePrice.toFixed(2); // Adjust decimal places as needed
+    };
+
     return (
         <div className='home_page'>
             <Carousel>
@@ -77,7 +101,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                             </NavLink>
                         </div>
                         <div className="item">
-                            <NavLink to="/products/sportsWear">
+                            <NavLink to="/products/classicJerseys">
                                 <img src={classicJerseys} alt="Image1" />
                                 <div className="category">Classic Jerseys</div>
                             </NavLink>
@@ -89,7 +113,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                             </NavLink>
                         </div>
                         <div className="item">
-                            <NavLink to="/products/others">
+                            <NavLink to="/products/previousSeasons">
                                 <img src={previousSeasons} alt="Image1" />
                                 <div className="category">Previous Seasons</div>
                             </NavLink>
@@ -107,15 +131,19 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                             stock.map(product =>
                                 product.sale !== null || 0
                                     ?
-                                    <NavLink className="item">
+                                    <NavLink to={`/products/offers/${product.code}`} className="item">
                                         <div className="image">
                                             <img src={image1} alt="image1" />
                                         </div>
                                         <div className="info">
                                             <div className="name">{product.code}</div>
                                             <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{product.price}EGP</div>
-                                                <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                {calculateSalePrice(product) === 'Invalid input' ? <div className="price">{product.price}EGP</div> : <div className="price_dashed">{product.price}EGP</div>}
+                                                {calculateSalePrice(product) !== 'Invalid input' ? <span>{calculateSalePrice(product)}EGP</span> : null}
+                                                <div className="add_cart" onClick={(e) => {
+                                                    e.preventDefault();
+                                                    addToCart(product.code)
+                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                             </div>
                                         </div>
                                     </NavLink>
@@ -135,15 +163,19 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                         {stock.map(newCollection =>
                             newCollection.newCollection === "new"
                                 ?
-                                <NavLink key={newCollection._id} className="item">
+                                <NavLink to={`/products/newCollection/${newCollection.code}`} key={newCollection._id} className="item">
                                     <div className="image">
                                         <img src={image2} alt="image2" />
                                     </div>
                                     <div className="info">
                                         <div className="name">{newCollection.code}</div>
                                         <div className="inner_info d-flex justify-content-between">
-                                            <div className="price">{newCollection.price}EGP</div>
-                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            {calculateSalePrice(newCollection) === 'Invalid input' ? <div className="price">{newCollection.price}EGP</div> : <div className="price_dashed">{newCollection.price}EGP</div>}
+                                            {calculateSalePrice(newCollection) !== 'Invalid input' ? <span>{calculateSalePrice(newCollection)}EGP</span> : null}
+                                            <div className="add_cart" onClick={(e) => {
+                                                e.preventDefault();
+                                                addToCart(newCollection.code)
+                                            }}><FontAwesomeIcon icon={faCartPlus} /></div>
                                         </div>
                                     </div>
                                 </NavLink>

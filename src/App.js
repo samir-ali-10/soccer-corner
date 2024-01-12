@@ -22,6 +22,8 @@ import Refund from './views/policies/Refund';
 import { useCallback, useEffect, useState } from 'react';
 import Signup from './components/Signup';
 import Signin from './components/Signin';
+import New from './views/admin/New';
+import Archived from './views/admin/Archived';
 
 function App() {
 
@@ -48,6 +50,8 @@ function App() {
         <Route path="/adminSecret/stock" element={<Stock />} />
         <Route path="/adminSecret/complains" element={<ComplainsAdmin />} />
         <Route path="/adminSecret/newOrders" element={<NewOrders />} />
+        <Route path="/adminSecret/newOrders/new" element={<New />} />
+        <Route path="/adminSecret/newOrders/archived" element={<Archived />} />
         <Route path="/adminSecret/returns" element={<Returns />} />
         <Route path="/adminSecret/editProduct/:code" element={<EditProduct />} />
         <Route path="/shippingPolicy" element={<Shipping />} />

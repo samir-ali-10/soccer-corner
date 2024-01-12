@@ -261,22 +261,27 @@ export default function Products() {
                                 <NavLink to="/products/studs_turfs/all">See All</NavLink>
                             </div>
                             <div className="slider_container d-flex">
-                                {studsTurfs.map(item =>
-                                    <NavLink key={item.id} className="item">
-                                        <div className="image">
-                                            <img src={item.image} alt="image1" />
-                                        </div>
-                                        <div className="info">
-                                            <div className="name">{item.title}</div>
-                                            <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{item.price}EGP</div>
-                                                <div className="add_cart" onClick={(e) => {
-                                                    e.preventDefault();
-                                                    addToCart(item.code)
-                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                {stock.map(item =>
+                                    item.BrandName === "puma"
+                                        ?
+                                        <NavLink to={`/products/${params.category}/${item.code}`} key={item._id} className="item">
+                                            <div className="image">
+                                                <img src={image4} alt="image1" />
                                             </div>
-                                        </div>
-                                    </NavLink>
+                                            <div className="info">
+                                                <div className="name">{item.code}</div>
+                                                <div className="inner_info d-flex justify-content-between">
+                                                    {calculateSalePrice(item) === 'Invalid input' ? <div className="price">{item.price}EGP</div> : <div className="price_dashed">{item.price}EGP</div>}
+                                                    {calculateSalePrice(item) !== 'Invalid input' ? <span>{calculateSalePrice(item)}EGP</span> : null}
+                                                    <div className="add_cart" onClick={(e) => {
+                                                        e.preventDefault();
+                                                        addToCart(item.code)
+                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        :
+                                        null
                                 )}
                             </div>
                         </div>
@@ -286,22 +291,27 @@ export default function Products() {
                                 <NavLink to="/products/studs_turfs/all">See All</NavLink>
                             </div>
                             <div className="slider_container d-flex">
-                                {studsTurfs.map(item =>
-                                    <NavLink key={item.id} className="item">
-                                        <div className="image">
-                                            <img src={item.image} alt="image1" />
-                                        </div>
-                                        <div className="info">
-                                            <div className="name">{item.title}</div>
-                                            <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{item.price}EGP</div>
-                                                <div className="add_cart" onClick={(e) => {
-                                                    e.preventDefault();
-                                                    addToCart(item.code)
-                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                {stock.map(item =>
+                                    item.BrandName === "adidas"
+                                        ?
+                                        <NavLink to={`/products/${params.category}/${item.code}`} key={item._id} className="item">
+                                            <div className="image">
+                                                <img src={image4} alt="image1" />
                                             </div>
-                                        </div>
-                                    </NavLink>
+                                            <div className="info">
+                                                <div className="name">{item.code}</div>
+                                                <div className="inner_info d-flex justify-content-between">
+                                                    {calculateSalePrice(item) === 'Invalid input' ? <div className="price">{item.price}EGP</div> : <div className="price_dashed">{item.price}EGP</div>}
+                                                    {calculateSalePrice(item) !== 'Invalid input' ? <span>{calculateSalePrice(item)}EGP</span> : null}
+                                                    <div className="add_cart" onClick={(e) => {
+                                                        e.preventDefault();
+                                                        addToCart(item.code)
+                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        :
+                                        null
                                 )}
                             </div>
                         </div>
@@ -311,22 +321,27 @@ export default function Products() {
                                 <NavLink to="/products/studs_turfs/all">See All</NavLink>
                             </div>
                             <div className="slider_container d-flex">
-                                {studsTurfs.map(item =>
-                                    <NavLink key={item.id} className="item">
-                                        <div className="image">
-                                            <img src={item.image} alt="image1" />
-                                        </div>
-                                        <div className="info">
-                                            <div className="name">{item.title}</div>
-                                            <div className="inner_info d-flex justify-content-between">
-                                                <div className="price">{item.price}EGP</div>
-                                                <div className="add_cart" onClick={(e) => {
-                                                    e.preventDefault();
-                                                    addToCart(item.code)
-                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                {stock.map(item =>
+                                    item.BrandName === "nike" && item.type === "studs"
+                                        ?
+                                        <NavLink to={`/products/${params.category}/${item.code}`} key={item._id} className="item">
+                                            <div className="image">
+                                                <img src={image4} alt="image1" />
                                             </div>
-                                        </div>
-                                    </NavLink>
+                                            <div className="info">
+                                                <div className="name">{item.code}</div>
+                                                <div className="inner_info d-flex justify-content-between">
+                                                    {calculateSalePrice(item) === 'Invalid input' ? <div className="price">{item.price}EGP</div> : <div className="price_dashed">{item.price}EGP</div>}
+                                                    {calculateSalePrice(item) !== 'Invalid input' ? <span>{calculateSalePrice(item)}EGP</span> : null}
+                                                    <div className="add_cart" onClick={(e) => {
+                                                        e.preventDefault();
+                                                        addToCart(item.code)
+                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                </div>
+                                            </div>
+                                        </NavLink>
+                                        :
+                                        null
                                 )}
                             </div>
                         </div>
@@ -339,43 +354,91 @@ export default function Products() {
                             <NavLink to="/products/sportsWear/all">See All</NavLink>
                         </div>
                         <div className="slider_container d-flex">
-                            {sportsWear.map(item =>
-                                <NavLink key={item.id} className="item">
-                                    <div className="image">
-                                        <img src={item.image} alt="image1" />
-                                    </div>
-                                    <div className="info">
-                                        <div className="name">{item.title}</div>
-                                        <div className="inner_info d-flex justify-content-between">
-                                            <div className="price">{item.price}EGP</div>
-                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                            {stock.map(item =>
+                                item.type === "sports wear"
+                                    ?
+                                    <NavLink to={`/products/${params.category}/${item.code}`} key={item.id} className="item">
+                                        <div className="image">
+                                            <img src={item.image} alt="image1" />
                                         </div>
-                                    </div>
-                                </NavLink>
+                                        <div className="info">
+                                            <div className="name">{item.title}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                {calculateSalePrice(item) === 'Invalid input' ? <div className="price">{item.price}EGP</div> : <div className="price_dashed">{item.price}EGP</div>}
+                                                {calculateSalePrice(item) !== 'Invalid input' ? <span>{calculateSalePrice(item)}EGP</span> : null}
+                                                <div className="add_cart" onClick={(e) => {
+                                                    e.preventDefault();
+                                                    addToCart(item.code)
+                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                    :
+                                    null
                             )}
                         </div>
                     </div>
                 }
-                {params.category === "others" &&
-                    <div className='others'>
-                        <h2>Others</h2>
+                {params.category === "classicJerseys" &&
+                    <div className='classic_jerseys'>
+                        <h2>Classic Jerseys</h2>
                         <div className="all_products">
-                            <NavLink to="/products/others/all">See All</NavLink>
+                            <NavLink to="/products/classicJerseys/all">See All</NavLink>
                         </div>
                         <div className="slider_container d-flex">
-                            {sportsWear.map(item =>
-                                <NavLink key={item.id} className="item">
-                                    <div className="image">
-                                        <img src={item.image} alt="image1" />
-                                    </div>
-                                    <div className="info">
-                                        <div className="name">{item.title}</div>
-                                        <div className="inner_info d-flex justify-content-between">
-                                            <div className="price">{item.price}EGP</div>
-                                            <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
+                            {stock.map(item =>
+                                item.type === "classic jerseys"
+                                    ?
+                                    <NavLink to={`/products/${params.category}/${item.code}`} key={item.id} className="item">
+                                        <div className="image">
+                                            <img src={item.image} alt="image1" />
                                         </div>
-                                    </div>
-                                </NavLink>
+                                        <div className="info">
+                                            <div className="name">{item.title}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                {calculateSalePrice(item) === 'Invalid input' ? <div className="price">{item.price}EGP</div> : <div className="price_dashed">{item.price}EGP</div>}
+                                                {calculateSalePrice(item) !== 'Invalid input' ? <span>{calculateSalePrice(item)}EGP</span> : null}
+                                                <div className="add_cart" onClick={(e) => {
+                                                    e.preventDefault();
+                                                    addToCart(item.code)
+                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                    :
+                                    null
+                            )}
+                        </div>
+                    </div>
+                }
+                {params.category === "previousSeasons" &&
+                    <div className='previous_seasons'>
+                        <h2>Previous Seasons</h2>
+                        <div className="all_products">
+                            <NavLink to="/products/previousSeasons/all">See All</NavLink>
+                        </div>
+                        <div className="slider_container d-flex">
+                            {stock.map(item =>
+                                item.type === "previous seasons"
+                                    ?
+                                    <NavLink to={`/products/${params.category}/${item.code}`} key={item.id} className="item">
+                                        <div className="image">
+                                            <img src={item.image} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{item.title}</div>
+                                            <div className="inner_info d-flex justify-content-between">
+                                                {calculateSalePrice(item) === 'Invalid input' ? <div className="price">{item.price}EGP</div> : <div className="price_dashed">{item.price}EGP</div>}
+                                                {calculateSalePrice(item) !== 'Invalid input' ? <span>{calculateSalePrice(item)}EGP</span> : null}
+                                                <div className="add_cart" onClick={(e) => {
+                                                    e.preventDefault();
+                                                    addToCart(item.code)
+                                                }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                    :
+                                    null
                             )}
                         </div>
                     </div>

@@ -330,7 +330,16 @@ export default function Stock() {
                                                     )
                                                 }
                                             </div>
-                                            {collectionName === "" || league === "serie a" ? <h2 className='league'>Serie A</h2> : <h3>{collectionName}</h3>}
+                                            {collectionName === "" || league === "serie a"
+                                                ?
+                                                <h2 className='league'>Serie A</h2>
+                                                :
+                                                type !== "jerseys"
+                                                ?
+                                                ""
+                                                :
+                                                <h3>{collectionName}</h3>
+                                            }
                                             {model ? <p className='text-center'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
