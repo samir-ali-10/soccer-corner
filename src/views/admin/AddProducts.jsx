@@ -37,7 +37,7 @@ export default function AddProducts() {
         size: yup.string().required(),
         quantity: yup.number().required(),
         description: yup.string(),
-        file: yup.mixed(),
+        image: yup.mixed(),
     });
 
     let handleSub = async (values) => {
@@ -60,7 +60,7 @@ export default function AddProducts() {
                 size: values.size,
                 quantity: values.quantity,
                 description: values.description,
-                file: values.file
+                image: values.image
             })
         })
         return response.json();
@@ -137,7 +137,7 @@ export default function AddProducts() {
                         size: "",
                         quantity: "",
                         description: "",
-                        file: undefined,
+                        image: undefined,
                     }}
                     onSubmit={(values) => {
                         handleSub(values);
@@ -415,12 +415,12 @@ export default function AddProducts() {
                                 <Form.Label>Product Image</Form.Label>
                                 <Form.Control
                                     type="file"
-                                    name="file"
+                                    name="image"
                                     onChange={handleChange}
-                                    isInvalid={!!errors.file}
+                                    isInvalid={!!errors.image}
                                 />
                                 <Form.Control.Feedback type="invalid" tooltip>
-                                    {errors.file}
+                                    {errors.image}
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <div className='clear_fields_container d-flex justify-content-between'>
