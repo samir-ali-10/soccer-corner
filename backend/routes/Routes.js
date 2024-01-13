@@ -2,22 +2,13 @@ const express = require("express");
 const router = express.Router();
 const ProductController = require("../controllers/ProductController");
 const authController = require('../controllers/authController')
-const multer = require('multer');
-const fileStorage = multer.diskStorage({
-    destination : (req , file , cb) => {
-        cb(null , 'images' );
-    },
-    filename : (req ,file , cb) => {
-        cb(null , new Date().toISOString() + '-' + file.originalname);
-    }
-})
-const upload = multer({ storage: fileStorage}); 
-
+const upload = require('../middleware/upload')
 // => PRODUCTS
 
 router.get('/api/products/type/:type' , ProductController.getBytype)
 router.get('/api/products/types' , ProductController.getTypes)
 router.get("/api/products", ProductController.getProducts); // get all products
+router.post("/api/products", upload.array('image') ,  ProductController.postAddProduct);
 router.get("/api/products/collection/:collectionName",ProductController.getCollection); // get collection
 router.get("/api/products/code/:code",ProductController.getSingleProduct); // get single product
 router.get("/api/products/size/:size", ProductController.getBySize); // get by size
@@ -30,7 +21,6 @@ router.get('/api/products/league/:league' , ProductController.getByLeague) // ge
 router.get('/api/products/delete-product/:code' , ProductController.deleteSingleProduct) // delete single product 
 router.get('/api/products/delete-products' , ProductController.deleteAllProducts) // delete all products
 router.post('/api/products/editProduct/:code' , ProductController.editProduct); // edit Product by code
-router.post("/api/products", upload.single('file'), ProductController.postAddProduct);
 
 // Cart
 router.get('/api/products/cart', ProductController.getProductsOnCart)

@@ -2,15 +2,17 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
-const Routes = require("./routes/Routes");
+const Routes = require("./routes/routes");
 const bodyParser = require('body-parser')
 
-app.use(bodyParser.urlencoded({extended : false}));
+
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 
 app.use(Routes);
 
+app.use( '/uploads' , express.static('uploads'))
 
 mongoose
   .connect(

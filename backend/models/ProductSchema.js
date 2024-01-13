@@ -21,11 +21,11 @@ const productSchema = new schema({
       default : 1,
     }, 
     description: String,
-    image:  Buffer, // Binary data for the image
+    image : String,
 })
 
 
-const ProductModel = mongoose.model("products", productSchema);
+const ProductModel = mongoose.model("Products", productSchema);
 
 
 module.exports = ProductModel;
