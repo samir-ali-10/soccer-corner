@@ -41,6 +41,8 @@ export default function AddProducts() {
     });
 
     let handleSub = async (values) => {
+        const formData = new FormData();
+        formData.append('image', values.image);
         let response = await fetch(`http://localhost:3001/api/products`, {
             method: 'POST',
             headers: {
@@ -60,7 +62,7 @@ export default function AddProducts() {
                 size: values.size,
                 quantity: values.quantity,
                 description: values.description,
-                image: values.image
+                formData
             })
         })
         return response.json();
@@ -416,6 +418,7 @@ export default function AddProducts() {
                                 <Form.Control
                                     type="file"
                                     name="image"
+                                    accept='image/*'
                                     onChange={handleChange}
                                     isInvalid={!!errors.image}
                                 />
