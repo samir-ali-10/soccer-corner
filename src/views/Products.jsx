@@ -124,6 +124,7 @@ export default function Products() {
 
     useEffect(() => {
         getData();
+        getLeagues();
     }, [])
 
     return (
@@ -132,67 +133,87 @@ export default function Products() {
                 {params.category === "footballJerseys" &&
                     <div className='football_jerseys'>
                         <div className="egyptian_league">
-                            <h2>Egyptian League</h2>
-                            <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
-                            </div>
-                            <div className="slider_container d-flex">
-                                {stock.map(egypt =>
-                                    egypt.league === "egyptian"
+                            {
+                                leagues.map(league =>
+                                    league.leagueName === "egyptian"
                                         ?
-                                        <NavLink to={`/products/${params.category}/${egypt.code}`} key={egypt._id} className="item">
-                                            <div className="image">
-                                                <img src={image1} alt="image1" />
+                                        <>
+                                            <h2>Egyptian League</h2>
+                                            <div className="all_products">
+                                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
                                             </div>
-                                            <div className="info">
-                                                <div className="name">{egypt.code}</div>
-                                                <div className="inner_info d-flex justify-content-between">
-                                                    {calculateSalePrice(egypt) === 'Invalid input' ? <div className="price">{egypt.price}EGP</div> : <div className="price_dashed">{egypt.price}EGP</div>}
-                                                    {calculateSalePrice(egypt) !== 'Invalid input' ? <span>{calculateSalePrice(egypt)}EGP</span> : null}
-                                                    <div className="add_cart" onClick={(e) => {
-                                                        e.preventDefault();
-                                                        addToCart(egypt.code)
-                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
-                                                </div>
+                                            <div className="slider_container d-flex">
+                                                {stock.map(egypt =>
+                                                    egypt.league === "egyptian"
+                                                        ?
+                                                        <NavLink to={`/products/${params.category}/${egypt.code}`} key={egypt._id} className={calculateSalePrice(egypt) === 'Invalid input' ? "item" : "item sale"}>
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="name">{egypt.code}</div>
+                                                                <div className="inner_info d-flex justify-content-between">
+                                                                    {calculateSalePrice(egypt) === 'Invalid input' ? <div className="price">{egypt.price}EGP</div> : <div className="price_dashed">{egypt.price}EGP</div>}
+                                                                    {calculateSalePrice(egypt) !== 'Invalid input' ? <span>{calculateSalePrice(egypt)}EGP</span> : null}
+                                                                    <div className="add_cart" onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        addToCart(egypt.code)
+                                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null
+                                                )}
                                             </div>
-                                        </NavLink>
+                                        </>
                                         :
                                         null
-                                )}
-                            </div>
+                                )
+                            }
                         </div>
                         <div className="serie_A">
-                            <h2>Serie A</h2>
-                            <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
-                            </div>
-                            <div className="slider_container d-flex">
-                                {stock.map(serieA =>
-                                    serieA.league === "serie a"
+                            {
+                                leagues.map(league =>
+                                    league.leagueName === "serie a"
                                         ?
-                                        <NavLink to={`/products/${params.category}/${serieA.code}`} key={serieA._id} className="item">
-                                            <div className="image">
-                                                <img src={image1} alt="image1" />
+                                        <>
+                                            <h2>Serie A</h2>
+                                            <div className="all_products">
+                                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
                                             </div>
-                                            <div className="info">
-                                                <div className="name">{serieA.code}</div>
-                                                <div className="inner_info d-flex justify-content-between">
-                                                    {calculateSalePrice(serieA) === 'Invalid input' ? <div className="price">{serieA.price}EGP</div> : <div className="price_dashed">{serieA.price}EGP</div>}
-                                                    {calculateSalePrice(serieA) !== 'Invalid input' ? <span>{calculateSalePrice(serieA)}EGP</span> : null}
-                                                    <div className="add_cart" onClick={(e) => {
-                                                        e.preventDefault();
-                                                        addToCart(serieA.code)
-                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
-                                                </div>
+                                            <div className="slider_container d-flex">
+                                                {stock.map(seriea =>
+                                                    seriea.league === "serie a"
+                                                        ?
+                                                        <NavLink to={`/products/${params.category}/${seriea.code}`} key={seriea._id} className={calculateSalePrice(seriea) === 'Invalid input' ? "item" : "item sale"}>
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="name">{seriea.code}</div>
+                                                                <div className="inner_info d-flex justify-content-between">
+                                                                    {calculateSalePrice(seriea) === 'Invalid input' ? <div className="price">{seriea.price}EGP</div> : <div className="price_dashed">{seriea.price}EGP</div>}
+                                                                    {calculateSalePrice(seriea) !== 'Invalid input' ? <span>{calculateSalePrice(seriea)}EGP</span> : null}
+                                                                    <div className="add_cart" onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        addToCart(seriea.code)
+                                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null
+                                                )}
                                             </div>
-                                        </NavLink>
+                                        </>
                                         :
                                         null
-                                )}
-                            </div>
+                                )
+                            }
                         </div>
                         <div className="spanish_league">
-                            <h2>Spanish League</h2>
+                            <h2>La Liga</h2>
                             <div className="all_products">
                                 <NavLink to="/products/footballJerseys/all">See All</NavLink>
                             </div>
@@ -222,34 +243,44 @@ export default function Products() {
                             </div>
                         </div>
                         <div className="saudi_league">
-                            <h2>Saudi League</h2>
-                            <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
-                            </div>
-                            <div className="slider_container d-flex">
-                                {stock.map(saudi =>
-                                    saudi.league === "saudi"
+                            {
+                                leagues.map(league =>
+                                    league.leagueName === "saudi"
                                         ?
-                                        <NavLink to={`/products/${params.category}/${saudi.code}`} key={saudi._id} className={calculateSalePrice(saudi) === 'Invalid input' ? "item" : "item sale"}>
-                                            <div className="image">
-                                                <img src={image1} alt="image1" />
+                                        <>
+                                            <h2>Saudi League</h2>
+                                            <div className="all_products">
+                                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
                                             </div>
-                                            <div className="info">
-                                                <div className="name">{saudi.code}</div>
-                                                <div className="inner_info d-flex justify-content-between">
-                                                    {calculateSalePrice(saudi) === 'Invalid input' ? <div className="price">{saudi.price}EGP</div> : <div className="price_dashed">{saudi.price}EGP</div>}
-                                                    {calculateSalePrice(saudi) !== 'Invalid input' ? <span>{calculateSalePrice(saudi)}EGP</span> : null}
-                                                    <div className="add_cart" onClick={(e) => {
-                                                        e.preventDefault();
-                                                        addToCart(saudi.code)
-                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
-                                                </div>
+                                            <div className="slider_container d-flex">
+                                                {stock.map(saudi =>
+                                                    saudi.league === "saudi"
+                                                        ?
+                                                        <NavLink to={`/products/${params.category}/${saudi.code}`} key={saudi._id} className={calculateSalePrice(saudi) === 'Invalid input' ? "item" : "item sale"}>
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="name">{saudi.code}</div>
+                                                                <div className="inner_info d-flex justify-content-between">
+                                                                    {calculateSalePrice(saudi) === 'Invalid input' ? <div className="price">{saudi.price}EGP</div> : <div className="price_dashed">{saudi.price}EGP</div>}
+                                                                    {calculateSalePrice(saudi) !== 'Invalid input' ? <span>{calculateSalePrice(saudi)}EGP</span> : null}
+                                                                    <div className="add_cart" onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        addToCart(saudi.code)
+                                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null
+                                                )}
                                             </div>
-                                        </NavLink>
+                                        </>
                                         :
                                         null
-                                )}
-                            </div>
+                                )
+                            }
                         </div>
                     </div>
                 }

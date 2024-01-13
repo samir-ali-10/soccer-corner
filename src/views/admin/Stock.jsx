@@ -41,6 +41,7 @@ export default function Stock() {
         [categories, setCategories] = useState([]),
         [leagues, setLeagues] = useState([]),
         [types, setTypes] = useState([]),
+        [all, setAll] = useState(),
         [typeSelected, setTypeSelected] = useState(),
         [categorySelected, setCategorySelected] = useState(),
         [leagueSelected, setLeagueSelected] = useState(),
@@ -56,13 +57,10 @@ export default function Stock() {
 
     let getData = () => {
         setCollectionName("")
-        // setCategorySelected("")
         setModel("")
-        // setModelSelected("")
         setSize("")
-        // setSizeSelected("")
         setLeague("")
-        // setLeagueSelected("")
+        setAll("all")
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
@@ -72,6 +70,7 @@ export default function Stock() {
         setSizeSelected("")
         setModelSelected("")
         setCollectionName("")
+        setAll("");
         setType(val.target.value)
         fetch(`http://localhost:3001/api/products/type/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
@@ -81,6 +80,8 @@ export default function Stock() {
         setLeagueSelected("");
         setSizeSelected("")
         setModelSelected("")
+        setType("");
+        setAll("");
         setCollectionName(val.target.value);
         fetch(`http://localhost:3001/api/products/collection/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
@@ -90,6 +91,8 @@ export default function Stock() {
         setCollectionName("")
         setCategorySelected("")
         setModelSelected("")
+        setType("");
+        setAll("");
         setLeague(val.target.value);
         fetch(`http://localhost:3001/api/products/league/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
@@ -260,8 +263,17 @@ export default function Stock() {
                                         ?
                                         <>
                                             {collectionName ? <h3>{collectionName}</h3> : <h3>All Products</h3>}
-                                            {collectionName === "" || league === "egyptian" ? <h2 className='league'>Egyptian League</h2> : <h3>{collectionName}</h3>}
-                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            {all === "all"
+                                                ?
+                                                null
+                                                :
+                                                type !== ""
+                                                    ?
+                                                    <h2>{type}</h2>
+                                                    :
+                                                    league === "egyptian" ? <h2 className='league'>Egyptian League</h2> : null
+                                            }
+                                            {model ? <p className='text-center text-white'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
                                                     stock.map((item) => item.league === "egyptian"
@@ -295,52 +307,21 @@ export default function Stock() {
                                                             </div>
                                                         </NavLink>
                                                         :
-                                                        stock.type === typeSelected
-                                                            ?
-                                                            <NavLink key={item._id} className="product" to="">
-                                                                <div className="image">
-                                                                    <img src={image1} alt="image1" />
-                                                                </div>
-                                                                <div className="info">
-                                                                    <div className="code">Product Code: <span>{item.code}</span></div>
-                                                                    <div className="league">Product League: <span>{item.league}</span></div>
-                                                                    <div className="model">Product Model: <span>{item.model}</span></div>
-                                                                    <div className="collectionName">Product Name: <span>{item.collectionName}</span></div>
-                                                                    <div className="price">Product Price: <span>{item.price}EGP</span></div>
-                                                                    <div className="size">Product Size: <span>{item.size}</span></div>
-                                                                    <div className="description">Product Description: <span>{item.description}</span></div>
-                                                                    <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
-                                                                    {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}</span></div> : null}
-                                                                    {item.sale !== null ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
-                                                                    {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
-                                                                    <div className="delete_item">
-                                                                        <button onClick={(e) => {
-                                                                            propagationNo(e)
-                                                                            deleteItem(item)
-                                                                        }}>Delete Product</button>
-                                                                        <button onClick={(e) => {
-                                                                            propagationNo(e)
-                                                                            navigateToEdit(item)
-                                                                        }} className='edit_product'>Edit Product</button>
-                                                                    </div>
-                                                                </div>
-                                                            </NavLink>
-                                                            :
-                                                            null
+                                                        null
                                                     )
                                                 }
                                             </div>
-                                            {collectionName === "" || league === "serie a"
+                                            {all === "all"
                                                 ?
-                                                <h2 className='league'>Serie A</h2>
+                                                null
                                                 :
-                                                type !== "jerseys"
-                                                ?
-                                                ""
-                                                :
-                                                <h3>{collectionName}</h3>
+                                                type !== ""
+                                                    ?
+                                                    <h2>{type}</h2>
+                                                    :
+                                                    league === "serie a" ? <h2 className='league'>Serie A</h2> : null
                                             }
-                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            {model ? <p className='text-center text-white'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
                                                     stock.map((item) => item.league === "serie a"
@@ -378,8 +359,17 @@ export default function Stock() {
                                                     )
                                                 }
                                             </div>
-                                            {collectionName === "" || league === "La Liga" ? <h2 className='league'>La Liga</h2> : <h3>{collectionName}</h3>}
-                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            {all === "all"
+                                                ?
+                                                null
+                                                :
+                                                type !== ""
+                                                    ?
+                                                    <h2>{type}</h2>
+                                                    :
+                                                    league === "La Liga" ? <h2 className='league'>La Liga</h2> : null
+                                            }
+                                            {model ? <p className='text-center text-white'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
                                                     stock.map((item) => item.league === "La Liga"
@@ -417,8 +407,17 @@ export default function Stock() {
                                                     )
                                                 }
                                             </div>
-                                            {collectionName === "" || league === "premier" ? <h2 className='league'>Premier League</h2> : <h3>{collectionName}</h3>}
-                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            {all === "all"
+                                                ?
+                                                null
+                                                :
+                                                type !== ""
+                                                    ?
+                                                    <h2>{type}</h2>
+                                                    :
+                                                    league === "premier" ? <h2 className='league'>Premier League</h2> : null
+                                            }
+                                            {model ? <p className='text-center text-white'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
                                                     stock.map((item) => item.league === "premier"
@@ -456,8 +455,17 @@ export default function Stock() {
                                                     )
                                                 }
                                             </div>
-                                            {collectionName === "" || league === "saudi" ? <h2 className='league'>Saudi League</h2> : <h3>{collectionName}</h3>}
-                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            {all === "all"
+                                                ?
+                                                null
+                                                :
+                                                type !== ""
+                                                    ?
+                                                    <h2>{type}</h2>
+                                                    :
+                                                    league === "saudi" ? <h2 className='league'>Saudi League</h2> : null
+                                            }
+                                            {model ? <p className='text-center text-white'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
                                                     stock.map((item) => item.league === "saudi"
@@ -499,7 +507,7 @@ export default function Stock() {
                                         :
                                         <>
                                             {collectionName ? <h3>{collectionName}</h3> : <h3>All Products</h3>}
-                                            {model ? <p className='text-center'>{model}</p> : ""}
+                                            {model ? <p className='text-center text-white'>{model}</p> : ""}
                                             <div className="products_container mb-5">
                                                 {
                                                     stock.map(item =>

@@ -107,6 +107,17 @@ export default function ProductsAll() {
         fetch(`http://localhost:3001/api/products/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
+    const calculateSalePrice = (product) => {
+        // Ensure that price and sale are valid numbers
+        if (typeof product.price !== 'number' || typeof product.sale !== 'number') {
+            return 'Invalid input';
+        }
+
+        // Calculate the sale price
+        const salePrice = product.price - (product.price * product.sale) / 100;
+        return salePrice.toFixed(2); // Adjust decimal places as needed
+    };
+
     useEffect(() => {
         getData();
     }, [])
@@ -136,7 +147,8 @@ export default function ProductsAll() {
                                         </div>
                                         <div className="info">
                                             <div className="name">{egypt.code}</div>
-                                            <div className="price">{egypt.price}EGP</div>
+                                            {calculateSalePrice(egypt) === 'Invalid input' ? <div className="price">{egypt.price}EGP</div> : <div className="price_dashed">{egypt.price}EGP</div>}
+                                            {calculateSalePrice(egypt) !== 'Invalid input' ? <span>{calculateSalePrice(egypt)}EGP</span> : null}
                                         </div>
                                     </NavLink>
                                     :
@@ -155,7 +167,8 @@ export default function ProductsAll() {
                                         </div>
                                         <div className="info">
                                             <div className="name">{serieA.code}</div>
-                                            <div className="price">{serieA.price}EGP</div>
+                                            {calculateSalePrice(serieA) === 'Invalid input' ? <div className="price">{serieA.price}EGP</div> : <div className="price_dashed">{serieA.price}EGP</div>}
+                                            {calculateSalePrice(serieA) !== 'Invalid input' ? <span>{calculateSalePrice(serieA)}EGP</span> : null}
                                         </div>
                                     </NavLink>
                                     :
@@ -174,7 +187,8 @@ export default function ProductsAll() {
                                         </div>
                                         <div className="info">
                                             <div className="name">{spanish.code}</div>
-                                            <div className="price">{spanish.price}EGP</div>
+                                            {calculateSalePrice(spanish) === 'Invalid input' ? <div className="price">{spanish.price}EGP</div> : <div className="price_dashed">{spanish.price}EGP</div>}
+                                            {calculateSalePrice(spanish) !== 'Invalid input' ? <span>{calculateSalePrice(spanish)}EGP</span> : null}
                                         </div>
                                     </NavLink>
                                     :

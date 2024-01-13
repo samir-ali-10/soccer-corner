@@ -1059,11 +1059,18 @@ ul {
   text-transform: uppercase;
 }
 
-.products_all .items_container .item .info .price {
+.products_all .items_container .item .info .price,
+.products_all .items_container .item .info .price_dashed,
+.products_all .items_container .item .info span {
   font-size: 1.4rem;
   font-weight: 600;
   position: relative;
   margin-bottom: 30px;
+}
+
+.products_all .items_container .item .info .price_dashed {
+  margin: 10px 0;
+  text-decoration: line-through;
 }
 
 .products_all .items_container .item .info .price::before {
