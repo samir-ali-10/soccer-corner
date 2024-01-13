@@ -3,7 +3,7 @@ const NameOfCollection = require("../models/NavBarSchema");
 const Cart = require("../models/CartSchema");
 const LeagueNames = require('../models/LeagueSchema')
 const ProductModel = require('../models/ProductSchema')
-
+const Size = require('../models/SizeSchema')
 
 // => GET
 
@@ -14,6 +14,31 @@ exports.getTypes = (req ,res , next) => {
   }).catch(err => {
     console.log(err);
   })
+}
+
+exports.getSizes = (req , res) => {
+  Size.find().then(size => {
+    res.json(size)
+  }).catch(err => {
+    console.log(err);
+  })
+}
+
+exports.getTypeBrandNameCollectionNameSize = (req ,res) => {
+  const type = req.params.type;
+  const brandName = req.params.brandName;
+  const collectionName = req.params.collectionName;
+  const size = req.params.size;
+
+  ProductModel.find({type : type , BrandName : brandName , collectionName : collectionName , size : size})
+  .then(keys => {
+    res.json(keys)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+
+  
 }
 
 
@@ -184,18 +209,16 @@ exports.postAddProduct = async (req, res, next) => {
   const quantity = req.body.quantity;
   const description = req.body.description;
 
-  
 
-
-
-
+  // check if product exist 
 
   const existingProduct = await ProductModel.findOne({ code });
-
   if (existingProduct) {
     console.log('Product is already exist ');
     return res.json("product already exist")
   }
+
+  //check if the collectionName exist 
 
   const existingCollectionName = await NameOfCollection.findOne({ Name: collectionName });
 
@@ -207,11 +230,12 @@ exports.postAddProduct = async (req, res, next) => {
     const newNameOfCollection = new NameOfCollection({
       Name: collectionName,
     });
-    await newNameOfCollection.save();
+    await newNameOfCollection.trim().save();
     console.log('New collectionName added:', newNameOfCollection);
   }
 
 
+  // check if the league name exist
 
   const existingLeagueName = await LeagueNames.findOne({ leagueName: league });
 
@@ -219,13 +243,13 @@ exports.postAddProduct = async (req, res, next) => {
     console.log('league is already exist');
   }
    else {
+
     const newLeagueName = new LeagueNames({
       leagueName: league,
     });
-    await newLeagueName.save();
+    await newLeagueName.trim().save();
     console.log('New league added:', newLeagueName);
   }
-
 
 
     const product = new ProductModel({
@@ -244,16 +268,6 @@ exports.postAddProduct = async (req, res, next) => {
       sizes : sizes,
       description: description,
     });
-    if (req.files) {
-      let path = ''
-      req.files.forEach( (files , index , arr) => {
-        path = path + files.path + ','
-      })
-      path = path.substring(0 , path.lastIndexOf(','))
-      product.image = path
-    } else {
-      console.log('no image provided');
-    }
     await product.save();
     console.log('New product added:', product);
 

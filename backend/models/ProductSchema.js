@@ -21,7 +21,7 @@ const productSchema = new schema({
       default : 1,
     }, 
     description: String,
-    image : String,
+    // fileImage : String,
 })
 
 

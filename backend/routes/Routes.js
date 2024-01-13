@@ -8,7 +8,7 @@ const upload = require('../middleware/upload')
 router.get('/api/products/type/:type' , ProductController.getBytype)
 router.get('/api/products/types' , ProductController.getTypes)
 router.get("/api/products", ProductController.getProducts); // get all products
-router.post("/api/products", upload.array('image') ,  ProductController.postAddProduct);
+router.post("/api/products",  ProductController.postAddProduct);
 router.get("/api/products/collection/:collectionName",ProductController.getCollection); // get collection
 router.get("/api/products/code/:code",ProductController.getSingleProduct); // get single product
 router.get("/api/products/size/:size", ProductController.getBySize); // get by size
@@ -21,7 +21,8 @@ router.get('/api/products/league/:league' , ProductController.getByLeague) // ge
 router.get('/api/products/delete-product/:code' , ProductController.deleteSingleProduct) // delete single product 
 router.get('/api/products/delete-products' , ProductController.deleteAllProducts) // delete all products
 router.post('/api/products/editProduct/:code' , ProductController.editProduct); // edit Product by code
-
+router.get('/api/products/sizes' , ProductController.getBySize); // get sizes
+router.get('/api/products/:type/:brandName/:collectionName/:size' , ProductController.getTypeBrandNameCollectionNameSize); //get type brandname collectionname size
 // Cart
 router.get('/api/products/cart', ProductController.getProductsOnCart)
 router.post('/api/products/cart/:code' , ProductController.postProductsOnCart);
