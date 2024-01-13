@@ -141,7 +141,7 @@ export default function ProductsAll() {
                             <div className="items_container">
                                 {stock.map((egypt) => egypt.league === "egyptian"
                                     ?
-                                    <NavLink key={egypt._id} className="item">
+                                    <NavLink to={`/products/${params.category}/${egypt.code}`} key={egypt._id} className="item">
                                         <div className="image">
                                             <img src={image1} alt="image1" />
                                         </div>
@@ -161,7 +161,7 @@ export default function ProductsAll() {
                             <div className="items_container">
                                 {stock.map((serieA) => serieA.league === "serie a"
                                     ?
-                                    <NavLink key={serieA._id} className="item">
+                                    <NavLink to={`/products/${params.category}/${serieA.code}`} key={serieA._id} className="item">
                                         <div className="image">
                                             <img src={image1} alt="image1" />
                                         </div>
@@ -181,7 +181,7 @@ export default function ProductsAll() {
                             <div className="items_container">
                                 {stock.map((spanish) => spanish.league === "La Liga"
                                     ?
-                                    <NavLink key={spanish._id} className="item">
+                                    <NavLink to={`/products/${params.category}/${spanish.code}`} key={spanish._id} className="item">
                                         <div className="image">
                                             <img src={image1} alt="image1" />
                                         </div>
@@ -202,16 +202,20 @@ export default function ProductsAll() {
                     <div className='studs_turfs'>
                         <h2>Studs & Turfs</h2>
                         <div className="items_container">
-                            {studsTurfs.map(item =>
-                                <NavLink key={item.id} className="item">
-                                    <div className="image">
-                                        <img src={item.image} alt="image1" />
-                                    </div>
-                                    <div className="info">
-                                        <div className="name">{item.title}</div>
-                                        <div className="price">{item.price}EGP</div>
-                                    </div>
-                                </NavLink>
+                            {stock.map(item =>
+                                item.type === "studs"
+                                    ?
+                                    <NavLink to={`/products/${params.category}/${item.code}`} key={item._id} className="item">
+                                        <div className="image">
+                                            <img src={image2} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{item.code}</div>
+                                            <div className="price">{item.price}EGP</div>
+                                        </div>
+                                    </NavLink>
+                                    :
+                                    null
                             )}
                         </div>
                     </div>

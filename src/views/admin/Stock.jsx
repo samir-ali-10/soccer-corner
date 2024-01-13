@@ -41,6 +41,7 @@ export default function Stock() {
         [categories, setCategories] = useState([]),
         [leagues, setLeagues] = useState([]),
         [types, setTypes] = useState([]),
+        [sizes, setSizes] = useState([]),
         [all, setAll] = useState(),
         [typeSelected, setTypeSelected] = useState(),
         [categorySelected, setCategorySelected] = useState(),
@@ -73,6 +74,11 @@ export default function Stock() {
         setAll("");
         setType(val.target.value)
         fetch(`http://localhost:3001/api/products/type/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    let getTypeBrandCollectionSize = (val) => {
+        setSize(val.target.value);
+        fetch(`http://localhost:3001/api/products/${type}/${league}/${collectionName}/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
     let getCollection = (val) => {
@@ -121,6 +127,9 @@ export default function Stock() {
         fetch(`http://localhost:3001/api/products/types`).then((res) => res.json()).then((data) => setTypes(data));
     }
 
+    let getSizes = () => {
+        fetch(`http://localhost:3001/api/products/sizes`).then((res) => res.json()).then((data) => setSizes(data))
+    }
 
     let propagationNo = (event) => {
         event.stopPropagation()
@@ -193,7 +202,10 @@ export default function Stock() {
         getCategories();
         getLeagues();
         getTypes();
+        getSizes();
     }, [])
+
+    console.log(sizes);
 
     return (
         <div className='stock mt-4'>
@@ -214,7 +226,7 @@ export default function Stock() {
                             }
                         </select>
                         <select value={leagueSelected} onChange={getLeague} name="league" id="league">
-                            <option value={"--Choose a League--"} >--Choose a League--</option>
+                            <option value={"--Choose a League--"} >--Choose a League/BrandName--</option>
                             {
                                 leagues.map(league =>
                                     <option key={league.leagueName} value={league.leagueName}>{league.leagueName}</option>
@@ -236,7 +248,14 @@ export default function Stock() {
                                 )
                             }
                         </select>
-                        <select value={sizeSelected} onChange={getCollectionSize} name="sizes" id="sizes">
+                        <select value={sizeSelected} onChange={() => {
+                            type !== ""
+                                ?
+                                getTypeBrandCollectionSize()
+                                :
+                                getCollectionSize()
+                        }
+                        } name="sizes" id="sizes">
                             {
                                 sizeOptions.map(option =>
                                     <option key={option.value} value={option.value}>{option.text}</option>

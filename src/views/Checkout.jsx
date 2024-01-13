@@ -3,9 +3,46 @@ import * as formik from 'formik';
 import * as yup from 'yup';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import image3 from "../images/carousel_3.jpeg"
+import image1 from "../images/carousel_3.jpeg"
+import image2 from "../images/ahly_2.jpeg"
+import image3 from "../images/ahly_3.jpeg"
+import image4 from "../images/ahly_4.jpeg"
+import image5 from "../images/ahly_5.jpeg"
 
 export default function Checkout({ setAppearFooter }) {
+
+    const sportsWear = [
+        {
+            image: image1,
+            price: 300,
+            title: "Sports Wear One",
+            id: 1
+        },
+        {
+            image: image2,
+            price: 400,
+            title: "Sports Wear Two",
+            id: 2
+        },
+        {
+            image: image3,
+            price: 500,
+            title: "Sports Wear Three",
+            id: 3
+        },
+        {
+            image: image4,
+            price: 500,
+            title: "Sports Wear Four",
+            id: 4
+        },
+        {
+            image: image5,
+            price: 500,
+            title: "Sports Wear Five",
+            id: 5
+        },
+    ]
 
     const [phone, setPhone] = useState('');
 
@@ -21,7 +58,7 @@ export default function Checkout({ setAppearFooter }) {
         zone: yup.string().required(),
         area: yup.string().required(),
         address: yup.string().required(),
-        phone: yup.number().required(),
+        phone: yup.string().required().matches(/^[0-9]+$/, "Must be only digits").min(10, "Must Be 11 Digits").max(11, "Must Be 11 Digits"),
         note: yup.string(),
         termsCondition: yup.bool().required().oneOf([true], 'terms must be accepted'),
     });
@@ -124,7 +161,7 @@ export default function Checkout({ setAppearFooter }) {
                                     className="position-relative mb-4"
                                 >
                                     <Form.Control
-                                        type="number"
+                                        type="text"
                                         name="phone"
                                         placeholder='Phone Number'
                                         value={values.phone}
@@ -199,22 +236,28 @@ export default function Checkout({ setAppearFooter }) {
                         </Form>
                     )}
                 </Formik>
-                <div className="floating_receipt pt-4 pb-4">
+                <div className="floating_receipt pb-4">
                     <div className="content">
                         <div className="item">
-                            <div className="info d-flex align-items-center">
-                                <div className="top d-flex">
-                                    <div className="image">
-                                        <img src={image3} alt="image1" />
-                                    </div>
-                                    <div className="title">
-                                        <h5>Real Madrid Full 2023</h5>
-                                        <p>L</p>
-                                    </div>
-                                </div>
-                                <div className="price">
-                                    600EGP
-                                </div>
+                            <div className="info">
+                                {
+                                    sportsWear.map(product =>
+                                        <>
+                                            <div className="top d-flex mb-3">
+                                                <div className="image">
+                                                    <img src={product.image} alt="image1" />
+                                                </div>
+                                                <div className="title">
+                                                    <h5>{product.title}</h5>
+                                                    <p>L</p>
+                                                </div>
+                                                <div className="price">
+                                                    {product.price}EGP
+                                                </div>
+                                            </div>
+                                        </>
+                                    )
+                                }
                             </div>
                             <div className="totals">
                                 <div className="subtotal">
