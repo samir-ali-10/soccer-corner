@@ -71,22 +71,19 @@ exports.signUp = async (req, res, next) => {
       next(err);
     }
   };
-
   exports.logIn = async (req, res, next) => {
     try {
         const email = req.body.email;
         const password = req.body.password;
-        let loadedUser;
 
         // Find the user by email
         const user = await User.findOne({ email: email });
 
         if (!user) {
-            const error = new Error('A user with this email could not be found')
-            console.log('A user with this email could not be found');
+            const error = new Error('A user with this email could not be found');
+            error.statusCode = 404; // Not Found
+            throw error;
         }
-
-        loadedUser = user;
 
         // Compare the provided password with the hashed password in the database
         const isEqual = await bcrypt.compare(password, user.password);
@@ -99,22 +96,21 @@ exports.signUp = async (req, res, next) => {
 
         // Generate a JWT token for the authenticated user
         const token = jwt.sign({
-            email: loadedUser.email,
-            userId: loadedUser._id.toString()
+            email: user.email,
+            userId: user._id
         }, 'somesupersecretsecret', { expiresIn: '1h' });
 
         // Send the token and userId to the client
-        res.status(200).json({ token: token, userId: loadedUser._id.toString() });
         res.redirect('/home');
+        // res.status(200).json({ token: token, userId: user._id });
 
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
         }
-        next(err);
+        // res.status(err.statusCode).json({ error: err.message });
     }
-};
-
+  };
 exports.getReviews = (req ,res,next) => {
   Reviews.find()
   .then(reviews => {

@@ -5,14 +5,7 @@ const LeagueNames = require('../models/LeagueSchema')
 const ProductModel = require('../models/ProductSchema')
 
 
-// const Stud = require('../models/StudSchema')
-// const SportsWear = require('../models/SportsWearSchema')
-// const ClassicJerseys = require('../models/ClassicJerseysSchema')
-// const PerviousSeasons = require('../models/PerviousSeasonsSchema')
-// const NewJerseys  = require("../models/NewJerseysSchema");
-
 // => GET
-
 
 exports.getTypes = (req ,res , next) => {
   types.find()
@@ -41,7 +34,7 @@ exports.getProducts = (req, res, next) => {
   ProductModel.find()
     .then((products) => {
       res.json(products);
-      console.log(products);
+      // console.log(products);
     })
     .catch((err) => {
       console.log(err);
@@ -63,7 +56,7 @@ exports.getCollection = (req, res, next) => {
   ProductModel.find({ collectionName })
     .then((products) => {
       res.json(products);
-      console.log(products);
+      // console.log(products);
     })
     .catch((err) => {
       console.log(err);
@@ -75,7 +68,7 @@ exports.getByLeague = (req, res, next) => {
   ProductModel.find({ league })
     .then((product) => {
       res.json(product);
-      console.log(product);
+      // console.log(product);
     })
     .catch((err) => {
       console.log(err);
@@ -87,7 +80,7 @@ exports.getSingleProduct = (req, res, next) => {
   ProductModel.findOne({ code })
     .then((product) => {
       res.json(product);
-      console.log(product);
+      // console.log(product);
     })
     .catch((err) => {
       console.log(err);
@@ -99,7 +92,7 @@ exports.getBySize = (req, res, next) => {
   ProductModel.find({ size })
     .then((products) => {
       res.json(products);
-      console.log(products);
+      // console.log(products);
     })
     .catch((err) => {
       console.log(err);
@@ -113,7 +106,7 @@ exports.getCollectionAndModel = (req , res, next) => {
   ProductModel.find({ model , collectionName})
   .then(products => {
     res.json(products)
-    console.log(products);
+    // console.log(products);
   })
   .catch(err => { 
     console.log(err);
@@ -127,7 +120,7 @@ exports.getCollectionAndSize = (req , res, next) => {
   ProductModel.find({ size , collectionName})
   .then(products => {
     res.json(products)
-    console.log(products);
+    // console.log(products);
   })
   .catch(err => { 
     console.log(err);
@@ -142,7 +135,7 @@ exports.getCollectionAndModelAndSize = (req , res, next) => {
   ProductModel.find({model , size , collectionName})
   .then(products => {
     res.json(products)
-    console.log(products);
+    // console.log(products);
   })
   .catch(err => { 
     console.log(err);
@@ -155,7 +148,7 @@ exports.getCollectionsNames = (req , res , next ) => {
   NameOfCollection.find()
   .then(collectionNames => {
     res.json(collectionNames)
-    console.log(collectionNames)
+    // console.log(collectionNames)
   }).catch(err => {
     console.log(err);
   })
@@ -165,7 +158,7 @@ exports.getLeagueNames = (req , res , next) => {
   LeagueNames.find()
   .then(leagueNames => {
     res.json(leagueNames)
-    console.log(leagueNames)
+    // console.log(leagueNames)
   }).catch(err => {
     console.log(err);
   })
@@ -190,8 +183,12 @@ exports.postAddProduct = async (req, res, next) => {
   const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   const quantity = req.body.quantity;
   const description = req.body.description;
-  const image = req.file; 
-  console.log(image);
+
+  
+
+
+
+
 
   const existingProduct = await ProductModel.findOne({ code });
 
@@ -231,7 +228,6 @@ exports.postAddProduct = async (req, res, next) => {
 
 
 
-
     const product = new ProductModel({
       code: code,
       model : model,
@@ -247,10 +243,21 @@ exports.postAddProduct = async (req, res, next) => {
       size: size,
       sizes : sizes,
       description: description,
-      image: image,
     });
+    if (req.files) {
+      let path = ''
+      req.files.forEach( (files , index , arr) => {
+        path = path + files.path + ','
+      })
+      path = path.substring(0 , path.lastIndexOf(','))
+      product.image = path
+    } else {
+      console.log('no image provided');
+    }
     await product.save();
     console.log('New product added:', product);
+
+
 };
 
 exports.increaseQuantity = async (req, res) => {
@@ -261,7 +268,7 @@ exports.increaseQuantity = async (req, res) => {
     if (productInCart) {
       productInCart.quantity += 1; // Increase quantity by 1 (or any desired value)
       await productInCart.save();
-      console.log('Product quantity increased:', productInCart);
+      // console.log('Product quantity increased:', productInCart);
       return res.json('Product quantity increased');
     } else {
       console.log('Product not found in the cart');
@@ -281,7 +288,7 @@ exports.decreaseQuantity =  async (req, res) => {
     if (productInCart && productInCart.quantity > 0) {
       productInCart.quantity -= 1; // Decrease quantity by 1 (or any desired value)
       await productInCart.save();
-      console.log('Product quantity decreased:', productInCart);
+      // console.log('Product quantity decreased:', productInCart);
       return res.json('Product quantity decreased');
     } else {
       console.log('Invalid operation. Minimum quantity reached.');
@@ -317,6 +324,7 @@ exports.postProductsOnCart = async (req, res, next) => {
         sale : existingProduct.sale,
         quantity: 1,
         description: existingProduct.description,
+        
       };
 
       const cartProduct = new Cart(productData);
@@ -372,7 +380,7 @@ exports.editProduct = (req, res, next) => {
   )
     .then((newProduct) => {
       res.json(newProduct);
-      console.log(newProduct);
+      // console.log(newProduct);
       console.log("PRODUCT EDITED");
     })
     .catch((err) => {

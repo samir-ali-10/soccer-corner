@@ -15,8 +15,9 @@ const CartSchema = new Schema({
       default : 1,
     },
     description: String,
-    // image: String,
+    image: String,
   });
   
   const Cart = mongoose.model('Cart' , CartSchema)
   module.exports = Cart;
+
