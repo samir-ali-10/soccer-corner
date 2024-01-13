@@ -24,18 +24,18 @@ export default function AddProducts() {
     ];
 
     const schema = yup.object().shape({
-        code: yup.string().required(),
-        model: yup.string().required(),
-        kit: yup.string().required(),
+        code: yup.string(),
+        model: yup.string(),
+        kit: yup.string(),
         type: yup.string(),
         BrandName: yup.string(),
-        collectionName: yup.string().required(),
-        league: yup.string().required(),
-        price: yup.number().required(),
+        collectionName: yup.string(),
+        league: yup.string(),
+        price: yup.number(),
         sale: yup.number(),
         newCollection: yup.string(),
-        size: yup.string().required(),
-        quantity: yup.number().required(),
+        size: yup.string(),
+        quantity: yup.number(),
         description: yup.string(),
         image: yup.mixed(),
     });
@@ -429,9 +429,9 @@ export default function AddProducts() {
                                     values.code = ""
                                     values.collectionName = ""
                                     values.league = ""
-                                    values.BrandName= ""
-                                    values.kit= ""
-                                    values.type= ""
+                                    values.BrandName = ""
+                                    values.kit = ""
+                                    values.type = ""
                                     values.description = ""
                                     values.model = ""
                                     values.price = ""

@@ -60,15 +60,15 @@ export default function Stock() {
         setModel("")
         setSize("")
         setLeague("")
+        setType("")
         setAll("all")
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
     let getType = (val) => {
         setLeague("")
-        setLeagueSelected("");
-        setSizeSelected("")
-        setModelSelected("")
+        setSize("")
+        setModel("")
         setCollectionName("")
         setAll("");
         setType(val.target.value)
@@ -77,9 +77,8 @@ export default function Stock() {
 
     let getCollection = (val) => {
         setLeague("")
-        setLeagueSelected("");
-        setSizeSelected("")
-        setModelSelected("")
+        setModel("")
+        setSize("")
         setType("");
         setAll("");
         setCollectionName(val.target.value);
@@ -87,10 +86,8 @@ export default function Stock() {
     }
 
     let getLeague = (val) => {
-        setSizeSelected("")
         setCollectionName("")
-        setCategorySelected("")
-        setModelSelected("")
+        setModel("")
         setType("");
         setAll("");
         setLeague(val.target.value);
@@ -469,6 +466,54 @@ export default function Stock() {
                                             <div className="products_container mb-5">
                                                 {
                                                     stock.map((item) => item.league === "saudi"
+                                                        ?
+                                                        <NavLink key={item._id} className="product" to="">
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="code">Product Code: <span>{item.code}</span></div>
+                                                                <div className="league">Product League: <span>{item.league}</span></div>
+                                                                <div className="model">Product Model: <span>{item.model}</span></div>
+                                                                <div className="collectionName">Product Name: <span>{item.collectionName}</span></div>
+                                                                <div className="price">Product Price: <span>{item.price}EGP</span></div>
+                                                                <div className="size">Product Size: <span>{item.size}</span></div>
+                                                                <div className="description">Product Description: <span>{item.description}</span></div>
+                                                                <div className="quantity">Product Quantity: <span>{item.quantity} pieces</span></div>
+                                                                {item.sale !== null ? <div className="sale">Product Sale: <span>{item.sale}%</span></div> : null}
+                                                                {item.sale !== null ? <div className="sale_price">Product Sale Price: <span>{calculateSalePrice(item)}EGP</span></div> : null}
+                                                                {item.newCollection !== "" ? <div className="new_collection">New Collection: <span>{item.newCollection}</span></div> : null}
+                                                                <div className="delete_item">
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        deleteItem(item)
+                                                                    }}>Delete Product</button>
+                                                                    <button onClick={(e) => {
+                                                                        propagationNo(e)
+                                                                        navigateToEdit(item)
+                                                                    }} className='edit_product'>Edit Product</button>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null
+                                                    )
+                                                }
+                                            </div>
+                                            {all === "all"
+                                                ?
+                                                null
+                                                :
+                                                type !== ""
+                                                    ?
+                                                    <h2>{type}</h2>
+                                                    :
+                                                    league === "saudi" ? <h2 className='league'>Saudi League</h2> : null
+                                            }
+                                            {model ? <p className='text-center text-white'>{model}</p> : ""}
+                                            <div className="products_container mb-5">
+                                                {
+                                                    stock.map((item) => item.type === type
                                                         ?
                                                         <NavLink key={item._id} className="product" to="">
                                                             <div className="image">
