@@ -3,16 +3,16 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Routes = require("./routes/routes");
-const bodyParser = require('body-parser')
-
+const bodyParser = require('body-parser');
+const multer = require('multer')
+const upload = require('./middleware/upload')
+const ProductController = require('./controllers/ProductController')
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
-
 app.use(Routes);
-
-app.use( '/uploads' , express.static('uploads'))
+app.post("/api/products", upload.array('image') , ProductController.postAddProduct);
 
 mongoose
   .connect(

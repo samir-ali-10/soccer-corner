@@ -208,15 +208,15 @@ exports.postAddProduct = async (req, res, next) => {
   const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
   const quantity = req.body.quantity;
   const description = req.body.description;
-
+  
 
   // check if product exist 
 
-  const existingProduct = await ProductModel.findOne({ code });
-  if (existingProduct) {
-    console.log('Product is already exist ');
-    return res.json("product already exist")
-  }
+  // const existingProduct = await ProductModel.findOne({ code });
+  // if (existingProduct) {
+  //   console.log('Product is already exist ');
+  //   return res.json("product already exist")
+  // }
 
   //check if the collectionName exist 
 
@@ -230,7 +230,7 @@ exports.postAddProduct = async (req, res, next) => {
     const newNameOfCollection = new NameOfCollection({
       Name: collectionName,
     });
-    await newNameOfCollection.trim().save();
+    await newNameOfCollection.save();
     console.log('New collectionName added:', newNameOfCollection);
   }
 
@@ -247,7 +247,7 @@ exports.postAddProduct = async (req, res, next) => {
     const newLeagueName = new LeagueNames({
       leagueName: league,
     });
-    await newLeagueName.trim().save();
+    await newLeagueName.save();
     console.log('New league added:', newLeagueName);
   }
 
@@ -268,6 +268,19 @@ exports.postAddProduct = async (req, res, next) => {
       sizes : sizes,
       description: description,
     });
+
+    if (req.files) {
+      let path = ''
+      req.files.forEach(function (files , index , arr ){
+        path = path + files.path + ','
+      })
+      path = path.substring(0 , path.lastIndexOf(','))
+      product.images = path
+    } else {
+      console.log('no image provided');
+    }
+
+  
     await product.save();
     console.log('New product added:', product);
 
