@@ -414,6 +414,7 @@ export default function AddProducts() {
                                     type="file"
                                     name="image"
                                     accept='image/*'
+                                    multiple
                                     onChange={handleChange}
                                     isInvalid={!!errors.image}
                                 />
