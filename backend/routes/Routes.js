@@ -23,10 +23,10 @@ router.post('/api/products/editProduct/:code' , ProductController.editProduct); 
 router.get('/api/products/:type/:brandName/:collectionName/:size' , ProductController.getTypeBrandNameCollectionNameSize); //get type brandname collectionname size
 router.get('/api/products/sizes' , ProductController.getSizes); // get sizes
 router.get('/api/products/models' , ProductController.getModels) // get models 
-router.get('/api/products/:type/:BrandName')
-router.get('/api/products/:type/:BrandName/:collectionName')
-router.get('/api/products/:type/:BrandName/:collectionName/:model')
-router.get('/api/products/:type/:BrandName/:collectionName/:model/:size')
+// router.get('/api/products/:type/:BrandName')
+// router.get('/api/products/:type/:BrandName/:collectionName')
+// router.get('/api/products/:type/:BrandName/:collectionName/:model')
+// router.get('/api/products/:type/:BrandName/:collectionName/:model/:size')
 // Cart
 router.get('/api/products/cart', ProductController.getProductsOnCart)
 router.post('/api/products/cart/:code' , ProductController.postProductsOnCart);

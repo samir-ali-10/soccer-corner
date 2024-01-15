@@ -17,7 +17,7 @@ const productSchema = new schema({
     sale : Number,
     newCollection : String,
     quantity: {
-      type : Number,
+      type : Number,  
       default : 1,
     }, 
     description: String,
