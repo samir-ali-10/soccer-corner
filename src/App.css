@@ -1651,16 +1651,26 @@ ul {
   background-color: var(--text-color);
 }
 
+/* .new_orders_new .types .quantity {
+  margin-left: -40px;
+} */
+
+.new_orders_new .types .phone {
+  margin-right: 80px;
+}
+
+.new_orders_new .types .area {
+  margin-right: 80px;
+}
+
 .new_orders_new .new_orders_container {
-  margin-top: 70px;
-  display: grid;
-  gap: 40px;
-  grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
+  margin-top: 20px;
 }
 
 .new_orders_new .new_orders_container .new_item {
-  border-right: 1px solid #777;
+  border-bottom: 1px solid #777;
   margin-bottom: 80px;
+  padding-bottom: 30px;
 }
 
 .new_orders_new .new_orders_container .new_item .info .image {
