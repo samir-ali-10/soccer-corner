@@ -15,13 +15,18 @@ router.get("/api/products/collection/:collectionName/model/:model",ProductContro
 router.get("/api/products/collection/:collectionName/size/:size",ProductController.getCollectionAndSize); // get collection and size 
 router.get("/api/products/league/:league/model/:model/collection/:collectionName/size/:size",ProductController.getCollectionAndModelAndSize); // get collection , model and size 
 router.get('/api/products/CollectionsNames' , ProductController.getCollectionsNames); // Get collectionsNames
-router.get('/api/products/LeagueNames' , ProductController.getLeagueNames)
+router.get('/api/products/LeagueOrBrandNames' , ProductController.getLeagueOrBrand) // get leagueOrBrand
 router.get('/api/products/league/:league' , ProductController.getByLeague) // get by league
 router.get('/api/products/delete-product/:code' , ProductController.deleteSingleProduct) // delete single product 
 router.get('/api/products/delete-products' , ProductController.deleteAllProducts) // delete all products
 router.post('/api/products/editProduct/:code' , ProductController.editProduct); // edit Product by code
-router.get('/api/products/sizes' , ProductController.getBySize); // get sizes
 router.get('/api/products/:type/:brandName/:collectionName/:size' , ProductController.getTypeBrandNameCollectionNameSize); //get type brandname collectionname size
+router.get('/api/products/sizes' , ProductController.getSizes); // get sizes
+router.get('/api/products/models' , ProductController.getModels) // get models 
+router.get('/api/products/:type/:BrandName')
+router.get('/api/products/:type/:BrandName/:collectionName')
+router.get('/api/products/:type/:BrandName/:collectionName/:model')
+router.get('/api/products/:type/:BrandName/:collectionName/:model/:size')
 // Cart
 router.get('/api/products/cart', ProductController.getProductsOnCart)
 router.post('/api/products/cart/:code' , ProductController.postProductsOnCart);
