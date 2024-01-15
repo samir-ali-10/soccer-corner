@@ -58,9 +58,6 @@ export default function AddProducts() {
         formData.append('description', values.description);
         let response = await fetch(`http://localhost:3001/api/products`, {
             method: 'POST',
-            headers: {
-                'Content-type': 'multipart/form-data',
-            },
             body: formData,
         })
         return response.json();
