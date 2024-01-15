@@ -43,27 +43,25 @@ export default function AddProducts() {
     let handleSub = async (values) => {
         const formData = new FormData();
         formData.append('image', values.image);
+        formData.append('collectionName', values.collectionName);
+        formData.append('kit', values.kit);
+        formData.append('type', values.type);
+        formData.append('BrandName', values.BrandName);
+        formData.append('league', values.league);
+        formData.append('code', values.code);
+        formData.append('model', values.model);
+        formData.append('price', values.price);
+        formData.append('sale', values.sale);
+        formData.append('newCollection', values.newCollection);
+        formData.append('size', values.size);
+        formData.append('quantity', values.quantity);
+        formData.append('description', values.description);
         let response = await fetch(`http://localhost:3001/api/products`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             },
-            body: JSON.stringify({
-                collectionName: values.collectionName,
-                kit: values.kit,
-                type: values.type,
-                BrandName: values.BrandName,
-                league: values.league,
-                code: values.code,
-                model: values.model,
-                price: values.price,
-                sale: values.sale,
-                newCollection: values.newCollection,
-                size: values.size,
-                quantity: values.quantity,
-                description: values.description,
-                formData
-            })
+            body: formData,
         })
         return response.json();
     }
