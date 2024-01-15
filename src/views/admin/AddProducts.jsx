@@ -59,7 +59,7 @@ export default function AddProducts() {
         let response = await fetch(`http://localhost:3001/api/products`, {
             method: 'POST',
             headers: {
-                'Content-type': 'application/json; charset=UTF-8'
+                'Content-type': 'multipart/form-data; charset=UTF-8'
             },
             body: formData,
         })
