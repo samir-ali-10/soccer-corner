@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const Routes = require("./routes/routes");
 const bodyParser = require('body-parser');
-const multer = require('multer')
 const upload = require('./middleware/upload')
 const ProductController = require('./controllers/ProductController')
 
