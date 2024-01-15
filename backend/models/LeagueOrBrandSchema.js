@@ -5,6 +5,6 @@ const LeagueOrBrandSchema = new Schema({
   leagueOrBrand: String,
 });
 
-const LeagueOrBrand = mongoose.model("LeagueNamesOrBrandNames", LeagueOrBrandSchema);
+const LeagueOrBrand = mongoose.model("leagueorbrand", LeagueOrBrandSchema);
 
 module.exports = LeagueOrBrand;

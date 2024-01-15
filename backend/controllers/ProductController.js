@@ -38,6 +38,21 @@ exports.getSizes = (req, res) => {
     });
 };
 
+exports.getByTypeAndBrandName = (req, res) => {
+  const type = req.params.type;
+  const BrandName = req.params.BrandName;
+
+  ProductModel.find({type : type , BrandName : BrandName})
+  .then(products => {
+    res.json(products)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+
+
+}
+
 exports.getTypeBrandNameCollectionNameSize = (req, res) => {
   const type = req.params.type;
   const brandName = req.params.brandName;
@@ -255,7 +270,7 @@ exports.postAddProduct = async (req, res, next) => {
         leagueOrBrand: BrandName,
       });
       await newBrandName.save();
-      console.log("New BRANDNAME added:", newBrandName);
+      console.log("New Brandname added:", newBrandName);
     }
 
 
