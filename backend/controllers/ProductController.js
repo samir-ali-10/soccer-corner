@@ -40,9 +40,9 @@ exports.getSizes = (req, res) => {
 
 exports.getByTypeAndBrandName = (req, res) => {
   const type = req.params.type;
-  const BrandName = req.params.BrandName;
+  const brandName = req.params.brandName;
 
-  ProductModel.find({type : type , BrandName : BrandName})
+  ProductModel.find({type : type , BrandName : brandName})
   .then(products => {
     res.json(products)
   })
@@ -53,25 +53,71 @@ exports.getByTypeAndBrandName = (req, res) => {
 
 }
 
-exports.getTypeBrandNameCollectionNameSize = (req, res) => {
+
+exports.getTypeBrandNameCollectionName = (req, res) => {
   const type = req.params.type;
   const brandName = req.params.brandName;
   const collectionName = req.params.collectionName;
+
+  ProductModel.find({
+    type: type,
+    BrandName: brandName,
+    collectionName: collectionName,
+  })
+    .then((products) => {
+      res.json(products);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.getTypeBrandNameCollectionNameModel = (req, res) => {
+  const type = req.params.type;
+  const brandName = req.params.brandName;
+  const collectionName = req.params.collectionName;
+  const model = req.params.model;
+
+  ProductModel.find({
+    type: type,
+    BrandName: brandName,
+    collectionName: collectionName,
+    model : model
+  })
+    .then((products) => {
+      res.json(products);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+exports.getTypeBrandNameCollectionNameModelSize = (req, res) => {
+  const type = req.params.type;
+  const brandName = req.params.brandName;
+  const collectionName = req.params.collectionName;
+  const model = req.params.model;
   const size = req.params.size;
 
   ProductModel.find({
     type: type,
     BrandName: brandName,
     collectionName: collectionName,
-    size: size,
+    model : model,
+    size : size
   })
-    .then((keys) => {
-      res.json(keys);
+    .then((products) => {
+      res.json(products);
     })
     .catch((err) => {
       console.log(err);
     });
 };
+
+
+
+
+
+
 
 exports.getBytype = (req, res, next) => {
   const type = req.params.type;

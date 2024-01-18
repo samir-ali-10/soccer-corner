@@ -22,10 +22,10 @@ router.get('/api/products/delete-products' , ProductController.deleteAllProducts
 router.post('/api/products/editProduct/:code' , ProductController.editProduct); // edit Product by code
 router.get('/api/products/sizes' , ProductController.getSizes); // get sizes
 router.get('/api/products/models' , ProductController.getModels) // get models 
-router.get('/api/products/:type/:BrandName' ,ProductController.getByTypeAndBrandName)
-// router.get('/api/products/:type/:BrandName/:collectionName')
-// router.get('/api/products/:type/:BrandName/:collectionName/:model')
-// router.get('/api/products/:type/:BrandName/:collectionName/:model/:size')
+router.get('/api/products/:type/:brandName' ,ProductController.getByTypeAndBrandName); // Get by type and brandname 
+router.get('/api/products/:type/:brandName/:collectionName' , ProductController.getTypeBrandNameCollectionName); // Get by type , brandname and collectionName
+router.get('/api/products/:type/:brandName/:collectionName/:model' , ProductController.getTypeBrandNameCollectionNameModel); // Get by type , brandname  , collectionName and Model
+router.get('/api/products/:type/:brandName/:collectionName/:model/:size' , ProductController.getTypeBrandNameCollectionNameModelSize) // Get by type , brandname , collectionname , model and Size 
 // Cart
 router.get('/api/products/cart', ProductController.getProductsOnCart)
 router.post('/api/products/cart/:code' , ProductController.postProductsOnCart);
