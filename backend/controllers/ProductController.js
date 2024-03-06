@@ -382,17 +382,28 @@ exports.postAddProduct = async (req, res, next) => {
 
 exports.increaseQuantity = async (req, res) => {
   const code = req.params.code;
+
   try {
     const productInCart = await Cart.findOne({ code: code });
+    const productInDB = await ProductModel.findOne({ code: code });
 
-    if (productInCart) {
-      productInCart.quantity += 1; // Increase quantity by 1 (or any desired value)
-      await productInCart.save();
-      // console.log('Product quantity increased:', productInCart);
-      return res.json("Product quantity increased");
+    if (productInCart && productInDB) {
+      if (productInDB.quantity > 0) {
+        productInCart.quantity += 1; // Increase quantity in the cart by 1 (or any desired value)
+        productInDB.quantity -= 1; // Decrease quantity in the database by 1 (or any desired value)
+
+        await productInCart.save();
+        await productInDB.save();
+
+        console.log('Product quantity increased:', productInCart);
+        return res.json("Product quantity increased");
+      } else {
+        console.log("Product is out of stock");
+        return res.status(400).json("Product is out of stock");
+      }
     } else {
-      console.log("Product not found in the cart");
-      return res.status(404).json("Product not found in the cart");
+      console.log("Product not found in the cart or DB");
+      return res.status(404).json("Product not found in the cart or DB");
     }
   } catch (error) {
     console.error("Error increasing quantity:", error.message);
@@ -403,11 +414,19 @@ exports.increaseQuantity = async (req, res) => {
 exports.decreaseQuantity = async (req, res) => {
   const productCode = req.params.code;
   try {
+    
     const productInCart = await Cart.findOne({ code: productCode });
+    const productInDB = await ProductModel.findOne({ code : productCode })
 
     if (productInCart && productInCart.quantity > 0) {
+
       productInCart.quantity -= 1; // Decrease quantity by 1 (or any desired value)
+      productInDB.quantity += 1;
+
+
       await productInCart.save();
+      await productInDB.save();
+      
       // console.log('Product quantity decreased:', productInCart);
       return res.json("Product quantity decreased");
     } else {
@@ -428,6 +447,14 @@ exports.postProductsOnCart = async (req, res, next) => {
 
   if (existingProduct) {
     const productInCart = await Cart.findOne({ code });
+    const productInDB = await ProductModel.findOne({ code })
+
+    if (productInDB.quantity <= 0) {
+      console.log("Product is out of stock");
+      res.status(400).json("Product is out of stock");
+      return;
+    }
+
 
     if (!productInCart) {
       const productData = {
@@ -446,6 +473,10 @@ exports.postProductsOnCart = async (req, res, next) => {
 
       const cartProduct = new Cart(productData);
       await cartProduct.save();
+      
+      productInDB.quantity -= 1;
+      await productInDB.save();
+
       console.log("Product saved:", existingProduct);
       res.json("Product saved");
       return cartProduct;
