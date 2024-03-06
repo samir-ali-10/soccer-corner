@@ -34,6 +34,7 @@ exports.signUp = async (req, res, next) => {
       if (existingUser) {
         const error = new Error('User with this email already exists.');
         error.statusCode = 422;
+        console.log('user already exist');
         throw error;
       }
   
@@ -46,7 +47,6 @@ exports.signUp = async (req, res, next) => {
   
       // Hash the password
       const hashedPw = await bcrypt.hash(password, 12);
-  
       // Create a new user
       const user = new User({
         email: email,
