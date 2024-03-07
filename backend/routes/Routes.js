@@ -39,6 +39,7 @@ router.get('/api/products/cart/delete-products' , ProductController.deleteAllPro
 
 router.get('/api/auth/getUsers' , authController.getUsers)
 router.post('/api/auth/logIn' , authController.logIn)
+// router.post('/api/auth/logOut' , authController.logOut) // logout API
 router.post('/api/auth/signUp' ,authController.signUp)
 
 // REVIEWS
