@@ -5,6 +5,8 @@ const LeagueOrBrand = require("../models/LeagueOrBrandSchema");
 const ProductModel = require("../models/ProductSchema");
 const Size = require("../models/SizeSchema");
 const Model = require("../models/ModelSchema");
+const Archive = require('../models/ArchiveSchema');
+const Order = require("../models/NewOrdersSchema");
 // => GET
 
 exports.getTypes = (req, res, next) => {
@@ -149,6 +151,28 @@ exports.getProductsOnCart = (req, res, next) => {
       console.log(err);
     });
 };
+
+exports.getOrders = (req , res , next) => {
+  Order.find()
+  .then((products) => {
+    res.json(products);
+  }).catch((err) => {
+    console.log(err);
+  });
+}
+
+exports.getArchive = (req , res , next) => {
+  Archive.find()
+  .then((products) => {
+    res.json(products);
+  }).catch((err) => {
+    console.log(err);
+  });
+}
+
+
+
+
 
 exports.getCollection = (req, res, next) => {
   const collectionName = req.params.collectionName;
@@ -488,6 +512,48 @@ exports.postProductsOnCart = async (req, res, next) => {
     console.log("Product not found in DB");
   }
 };
+
+exports.postOrder = async (req , res , next) => {
+  const name = req.body.name;
+  const zone = req.body.zone;
+  const area = req.body.area;
+  const phone = req.body.phone;
+  const address = req.body.address;
+  const note = req.body.note;
+
+  const productsInCart = await Cart.find({});
+
+  if (productsInCart.length === 0) {
+      console.log('cart is empty');
+      return res.status(400).json('cart is empty')
+  }
+
+    const ProductsData =  productsInCart.map(item => ({
+      code : item.code,
+      image : item.image,
+      size : item.size,
+      quantity  : item.quantity,
+      price : item.price
+    }))
+
+  const order = new Order({
+    Name : name,
+    Area : area,
+    Zone : zone,
+    Phone : phone,
+    Address : address,
+    note : note,
+    productsOrdered : ProductsData
+  })
+
+  await order.save();
+
+  console.log('order saved ', order);
+
+  // await Cart.deleteMany({});
+
+} 
+
 
 // => EDIT
 
