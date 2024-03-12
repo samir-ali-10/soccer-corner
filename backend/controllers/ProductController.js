@@ -170,6 +170,28 @@ exports.getArchive = (req , res , next) => {
   });
 }
 
+exports.postToArchive = async (req , res , next ) => {
+  
+const productId = req.params.productId;
+const existProductInArchive = await Archive.findOne({ _id : productId })
+const productInOrders = await Order.findOne({ _id :  productId })
+
+  if (existProductInArchive) {
+    console.log('product already exist in archive ');
+    return res.json("product already exist in archive");
+
+  }
+  const productToArchive = new Archive({
+    name : productInOrders.name ,
+    phone : productInOrders.phone,
+    area : productInOrders.area ,
+    zone : productInOrders.zone ,
+    productsOrdered : productInOrders.productsOrdered
+  })
+ await productToArchive.save();
+ console.log('product saved in archive ' , productToArchive);
+}
+
 
 
 
@@ -537,11 +559,11 @@ exports.postOrder = async (req , res , next) => {
     }))
 
   const order = new Order({
-    Name : name,
-    Area : area,
-    Zone : zone,
-    Phone : phone,
-    Address : address,
+    name : name,
+    area : area,
+    zone : zone,
+    phone : phone,
+    address : address,
     note : note,
     productsOrdered : ProductsData
   })
@@ -550,7 +572,7 @@ exports.postOrder = async (req , res , next) => {
 
   console.log('order saved ', order);
 
-  // await Cart.deleteMany({});
+  await Cart.deleteMany({});
 
 } 
 
