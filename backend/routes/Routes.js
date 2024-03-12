@@ -35,7 +35,9 @@ router.get('/api/products/cart/delete-product/:code' , ProductController.deleteP
 router.get('/api/products/cart/delete-products' , ProductController.deleteAllProductsFromCart)
 router.get('/api/orders' , ProductController.getOrders) // orders API
 router.post('/api/postOrder' , ProductController.postOrder) // post products on cart and Client info in the orders
-router.get('/api/products/archive' , ProductController.getArchive) // archive API
+router.get('/api/archive' , ProductController.getArchive) // archive API
+router.post('/api/postToArchive/:productId' , ProductController.postToArchive) // post from orders to archive
+
 
 // AUTHENTICATION
 

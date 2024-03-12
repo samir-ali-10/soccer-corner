@@ -3,11 +3,11 @@ const schema = mongoose.Schema;
 
 
 const OrderSchema = new schema({
-    Name : String,
-    Phone : String,
-    Area : String,
-    Zone : String,
-    Address : String,
+    name : String,
+    phone : String,
+    area : String,
+    zone : String,
+    address : String,
     note : String,
     productsOrdered : [{
         code : String,

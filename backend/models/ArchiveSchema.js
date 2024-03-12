@@ -3,14 +3,17 @@ const schema = mongoose.Schema;
 
 
 const archiveSchema = new schema({
-    Code : String,
-    Size : String,
-    Quantity : String,
-    Price : Number,
-    Name : String,
-    Phone : String,
-    AreaZone : String,
-    Status : String,
+    name : String,
+    phone : String,
+    area : String,
+    zone : String,
+    status : String,
+    productsOrdered : [{
+        code : String,
+        size : String,
+        quantity : String,
+        price : Number, 
+    }],
 })
 
 const Archive  = mongoose.model('Archive' , archiveSchema)
