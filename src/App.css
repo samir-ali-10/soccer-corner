@@ -174,6 +174,10 @@ ul {
   color: var(--text-color);
 }
 
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+  color: white !important;
+}
+
 .navigation .actions {
   margin-left: 100px;
   display: flex;
@@ -215,7 +219,7 @@ ul {
 /************************ Admin ***************************/
 
 .admin_home {
-  margin-top: 100px;
+  margin-top: 40px;
 }
 
 .selections {
@@ -1532,9 +1536,10 @@ ul {
 }
 
 .add_products .btn:hover {
-  background-color: var(--primary-color);
+  background-color: var(--text-color);
+  color: var(--primary-color);
   color: initial;
-  scale: 1.1;
+  scale: 1.02;
 }
 
 .add_products .btn:focus {
@@ -1668,17 +1673,21 @@ ul {
 }
 
 .new_orders_new .new_orders_container .new_item {
-  border-bottom: 1px solid #777;
   margin-bottom: 80px;
   padding-bottom: 30px;
 }
 
-.new_orders_new .new_orders_container .new_item .info .image {
-  width: 80px;
-  height: 80px;
+.new_orders_new table tbody {
+  border-bottom: 1px solid #777;
 }
 
-.new_orders_new .new_orders_container .new_item .info .image img {
+.new_orders_new table tbody .image {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 30px;
+}
+
+.new_orders_new table tbody .image img {
   width: 100%;
   height: 100%;
 }
@@ -1690,6 +1699,7 @@ ul {
 }
 
 .checkout input,
+.checkout select,
 .checkout textarea {
   padding: 15px;
   background-color: #333;
@@ -1755,21 +1765,20 @@ ul {
   display: none;
 }
 
+.checkout h2.summary {
+  margin-left: 230px;
+}
+
 .checkout .floating_receipt {
   background-color: #77777732;
-  width: 40%;
-  z-index: -1;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .checkout .floating_receipt .content {
   color: var(--text-color);
-  position: fixed;
-  width: 100%;
+  width: 50%;
   padding: 20px 40px 0 40px;
-}
-
-.checkout .floating_receipt .content .item {
-  width: 60%;
 }
 
 .checkout .floating_receipt .content .item .info .image {
@@ -1792,10 +1801,6 @@ ul {
   font-size: 1rem;
 }
 
-.checkout .floating_receipt .content .item .info .price {
-  margin-left: 50px;
-}
-
 .checkout .floating_receipt .content .item .totals {
   margin-top: 10px;
   font-size: .9rem;
@@ -1803,10 +1808,7 @@ ul {
 
 .checkout .floating_receipt .content .item .totals>div {
   display: flex;
-}
-
-.checkout .floating_receipt .content .item .totals>div>span {
-  margin-right: 200px;
+  justify-content: space-between;
 }
 
 .checkout .floating_receipt .content .item .totals .subtotal p {
@@ -2130,6 +2132,10 @@ footer .copyright::before {
 
   .checkout .contact input {
     margin-bottom: 20px;
+  }
+
+  .checkout .floating_receipt .content {
+    width: 100%;
   }
 
 }

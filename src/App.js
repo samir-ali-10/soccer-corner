@@ -15,7 +15,6 @@ import ProductsAll from './views/ProductsAll';
 import EditProduct from './views/admin/EditProduct';
 import ComplainsAdmin from "./views/admin/ComplainsAdmin"
 import NewOrders from "./views/admin/NewOrders"
-import Returns from "./views/admin/Returns"
 import Checkout from './views/Checkout';
 import Shipping from './views/policies/Shipping';
 import Refund from './views/policies/Refund';
@@ -40,7 +39,7 @@ function App() {
         <Route path="/home" element={<Home appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout setAppearFooter={setAppearFooter} />} />
+        <Route path="/checkout" element={<Checkout setAppearFooter={setAppearFooter} setAppearLoginSignup={setAppearLoginSignup} />} />
         <Route path="/products/:category" element={<Products />} />
         <Route path="/products/:category/all" element={<ProductsAll />} />
         <Route path="/products/:category/:code" element={<ProductDetails />} />
@@ -52,7 +51,6 @@ function App() {
         <Route path="/adminSecret/newOrders" element={<NewOrders />} />
         <Route path="/adminSecret/newOrders/new" element={<New />} />
         <Route path="/adminSecret/newOrders/archived" element={<Archived />} />
-        <Route path="/adminSecret/returns" element={<Returns />} />
         <Route path="/adminSecret/editProduct/:code" element={<EditProduct />} />
         <Route path="/shippingPolicy" element={<Shipping />} />
         <Route path="/refund&exchangePolicy" element={<Refund />} />

@@ -89,7 +89,9 @@ export default function AddProducts() {
     }
 
     let getProduct = (val) => {
-        // console.log(val.target.value);
+        if (val.target.value === "--Choose Existing Code--") {
+            return;
+        }
         fetch(`http://localhost:3001/api/products/code/${val.target.value}`).then(res => res.json()).then(data => {
             setProduct(data)
             setCode(data.code)
@@ -178,6 +180,61 @@ export default function AddProducts() {
                                     controlId="validationFormik101"
                                     className="position-relative"
                                 >
+                                    <Form.Label>Type</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="type"
+                                        value={values.type === "" ? type : values.type}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.type}
+                                    />
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.type}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>League</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="league"
+                                        value={values.league === "" ? league : values.league}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.league}
+                                    />
+                                    <Form.Control.Feedback type="invalid" tooltip>
+                                        {errors.league}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
+                                    <Form.Label>Brand Name</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="BrandName"
+                                        value={values.BrandName === "" ? BrandName : values.BrandName}
+                                        onChange={handleChange}
+                                        isInvalid={!!errors.BrandName}
+                                    />
+                                    <Form.Control.Feedback BrandName="invalid" tooltip>
+                                        {errors.BrandName}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group
+                                    as={Col}
+                                    controlId="validationFormik101"
+                                    className="position-relative"
+                                >
                                     <Form.Label>Collection</Form.Label>
                                     <Form.Control
                                         type="text"
@@ -235,63 +292,6 @@ export default function AddProducts() {
                                     controlId="validationFormik101"
                                     className="position-relative"
                                 >
-                                    <Form.Label>League</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="league"
-                                        value={values.league === "" ? league : values.league}
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.league}
-                                    />
-                                    <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.league}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Row>
-                            <Row>
-                                <Form.Group
-                                    as={Col}
-                                    controlId="validationFormik101"
-                                    className="position-relative"
-                                >
-                                    <Form.Label>Type</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="type"
-                                        value={values.type === "" ? type : values.type}
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.type}
-                                    />
-                                    <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.type}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Row>
-                            <Row>
-                                <Form.Group
-                                    as={Col}
-                                    controlId="validationFormik101"
-                                    className="position-relative"
-                                >
-                                    <Form.Label>Brand Name</Form.Label>
-                                    <Form.Control
-                                        type="text"
-                                        name="BrandName"
-                                        value={values.BrandName === "" ? BrandName : values.BrandName}
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.BrandName}
-                                    />
-                                    <Form.Control.Feedback BrandName="invalid" tooltip>
-                                        {errors.BrandName}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Row>
-                            <Row>
-                                <Form.Group
-                                    as={Col}
-                                    controlId="validationFormik101"
-                                    className="position-relative"
-                                >
                                     <Form.Label>Price</Form.Label>
                                     <Form.Control
                                         type="number"
@@ -323,8 +323,6 @@ export default function AddProducts() {
                                         {errors.sale}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                            </Row>
-                            <Row>
                                 <Form.Group
                                     as={Col}
                                     controlId="validationFormik101"

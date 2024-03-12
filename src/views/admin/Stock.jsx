@@ -120,7 +120,7 @@ export default function Stock() {
     }
 
     let getLeagues = () => {
-        fetch(`http://localhost:3001/api/products/LeagueNames`).then((res) => res.json()).then((data) => setLeagues(data));
+        fetch(`http://localhost:3001/api/products/LeagueOrBrandNames`).then((res) => res.json()).then((data) => setLeagues(data));
     }
 
     let getTypes = () => {
@@ -208,7 +208,7 @@ export default function Stock() {
     console.log(sizes);
 
     return (
-        <div className='stock mt-4'>
+        <div className='stock mt-4 overflow-hidden'>
             <Container>
                 <div className="back_to_admin">
                     <NavLink to="/adminSecret" className="back_to_admin"><FontAwesomeIcon icon={faLeftLong} />Back to admin dashboard</NavLink>

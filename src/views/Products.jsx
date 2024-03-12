@@ -95,7 +95,7 @@ export default function Products() {
     }
 
     let getLeagues = () => {
-        fetch(`http://localhost:3001/api/products/LeagueNames`).then((res) => res.json()).then((data) => setLeagues(data));
+        fetch(`http://localhost:3001/api/products/LeagueOrBrandNames`).then((res) => res.json()).then((data) => setLeagues(data));
     }
 
     let addToCart = async (product) => {
@@ -126,6 +126,8 @@ export default function Products() {
         getData();
         getLeagues();
     }, [])
+
+    console.log(leagues);
 
     return (
         <div className='products'>
@@ -213,34 +215,44 @@ export default function Products() {
                             }
                         </div>
                         <div className="spanish_league">
-                            <h2>La Liga</h2>
-                            <div className="all_products">
-                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
-                            </div>
-                            <div className="slider_container d-flex">
-                                {stock.map(spanish =>
-                                    spanish.league === "La Liga"
+                            {
+                                leagues.map(league =>
+                                    league.leagueName === "La Liga"
                                         ?
-                                        <NavLink to={`/products/${params.category}/${spanish.code}`} key={spanish._id} className={calculateSalePrice(spanish) === 'Invalid input' ? "item" : "item sale"}>
-                                            <div className="image">
-                                                <img src={image1} alt="image1" />
+                                        <>
+                                            <h2>La Liga</h2>
+                                            <div className="all_products">
+                                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
                                             </div>
-                                            <div className="info">
-                                                <div className="name">{spanish.code}</div>
-                                                <div className="inner_info d-flex justify-content-between">
-                                                    {calculateSalePrice(spanish) === 'Invalid input' ? <div className="price">{spanish.price}EGP</div> : <div className="price_dashed">{spanish.price}EGP</div>}
-                                                    {calculateSalePrice(spanish) !== 'Invalid input' ? <span>{calculateSalePrice(spanish)}EGP</span> : null}
-                                                    <div className="add_cart" onClick={(e) => {
-                                                        e.preventDefault();
-                                                        addToCart(spanish.code)
-                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
-                                                </div>
+                                            <div className="slider_container d-flex">
+                                                {stock.map(la_liga =>
+                                                    la_liga.league === "La Liga"
+                                                        ?
+                                                        <NavLink to={`/products/${params.category}/${la_liga.code}`} key={la_liga._id} className={calculateSalePrice(la_liga) === 'Invalid input' ? "item" : "item sale"}>
+                                                            <div className="image">
+                                                                <img src={image1} alt="image1" />
+                                                            </div>
+                                                            <div className="info">
+                                                                <div className="name">{la_liga.code}</div>
+                                                                <div className="inner_info d-flex justify-content-between">
+                                                                    {calculateSalePrice(la_liga) === 'Invalid input' ? <div className="price">{la_liga.price}EGP</div> : <div className="price_dashed">{la_liga.price}EGP</div>}
+                                                                    {calculateSalePrice(la_liga) !== 'Invalid input' ? <span>{calculateSalePrice(la_liga)}EGP</span> : null}
+                                                                    <div className="add_cart" onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        addToCart(la_liga.code)
+                                                                    }}><FontAwesomeIcon icon={faCartPlus} /></div>
+                                                                </div>
+                                                            </div>
+                                                        </NavLink>
+                                                        :
+                                                        null
+                                                )}
                                             </div>
-                                        </NavLink>
+                                        </>
                                         :
                                         null
-                                )}
-                            </div>
+                                )
+                            }
                         </div>
                         <div className="saudi_league">
                             {
@@ -284,7 +296,8 @@ export default function Products() {
                         </div>
                     </div>
                 }
-                {params.category === "studs_turfs" &&
+                {
+                    params.category === "studs_turfs" &&
                     <div className='studs_turfs'>
                         <div className="puma">
                             <h2>Puma</h2>
@@ -378,7 +391,8 @@ export default function Products() {
                         </div>
                     </div>
                 }
-                {params.category === "sportsWear" &&
+                {
+                    params.category === "sportsWear" &&
                     <div className='sports_wear'>
                         <h2>Sports Wear</h2>
                         <div className="all_products">
@@ -410,7 +424,8 @@ export default function Products() {
                         </div>
                     </div>
                 }
-                {params.category === "classicJerseys" &&
+                {
+                    params.category === "classicJerseys" &&
                     <div className='classic_jerseys'>
                         <h2>Classic Jerseys</h2>
                         <div className="all_products">
@@ -442,7 +457,8 @@ export default function Products() {
                         </div>
                     </div>
                 }
-                {params.category === "previousSeasons" &&
+                {
+                    params.category === "previousSeasons" &&
                     <div className='previous_seasons'>
                         <h2>Previous Seasons</h2>
                         <div className="all_products">
@@ -474,7 +490,7 @@ export default function Products() {
                         </div>
                     </div>
                 }
-            </Container>
-        </div>
+            </Container >
+        </div >
     )
 }

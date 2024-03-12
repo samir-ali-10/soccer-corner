@@ -35,12 +35,6 @@ export default function AdminView() {
                             <FontAwesomeIcon icon={faCartFlatbedSuitcase} />
                         </div>
                     </NavLink>
-                    <NavLink to="/adminSecret/returns" className="selection">
-                        <h3>Returns</h3>
-                        <div className="icon">
-                            <FontAwesomeIcon icon={faArrowRotateLeft} />
-                        </div>
-                    </NavLink>
                 </div>
             </Container>
         </div>
