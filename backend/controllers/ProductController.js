@@ -160,6 +160,72 @@ exports.getOrders = (req , res , next) => {
     console.log(err);
   });
 }
+exports.postOrder = async (req , res , next) => {
+  const name = req.body.name;
+  const zone = req.body.zone;
+  const area = req.body.area;
+  const phone = req.body.phone;
+  const address = req.body.address;
+  const note = req.body.note;
+
+  const productsInCart = await Cart.find({});
+
+  if (productsInCart.length === 0) {
+      console.log('cart is empty');
+      return res.status(400).json('cart is empty')
+  }
+
+    const ProductsData =  productsInCart.map(item => ({
+      code : item.code,
+      image : item.image,
+      size : item.size,
+      quantity  : item.quantity,
+      price : item.price
+    }))
+
+  const order = new Order({
+    name : name,
+    area : area,
+    zone : zone,
+    phone : phone,
+    address : address,
+    note : note,
+    productsOrdered : ProductsData
+  })
+
+  await order.save();
+
+  console.log('order saved ', order);
+
+  await Cart.deleteMany({});
+
+} 
+
+exports.deleteOrder = (req , res , next) => {
+
+  const orderId = req.params.orderId;
+
+  Order.deleteOne({ _id : orderId })
+  .then(result => {
+    res.json('order deleted successfully')
+    console.log('order deleted successfully');
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+exports.deleteAllOrders = (req , res , next) => {
+
+  Order.deleteMany()
+  .then(result => {
+    res.json('orders deleted successfully');
+    console.log('orders deleted successfully');
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
 
 exports.getArchive = (req , res , next) => {
   Archive.find()
@@ -191,6 +257,33 @@ const productInOrders = await Order.findOne({ _id :  productId })
  await productToArchive.save();
  console.log('product saved in archive ' , productToArchive);
 }
+
+exports.deleteOrderFromArchive = (req , res, next) => {
+  const orderId = req.params.orderId;
+
+  Archive.deleteOne({ _id : orderId })
+  .then(result => {
+    res.json('order from archive deleted successfully')
+    console.log('order from archive deleted successfully');
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+exports.deleteAllOrdersFromArchive = (req , res , next) => {
+
+  Archive.deleteMany()
+  .then(result => {
+    res.json('orders from archive deleted successfully');
+    console.log('orders from archive deleted successfully');
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
+
 
 
 
@@ -534,47 +627,6 @@ exports.postProductsOnCart = async (req, res, next) => {
     console.log("Product not found in DB");
   }
 };
-
-exports.postOrder = async (req , res , next) => {
-  const name = req.body.name;
-  const zone = req.body.zone;
-  const area = req.body.area;
-  const phone = req.body.phone;
-  const address = req.body.address;
-  const note = req.body.note;
-
-  const productsInCart = await Cart.find({});
-
-  if (productsInCart.length === 0) {
-      console.log('cart is empty');
-      return res.status(400).json('cart is empty')
-  }
-
-    const ProductsData =  productsInCart.map(item => ({
-      code : item.code,
-      image : item.image,
-      size : item.size,
-      quantity  : item.quantity,
-      price : item.price
-    }))
-
-  const order = new Order({
-    name : name,
-    area : area,
-    zone : zone,
-    phone : phone,
-    address : address,
-    note : note,
-    productsOrdered : ProductsData
-  })
-
-  await order.save();
-
-  console.log('order saved ', order);
-
-  await Cart.deleteMany({});
-
-} 
 
 
 // => EDIT

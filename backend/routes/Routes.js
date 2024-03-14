@@ -3,7 +3,7 @@ const router = express.Router();
 const ProductController = require("../controllers/ProductController");
 const authController = require('../controllers/authController')
 
-// => PRODUCTS
+// => PRODUCTS IN HOME & STOCK
 
 router.get('/api/products/type/:type' , ProductController.getBytype)
 router.get('/api/products/types' , ProductController.getTypes)
@@ -33,10 +33,18 @@ router.post('/api/products/cart/increase/:code' , ProductController.increaseQuan
 router.post('/api/products/cart/decrease/:code' , ProductController.decreaseQuantity)
 router.get('/api/products/cart/delete-product/:code' , ProductController.deleteProductFromCart)
 router.get('/api/products/cart/delete-products' , ProductController.deleteAllProductsFromCart)
+
+// New Orders
 router.get('/api/orders' , ProductController.getOrders) // orders API
 router.post('/api/postOrder' , ProductController.postOrder) // post products on cart and Client info in the orders
+router.get('/api/deleteOrder/:orderId' , ProductController.deleteOrder) // delete one order
+router.get('/api/deleteAllOrders' , ProductController.deleteAllOrders)  // delete all orders
+
+// Archive
 router.get('/api/archive' , ProductController.getArchive) // archive API
 router.post('/api/postToArchive/:productId' , ProductController.postToArchive) // post from orders to archive
+router.get('/api/archive/deleteOrderFromArchive/:orderId' ,ProductController.deleteOrderFromArchive) // delete order from archive
+router.get('/api/archive/deleteAllOrdersFromArchive' , ProductController.deleteAllOrdersFromArchive) // delete orders from archive
 
 
 // AUTHENTICATION
