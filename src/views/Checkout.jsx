@@ -9,7 +9,7 @@ import image3 from "../images/ahly_3.jpeg"
 import image4 from "../images/ahly_4.jpeg"
 import image5 from "../images/ahly_5.jpeg"
 
-export default function Checkout({ setAppearFooter }) {
+export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
 
     const sportsWear = [
         {
@@ -44,10 +44,17 @@ export default function Checkout({ setAppearFooter }) {
         },
     ]
 
-    const [phone, setPhone] = useState('');
+    const [name, setName] = useState(''),
+        [zone, setZone] = useState(''),
+        [area, setArea] = useState(''),
+        [phone, setPhone] = useState(''),
+        [address, setAddress] = useState(''),
+        [description, setDescription] = useState(''),
+        [terms, setTerms] = useState('');
 
     useEffect(() => {
         setAppearFooter(false)
+        setAppearLoginSignup(true)
     }, [])
 
     const { Formik } = formik;
@@ -69,14 +76,67 @@ export default function Checkout({ setAppearFooter }) {
     //     }
     // };
 
+    const handleSub = (values) => {
+        const formData = new FormData();
+        formData.append('receiverName', values.receiverName);
+        formData.append('zone', values.zone);
+        formData.append('area', values.area);
+        formData.append('address', values.address);
+        formData.append('phone', values.phone);
+        formData.append('note', values.note);
+        formData.append('termsCondition', values.termsCondition);
+    }
+
     return (
         <div className='checkout'>
-            <div className='containing d-flex'>
+            <div className='containing'>
+                <h2 className='mb-3 mt-3 summary'>Order Summary</h2>
+                <div className="floating_receipt pb-4">
+                    <div className="content">
+                        <div className="item">
+                            <div className="info">
+                                {
+                                    sportsWear.map(product =>
+                                        <>
+                                            <div className="top d-flex justify-content-between mb-3">
+                                                <div className='d-flex'>
+                                                    <div className="image">
+                                                        <img src={product.image} alt="image1" />
+                                                    </div>
+                                                    <div className="title">
+                                                        <h5>{product.title}</h5>
+                                                        <p>L</p>
+                                                    </div>
+                                                </div>
+                                                <div className="price">
+                                                    {product.price}EGP
+                                                </div>
+                                            </div>
+                                        </>
+                                    )
+                                }
+                            </div>
+                            <div className="totals">
+                                <div className="subtotal">
+                                    <span>Subtotal</span>
+                                    <p>600EGP</p>
+                                </div>
+                                <div className="shipping">
+                                    <span>Shipping</span>
+                                    <p>50EGP</p>
+                                </div>
+                                <div className="total">
+                                    <span>Total</span>
+                                    <p>650EGP</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <Formik
                     validationSchema={schema}
                     initialValues={{
                         receiverName: "",
-                        email: "",
                         zone: "",
                         area: "",
                         address: "",
@@ -84,7 +144,9 @@ export default function Checkout({ setAppearFooter }) {
                         note: "",
                         termsCondition: false,
                     }}
-                    onSubmit={console.log()}
+                    onSubmit={(values) => {
+                        handleSub(values);
+                    }}
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
                         <Form className='mt-5' noValidate onSubmit={handleSubmit}>
@@ -113,46 +175,36 @@ export default function Checkout({ setAppearFooter }) {
                             </Row>
                             <Row>
                                 <h2>Delivery</h2>
-                                <Form.Group
-                                    as={Col}
-                                    controlId="validationFormik101"
-                                    className="position-relative mb-4"
-                                >
-                                    <Form.Control
-                                        type="text"
+                                <div className='mb-4'>
+                                    <formik.Field
+                                        as="select"
                                         name="zone"
-                                        placeholder='Zone'
-                                        value={values.zone}
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.zone}
-                                    />
-                                    <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.zone}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
+                                        className='w-100 rounded'
+                                    >
+                                        <option value="">Select Zone</option>
+                                        <option value="cairo">Cairo</option>
+                                        <option value="giza">Giza</option>
+                                    </formik.Field>
+                                    {touched.zone && errors.zone && (
+                                        <span className="text-danger bg-danger text-white p-1 fs-6 rounded mt-2 d-inline-block">please select a zone</span>
+                                    )}
+                                </div>
                             </Row>
                             <Row>
-                                <Form.Group
-                                    as={Col}
-                                    controlId="validationFormik101"
-                                    className="position-relative mb-4"
-                                >
-                                    <Form.Control
-                                        type="text"
+                                <div className='mb-4'>
+                                    <formik.Field
+                                        as="select"
                                         name="area"
-                                        placeholder='Area'
-                                        value={values.area}
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.area}
-                                    />
-                                    <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.area}
-                                    </Form.Control.Feedback>
-                                    {/* <Form.Select defaultValue="Choose...">
-                                        <option>Choose...</option>
-                                        <option>...</option>
-                                    </Form.Select> */}
-                                </Form.Group>
+                                        className='w-100 rounded'
+                                    >
+                                        <option value="">Select Zone</option>
+                                        <option value="cairo">Cairo</option>
+                                        <option value="giza">Giza</option>
+                                    </formik.Field>
+                                    {touched.area && errors.area && (
+                                        <span className="text-danger bg-danger text-white p-1 fs-6 rounded mt-2 d-inline-block">please select an area</span>
+                                    )}
+                                </div>
                             </Row>
                             <Row>
                                 <Form.Group
@@ -219,7 +271,7 @@ export default function Checkout({ setAppearFooter }) {
                                         label="Agree to terms and conditions"
                                         onChange={handleChange}
                                         isInvalid={!!errors.termsCondition}
-                                        feedback={errors.termsCondition}
+                                        feedback="You must agree to terms and conditions"
                                         feedbackType="invalid"
                                         id="validationFormik106"
                                         feedbackTooltip
@@ -236,49 +288,6 @@ export default function Checkout({ setAppearFooter }) {
                         </Form>
                     )}
                 </Formik>
-                <div className="floating_receipt pb-4">
-                    <div className="content">
-                        <div className="item">
-                            <div className="info">
-                                {
-                                    sportsWear.map(product =>
-                                        <>
-                                            <div className="top d-flex mb-3">
-                                                <div className="image">
-                                                    <img src={product.image} alt="image1" />
-                                                </div>
-                                                <div className="title">
-                                                    <h5>{product.title}</h5>
-                                                    <p>L</p>
-                                                </div>
-                                                <div className="price">
-                                                    {product.price}EGP
-                                                </div>
-                                            </div>
-                                        </>
-                                    )
-                                }
-                            </div>
-                            <div className="totals">
-                                <div className="subtotal">
-                                    <span>Subtotal</span>
-                                    <p>600EGP</p>
-                                </div>
-                                <div className="shipping">
-                                    <span>Shipping</span>
-                                    <p>50EGP</p>
-                                </div>
-                                <div className="total">
-                                    <span>Total</span>
-                                    <p>650EGP</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className='buy_products sm mt-2'>
-                    <Button className='w-100 pt-2 pb-2 fs-5' type="submit">Order Now</Button>
-                </div>
             </div>
         </div>
     )

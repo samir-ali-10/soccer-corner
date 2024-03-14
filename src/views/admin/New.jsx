@@ -1,7 +1,7 @@
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Table } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 import image3 from "../../images/carousel_3.jpeg"
 
@@ -25,6 +25,93 @@ export default function New() {
                 </div>
                 <h2 className='text-center'>New Orders</h2>
                 {
+                    cart.length === 0
+                        ?
+                        <div className="image text-center text-capitalize mt-5">
+                            <h1>There are no new orders</h1>
+                        </div>
+                        :
+                        <div className='mt-5'>
+                            <table className='w-100 ms-auto text-center'>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Code</th>
+                                    <th>Size</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Area-Zone</th>
+                                    <th>Address</th>
+                                </tr>
+                                <tbody>
+                                    <tr>
+                                        <td className='d-flex justify-content-center mt-3'>
+                                            <div className="image">
+                                                <img src={image3} alt="image1" />
+                                            </div>
+                                        </td>
+                                        <td>sdfdfsf</td>
+                                        <td>S</td>
+                                        <td>8</td>
+                                        <td>300EGP</td>
+                                        <td>Samir</td>
+                                        <td>01005212460</td>
+                                        <td>Giza, Egypt</td>
+                                        <td>El Rehab St., Giza Governorate, Egypt</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='d-flex justify-content-center mt-3'>
+                                            <div className="image">
+                                                <img src={image3} alt="image1" />
+                                            </div>
+                                        </td>
+                                        <td>sdfdfsf</td>
+                                        <td>S</td>
+                                        <td>8</td>
+                                        <td>300EGP</td>
+                                        <td>Samir</td>
+                                        <td>01005212460</td>
+                                        <td>Giza, Egypt</td>
+                                        <td>El Rehab St., Giza Governorate, Egypt</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td className='d-flex justify-content-center mt-3'>
+                                            <div className="image">
+                                                <img src={image3} alt="image1" />
+                                            </div>
+                                        </td>
+                                        <td>sdfdfsf</td>
+                                        <td>S</td>
+                                        <td>8</td>
+                                        <td>300EGP</td>
+                                        <td>Samir</td>
+                                        <td>01005212460</td>
+                                        <td>Giza, Egypt</td>
+                                        <td>El Rehab St., Giza Governorate, Egypt</td>
+                                    </tr>
+                                    <tr>
+                                        <td className='d-flex justify-content-center mt-3'>
+                                            <div className="image">
+                                                <img src={image3} alt="image1" />
+                                            </div>
+                                        </td>
+                                        <td>sdfdfsf</td>
+                                        <td>S</td>
+                                        <td>8</td>
+                                        <td>300EGP</td>
+                                        <td>Samir</td>
+                                        <td>01005212460</td>
+                                        <td>Giza, Egypt</td>
+                                        <td>El Rehab St., Giza Governorate, Egypt</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                }
+                {/* {
                     cart.length === 0
                         ?
                         <div className="image text-center text-capitalize mt-5">
@@ -81,7 +168,7 @@ export default function New() {
                                 }
                             </div>
                         </>
-                }
+                } */}
             </Container>
         </div>
     )

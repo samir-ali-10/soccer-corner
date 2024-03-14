@@ -177,7 +177,7 @@ export default function ProductsAll() {
                             </div>
                         </div>
                         <div className="spanish_league">
-                            <h2>Spanish League</h2>
+                            <h2>La Liga</h2>
                             <div className="items_container">
                                 {stock.map((spanish) => spanish.league === "La Liga"
                                     ?

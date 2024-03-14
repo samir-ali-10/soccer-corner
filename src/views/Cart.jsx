@@ -141,8 +141,6 @@ export default function Cart() {
                                             <div className="price">
                                                 {item.price}EGP
                                             </div>
-                                            {/* {calculateSalePrice(item) === 'Invalid input' ? <div className="price">{item.price}EGP</div> : <div className="price_dashed">{item.price}EGP</div>}
-                                            {calculateSalePrice(item) !== 'Invalid input' ? <span>{calculateSalePrice(item)}EGP</span> : null} */}
                                         </div>
                                     </div>
                                 )
