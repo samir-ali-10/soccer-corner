@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 
 export default function Shipping() {
     return (
-        <div className='policy shipping text-center'>
+        <div className='policy shipping text-center text-white'>
             <Container>
                 <h2>Shipping</h2>
                 <div className="content">

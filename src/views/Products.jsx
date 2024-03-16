@@ -100,7 +100,7 @@ export default function Products() {
 
     let addToCart = async (product) => {
         // dispatch(increaseQuantity(product))
-        let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
+        let response = await fetch(`http://localhost:3001/api/PostOncart/${product}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
@@ -137,7 +137,7 @@ export default function Products() {
                         <div className="egyptian_league">
                             {
                                 leagues.map(league =>
-                                    league.leagueName === "egyptian"
+                                    league.leagueOrBrand === "egyptian"
                                         ?
                                         <>
                                             <h2>Egyptian League</h2>
@@ -177,7 +177,7 @@ export default function Products() {
                         <div className="serie_A">
                             {
                                 leagues.map(league =>
-                                    league.leagueName === "serie a"
+                                    league.leagueOrBrand === "serie a"
                                         ?
                                         <>
                                             <h2>Serie A</h2>
@@ -217,7 +217,7 @@ export default function Products() {
                         <div className="spanish_league">
                             {
                                 leagues.map(league =>
-                                    league.leagueName === "La Liga"
+                                    league.leagueOrBrand === "La Liga"
                                         ?
                                         <>
                                             <h2>La Liga</h2>
@@ -257,7 +257,7 @@ export default function Products() {
                         <div className="saudi_league">
                             {
                                 leagues.map(league =>
-                                    league.leagueName === "saudi"
+                                    league.leagueOrBrand === "saudi"
                                         ?
                                         <>
                                             <h2>Saudi League</h2>

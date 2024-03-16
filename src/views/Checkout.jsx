@@ -262,22 +262,28 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
                                     />
                                 </Form.Group>
                             </Row>
-                            <Row>
-                                <Form.Group className="position-relative mb-3">
-                                    <Form.Check
-                                        required
-                                        className='termsCondition'
-                                        name="termsCondition"
-                                        label="Agree to terms and conditions"
-                                        onChange={handleChange}
-                                        isInvalid={!!errors.termsCondition}
-                                        feedback="You must agree to terms and conditions"
-                                        feedbackType="invalid"
-                                        id="validationFormik106"
-                                        feedbackTooltip
-                                    />
-                                </Form.Group>
-                            </Row>
+                            <div className='d-flex justify-content-between'>
+                                <Row>
+                                    <Form.Group className="position-relative mb-3">
+                                        <Form.Check
+                                            required
+                                            className='termsCondition'
+                                            name="termsCondition"
+                                            label="Agree to terms and conditions"
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.termsCondition}
+                                            feedback="You must agree to terms and conditions"
+                                            feedbackType="invalid"
+                                            id="validationFormik106"
+                                            feedbackTooltip
+                                        />
+                                    </Form.Group>
+                                </Row>
+                                <div className='text-end'>
+                                    <NavLink className='text-white text-decoration-underline d-block' to="/refund&exchangePolicy">Refund & Exchange Policy</NavLink>
+                                    <NavLink className='text-white text-decoration-underline d-block' to="/">Washing Methods</NavLink>
+                                </div>
+                            </div>
                             <div className="shipping_price mt-5">
                                 <h2>Shipping Prices</h2>
                                 <p className='m-0'>Enter your shipping address to view available shipping Prices</p>

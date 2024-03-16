@@ -133,7 +133,7 @@ export default function EditProduct() {
 
 
     return (
-        <div className='add_products mt-5'>
+        <div className='add_products edit mt-5'>
             <Container>
                 <Form onSubmit={(e) => handleEditProduct(e)}>
                     <Form.Group className="mb-4">

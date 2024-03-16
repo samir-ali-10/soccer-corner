@@ -1,4 +1,4 @@
-import { faLeftLong } from '@fortawesome/free-solid-svg-icons'
+import { faLeftLong, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { Container, Table } from 'react-bootstrap'
@@ -7,31 +7,49 @@ import image3 from "../../images/carousel_3.jpeg"
 
 export default function New() {
 
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([]),
+        [newOrders, setNewOrders] = useState([]);
 
-    let getCartItems = () => {
-        fetch(`http://localhost:3001/api/products/cart`).then((res) => res.json()).then((data) => setCart(data));
+    // let getCartItems = () => {
+    //     fetch(`http://localhost:3001/api/products/cart`).then((res) => res.json()).then((data) => setCart(data));
+    // }
+
+    const getNewOrders = () => {
+        fetch(`http://localhost:3001/api/orders`).then((res) => res.json()).then((data) => setNewOrders(data));
+    }
+
+    const deleteSingleOrder = (orderCode) => {
+        fetch(`http://localhost:3001/api/deleteOrder/${orderCode}`).then((res) => res.json()).then((data) => console.log(data));
+    }
+
+    let deleteAllOrders = () => {
+        fetch(`http://localhost:3001/api/deleteAllOrders`).then((res) => res.json()).then((data) => console.log(data));
     }
 
     useEffect(() => {
-        getCartItems();
-    }, [cart])
+        getNewOrders();
+    }, [])
+
+    console.log(newOrders);
 
     return (
-        <div className='new_orders_new text-white mt-4'>
+        <div className='orders text-white mt-4'>
             <Container>
                 <div className="back_to_admin mb-5">
                     <NavLink to="/adminSecret" className="back_to_admin"><FontAwesomeIcon icon={faLeftLong} />Back to admin dashboard</NavLink>
                 </div>
                 <h2 className='text-center'>New Orders</h2>
                 {
-                    cart.length === 0
+                    newOrders.length === 0
                         ?
                         <div className="image text-center text-capitalize mt-5">
                             <h1>There are no new orders</h1>
                         </div>
                         :
                         <div className='mt-5'>
+                            <div className='text-end mt-3 mb-5'>
+                                <button onClick={deleteAllOrders} className='bg-danger border-0 rounded text-white fs-5'>Delete All</button>
+                            </div>
                             <table className='w-100 ms-auto text-center'>
                                 <tr>
                                     <th>Image</th>
@@ -43,132 +61,41 @@ export default function New() {
                                     <th>Phone</th>
                                     <th>Area-Zone</th>
                                     <th>Address</th>
+                                    <th>Actions</th>
                                 </tr>
-                                <tbody>
-                                    <tr>
-                                        <td className='d-flex justify-content-center mt-3'>
-                                            <div className="image">
-                                                <img src={image3} alt="image1" />
-                                            </div>
-                                        </td>
-                                        <td>sdfdfsf</td>
-                                        <td>S</td>
-                                        <td>8</td>
-                                        <td>300EGP</td>
-                                        <td>Samir</td>
-                                        <td>01005212460</td>
-                                        <td>Giza, Egypt</td>
-                                        <td>El Rehab St., Giza Governorate, Egypt</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='d-flex justify-content-center mt-3'>
-                                            <div className="image">
-                                                <img src={image3} alt="image1" />
-                                            </div>
-                                        </td>
-                                        <td>sdfdfsf</td>
-                                        <td>S</td>
-                                        <td>8</td>
-                                        <td>300EGP</td>
-                                        <td>Samir</td>
-                                        <td>01005212460</td>
-                                        <td>Giza, Egypt</td>
-                                        <td>El Rehab St., Giza Governorate, Egypt</td>
-                                    </tr>
-                                </tbody>
-                                <tbody>
-                                    <tr>
-                                        <td className='d-flex justify-content-center mt-3'>
-                                            <div className="image">
-                                                <img src={image3} alt="image1" />
-                                            </div>
-                                        </td>
-                                        <td>sdfdfsf</td>
-                                        <td>S</td>
-                                        <td>8</td>
-                                        <td>300EGP</td>
-                                        <td>Samir</td>
-                                        <td>01005212460</td>
-                                        <td>Giza, Egypt</td>
-                                        <td>El Rehab St., Giza Governorate, Egypt</td>
-                                    </tr>
-                                    <tr>
-                                        <td className='d-flex justify-content-center mt-3'>
-                                            <div className="image">
-                                                <img src={image3} alt="image1" />
-                                            </div>
-                                        </td>
-                                        <td>sdfdfsf</td>
-                                        <td>S</td>
-                                        <td>8</td>
-                                        <td>300EGP</td>
-                                        <td>Samir</td>
-                                        <td>01005212460</td>
-                                        <td>Giza, Egypt</td>
-                                        <td>El Rehab St., Giza Governorate, Egypt</td>
-                                    </tr>
-                                </tbody>
+                                {
+                                    newOrders.map((order, index) =>
+                                        <tbody key={index}>
+                                            {
+                                                order.productsOrdered.map((product, innerIndex) =>
+                                                    <tr key={innerIndex} className='text-capitalize'>
+                                                        <td className='d-flex justify-content-center mt-3'>
+                                                            <div className="image">
+                                                                <img src={image3} alt="image1" />
+                                                            </div>
+                                                        </td>
+                                                        <td>{product.code}</td>
+                                                        <td>{product.size}</td>
+                                                        <td>{product.quantity}</td>
+                                                        <td>{product.price}EGP</td>
+                                                        <td>{order.name}</td>
+                                                        <td>{order.phone}</td>
+                                                        <td>{order.zone}, {order.area}</td>
+                                                        <td>{order.address}</td>
+                                                        <td>
+                                                            <div>
+                                                                <button onClick={() => deleteSingleOrder(product._id)} className='bg-transparent border-0 text-danger'><FontAwesomeIcon icon={faTrashCan} /></button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            }
+                                        </tbody>
+                                    )
+                                }
                             </table>
                         </div>
                 }
-                {/* {
-                    cart.length === 0
-                        ?
-                        <div className="image text-center text-capitalize mt-5">
-                            <h1>There are no new orders</h1>
-                        </div>
-                        :
-                        <>
-                            <div className="types d-flex justify-content-around mt-5">
-                                <p className='image'>Image</p>
-                                <p className='code'>Code</p>
-                                <p className='size'>Size</p>
-                                <p className='quantity'>Quantity</p>
-                                <p className='price'>Price</p>
-                                <p className='name'>Name</p>
-                                <p className='phone'>Phone</p>
-                                <p className='area'>Area-Zone</p>
-                                <p className='address'>Address</p>
-                            </div>
-                            <div className="new_orders_container">
-                                {
-                                    cart.map(item =>
-                                        <div key={item._id} className="new_item">
-                                            <div className="info d-flex justify-content-around align-items-center">
-                                                <div className="image">
-                                                    <img src={image3} alt="image1" />
-                                                </div>
-                                                <div className="code">
-                                                    <h5>{item.code}</h5>
-                                                </div>
-                                                <div className="size">
-                                                    S
-                                                </div>
-                                                <div className="quantity">
-                                                    8
-                                                </div>
-                                                <div className="price">
-                                                    {item.price}EGP
-                                                </div>
-                                                <div className="name">
-                                                    Samir
-                                                </div>
-                                                <div className="phone">
-                                                    01097621363
-                                                </div>
-                                                <div className="area_zone">
-                                                    Giza, Egypt
-                                                </div>
-                                                <div className="address">
-                                                    El Rehab St., Giza Governorate, Egypt
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                }
-                            </div>
-                        </>
-                } */}
             </Container>
         </div>
     )

@@ -17,7 +17,7 @@ export default function Navigation() {
 
 
     let getCartItems = () => {
-        fetch(`http://localhost:3001/api/products/cart`).then((res) => res.json()).then((data) => setCart(data));
+        fetch(`http://localhost:3001/api/ProductsOncart`).then((res) => res.json()).then((data) => setCart(data));
     }
 
     let calculateTotalQuantity = () => {

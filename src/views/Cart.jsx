@@ -16,26 +16,23 @@ export default function Cart() {
         [totalPrice, setTotalPrice] = useState(),
         [totalQuantity, setTotalQuantity] = useState(0);
 
-    // const cartRtk = useSelector((state) => state.cart)
-    // const dispatch = useDispatch()
-
 
     let getCartItems = () => {
-        fetch(`http://localhost:3001/api/products/cart`).then((res) => res.json()).then((data) => setCart(data));
+        fetch(`http://localhost:3001/api/ProductsOncart`).then((res) => res.json()).then((data) => setCart(data));
     }
 
     let removeSingleProduct = (product) => {
-        fetch(`http://localhost:3001/api/products/cart/delete-product/${product}`).then((res) => res.json()).then((data) => console.log(data));
+        fetch(`http://localhost:3001/api/deleteproductFromCart/${product}`).then((res) => res.json()).then((data) => console.log(data));
         window.location.reload()
     }
 
     let removeAllProducts = () => {
-        fetch(`http://localhost:3001/api/products/cart/delete-products`).then((res) => res.json()).then((data) => console.log(data));
+        fetch(`http://localhost:3001/api/deleteproductsFromCart`).then((res) => res.json()).then((data) => console.log(data));
         window.location.reload()
     }
 
     let increaseQuantity = async (product) => {
-        let response = await fetch(`http://localhost:3001/api/products/cart/increase/${product}`, {
+        let response = await fetch(`http://localhost:3001/api/increaseQuantity/${product}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
@@ -47,7 +44,7 @@ export default function Cart() {
     }
 
     let decreaseQuantity = async (product) => {
-        let response = await fetch(`http://localhost:3001/api/products/cart/decrease/${product}`, {
+        let response = await fetch(`http://localhost:3001/api/decreaseQuantity/${product}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
@@ -57,25 +54,6 @@ export default function Cart() {
         })
         return response.json();
     }
-
-    const calculateSalePrice = (product) => {
-        // console.log(product.price);
-        return product.sale
-        // if(product.sale !== null) {
-        // }
-
-        // else {
-        //     return product.price
-        // }
-        // // Ensure that price and sale are valid numbers
-        // if (typeof product.price !== 'number' || typeof product.sale !== 'number') {
-        //     return 'Invalid input';
-        // }
-
-        // // Calculate the sale price
-        // const salePrice = product.price - (product.price * product.sale) / 100;
-        // return salePrice.toFixed(2); // Adjust decimal places as needed
-    };
 
     let getTotal = () => {
         return cart.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -100,10 +78,10 @@ export default function Cart() {
         <div className='cart'>
             <h2>Shopping Cart</h2>
             <Container>
-            <div className="top_heading d-flex justify-content-end me-5">
-                <h4>Quantity</h4>
-                <h4>Total</h4>
-            </div>
+                <div className="top_heading d-flex justify-content-end me-5">
+                    <h4>Quantity</h4>
+                    <h4>Total</h4>
+                </div>
                 {
                     cart.length === 0
                         ?

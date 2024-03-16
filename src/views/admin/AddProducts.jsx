@@ -165,7 +165,7 @@ export default function AddProducts() {
                                         {errors.code}
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                                <select className='code_list mb-5' value={selectedCode} onChange={getProduct} name="code_list" id="code_list">
+                                <select className='code_list mb-5 rounded' value={selectedCode} onChange={getProduct} name="code_list" id="code_list">
                                     <option value={"--Choose Existing Code--"} >--Choose Existing Code--</option>
                                     {
                                         stock.map(product =>
@@ -423,17 +423,19 @@ export default function AddProducts() {
                             <div className='clear_fields_container d-flex justify-content-between'>
                                 <Button type="submit">Send To Stock</Button>
                                 <button type='button' className='clear_fields' onClick={() => {
-                                    values.code = ""
-                                    values.collectionName = ""
-                                    values.league = ""
-                                    values.BrandName = ""
-                                    values.kit = ""
-                                    values.type = ""
-                                    values.description = ""
-                                    values.model = ""
-                                    values.price = ""
-                                    values.quantity = ""
-                                    values.size = ""
+                                    setCode("");
+                                    setType("");
+                                    setLeague("");
+                                    setBrandName("");
+                                    setCollectionName("");
+                                    setKit("");
+                                    setModel("");
+                                    setPrice("");
+                                    setSale("");
+                                    setNewCollection("");
+                                    setSize("");
+                                    setQuantity("");
+                                    setDescription("");
                                 }}>Clear all fields</button>
                             </div>
                         </Form>
