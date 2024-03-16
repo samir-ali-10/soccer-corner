@@ -43,7 +43,7 @@ exports.signUp = async (req, res, next) => {
       const zone = req.body.zone;
       const area = req.body.area;
       const phoneNumber = req.body.phoneNumber;
-      const address = req.body.address;
+      const address = req.body.address; 
   
       // Hash the password
       const hashedPw = await bcrypt.hash(password, 12);
@@ -51,7 +51,6 @@ exports.signUp = async (req, res, next) => {
       const user = new User({
         email: email,
         password: hashedPw,
-        confirmPassword: hashedPw,
         name: name,
         zone: zone,
         area: area,
@@ -60,15 +59,14 @@ exports.signUp = async (req, res, next) => {
       });
   
       // Save the user to the database
-      const result = await user.save();
+      await user.save();
   
-      console.log('User saved:', result);
-      res.status(201).json({ message: 'User created successfully.', userId: result._id });
+      console.log('User saved:', user);
+      res.status(201).json({ message: 'User created successfully.'});
     } catch (err) {
       if (!err.statusCode) {
         err.statusCode = 500;
       }
-      next(err);
     }
   };
   exports.logIn = async (req, res, next) => {
@@ -85,7 +83,6 @@ exports.signUp = async (req, res, next) => {
             throw error;
         }
 
-        // Compare the provided password with the hashed password in the database
         const isEqual = await bcrypt.compare(password, user.password);
 
         if (!isEqual) {

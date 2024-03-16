@@ -45,14 +45,15 @@ router.get('/api/archive' , ProductController.getArchive) // archive API
 router.post('/api/postToArchive/:productId' , ProductController.postToArchive) // post from orders to archive
 router.get('/api/archive/deleteOrderFromArchive/:orderId' ,ProductController.deleteOrderFromArchive) // delete order from archive
 router.get('/api/archive/deleteAllOrdersFromArchive' , ProductController.deleteAllOrdersFromArchive) // delete orders from archive
+// router.post('/api/postAllToArchive' , ProductController.postAllToArchive) // post all orders to archive 
 
 
 // AUTHENTICATION
 
-router.get('/api/auth/getUsers' , authController.getUsers)
-router.post('/api/auth/logIn' , authController.logIn)
-// router.post('/api/auth/logOut' , authController.logOut) // logout API
-router.post('/api/auth/signUp' ,authController.signUp)
+// router.get('/api/auth/getUsers' , authController.getUsers);
+// router.post('/api/auth/logIn' , authController.logIn)
+// // router.post('/api/auth/logOut' , authController.logOut) // logout API
+// router.post('/api/auth/signUp' ,authController.signUp)
 
 // REVIEWS
 

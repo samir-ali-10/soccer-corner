@@ -205,8 +205,8 @@ exports.deleteOrder = (req , res , next) => {
 
   const orderId = req.params.orderId;
 
-  Order.deleteOne({ _id : orderId })
-  .then(result => {
+  Order.findOneAndDelete({ _id : orderId })
+  .then((result) => {
     res.json('order deleted successfully')
     console.log('order deleted successfully');
   })
@@ -255,8 +255,49 @@ const productInOrders = await Order.findOne({ _id :  productId })
     productsOrdered : productInOrders.productsOrdered
   })
  await productToArchive.save();
- console.log('product saved in archive ' , productToArchive);
+ console.log('product saved in archive' , productToArchive);
 }
+
+// exports.postAllToArchive = async (req, res, next) => {
+//   try {
+//     // Retrieve all orders from the order collection
+//     const ordersInOrdersCollection = await Order.find();
+
+//     // Iterate through each order and save it to the archive collection
+//     for (const order of ordersInOrdersCollection) {
+//       const orderId = order._id;
+
+//       // Check if the order with the given orderId already exists in the archive
+//       const existOrderInArchive = await Archive.findOne({ _id: orderId });
+
+//       if (existOrderInArchive) {
+//         console.log(`order already exists in archive`);
+//         continue; // Skip to the next order
+//       }
+
+//       // Create a new Archive entry using details from the order in orders
+//       const orderToArchive = new Archive({
+//         name: order.name,
+//         phone: order.phone,
+//         area: order.area,
+//         zone: order.zone,
+//         productsOrdered: order.productsOrdered,
+//       });
+
+//       // Save the new Archive entry
+//       await orderToArchive.save();
+
+//       console.log(`order ${orderId} saved in archive`);
+//     }
+
+//     console.log('All orders saved in archive');
+//     return res.json('All  orders saved in archive');
+//   } catch (error) {
+//     console.error('Error in postAllToArchive:', error.message);
+//     return res.status(500).json('Internal Server Error');
+//   }
+// };
+
 
 exports.deleteOrderFromArchive = (req , res, next) => {
   const orderId = req.params.orderId;
@@ -551,28 +592,29 @@ exports.increaseQuantity = async (req, res) => {
 };
 
 exports.decreaseQuantity = async (req, res) => {
-  const productCode = req.params.code;
+  const code = req.params.code;
+
   try {
-    
-    const productInCart = await Cart.findOne({ code: productCode });
-    const productInDB = await ProductModel.findOne({ code : productCode })
+    const productInCart = await Cart.findOne({ code: code });
+    const productInDB = await ProductModel.findOne({ code: code });
 
-    if (productInCart && productInCart.quantity > 0) {
+    if (productInCart && productInDB) {
+      if (productInCart.quantity > 0) {
+        productInCart.quantity -= 1; // Decrease quantity in the cart by 1 (or any desired value)
+        productInDB.quantity += 1; // Increase quantity in the database by 1 (or any desired value)
 
-      productInCart.quantity -= 1; // Decrease quantity by 1 (or any desired value)
-      productInDB.quantity += 1;
+        await productInCart.save();
+        await productInDB.save();
 
-
-      await productInCart.save();
-      await productInDB.save();
-      
-      // console.log('Product quantity decreased:', productInCart);
-      return res.json("Product quantity decreased");
+        console.log('Product quantity decreased:', productInCart);
+        return res.json("Product quantity decreased");
+      } else {
+        console.log("Product quantity in cart is already 0");
+        return res.status(400).json("Product quantity in cart is already 0");
+      }
     } else {
-      console.log("Invalid operation. Minimum quantity reached.");
-      return res
-        .status(400)
-        .json("Invalid operation. Minimum quantity reached.");
+      console.log("Product not found in the cart or DB");
+      return res.status(404).json("Product not found in the cart or DB");
     }
   } catch (error) {
     console.error("Error decreasing quantity:", error.message);
@@ -581,19 +623,21 @@ exports.decreaseQuantity = async (req, res) => {
 };
 
 exports.postProductsOnCart = async (req, res, next) => {
-  const code = req.params.code;
-  const existingProduct = await ProductModel.findOne({ code });
+  try {
+    const code = req.params.code;
+    const existingProduct = await ProductModel.findOne({ code });
 
-  if (existingProduct) {
-    const productInCart = await Cart.findOne({ code });
-    const productInDB = await ProductModel.findOne({ code })
-
-    if (productInDB.quantity <= 0) {
-      console.log("Product is out of stock");
-      res.status(400).json("Product is out of stock");
-      return;
+    if (!existingProduct) {
+      console.log("Product not found in DB");
+      return res.status(404).json("Product not found in DB");
     }
 
+    if (existingProduct.quantity <= 0) {
+      console.log("Product is out of stock");
+      return res.status(400).json("Product is out of stock");
+    }
+
+    const productInCart = await Cart.findOne({ code });
 
     if (!productInCart) {
       const productData = {
@@ -612,22 +656,21 @@ exports.postProductsOnCart = async (req, res, next) => {
 
       const cartProduct = new Cart(productData);
       await cartProduct.save();
-      
-      productInDB.quantity -= 1;
-      await productInDB.save();
+
+      existingProduct.quantity -= 1;
+      await existingProduct.save();
 
       console.log("Product saved:", existingProduct);
-      res.json("Product saved");
-      return cartProduct;
+      return res.json("Product saved");
     } else {
       console.log("Product already exists in the cart");
-      res.json("Product already exists in the cart");
+      return res.json("Product already exists in the cart");
     }
-  } else {
-    console.log("Product not found in DB");
+  } catch (error) {
+    console.error("Error posting product on cart:", error.message);
+    return res.status(500).json("Internal Server Error");
   }
 };
-
 
 // => EDIT
 

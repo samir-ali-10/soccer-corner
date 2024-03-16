@@ -7,7 +7,6 @@ const archiveSchema = new schema({
     phone : String,
     area : String,
     zone : String,
-    status : String,
     productsOrdered : [{
         code : String,
         size : String,
