@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import * as formik from 'formik';
 import * as yup from 'yup';
+import Swal from 'sweetalert2';
 
 export default function ContactUs() {
 
@@ -13,6 +14,16 @@ export default function ContactUs() {
     });
 
     const handleReview = async (values) => {
+        Swal.fire({
+            title: "Review Placed Successfully",
+            timer: 2000,
+            timerProgressBar: true,
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log("I was closed by the timer");
+            }
+        });
         let response = await fetch(`http://localhost:3001/api/reviews`, {
             method: 'POST',
             headers: {
@@ -52,6 +63,7 @@ export default function ContactUs() {
                                     <Form.Control
                                         type="text"
                                         name="name"
+                                        className='border-0 text-white'
                                         required
                                         list='productsList'
                                         value={values.name}
@@ -68,6 +80,7 @@ export default function ContactUs() {
                                     <Form.Label>Message</Form.Label>
                                     <Form.Control
                                         as="textarea"
+                                        className='border-0 text-white'
                                         rows={6}
                                         name='message'
                                         value={values.message}

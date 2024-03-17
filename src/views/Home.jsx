@@ -28,7 +28,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
 
     let addToCart = async (product) => {
         // dispatch(increaseQuantity(product))
-        let response = await fetch(`http://localhost:3001/api/products/cart/${product}`, {
+        let response = await fetch(`http://localhost:3001/api/PostOncart/${product}`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
@@ -131,12 +131,13 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                             stock.map(product =>
                                 product.sale !== null || 0
                                     ?
-                                    <NavLink to={`/products/offers/${product.code}`} className="item">
+                                    <NavLink to={`/products/offers/${product.code}`} key={product._id} className="item">
                                         <div className="image">
                                             <img src={image1} alt="image1" />
                                         </div>
                                         <div className="info">
                                             <div className="name">{product.code}</div>
+                                            <div className='size text-uppercase text-center mb-2 fs-5'>{product.size}</div>
                                             <div className="inner_info d-flex justify-content-between">
                                                 {calculateSalePrice(product) === 'Invalid input' ? <div className="price">{product.price}EGP</div> : <div className="price_dashed">{product.price}EGP</div>}
                                                 {calculateSalePrice(product) !== 'Invalid input' ? <span>{calculateSalePrice(product)}EGP</span> : null}
@@ -163,12 +164,13 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                         {stock.map(newCollection =>
                             newCollection.newCollection === "new"
                                 ?
-                                <NavLink to={`/products/newCollection/${newCollection.code}`} key={newCollection._id} className="item">
+                                <NavLink to={`/products/newCollection/${newCollection.code}`} key={newCollection._id} className={calculateSalePrice(newCollection) === 'Invalid input' ? "item" : "item sale"}>
                                     <div className="image">
                                         <img src={image2} alt="image2" />
                                     </div>
                                     <div className="info">
                                         <div className="name">{newCollection.code}</div>
+                                        <div className='size text-uppercase text-center mb-2 fs-5'>{newCollection.size}</div>
                                         <div className="inner_info d-flex justify-content-between">
                                             {calculateSalePrice(newCollection) === 'Invalid input' ? <div className="price">{newCollection.price}EGP</div> : <div className="price_dashed">{newCollection.price}EGP</div>}
                                             {calculateSalePrice(newCollection) !== 'Invalid input' ? <span>{calculateSalePrice(newCollection)}EGP</span> : null}

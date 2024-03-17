@@ -111,9 +111,9 @@ export default function Cart() {
                                         <div className="actions">
                                             <div className="quantity">
                                                 <div className="quantity_icons d-flex">
-                                                    <button onClick={() => decreaseQuantity(item.code)} className='minus'><FontAwesomeIcon icon={faCaretDown} /></button>
+                                                    <button onClick={() => decreaseQuantity(item.code)} className='minus bg-transparent'><FontAwesomeIcon icon={faCaretDown} /></button>
                                                     {item.quantity}
-                                                    <button onClick={() => increaseQuantity(item.code)} className='plus' ><FontAwesomeIcon icon={faCaretUp} /></button>
+                                                    <button onClick={() => increaseQuantity(item.code)} className='plus bg-transparent' ><FontAwesomeIcon icon={faCaretUp} /></button>
                                                 </div>
                                             </div>
                                             <div className="price">

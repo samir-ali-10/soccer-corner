@@ -53,7 +53,7 @@ export default function Navigation() {
                                 <NavDropdown.Item href="/products/sportsWear">Sports Wear</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/studs_turfs">Studs & Turfs</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/classicJerseys">Classic Jerseys</NavDropdown.Item>
-                                <NavDropdown.Item href="/products/previousSeasons">previous Seasons</NavDropdown.Item>
+                                <NavDropdown.Item href="/products/previousSeasons">Previous Seasons</NavDropdown.Item>
                             </NavDropdown>
                             <NavLink to="/contactUs">Make A Review</NavLink>
                             <NavLink to="/adminSecret">Admin</NavLink>

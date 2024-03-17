@@ -20,6 +20,10 @@ ul {
   background-color: var(--secondary-color);
 }
 
+input:focus, textarea:focus {
+  background-color: initial !important;
+}
+
 /************************************ Popup Terms and Conditions *********************************/
 
 .modal-footer button {
@@ -824,7 +828,7 @@ ul {
   text-transform: capitalize;
   font-size: 1.2rem;
   font-style: italic;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .slider_container .item .info .price {
