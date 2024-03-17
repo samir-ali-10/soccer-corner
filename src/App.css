@@ -1707,6 +1707,10 @@ input:focus, textarea:focus {
   height: 100%;
 }
 
+.orders .actions button {
+  font-size: .8rem;
+}
+
 /************************ Checkout ***************************/
 
 .checkout {
