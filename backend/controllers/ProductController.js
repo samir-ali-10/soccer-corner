@@ -445,7 +445,6 @@ exports.postAddProduct = async (req, res, next) => {
   const collectionName = req.body.collectionName;
   const price = req.body.price;
   const size = req.body.size;
-  const sizes = ["S", "M", "L", "XL", "XXL"];
   const quantity = req.body.quantity;
   const description = req.body.description;
 
@@ -541,7 +540,6 @@ exports.postAddProduct = async (req, res, next) => {
     price: price,
     quantity: quantity,
     size: size,
-    sizes: sizes,
     description: description,
   });
 

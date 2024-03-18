@@ -13,7 +13,6 @@ const productSchema = new schema({
     price: Number,
     size: String,
     type: String,
-    sizes: Array,
     sale : Number,
     newCollection : String,
     quantity: {
