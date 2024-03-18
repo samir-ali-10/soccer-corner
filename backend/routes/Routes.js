@@ -26,6 +26,10 @@ router.get('/api/products/:type/:brandName' ,ProductController.getByTypeAndBrand
 router.get('/api/products/:type/:brandName/:collectionName' , ProductController.getTypeBrandNameCollectionName); // Get by type , brandname and collectionName
 router.get('/api/products/:type/:brandName/:collectionName/:model' , ProductController.getTypeBrandNameCollectionNameModel); // Get by type , brandname  , collectionName and Model
 router.get('/api/products/:type/:brandName/:collectionName/:model/:size' , ProductController.getTypeBrandNameCollectionNameModelSize) // Get by type , brandname , collectionname , model and Size 
+router.post('/api/orderStatus/returns/:orderId' , ProductController.returnsStatus); // returns status
+router.post('/api/orderStatus/outForDelivery/:orderId' , ProductController.outForDeliveryStatus) // out for delivery status
+router.post('/api/orderStatus/delivered/:orderId' , ProductController.deliveredStatus) // delivered status
+router.post('/api/orderStatus/moneyCollected/:orderId' , ProductController.moneyCollectedStatus) // money collected status
 // Cart
 router.get('/api/ProductsOncart', ProductController.getProductsOnCart)
 router.post('/api/PostOncart/:code' , ProductController.postProductsOnCart);

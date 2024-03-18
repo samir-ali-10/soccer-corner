@@ -227,6 +227,40 @@ exports.deleteAllOrders = (req , res , next) => {
   })
 }
 
+exports.returnsStatus = async (req , res, next) => {
+  const orderId = req.params.orderId
+  const existOrder = await Order.findOne({ _id : orderId })
+    existOrder.status = "returns";
+    await existOrder.save();
+  console.log('order status is now returns');
+}
+
+exports.moneyCollectedStatus = async (req , res, next) => {
+  const orderId = req.params.orderId
+  const existOrder = await Order.findOne({ _id : orderId })
+    existOrder.status = "moneyCollected";
+    await existOrder.save();
+  console.log('order status is now moneyCollected');
+}
+
+exports.deliveredStatus = async (req , res, next) => {
+  const orderId = req.params.orderId
+  const existOrder = await Order.findOne({ _id : orderId })
+   existOrder.status = "delivered";
+    await existOrder.save();
+  console.log('order status is now delivered');
+}
+
+exports.outForDeliveryStatus = async (req , res, next) => {
+  const orderId = req.params.orderId
+  const existOrder = await Order.findOne({ _id : orderId })
+   existOrder.status = "outForDelivery";
+    await existOrder.save();
+  console.log('order status is now outForDelivery');
+}
+
+
+
 exports.getArchive = (req , res , next) => {
   Archive.find()
   .then((products) => {
