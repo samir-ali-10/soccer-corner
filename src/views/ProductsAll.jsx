@@ -122,6 +122,8 @@ export default function ProductsAll() {
         getData();
     }, [])
 
+    console.log(stock);
+
     return (
         <div className='products_all'>
             <Container>
@@ -189,6 +191,26 @@ export default function ProductsAll() {
                                             <div className="name">{spanish.code}</div>
                                             {calculateSalePrice(spanish) === 'Invalid input' ? <div className="price">{spanish.price}EGP</div> : <div className="price_dashed">{spanish.price}EGP</div>}
                                             {calculateSalePrice(spanish) !== 'Invalid input' ? <span>{calculateSalePrice(spanish)}EGP</span> : null}
+                                        </div>
+                                    </NavLink>
+                                    :
+                                    null
+                                )}
+                            </div>
+                        </div>
+                        <div className="saudi_league">
+                            <h2>Saudi</h2>
+                            <div className="items_container">
+                                {stock.map((saudi) => saudi.league === "saudi"
+                                    ?
+                                    <NavLink to={`/products/${params.category}/${saudi.code}`} key={saudi._id} className="item">
+                                        <div className="image">
+                                            <img src={image1} alt="image1" />
+                                        </div>
+                                        <div className="info">
+                                            <div className="name">{saudi.code}</div>
+                                            {calculateSalePrice(saudi) === 'Invalid input' ? <div className="price">{saudi.price}EGP</div> : <div className="price_dashed">{saudi.price}EGP</div>}
+                                            {calculateSalePrice(saudi) !== 'Invalid input' ? <span>{calculateSalePrice(saudi)}EGP</span> : null}
                                         </div>
                                     </NavLink>
                                     :

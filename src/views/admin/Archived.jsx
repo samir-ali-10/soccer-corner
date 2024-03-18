@@ -1,7 +1,8 @@
 import { faBoxOpen, faLeftLong, faMoneyBill1Wave, faRotateLeft, faTrashCan, faTruck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
-import { Container, NavLink } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom';
 
 export default function Archived() {
 
@@ -31,7 +32,7 @@ export default function Archived() {
         <div className='orders text-white mt-4'>
             <Container>
                 <div className="back_to_admin mb-5">
-                    <NavLink to="/adminSecret" className="back_to_admin"><FontAwesomeIcon icon={faLeftLong} />Back to admin dashboard</NavLink>
+                    <NavLink to='/adminSecret' className="back_to_admin"><FontAwesomeIcon icon={faLeftLong} />Back to admin dashboard</NavLink>
                 </div>
                 <h2 className='text-center'>Archived Orders</h2>
                 {

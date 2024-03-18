@@ -100,14 +100,21 @@ export default function Stock() {
         fetch(`http://localhost:3001/api/products/league/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
     }
 
+    let getBySize = (val) => {
+        setSize(val)
+        fetch(`http://localhost:3001/api/products/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
     let getCollectionSize = (val) => {
-        setSize(val.target.value);
-        if (collectionName === "") {
-            fetch(`http://localhost:3001/api/products/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
-        }
-        else {
-            fetch(`http://localhost:3001/api/products/collection/${collectionName}/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
-        }
+        console.log(val);
+        console.log(sizeSelected);
+        setSize(val);
+        // if (collectionName === "") {
+        //     fetch(`http://localhost:3001/api/products/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+        // }
+        // else {
+        //     fetch(`http://localhost:3001/api/products/collection/${collectionName}/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+        // }
     }
 
     let getCollectionSizeModel = (val) => {
@@ -206,6 +213,7 @@ export default function Stock() {
     }, [])
 
     console.log(sizes);
+    console.log(size);
 
     return (
         <div className='stock mt-4 overflow-hidden'>
@@ -229,7 +237,7 @@ export default function Stock() {
                             <option value={"--Choose a League--"} >--Choose a League/BrandName--</option>
                             {
                                 leagues.map(league =>
-                                    <option key={league.leagueName} value={league.leagueName}>{league.leagueName}</option>
+                                    <option key={league.leagueOrBrand} value={league.leagueOrBrand}>{league.leagueOrBrand}</option>
                                 )
                             }
                         </select>
@@ -248,14 +256,7 @@ export default function Stock() {
                                 )
                             }
                         </select>
-                        <select value={sizeSelected} onChange={() => {
-                            type !== ""
-                                ?
-                                getTypeBrandCollectionSize()
-                                :
-                                getCollectionSize()
-                        }
-                        } name="sizes" id="sizes">
+                        <select value={sizeSelected} onChange={getBySize} name="sizes" id="sizes">
                             {
                                 sizeOptions.map(option =>
                                     <option key={option.value} value={option.value}>{option.text}</option>

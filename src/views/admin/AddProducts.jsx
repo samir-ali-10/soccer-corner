@@ -15,6 +15,24 @@ export default function AddProducts() {
 
     const { Formik } = formik;
 
+    const [stock, setStock] = useState([]),
+        [selectedCode, setSelectedCode] = useState(),
+        [product, setProduct] = useState(),
+        [collectionName, setCollectionName] = useState(),
+        [league, setLeague] = useState(),
+        [model, setModel] = useState(),
+        [kit, setKit] = useState(),
+        [type, setType] = useState(),
+        [BrandName, setBrandName] = useState(),
+        [code, setCode] = useState(),
+        [price, setPrice] = useState(),
+        [sale, setSale] = useState(),
+        [newCollection, setNewCollection] = useState(),
+        [size, setSize] = useState(),
+        [quantity, setQuantity] = useState(),
+        [selectedImage, SetSelectedImage] = useState(),
+        [description, setDescription] = useState();
+
     const options = [
         { value: 's', text: 'S' },
         { value: 'm', text: 'M' },
@@ -63,26 +81,14 @@ export default function AddProducts() {
         return response.json();
     }
 
+
     let handleCollectionNames = () => {
         fetch(`http://localhost:3001/api/products/CollectionsNames`).then((res) => res.json()).then((data) => console.log(data));
     }
 
-    const [stock, setStock] = useState([]),
-        [selectedCode, setSelectedCode] = useState(),
-        [product, setProduct] = useState(),
-        [collectionName, setCollectionName] = useState(),
-        [league, setLeague] = useState(),
-        [model, setModel] = useState(),
-        [kit, setKit] = useState(),
-        [type, setType] = useState(),
-        [BrandName, setBrandName] = useState(),
-        [code, setCode] = useState(),
-        [price, setPrice] = useState(),
-        [sale, setSale] = useState(),
-        [newCollection, setNewCollection] = useState(),
-        [size, setSize] = useState(),
-        [quantity, setQuantity] = useState(),
-        [description, setDescription] = useState();
+    let test = () => {
+        console.log(selectedImage);
+    }
 
     let getData = () => {
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
@@ -412,6 +418,7 @@ export default function AddProducts() {
                                     type="file"
                                     name="image"
                                     accept='image/*'
+                                    value={values.image}
                                     multiple
                                     onChange={handleChange}
                                     isInvalid={!!errors.image}
@@ -436,6 +443,20 @@ export default function AddProducts() {
                                     setSize("");
                                     setQuantity("");
                                     setDescription("");
+                                    values.code = '';
+                                    values.BrandName = '';
+                                    values.collectionName = '';
+                                    values.description = '';
+                                    values.image = undefined;
+                                    values.kit = '';
+                                    values.league = '';
+                                    values.model = '';
+                                    values.newCollection = '';
+                                    values.price = '';
+                                    values.quantity = '';
+                                    values.sale = '';
+                                    values.size = '';
+                                    values.type = '';
                                 }}>Clear all fields</button>
                             </div>
                         </Form>

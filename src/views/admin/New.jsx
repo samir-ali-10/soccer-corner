@@ -18,8 +18,8 @@ export default function New() {
         fetch(`http://localhost:3001/api/orders`).then((res) => res.json()).then((data) => setNewOrders(data));
     }
 
-    const deleteSingleOrder = (orderCode) => {
-        fetch(`http://localhost:3001/api/deleteOrder/${orderCode}`).then((res) => res.json()).then((data) => console.log(data));
+    const deleteSingleOrder = (orderId) => {
+        fetch(`http://localhost:3001/api/deleteOrder/${orderId}`).then((res) => res.json()).then((data) => console.log(data));
     }
 
     let deleteAllOrders = () => {
@@ -51,18 +51,20 @@ export default function New() {
                                 <button onClick={deleteAllOrders} className='bg-danger border-0 rounded text-white fs-5'>Delete All</button>
                             </div>
                             <table className='w-100 ms-auto text-center'>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Code</th>
-                                    <th>Size</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Area-Zone</th>
-                                    <th>Address</th>
-                                    <th>Actions</th>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Code</th>
+                                        <th>Size</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Area-Zone</th>
+                                        <th>Address</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
                                 {
                                     newOrders.map((order, index) =>
                                         <tbody key={index}>
