@@ -161,12 +161,21 @@ exports.getOrders = (req , res , next) => {
   });
 }
 exports.postOrder = async (req , res , next) => {
-  const name = req.body.name;
+  const name = req.body.receiverName;
   const zone = req.body.zone;
   const area = req.body.area;
   const phone = req.body.phone;
   const address = req.body.address;
   const note = req.body.note;
+  const termsCondition = req.body.termsCondition; // Retrieve terms and conditions checkbox value
+
+  // Check if terms and conditions are accepted
+  if (!termsCondition) {
+    console.log('Terms and conditions not accepted');
+    return res.status(400).json('Terms and conditions not accepted');
+  }
+
+
 
   const productsInCart = await Cart.find({});
 
