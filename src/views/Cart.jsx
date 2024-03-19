@@ -14,7 +14,8 @@ export default function Cart() {
 
     const [cart, setCart] = useState([]),
         [totalPrice, setTotalPrice] = useState(),
-        [totalQuantity, setTotalQuantity] = useState(0);
+        [totalQuantity, setTotalQuantity] = useState(0),
+        [error, setError] = useState(false);
 
 
     let getCartItems = () => {
@@ -32,15 +33,30 @@ export default function Cart() {
     }
 
     let increaseQuantity = async (product) => {
-        let response = await fetch(`http://localhost:3001/api/increaseQuantity/${product}`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8'
-            },
-            body: JSON.stringify({
-            })
-        })
-        return response.json();
+        let response;
+        try {
+            response = await fetch(`http://localhost:3001/api/increaseQuantity/${product}`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                },
+                body: JSON.stringify({})
+            });
+            setError(false);
+
+            // Check if response is not successful
+            if (!response.ok) {
+                // Throw an error with the response status
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            return response.json();
+        } catch (error) {
+            // Log the error and response
+            setError(true);
+            // Rethrow the error to maintain the error flow
+            // throw error;
+        }
     }
 
     let decreaseQuantity = async (product) => {
@@ -52,6 +68,7 @@ export default function Cart() {
             body: JSON.stringify({
             })
         })
+        setError(false);
         return response.json();
     }
 
@@ -115,6 +132,7 @@ export default function Cart() {
                                                     {item.quantity}
                                                     <button onClick={() => increaseQuantity(item.code)} className='plus bg-transparent' ><FontAwesomeIcon icon={faCaretUp} /></button>
                                                 </div>
+                                                {error ? <div className='bg-danger px-2 rounded mt-3'>can not add anymore</div> : null}
                                             </div>
                                             <div className="price">
                                                 {item.price}EGP

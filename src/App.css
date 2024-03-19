@@ -1726,6 +1726,11 @@ input:focus, textarea:focus {
   color: var(--text-color);
 }
 
+.checkout input:focus,
+.checkout textarea:focus {
+  color: var(--text-color);
+}
+
 .checkout input::placeholder,
 .checkout textarea::placeholder {
   color: var(--text-color);

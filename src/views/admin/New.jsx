@@ -20,10 +20,12 @@ export default function New() {
 
     const deleteSingleOrder = (orderId) => {
         fetch(`http://localhost:3001/api/deleteOrder/${orderId}`).then((res) => res.json()).then((data) => console.log(data));
+        window.location.reload();
     }
 
     let deleteAllOrders = () => {
         fetch(`http://localhost:3001/api/deleteAllOrders`).then((res) => res.json()).then((data) => console.log(data));
+        window.location.reload();
     }
 
     useEffect(() => {
