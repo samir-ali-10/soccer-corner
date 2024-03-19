@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import * as formik from 'formik';
 import * as yup from 'yup';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import { NavLink } from 'react-router-dom';
 import image1 from "../images/carousel_3.jpeg"
 import image2 from "../images/ahly_2.jpeg"
@@ -10,52 +13,6 @@ import image4 from "../images/ahly_4.jpeg"
 import image5 from "../images/ahly_5.jpeg"
 
 export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
-
-    const sportsWear = [
-        {
-            image: image1,
-            price: 300,
-            title: "Sports Wear One",
-            id: 1
-        },
-        {
-            image: image2,
-            price: 400,
-            title: "Sports Wear Two",
-            id: 2
-        },
-        {
-            image: image3,
-            price: 500,
-            title: "Sports Wear Three",
-            id: 3
-        },
-        {
-            image: image4,
-            price: 500,
-            title: "Sports Wear Four",
-            id: 4
-        },
-        {
-            image: image5,
-            price: 500,
-            title: "Sports Wear Five",
-            id: 5
-        },
-    ]
-
-    const [name, setName] = useState(''),
-        [zone, setZone] = useState(''),
-        [area, setArea] = useState(''),
-        [phone, setPhone] = useState(''),
-        [address, setAddress] = useState(''),
-        [description, setDescription] = useState(''),
-        [terms, setTerms] = useState('');
-
-    useEffect(() => {
-        setAppearFooter(false)
-        setAppearLoginSignup(true)
-    }, [])
 
     const { Formik } = formik;
 
@@ -70,22 +27,52 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
         termsCondition: yup.bool().required().oneOf([true], 'terms must be accepted'),
     });
 
-    // let handleValidateDigits = (e) => {
-    //     if (e.target.name === "phone") {
-    //         setPhone(e.target.value)
-    //     }
-    // };
+    const [name, setName] = useState(''),
+        [zone, setZone] = useState(''),
+        [products, setProducts] = useState([]),
+        [area, setArea] = useState(''),
+        [phone, setPhone] = useState(''),
+        [address, setAddress] = useState(''),
+        [description, setDescription] = useState(''),
+        [terms, setTerms] = useState('');
 
-    const handleSub = (values) => {
-        const formData = new FormData();
-        formData.append('receiverName', values.receiverName);
-        formData.append('zone', values.zone);
-        formData.append('area', values.area);
-        formData.append('address', values.address);
-        formData.append('phone', values.phone);
-        formData.append('note', values.note);
-        formData.append('termsCondition', values.termsCondition);
+    let getCartItems = () => {
+        fetch(`http://localhost:3001/api/ProductsOncart`).then((res) => res.json()).then((data) => setProducts(data));
     }
+
+    const handlePurchase = async (values) => {
+        values.preventDefault();
+        try {
+            const formData = new FormData();
+            formData.append('receiverName', values.receiverName);
+            formData.append('zone', values.zone);
+            formData.append('area', values.area);
+            formData.append('address', values.address);
+            formData.append('phone', values.phone);
+            formData.append('note', values.note);
+            formData.append('termsCondition', values.termsCondition);
+            const response = await fetch('http://localhost:3001/api/postOrder', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Handle successful response, maybe show a success message
+            console.log('Order placed successfully!');
+        } catch (error) {
+            console.error('Error placing order:', error);
+            // Handle error, maybe show an error message to the user
+        }
+    }
+
+    useEffect(() => {
+        getCartItems();
+        setAppearFooter(false)
+        setAppearLoginSignup(true)
+    }, [])
 
     return (
         <div className='checkout'>
@@ -96,8 +83,8 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
                         <div className="item">
                             <div className="info">
                                 {
-                                    sportsWear.map(product =>
-                                        <>
+                                    products.map((product, index) =>
+                                        <div key={index}>
                                             <div className="top d-flex justify-content-between mb-3">
                                                 <div className='d-flex'>
                                                     <div className="image">
@@ -105,14 +92,15 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
                                                     </div>
                                                     <div className="title">
                                                         <h5>{product.title}</h5>
-                                                        <p>L</p>
+                                                        <p className='mb-0'>L</p>
+                                                        <p>{product.quantity}</p>
                                                     </div>
                                                 </div>
                                                 <div className="price">
                                                     {product.price}EGP
                                                 </div>
                                             </div>
-                                        </>
+                                        </div>
                                     )
                                 }
                             </div>
@@ -145,11 +133,11 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
                         termsCondition: false,
                     }}
                     onSubmit={(values) => {
-                        handleSub(values);
+                        handlePurchase(values);
                     }}
                 >
                     {({ handleSubmit, handleChange, values, touched, errors }) => (
-                        <Form className='mt-5' noValidate onSubmit={handleSubmit}>
+                        <Form className='mt-5' noValidate onSubmit={handlePurchase}>
                             <Row className='contact mb-5'>
                                 <div className="headlines d-flex justify-content-between align-items-center">
                                     <h2>Contact</h2>
