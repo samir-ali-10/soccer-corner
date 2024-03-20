@@ -21,6 +21,7 @@ const productSchema = new schema({
     }, 
     description: String,
     images : String,
+    availableSizes : Array,
 })
 
 

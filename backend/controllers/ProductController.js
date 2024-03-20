@@ -490,6 +490,8 @@ exports.postAddProduct = async (req, res, next) => {
   const size = req.body.size;
   const quantity = req.body.quantity;
   const description = req.body.description;
+  let availableSizes = req.body.availableSizes;
+  availableSizes = availableSizes.split(',');
 
   // => CHECK IF PRODUCT EXIST
 
@@ -584,6 +586,7 @@ exports.postAddProduct = async (req, res, next) => {
     quantity: quantity,
     size: size,
     description: description,
+    availableSizes : availableSizes
   });
 
   if (req.files) {
@@ -729,6 +732,8 @@ exports.editProduct = (req, res, next) => {
   const UpdatedSize = req.body.size;
   const UpdatedQuantity = req.body.quantity;
   const UpdatedDescription = req.body.description;
+  let UpdatedAvailableSizes = req.body.availableSizes;
+  UpdatedAvailableSizes = UpdatedAvailableSizes.split(',');
 
   ProductModel.findOneAndUpdate(
     { code },
@@ -745,6 +750,7 @@ exports.editProduct = (req, res, next) => {
       quantity: UpdatedQuantity,
       size: UpdatedSize,
       description: UpdatedDescription,
+      availableSizes : UpdatedAvailableSizes,
     }
   )
     .then((newProduct) => {
