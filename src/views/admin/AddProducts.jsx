@@ -74,6 +74,7 @@ export default function AddProducts() {
         formData.append('size', values.size);
         formData.append('quantity', values.quantity);
         formData.append('description', values.description);
+        formData.append('availableSizes', values.availableSizes);
         let response = await fetch(`http://localhost:3001/api/products`, {
             method: 'POST',
             body: formData,
@@ -140,6 +141,7 @@ export default function AddProducts() {
                         sale: "",
                         newCollection: "",
                         size: "",
+                        availableSizes: [],
                         quantity: "",
                         description: "",
                         image: undefined,
@@ -374,6 +376,35 @@ export default function AddProducts() {
                                     }
                                 </datalist>
                             </Row>
+                            <span className='bg-white px-2 py-1 rounded'>Available Sizes</span>
+                            <Row className='mt-3 mb-5'>
+                                <div role="group" aria-labelledby="checkbox-group" className='d-flex flex-column text-white'>
+                                    <label className='mb-3'>
+                                        <formik.Field className='me-3' type="checkbox" name="availableSizes" value="xs" />
+                                        XS
+                                    </label>
+                                    <label className='mb-3'>
+                                        <formik.Field className='me-3' type="checkbox" name="availableSizes" value="s" />
+                                        S
+                                    </label>
+                                    <label className='mb-3'>
+                                        <formik.Field className='me-3' type="checkbox" name="availableSizes" value="m" />
+                                        M
+                                    </label>
+                                    <label className='mb-3'>
+                                        <formik.Field className='me-3' type="checkbox" name="availableSizes" value="l" />
+                                        L
+                                    </label>
+                                    <label className='mb-3'>
+                                        <formik.Field className='me-3' type="checkbox" name="availableSizes" value="xl" />
+                                        XL
+                                    </label>
+                                    <label className='mb-3'>
+                                        <formik.Field className='me-3' type="checkbox" name="availableSizes" value="xxl" />
+                                        XXL
+                                    </label>
+                                </div>
+                            </Row>
                             <Row>
                                 <Form.Group
                                     as={Col}
@@ -457,6 +488,7 @@ export default function AddProducts() {
                                     values.sale = '';
                                     values.size = '';
                                     values.type = '';
+                                    values.availableSizes = [];
                                 }}>Clear all fields</button>
                             </div>
                         </Form>
