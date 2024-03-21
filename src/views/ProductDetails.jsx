@@ -9,37 +9,29 @@ export default function ProductDetails() {
 
     let params = useParams();
 
-    const [activeSize, setActiveSize] = useState(),
+    const [selectedSize, setSelectedSize] = useState(),
         [product, setProduct] = useState();
 
     let handleActive = (element) => {
-        setActiveSize(element)
+        setSelectedSize(element)
     }
 
     let getProduct = () => {
         fetch(`http://localhost:3001/api/products/code/${params.code}`).then((res) => res.json()).then((data) => setProduct(data))
     }
 
-    const alahlyAPI = [
-        {
-            image: image1,
-            price: 300,
-            title: "t-shirt one alahly",
-            id: 1
-        },
-        {
-            image: image2,
-            price: 400,
-            title: "t-shirt two alahly",
-            id: 2
-        },
-        {
-            image: image3,
-            price: 500,
-            title: "t-shirt three alahly",
-            id: 3
-        },
-    ]
+    const addToCart = async () => {
+        let response = await fetch(`http://localhost:3001/api/PostOncart/${params.code}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+                selectedSize
+            })
+        })
+        return response.json();
+    }
 
     useEffect(() => {
         getProduct();
@@ -63,14 +55,17 @@ export default function ProductDetails() {
                                 <div className="price">
                                     Price: {product.price}EGP
                                 </div>
-                                <div className="sizes">
-                                    <button className={activeSize === "s" ? "active" : ""} onClick={() => handleActive("s")}>S</button>
-                                    <button className={activeSize === "m" ? "active" : ""} onClick={() => handleActive("m")}>M</button>
-                                    <button className={activeSize === "l" ? "active" : ""} onClick={() => handleActive("l")}>L</button>
-                                    <button className={activeSize === "xl" ? "active" : ""} onClick={() => handleActive("xl")}>XL</button>
-                                    <button className={activeSize === "xxl" ? "active" : ""} onClick={() => handleActive("xxl")}>XXL</button>
+                                <h3 className='text-white mb-3'>Available Sizes</h3>
+                                <div className="sizes d-flex justify-content-center">
+                                    {
+                                        product.availableSizes.map(size =>
+                                            <div key={size}>
+                                                <button className={selectedSize === size ? "active me-2" : "me-2"} onClick={() => handleActive(size)}>{size.toUpperCase()}</button>
+                                            </div>
+                                        )
+                                    }
                                 </div>
-                                <button className='add_to_cart'>Add to cart</button>
+                                <button onClick={addToCart} className='add_to_cart'>Add to cart</button>
                             </div>
                         </div>
                         :

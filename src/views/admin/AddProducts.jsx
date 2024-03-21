@@ -60,7 +60,7 @@ export default function AddProducts() {
 
     let handleSub = async (values) => {
         const formData = new FormData();
-        formData.append('image', values.image);
+        formData.append('image', selectedImage);
         formData.append('collectionName', values.collectionName);
         formData.append('kit', values.kit);
         formData.append('type', values.type);
@@ -75,6 +75,7 @@ export default function AddProducts() {
         formData.append('quantity', values.quantity);
         formData.append('description', values.description);
         formData.append('availableSizes', values.availableSizes);
+        console.log(selectedImage);
         let response = await fetch(`http://localhost:3001/api/products`, {
             method: 'POST',
             body: formData,
@@ -449,9 +450,9 @@ export default function AddProducts() {
                                     type="file"
                                     name="image"
                                     accept='image/*'
-                                    value={values.image}
-                                    multiple
-                                    onChange={handleChange}
+                                    // value={values.image}
+                                    // multiple
+                                    onChange={e => SetSelectedImage(e.target.files[0])}
                                     isInvalid={!!errors.image}
                                 />
                                 <Form.Control.Feedback type="invalid" tooltip>

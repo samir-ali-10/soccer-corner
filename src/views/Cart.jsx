@@ -15,7 +15,7 @@ export default function Cart() {
     const [cart, setCart] = useState([]),
         [totalPrice, setTotalPrice] = useState(),
         [totalQuantity, setTotalQuantity] = useState(0),
-        [error, setError] = useState(false);
+        [error, setError] = useState('');
 
 
     let getCartItems = () => {
@@ -42,18 +42,19 @@ export default function Cart() {
                 },
                 body: JSON.stringify({})
             });
-            setError(false);
+            // setError(false);
 
             // Check if response is not successful
-            if (!response.ok) {
-                // Throw an error with the response status
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+            // if (!response.ok) {
+            //     // Throw an error with the response status
+            //     throw new Error(`HTTP error! Status: ${response.status}`);
+            // }
 
-            return response.json();
+            // console.log(response.json().then(result => console.log(result)));
+            response.json().then(result => setError(result));
         } catch (error) {
             // Log the error and response
-            setError(true);
+            // setError(true);
             // Rethrow the error to maintain the error flow
             // throw error;
         }
@@ -68,7 +69,7 @@ export default function Cart() {
             body: JSON.stringify({
             })
         })
-        setError(false);
+        setError('');
         return response.json();
     }
 
@@ -132,7 +133,7 @@ export default function Cart() {
                                                     {item.quantity}
                                                     <button onClick={() => increaseQuantity(item.code)} className='plus bg-transparent' ><FontAwesomeIcon icon={faCaretUp} /></button>
                                                 </div>
-                                                {error ? <div className='bg-danger px-2 rounded mt-3'>can not add anymore</div> : null}
+                                                {error === 'Product is out of stock' ? <div className='bg-danger px-2 rounded mt-3'>{error}</div> : null}
                                             </div>
                                             <div className="price">
                                                 {item.price}EGP
