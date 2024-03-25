@@ -344,8 +344,7 @@ const productInOrders = await Order.findOne({ _id :  productId })
 
 exports.deleteOrderFromArchive = (req , res, next) => {
   const orderId = req.params.orderId;
-
-  Archive.deleteOne({ _id : orderId })
+  Archive.findOneAndDelete({ _id : orderId })
   .then(result => {
     res.json('order from archive deleted successfully')
     console.log('order from archive deleted successfully');
@@ -356,7 +355,6 @@ exports.deleteOrderFromArchive = (req , res, next) => {
 }
 
 exports.deleteAllOrdersFromArchive = (req , res , next) => {
-
   Archive.deleteMany()
   .then(result => {
     res.json('orders from archive deleted successfully');
@@ -366,10 +364,6 @@ exports.deleteAllOrdersFromArchive = (req , res , next) => {
     console.log(err);
   })
 }
-
-
-
-
 
 
 
