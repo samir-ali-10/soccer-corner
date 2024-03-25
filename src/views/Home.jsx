@@ -12,6 +12,7 @@ import { Container } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
 
@@ -27,7 +28,23 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
     }, [])
 
     let addToCart = async (product) => {
-        // dispatch(increaseQuantity(product))
+        let timerInterval;
+        Swal.fire({
+            title: "Product Added To Cart",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log("I was closed by the timer");
+            }
+        });
         let response = await fetch(`http://localhost:3001/api/PostOncart/${product}`, {
             method: 'POST',
             headers: {
@@ -133,7 +150,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                                     ?
                                     <NavLink to={`/products/offers/${product.code}`} key={product._id} className="item">
                                         <div className="image">
-                                            <img src={image1} alt="image1" />
+                                            <img src={product.images} alt="image1" />
                                         </div>
                                         <div className="info">
                                             <div className="name">{product.code}</div>
@@ -166,7 +183,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                                 ?
                                 <NavLink to={`/products/newCollection/${newCollection.code}`} key={newCollection._id} className={calculateSalePrice(newCollection) === 'Invalid input' ? "item" : "item sale"}>
                                     <div className="image">
-                                        <img src={image2} alt="image2" />
+                                        <img src={newCollection.images} alt="image2" />
                                     </div>
                                     <div className="info">
                                         <div className="name">{newCollection.code}</div>
@@ -184,54 +201,6 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                                 :
                                 null
                         )}
-                        {/* <NavLink className="item">
-                            <div className="image">
-                                <img src={image2} alt="image2" />
-                            </div>
-                            <div className="info">
-                                <div className="name">Zamalek t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="item">
-                            <div className="image">
-                                <img src={image1} alt="image3" />
-                            </div>
-                            <div className="info">
-                                <div className="name">Zamalek t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="item">
-                            <div className="image">
-                                <img src={image2} alt="image1" />
-                            </div>
-                            <div className="info">
-                                <div className="name">Zamalek t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink>
-                        <NavLink className="item">
-                            <div className="image">
-                                <img src={image3} alt="image1" />
-                            </div>
-                            <div className="info">
-                                <div className="name">Zamalek t-shirt one</div>
-                                <div className="inner_info d-flex justify-content-between">
-                                    <div className="price">300EGP</div>
-                                    <div className="add_cart"><FontAwesomeIcon icon={faCartPlus} /></div>
-                                </div>
-                            </div>
-                        </NavLink> */}
                     </div>
                 </div>
             </Container>

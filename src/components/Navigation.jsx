@@ -60,7 +60,7 @@ export default function Navigation() {
                         </Nav>
                     </Navbar.Collapse>
                     <div className="actions">
-                        <NavLink to="/"><FontAwesomeIcon className='fs-5' icon={faUser} /></NavLink>
+                        <NavLink to="/login"><FontAwesomeIcon className='fs-5' icon={faUser} /></NavLink>
                         <div className="cart_action">
                             <NavLink className="cart_icon" to="/cart"><FontAwesomeIcon className='fs-5' icon={faCartShopping} /></NavLink>
                             <span className='total_cart_quantity'>{totalQuantity}</span>
@@ -68,34 +68,6 @@ export default function Navigation() {
                     </div>
                 </Container>
             </Navbar>
-            {/* <Container>
-                <nav>
-                    <div className="logo">
-                        Logo
-                    </div>
-                    <ul className='d-flex'>
-                        <li>
-                            <NavLink>Home</NavLink>
-                        </li>
-                        <li>
-                            <NavDropdown className='drop_down' title="Categories" id="collasible-nav-dropdown">
-                                <NavLink>Action</NavLink>
-                                <NavLink>
-                                    Another action
-                                </NavLink>
-                                <NavLink>Something</NavLink>
-                            </NavDropdown>
-                        </li>
-                        <li>
-                            <NavLink>Admin</NavLink>
-                        </li>
-                    </ul>
-                    <div className="actions">
-                        <NavLink><FontAwesomeIcon icon={faUser} /></NavLink>
-                        <NavLink><FontAwesomeIcon icon={faCartShopping} /></NavLink>
-                    </div>
-                </nav>
-            </Container> */}
         </div>
     )
 }

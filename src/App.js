@@ -35,8 +35,8 @@ function App() {
       {!appearLoginSignup ? null : <Navigation />}
       <Routes>
         <Route path="/signup" element={<Signup appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
-        <Route path="/" element={<Signin appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
-        <Route path="/home" element={<Home appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
+        <Route path="/login" element={<Signin appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
+        <Route path="/" element={<Home appearLoginSignup={appearLoginSignup} setAppearLoginSignup={setAppearLoginSignup} />} />
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout setAppearFooter={setAppearFooter} setAppearLoginSignup={setAppearLoginSignup} />} />
