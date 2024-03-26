@@ -8,7 +8,7 @@ const upload = require('./middleware/upload')
 const ProductController = require('./controllers/ProductController')
 
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(Routes);
 app.post("/api/products", upload.array('image') , ProductController.postAddProduct);

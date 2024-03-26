@@ -167,13 +167,13 @@ exports.postOrder = async (req , res , next) => {
   const phone = req.body.phone;
   const address = req.body.address;
   const note = req.body.note;
-  const termsCondition = req.body.termsCondition; // Retrieve terms and conditions checkbox value
-
+  // let termsAndCondition = req.body.termsCondition; // Retrieve terms and conditions checkbox value
+  
   // Check if terms and conditions are accepted
-  if (!termsCondition) {
-    console.log('Terms and conditions not accepted');
-    return res.status(400).json('Terms and conditions not accepted');
-  }
+  // if (!termsAndCondition) {
+  //   console.log('Terms and conditions not accepted');
+  //   return res.status(400).json('Terms and conditions not accepted');
+  // }
 
 
 
@@ -223,6 +223,15 @@ exports.deleteOrder = (req , res , next) => {
     console.log(err);
   })
 }
+
+// exports.deleteOneProductFromOrder = async (req , res , next) => {
+
+//   const orderId = req.params.orderId
+//   const order = await Order.findOne({ _id : orderId })
+
+  
+
+// }
 
 exports.deleteAllOrders = (req , res , next) => {
 
