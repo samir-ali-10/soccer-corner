@@ -225,11 +225,10 @@ exports.deleteOrder = (req , res , next) => {
 }
 
 // exports.deleteOneProductFromOrder = async (req , res , next) => {
-
+//   con
 //   const orderId = req.params.orderId
 //   const order = await Order.findOne({ _id : orderId })
-
-  
+//   order.productsOrdered.
 
 // }
 
