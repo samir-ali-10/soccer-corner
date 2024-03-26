@@ -4,6 +4,7 @@ import image1 from "../images/carousel_1.jpeg"
 import image2 from "../images/carousel_2.jpeg"
 import image3 from "../images/carousel_3.jpeg"
 import { Container } from 'react-bootstrap'
+import Swal from 'sweetalert2'
 
 export default function ProductDetails() {
 
@@ -21,6 +22,23 @@ export default function ProductDetails() {
     }
 
     const addToCart = async () => {
+        let timerInterval;
+        Swal.fire({
+            title: "Product Added To Cart",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log("I was closed by the timer");
+            }
+        });
         let response = await fetch(`http://localhost:3001/api/PostOncart/${params.code}`, {
             method: 'POST',
             headers: {

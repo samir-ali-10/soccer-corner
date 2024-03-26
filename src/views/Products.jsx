@@ -15,6 +15,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch } from 'react-redux'
 import { increaseQuantity } from '../rtk/features/cart/cartSlice'
+import Swal from 'sweetalert2'
 
 export default function Products() {
 
@@ -99,7 +100,23 @@ export default function Products() {
     }
 
     let addToCart = async (product) => {
-        // dispatch(increaseQuantity(product))
+        let timerInterval;
+        Swal.fire({
+            title: "Product Added To Cart",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+            }
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log("I was closed by the timer");
+            }
+        });
         let response = await fetch(`http://localhost:3001/api/PostOncart/${product}`, {
             method: 'POST',
             headers: {

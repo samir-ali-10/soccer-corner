@@ -21,6 +21,21 @@ export default function Archived() {
         // console.log("hello");
     }
 
+    const handleStatus = (status) => {
+        if(status === "returns") {
+            return 'bg-danger'
+        }
+        else if(status === "delivered"){
+            return 'bg-info'
+        }
+        else if(status === "outForDelivery"){
+            return 'bg-success'
+        }
+        else {
+            return 'bg-warning'
+        }
+    }
+
     useEffect(() => {
         getArchieved();
     }, [])
@@ -64,7 +79,7 @@ export default function Archived() {
                                         <tbody key={index}>
                                             {
                                                 order.productsOrdered.map((product, innerIndex) =>
-                                                    <tr key={innerIndex} className='text-capitalize'>
+                                                    <tr key={innerIndex} className={`text-capitalize ${handleStatus(product.status)}`}>
                                                         <td>{product.code}</td>
                                                         <td>{product.size}</td>
                                                         <td>{product.quantity}</td>

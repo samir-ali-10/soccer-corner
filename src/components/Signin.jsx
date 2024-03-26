@@ -3,11 +3,13 @@ import * as formik from 'formik';
 import * as yup from 'yup';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import logo from "../images/logo.jpeg"
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export default function Signin({ appearLoginSignupm, setAppearLoginSignup, loggedIn, setLoggedIn }) {
 
     const { Formik } = formik;
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         setAppearLoginSignup(false)
@@ -44,6 +46,7 @@ export default function Signin({ appearLoginSignupm, setAppearLoginSignup, logge
             sessionStorage.setItem('token', token);
 
             setLoggedIn(true);
+            navigate('/');
         } catch (error) {
             console.error('Login failed:', error.message);
         }

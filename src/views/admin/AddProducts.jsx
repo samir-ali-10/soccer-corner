@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeftLong } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 export default function AddProducts() {
 
@@ -79,8 +80,31 @@ export default function AddProducts() {
         let response = await fetch(`http://localhost:3001/api/products`, {
             method: 'POST',
             body: formData,
-        })
-        return response.json();
+        });
+        if (response.ok) {
+            let timerInterval;
+            Swal.fire({
+                title: "Product Added To Cart",
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log("I was closed by the timer");
+                }
+            });
+            return response.json();
+        } else {
+            // Handle errors if any
+            console.error('Failed to add product:', response.statusText);
+            throw new Error('Failed to add product');
+        }
     }
 
 
@@ -165,6 +189,7 @@ export default function AddProducts() {
                                     <Form.Control
                                         type="text"
                                         name="code"
+                                        className='text-white'
                                         list='productsList'
                                         value={values.code === "" ? code : values.code}
                                         onChange={handleChange}
