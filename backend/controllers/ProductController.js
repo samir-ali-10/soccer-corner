@@ -167,13 +167,6 @@ exports.postOrder = async (req , res , next) => {
   const phone = req.body.phone;
   const address = req.body.address;
   const note = req.body.note;
-  // let termsAndCondition = req.body.termsCondition; // Retrieve terms and conditions checkbox value
-  
-  // Check if terms and conditions are accepted
-  // if (!termsAndCondition) {
-  //   console.log('Terms and conditions not accepted');
-  //   return res.status(400).json('Terms and conditions not accepted');
-  // }
 
 
 
@@ -245,35 +238,43 @@ exports.deleteAllOrders = (req , res , next) => {
 }
 
 exports.returnsStatus = async (req , res, next) => {
+  const productId = req.params.productId;
   const orderId = req.params.orderId
-  const existOrder = await Order.findOne({ _id : orderId })
-    existOrder.status = "returns";
-    await existOrder.save();
-  console.log('order status is now returns');
+  const existOrderInArchive =  await Archive.findOne({ _id : orderId });  
+  const productSelected =  existOrderInArchive.productsOrdered.find(prod => prod._id.toString() === productId); 
+    productSelected.status = 'returns'; 
+    await existOrderInArchive.save();
+    console.log('product status is now returns');
 }
 
 exports.moneyCollectedStatus = async (req , res, next) => {
+  const productId = req.params.productId;
   const orderId = req.params.orderId
-  const existOrder = await Order.findOne({ _id : orderId })
-    existOrder.status = "moneyCollected";
-    await existOrder.save();
-  console.log('order status is now moneyCollected');
+  const existOrderInArchive =  await Archive.findOne({ _id : orderId });  
+  const productSelected =  existOrderInArchive.productsOrdered.find(prod => prod._id.toString() === productId); 
+    productSelected.status = 'moneyCollected'; 
+    await existOrderInArchive.save();
+    console.log('product status is now moneyCollected');
 }
 
 exports.deliveredStatus = async (req , res, next) => {
+  const productId = req.params.productId;
   const orderId = req.params.orderId
-  const existOrder = await Order.findOne({ _id : orderId })
-   existOrder.status = "delivered";
-    await existOrder.save();
-  console.log('order status is now delivered');
+  const existOrderInArchive =  await Archive.findOne({ _id : orderId });  
+  const productSelected =  existOrderInArchive.productsOrdered.find(prod => prod._id.toString() === productId); 
+    productSelected.status = 'delivered'; 
+    await existOrderInArchive.save();
+    console.log('product status is now delivered');
 }
 
 exports.outForDeliveryStatus = async (req , res, next) => {
+  const productId = req.params.productId;
   const orderId = req.params.orderId
-  const existOrder = await Order.findOne({ _id : orderId })
-   existOrder.status = "outForDelivery";
-    await existOrder.save();
-  console.log('order status is now outForDelivery');
+  const existOrderInArchive =  await Archive.findOne({ _id : orderId });  
+  const productSelected =  existOrderInArchive.productsOrdered.find(prod => prod._id.toString() === productId); 
+    productSelected.status = 'outForDelivery'; 
+    await existOrderInArchive.save();
+    console.log('product status is now outForDelivery');
 }
 
 
@@ -498,7 +499,7 @@ exports.postAddProduct = async (req, res, next) => {
   // => CHECK IF PRODUCT EXIST
 
   const existingProduct = await ProductModel.findOne({ code });
-  if (existingProduct) {
+  if (existingProduct) {  
     console.log("Product is already exist ");
     return res.json("product already exist");
   }

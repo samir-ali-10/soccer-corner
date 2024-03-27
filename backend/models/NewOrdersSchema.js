@@ -9,7 +9,6 @@ const OrderSchema = new schema({
     zone : String,
     address : String,
     note : String,
-    status : String,
     productsOrdered : [{
         code : String,
         images : String,
