@@ -17,7 +17,7 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
     const { Formik } = formik;
 
     const schema = yup.object().shape({
-        receiverName: yup.string().required(),
+        name: yup.string().required(),
         email: yup.string().required(),
         zone: yup.string().required(),
         area: yup.string().required(),
@@ -41,31 +41,21 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
     }
 
     const handlePurchase = async (values) => {
-        values.preventDefault();
-        try {
-            const formData = new FormData();
-            formData.append('receiverName', values.receiverName);
-            formData.append('zone', values.zone);
-            formData.append('area', values.area);
-            formData.append('address', values.address);
-            formData.append('phone', values.phone);
-            formData.append('note', values.note);
-            formData.append('termsCondition', values.termsCondition);
-            const response = await fetch('http://localhost:3001/api/postOrder', {
-                method: 'POST',
-                body: formData,
-            });
+        // values.preventDefault();
+        const formData = new FormData();
+        formData.append('name', values.name);
+        formData.append('zone', values.zone);
+        formData.append('area', values.area);
+        formData.append('address', values.address);
+        formData.append('phone', values.phone);
+        formData.append('note', values.note);
+        formData.append('termsCondition', values.termsCondition);
+        let response = await fetch('http://localhost:3001/api/postOrder', {
+            method: 'POST',
+            body: formData,
+        });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            // Handle successful response, maybe show a success message
-            console.log('Order placed successfully!');
-        } catch (error) {
-            console.error('Error placing order:', error);
-            // Handle error, maybe show an error message to the user
-        }
+        return response.json();
     }
 
     useEffect(() => {
@@ -124,7 +114,7 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
                 <Formik
                     validationSchema={schema}
                     initialValues={{
-                        receiverName: "",
+                        name: "",
                         zone: "",
                         area: "",
                         address: "",
@@ -150,14 +140,14 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
                                 >
                                     <Form.Control
                                         type="text"
-                                        name="receiverName"
+                                        name="name"
                                         placeholder='Name'
-                                        value={values.receiverName}
+                                        value={values.name}
                                         onChange={handleChange}
-                                        isInvalid={!!errors.receiverName}
+                                        isInvalid={!!errors.name}
                                     />
                                     <Form.Control.Feedback type="invalid" tooltip>
-                                        {errors.receiverName}
+                                        {errors.name}
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>

@@ -137,7 +137,7 @@ export default function Archived() {
                                         <tbody key={index}>
                                             {
                                                 order.productsOrdered.map((product, innerIndex) =>
-                                                    <tr key={innerIndex} className={`text-capitalize ${handleStatus(product.status)}`}>
+                                                    <tr key={innerIndex} className={`text-capitalize rounded ${handleStatus(product.status)}`}>
                                                         <td>{product.code}</td>
                                                         <td>{product.size}</td>
                                                         <td>{product.quantity}</td>
