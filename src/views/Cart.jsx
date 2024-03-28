@@ -91,6 +91,8 @@ export default function Cart() {
         calculateTotalQuantity();
     }, [cart])
 
+    console.log(cart);
+
 
     return (
         <div className='cart'>
@@ -120,7 +122,7 @@ export default function Cart() {
                                                 <div className="code">
                                                     <h5>{item.code}</h5>
                                                 </div>
-                                                <p>{item.size.toUpperCase()}</p>
+                                                <p>{item.size}</p>
                                                 <div className="remove_item">
                                                     <button onClick={() => removeSingleProduct(item.code)}>remove</button>
                                                 </div>

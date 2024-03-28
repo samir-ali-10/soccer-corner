@@ -12,8 +12,14 @@ export default function Archived() {
         fetch(`http://localhost:3001/api/archive`).then((res) => res.json()).then((data) => setArchievedOrders(data));
     }
 
-    const deleteSingleOrder = (orderId) => {
+    const deleteOrder = (orderId) => {
         fetch(`http://localhost:3001/api/archive/deleteOrderFromArchive/${orderId}`).then((res) => res.json()).then((data) => console.log(data));
+        window.location.reload();
+    }
+
+    const deleteSingleProduct = (orderId, productId) => {
+        fetch(`http://localhost:3001/api/deleteProductFromOrderInArchive/${orderId}/${productId}`).then((res) => res.json()).then((data) => console.log(data));
+        window.location.reload();
     }
 
     const deleteAllOrders = () => {
@@ -21,17 +27,69 @@ export default function Archived() {
         // console.log("hello");
     }
 
+    const handleReturnStatus = async (orderId, productId) => {
+        window.location.reload();
+        let response = await fetch(`http://localhost:3001/api/orderStatus/returns/${orderId}/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
+    }
+
+    const handleDeliveredStatus = async (orderId, productId) => {
+        window.location.reload();
+        let response = await fetch(`http://localhost:3001/api/orderStatus/delivered/${orderId}/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
+    }
+
+    const handleOutForDeliveryStatus = async (orderId, productId) => {
+        window.location.reload();
+        let response = await fetch(`http://localhost:3001/api/orderStatus/outForDelivery/${orderId}/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
+    }
+
+    const handleMoneyCollectedStatus = async (orderId, productId) => {
+        window.location.reload();
+        let response = await fetch(`http://localhost:3001/api/orderStatus/moneyCollected/${orderId}/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
+    }
+
     const handleStatus = (status) => {
-        if(status === "returns") {
+        if (status === "returns") {
             return 'bg-danger'
         }
-        else if(status === "delivered"){
+        else if (status === "delivered") {
             return 'bg-info'
         }
-        else if(status === "outForDelivery"){
+        else if (status === "outForDelivery") {
             return 'bg-success'
         }
-        else {
+        else if (status === "moneyCollected") {
             return 'bg-warning'
         }
     }
@@ -89,16 +147,19 @@ export default function Archived() {
                                                         <td>{order.zone}, {order.area}</td>
                                                         <td>
                                                             <div className='actions d-flex gap-2 justify-content-center'>
-                                                                <button className='bg-transparent border-0 text-danger'><FontAwesomeIcon icon={faRotateLeft} /></button>
-                                                                <button className='bg-transparent border-0 text-success'><FontAwesomeIcon icon={faTruck} /></button>
-                                                                <button className='bg-transparent border-0 text-primary'><FontAwesomeIcon icon={faMoneyBill1Wave} /></button>
-                                                                <button className='bg-transparent border-0 text-info'><FontAwesomeIcon icon={faBoxOpen} /></button>
-                                                                <button onClick={() => deleteSingleOrder(product._id)} className='bg-transparent border-0 text-danger'><FontAwesomeIcon icon={faTrashCan} /></button>
+                                                                <button onClick={() => handleReturnStatus(order.orderId, product._id)} className='bg-transparent border-0 text-white'><FontAwesomeIcon icon={faRotateLeft} /></button>
+                                                                <button onClick={() => handleOutForDeliveryStatus(order.orderId, product._id)} className='bg-transparent border-0 text-white'><FontAwesomeIcon icon={faTruck} /></button>
+                                                                <button onClick={() => handleMoneyCollectedStatus(order.orderId, product._id)} className='bg-transparent border-0 text-white'><FontAwesomeIcon icon={faMoneyBill1Wave} /></button>
+                                                                <button onClick={() => handleDeliveredStatus(order.orderId, product._id)} className='bg-transparent border-0 text-white'><FontAwesomeIcon icon={faBoxOpen} /></button>
+                                                                <button onClick={() => deleteSingleProduct(order.orderId, product._id)} className='bg-transparent border-0 text-white'><FontAwesomeIcon icon={faTrashCan} /></button>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                 )
                                             }
+                                            <div>
+                                                <button onClick={() => deleteOrder(order.orderId)}>Delete Order</button>
+                                            </div>
                                         </tbody>
                                     )
                                 }

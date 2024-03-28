@@ -183,7 +183,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                                 ?
                                 <NavLink to={`/products/newCollection/${newCollection.code}`} key={newCollection._id} className={calculateSalePrice(newCollection) === 'Invalid input' ? "item" : "item sale"}>
                                     <div className="image">
-                                        <img src={newCollection.images} alt="image2" />
+                                        <img src={image2} alt="image2" />
                                     </div>
                                     <div className="info">
                                         <div className="name">{newCollection.code}</div>

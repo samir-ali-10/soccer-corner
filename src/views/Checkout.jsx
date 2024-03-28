@@ -92,7 +92,7 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
                                                     </div>
                                                     <div className="title">
                                                         <h5>{product.title}</h5>
-                                                        <p className='mb-0'>L</p>
+                                                        <p className='mb-0'>{product.size}</p>
                                                         <p>{product.quantity}</p>
                                                     </div>
                                                 </div>

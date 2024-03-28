@@ -55,6 +55,8 @@ export default function ProductDetails() {
         getProduct();
     }, [])
 
+    console.log(product);
+
 
     return (
         <div className='product_details mt-5'>

@@ -47,7 +47,7 @@ export default function Navigation() {
                             className="me-auto my-2 my-lg-0"
                             navbarScroll
                         >
-                            <NavLink to="/home" href="#action1">Home</NavLink>
+                            <NavLink to="/" href="#action1">Home</NavLink>
                             <NavDropdown title="Categories" id="navbarScrollingDropdown">
                                 <NavDropdown.Item href="/products/footballJerseys">Jerseys</NavDropdown.Item>
                                 <NavDropdown.Item href="/products/sportsWear">Sports Wear</NavDropdown.Item>

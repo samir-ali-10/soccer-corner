@@ -23,9 +23,26 @@ export default function New() {
         window.location.reload();
     }
 
-    let deleteAllOrders = () => {
+    const deleteSingleProduct = (orderId, productId) => {
+        fetch(`http://localhost:3001/api/deleteProductFromOrder/${orderId}/${productId}`).then((res) => res.json()).then((data) => console.log(data));
+        window.location.reload();
+    }
+
+    const deleteAllOrders = () => {
         fetch(`http://localhost:3001/api/deleteAllOrders`).then((res) => res.json()).then((data) => console.log(data));
         window.location.reload();
+    }
+
+    const sendToArchive = async (orderId) => {
+        let response = await fetch(`http://localhost:3001/api/postToArchive/${orderId}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({
+            })
+        })
+        return response.json();
     }
 
     useEffect(() => {
@@ -88,12 +105,16 @@ export default function New() {
                                                         <td>{order.address}</td>
                                                         <td>
                                                             <div>
-                                                                <button onClick={() => deleteSingleOrder(product._id)} className='bg-transparent border-0 text-danger'><FontAwesomeIcon icon={faTrashCan} /></button>
+                                                                <button onClick={() => deleteSingleProduct(order.orderId, product._id)} className='bg-transparent border-0 text-danger'><FontAwesomeIcon icon={faTrashCan} /></button>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                 )
                                             }
+                                            {/* <div className='mt-3 text-end'>
+                                                <button onClick={() => sendToArchive(order.orderId)} className='bg-success border-0 py-2 px-3 rounded'>Send Orders To Archive</button>
+                                            </div> */}
+                                            {/* <button>ksjbdf</button> */}
                                         </tbody>
                                     )
                                 }
