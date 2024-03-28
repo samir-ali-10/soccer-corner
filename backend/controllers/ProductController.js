@@ -693,6 +693,7 @@ exports.decreaseQuantity = async (req, res) => {
 exports.postProductsOnCart = async (req, res, next) => {
   try {
     const code = req.params.code;
+    const selectedSize = req.body.selectedSize;
     const existingProduct = await ProductModel.findOne({ code });
 
     if (!existingProduct) {
@@ -716,7 +717,7 @@ exports.postProductsOnCart = async (req, res, next) => {
         BrandName: existingProduct.BrandName,
         collectionName: existingProduct.collectionName,
         price: existingProduct.price,
-        size: existingProduct.size,
+        size: selectedSize ,
         sale: existingProduct.sale,
         quantity: 1,
         description: existingProduct.description,
