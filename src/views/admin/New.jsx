@@ -111,9 +111,9 @@ export default function New() {
                                                     </tr>
                                                 )
                                             }
-                                            {/* <div className='mt-3 text-end'>
+                                            <div className='mt-3 text-end'>
                                                 <button onClick={() => sendToArchive(order.orderId)} className='bg-success border-0 py-2 px-3 rounded'>Send Orders To Archive</button>
-                                            </div> */}
+                                            </div>
                                             {/* <button>ksjbdf</button> */}
                                         </tbody>
                                     )
