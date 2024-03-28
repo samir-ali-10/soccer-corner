@@ -168,6 +168,13 @@ exports.postOrder = async (req , res , next) => {
   const address = req.body.address;
   const note = req.body.note;
 
+  function generateOrderNumber() {
+    // Logic to generate a unique order number
+    // For example, you can use a combination of current timestamp and a random number
+    return Date.now().toString() + Math.floor(Math.random() * 1000);
+  }
+  const orderNumber = generateOrderNumber();
+
 
 
   const productsInCart = await Cart.find({});
@@ -186,6 +193,7 @@ exports.postOrder = async (req , res , next) => {
     }))
 
   const order = new Order({
+    orderId : orderNumber,
     name : name,
     area : area,
     zone : zone,
@@ -207,7 +215,7 @@ exports.deleteOrder = (req , res , next) => {
 
   const orderId = req.params.orderId;
 
-  Order.findOneAndDelete({ _id : orderId })
+  Order.findOneAndDelete({ orderId: orderId })
   .then((result) => {
     res.json('order deleted successfully')
     console.log('order deleted successfully');
@@ -217,13 +225,15 @@ exports.deleteOrder = (req , res , next) => {
   })
 }
 
-// exports.deleteOneProductFromOrder = async (req , res , next) => {
-//   con
-//   const orderId = req.params.orderId
-//   const order = await Order.findOne({ _id : orderId })
-//   order.productsOrdered.
+exports.deleteOneProductFromNewOrder = async (req , res , next) => {
+  const productId = req.params.productId
+  const orderId = req.params.orderId
+  const order = await Order.findOne({ orderId : orderId })
+  order.productsOrdered = order.productsOrdered.filter(prod => prod._id.toString() !== productId);
+  await order.save();
+  console.log('product deleted succesfully');
 
-// }
+}
 
 exports.deleteAllOrders = (req , res , next) => {
 
@@ -240,7 +250,7 @@ exports.deleteAllOrders = (req , res , next) => {
 exports.returnsStatus = async (req , res, next) => {
   const productId = req.params.productId;
   const orderId = req.params.orderId
-  const existOrderInArchive =  await Archive.findOne({ _id : orderId });  
+  const existOrderInArchive =  await Archive.findOne({ orderId : orderId });  
   const productSelected =  existOrderInArchive.productsOrdered.find(prod => prod._id.toString() === productId); 
     productSelected.status = 'returns'; 
     await existOrderInArchive.save();
@@ -250,7 +260,7 @@ exports.returnsStatus = async (req , res, next) => {
 exports.moneyCollectedStatus = async (req , res, next) => {
   const productId = req.params.productId;
   const orderId = req.params.orderId
-  const existOrderInArchive =  await Archive.findOne({ _id : orderId });  
+  const existOrderInArchive =  await Archive.findOne({ orderId : orderId });  
   const productSelected =  existOrderInArchive.productsOrdered.find(prod => prod._id.toString() === productId); 
     productSelected.status = 'moneyCollected'; 
     await existOrderInArchive.save();
@@ -260,7 +270,7 @@ exports.moneyCollectedStatus = async (req , res, next) => {
 exports.deliveredStatus = async (req , res, next) => {
   const productId = req.params.productId;
   const orderId = req.params.orderId
-  const existOrderInArchive =  await Archive.findOne({ _id : orderId });  
+  const existOrderInArchive =  await Archive.findOne({ orderId : orderId });  
   const productSelected =  existOrderInArchive.productsOrdered.find(prod => prod._id.toString() === productId); 
     productSelected.status = 'delivered'; 
     await existOrderInArchive.save();
@@ -270,7 +280,7 @@ exports.deliveredStatus = async (req , res, next) => {
 exports.outForDeliveryStatus = async (req , res, next) => {
   const productId = req.params.productId;
   const orderId = req.params.orderId
-  const existOrderInArchive =  await Archive.findOne({ _id : orderId });  
+  const existOrderInArchive =  await Archive.findOne({ orderId : orderId });  
   const productSelected =  existOrderInArchive.productsOrdered.find(prod => prod._id.toString() === productId); 
     productSelected.status = 'outForDelivery'; 
     await existOrderInArchive.save();
@@ -290,16 +300,17 @@ exports.getArchive = (req , res , next) => {
 
 exports.postToArchive = async (req , res , next ) => {
   
-const productId = req.params.productId;
-const existProductInArchive = await Archive.findOne({ _id : productId })
-const productInOrders = await Order.findOne({ _id :  productId })
+const orderId = req.params.orderId;
+const existProductInArchive = await Archive.findOne({ orderId : orderId })
+const productInOrders = await Order.findOne({ orderId :  orderId })
 
   if (existProductInArchive) {
-    console.log('product already exist in archive ');
-    return res.json("product already exist in archive");
+    console.log('order already exist in archive ');
+    return res.json("order already exist in archive");
 
   }
   const productToArchive = new Archive({
+    orderId : productInOrders.orderId,
     name : productInOrders.name ,
     phone : productInOrders.phone,
     area : productInOrders.area ,
@@ -307,53 +318,63 @@ const productInOrders = await Order.findOne({ _id :  productId })
     productsOrdered : productInOrders.productsOrdered
   })
  await productToArchive.save();
- console.log('product saved in archive' , productToArchive);
+ console.log('order saved in archive' , productToArchive);
 }
 
-// exports.postAllToArchive = async (req, res, next) => {
-//   try {
-//     // Retrieve all orders from the order collection
-//     const ordersInOrdersCollection = await Order.find();
+exports.postAllToArchive = async (req, res, next) => {
+  try {
+    // Retrieve all orders from the order collection
+    const ordersInOrdersCollection = await Order.find();
 
-//     // Iterate through each order and save it to the archive collection
-//     for (const order of ordersInOrdersCollection) {
-//       const orderId = order._id;
+    // Iterate through each order and save it to the archive collection
+    for (const order of ordersInOrdersCollection) {
+      const orderId = order.orderId;
 
-//       // Check if the order with the given orderId already exists in the archive
-//       const existOrderInArchive = await Archive.findOne({ _id: orderId });
+      // Check if the order with the given orderId already exists in the archive
+      const existOrderInArchive = await Archive.findOne({ orderId: orderId });
 
-//       if (existOrderInArchive) {
-//         console.log(`order already exists in archive`);
-//         continue; // Skip to the next order
-//       }
+      if (existOrderInArchive) {
+        console.log(`order already exists in archive`);
+        continue; // Skip to the next order
+      }
 
-//       // Create a new Archive entry using details from the order in orders
-//       const orderToArchive = new Archive({
-//         name: order.name,
-//         phone: order.phone,
-//         area: order.area,
-//         zone: order.zone,
-//         productsOrdered: order.productsOrdered,
-//       });
+      // Create a new Archive entry using details from the order in orders
+      const orderToArchive = new Archive({
+        orderId : order.orderId,
+        name: order.name,
+        phone: order.phone,
+        area: order.area,
+        zone: order.zone,
+        productsOrdered: order.productsOrdered,
+      });
 
-//       // Save the new Archive entry
-//       await orderToArchive.save();
+      // Save the new Archive entry
+      await orderToArchive.save();
 
-//       console.log(`order ${orderId} saved in archive`);
-//     }
+      console.log(`order ${orderId} saved in archive`);
+    }
 
-//     console.log('All orders saved in archive');
-//     return res.json('All  orders saved in archive');
-//   } catch (error) {
-//     console.error('Error in postAllToArchive:', error.message);
-//     return res.status(500).json('Internal Server Error');
-//   }
-// };
+    console.log('All orders saved in archive');
+    return res.json('All  orders saved in archive');
+  } catch (error) {
+    console.error('Error in postAllToArchive:', error.message);
+    return res.status(500).json('Internal Server Error');
+  }
+};
 
+exports.deleteOneProductFromOrderInArchive = async (req , res , next) => {
+  const productId = req.params.productId
+  const orderId = req.params.orderId
+  const order = await Archive.findOne({ orderId : orderId })
+  order.productsOrdered = order.productsOrdered.filter(prod => prod._id.toString() !== productId);
+  await order.save();
+  console.log('product deleted succesfully');
+
+}
 
 exports.deleteOrderFromArchive = (req , res, next) => {
   const orderId = req.params.orderId;
-  Archive.findOneAndDelete({ _id : orderId })
+  Archive.findOneAndDelete({ orderId : orderId })
   .then(result => {
     res.json('order from archive deleted successfully')
     console.log('order from archive deleted successfully');

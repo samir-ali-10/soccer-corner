@@ -40,17 +40,18 @@ router.get('/api/orders' , ProductController.getOrders) // orders API
 router.post('/api/postOrder' , ProductController.postOrder) // post products on cart and Client info in the orders
 router.get('/api/deleteOrder/:orderId' , ProductController.deleteOrder) // delete one order
 router.get('/api/deleteAllOrders' , ProductController.deleteAllOrders)  // delete all orders
-
+router.get('/api/deleteProductFromOrder/:orderId/:productId' , ProductController.deleteOneProductFromNewOrder) // delete one product from an order in NewOrders
 // Archive
 router.get('/api/archive' , ProductController.getArchive) // archive API
-router.post('/api/postToArchive/:productId' , ProductController.postToArchive) // post from orders to archive
+router.post('/api/postToArchive/:orderId' , ProductController.postToArchive) // post from orders to archive
 router.get('/api/archive/deleteOrderFromArchive/:orderId' ,ProductController.deleteOrderFromArchive) // delete order from archive
+router.get('/api/deleteProductFromOrderInArchive/:orderId/:productId' , ProductController.deleteOneProductFromOrderInArchive) // delete one product from an order in Archive
 router.get('/api/archive/deleteAllOrdersFromArchive' , ProductController.deleteAllOrdersFromArchive) // delete orders from archive
 router.post('/api/orderStatus/returns/:orderId/:productId' , ProductController.returnsStatus); // returns status
 router.post('/api/orderStatus/outForDelivery/:orderId/:productId' , ProductController.outForDeliveryStatus) // out for delivery status
 router.post('/api/orderStatus/delivered/:orderId/:productId' , ProductController.deliveredStatus) // delivered status
 router.post('/api/orderStatus/moneyCollected/:orderId/:productId' , ProductController.moneyCollectedStatus) // money collected status
-// router.post('/api/postAllToArchive' , ProductController.postAllToArchive) // post all orders to archive 
+router.post('/api/postAllToArchive' , ProductController.postAllToArchive) // post all orders to archive 
 
 
 // AUTHENTICATION
