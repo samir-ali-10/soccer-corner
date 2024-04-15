@@ -21,7 +21,12 @@ export default function Products() {
 
 
     const [stock, setStock] = useState([]),
-        [leagues, setLeagues] = useState([]);
+        [leagues, setLeagues] = useState([]),
+        [activeButton, setActiveButton] = useState(null);
+
+    const handleClick = (size) => {
+        setActiveButton(size);
+    };
 
     const studsTurfs = [
         {
@@ -144,8 +149,6 @@ export default function Products() {
         getLeagues();
     }, [])
 
-    console.log(leagues);
-
     return (
         <div className='products'>
             <Container>
@@ -159,7 +162,51 @@ export default function Products() {
                                         <>
                                             <h2>Egyptian League</h2>
                                             <div className="all_products">
-                                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
+                                                <NavLink to="/products/egyptian/all">See All</NavLink>
+                                                <div className='filter text-uppercase'>
+                                                    <button
+                                                        className={activeButton === 'xs' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xs')}
+                                                    >
+                                                        xs
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 's' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('s')}
+                                                    >
+                                                        s
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'm' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('m')}
+                                                    >
+                                                        m
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'l' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('l')}
+                                                    >
+                                                        l
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xl')}
+                                                    >
+                                                        xl
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xxl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xxl')}
+                                                    >
+                                                        xxl
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xxxl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xxxl')}
+                                                    >
+                                                        xxxl
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div className="slider_container d-flex">
                                                 {stock.map(egypt =>
@@ -198,8 +245,53 @@ export default function Products() {
                                         ?
                                         <>
                                             <h2>Serie A</h2>
-                                            <div className="all_products">
-                                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
+                                            <div className="all_products d-flex">
+                                                <NavLink className='me-5' to="/products/serie a/all">See All</NavLink>
+                                                <div className='filter text-uppercase'>
+                                                    <span className='text-capitalize text-white me-3 fs-5'>Filter By Size:</span>
+                                                    <button
+                                                        className={activeButton === 'xs' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xs')}
+                                                    >
+                                                        xs
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 's' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('s')}
+                                                    >
+                                                        s
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'm' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('m')}
+                                                    >
+                                                        m
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'l' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('l')}
+                                                    >
+                                                        l
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xl')}
+                                                    >
+                                                        xl
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xxl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xxl')}
+                                                    >
+                                                        xxl
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xxxl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xxxl')}
+                                                    >
+                                                        xxxl
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div className="slider_container d-flex">
                                                 {stock.map(seriea =>
@@ -238,8 +330,53 @@ export default function Products() {
                                         ?
                                         <>
                                             <h2>La Liga</h2>
-                                            <div className="all_products">
-                                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
+                                            <div className="all_products d-flex">
+                                                <NavLink className='me-5' to="/products/La Liga/all">See All</NavLink>
+                                                <div className='filter text-uppercase'>
+                                                    <span className='text-capitalize text-white me-3 fs-5'>Filter By Size:</span>
+                                                    <button
+                                                        className={activeButton === 'xs' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xs')}
+                                                    >
+                                                        xs
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 's' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('s')}
+                                                    >
+                                                        s
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'm' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('m')}
+                                                    >
+                                                        m
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'l' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('l')}
+                                                    >
+                                                        l
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xl')}
+                                                    >
+                                                        xl
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xxl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xxl')}
+                                                    >
+                                                        xxl
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xxxl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xxxl')}
+                                                    >
+                                                        xxxl
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div className="slider_container d-flex">
                                                 {stock.map(la_liga =>
@@ -278,8 +415,53 @@ export default function Products() {
                                         ?
                                         <>
                                             <h2>Saudi League</h2>
-                                            <div className="all_products">
-                                                <NavLink to="/products/footballJerseys/all">See All</NavLink>
+                                            <div className="all_products d-flex">
+                                                <NavLink className='me-5' to="/products/saudi/all">See All</NavLink>
+                                                <div className='filter text-uppercase'>
+                                                    <span className='text-capitalize text-white me-3 fs-5'>Filter By Size:</span>
+                                                    <button
+                                                        className={activeButton === 'xs' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xs')}
+                                                    >
+                                                        xs
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 's' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('s')}
+                                                    >
+                                                        s
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'm' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('m')}
+                                                    >
+                                                        m
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'l' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('l')}
+                                                    >
+                                                        l
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xl')}
+                                                    >
+                                                        xl
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xxl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xxl')}
+                                                    >
+                                                        xxl
+                                                    </button>
+                                                    <button
+                                                        className={activeButton === 'xxxl' ? 'me-3 active' : 'me-3'}
+                                                        onClick={() => handleClick('xxxl')}
+                                                    >
+                                                        xxxl
+                                                    </button>
+                                                </div>
                                             </div>
                                             <div className="slider_container d-flex">
                                                 {stock.map(saudi =>

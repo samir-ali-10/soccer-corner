@@ -141,7 +141,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                 <div className="best_sellers">
                     <h2>Offers</h2>
                     <div className="all_products">
-                        <NavLink to="/products/footballJerseys/all">See All</NavLink>
+                        <NavLink to="/products/offers/all">See All</NavLink>
                     </div>
                     <div className="slider_container d-flex">
                         {
@@ -175,7 +175,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                 <div className="best_sellers">
                     <h2>New Collection</h2>
                     <div className="all_products">
-                        <NavLink to="/products/footballJerseys/all">See All</NavLink>
+                        <NavLink to="/products/new/all">See All</NavLink>
                     </div>
                     <div className="slider_container d-flex">
                         {stock.map(newCollection =>

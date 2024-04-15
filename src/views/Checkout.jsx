@@ -41,7 +41,7 @@ export default function Checkout({ setAppearFooter, setAppearLoginSignup }) {
     }
 
     const handlePurchase = async (values) => {
-        // values.preventDefault();
+        values.preventDefault();
         const formData = new FormData();
         formData.append('name', values.name);
         formData.append('zone', values.zone);
