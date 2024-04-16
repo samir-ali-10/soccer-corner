@@ -113,7 +113,10 @@ export default function Signin({ appearLoginSignupm, setAppearLoginSignup, logge
                                 </Row>
                                 <div className='check d-flex justify-content-between align-items-center'>
                                     <Button className='submit' type="submit">Login</Button>
-                                    <NavLink to="/signup">Don't have an account?</NavLink>
+                                    <div className='d-flex flex-column'>
+                                        <NavLink to="/signup">Don't have an account?</NavLink>
+                                        <NavLink to="/">Back To Home</NavLink>
+                                    </div>
                                 </div>
                             </Form>
                         )}

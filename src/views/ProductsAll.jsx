@@ -122,7 +122,7 @@ export default function ProductsAll() {
         getData();
     }, [])
 
-    console.log(stock);
+    console.log(params);
 
     return (
         <div className='products_all'>
@@ -136,7 +136,32 @@ export default function ProductsAll() {
                         }
                     </select>
                 </div>
-                {params.category === "footballJerseys" &&
+                {
+                    <div>
+                        <h2 className=''>{params.category}</h2>
+                        <div className='items_container'>
+                            {
+                                stock.map(product =>
+                                    product.league === params.category || product.newCollection === params.category || product.sale !== null || 0
+                                        ?
+                                        <NavLink to={`/products/${params.category}/${product.code}`} key={product._id} className="item">
+                                            <div className="image">
+                                                <img src={image1} alt="image1" />
+                                            </div>
+                                            <div className="info">
+                                                <div className="name">{product.code}</div>
+                                                {calculateSalePrice(product) === 'Invalid input' ? <div className="price">{product.price}EGP</div> : <div className="price_dashed">{product.price}EGP</div>}
+                                                {calculateSalePrice(product) !== 'Invalid input' ? <span>{calculateSalePrice(product)}EGP</span> : null}
+                                            </div>
+                                        </NavLink>
+                                        :
+                                        null
+                                )
+                            }
+                        </div>
+                    </div>
+                }
+                {/* {params.category === "footballJerseys" &&
                     <div className='football_jerseys'>
                         <div className="egyptian_league">
                             <h2>Egyptian League</h2>
@@ -219,7 +244,7 @@ export default function ProductsAll() {
                             </div>
                         </div>
                     </div>
-                }
+                } */}
                 {params.category === "studs_turfs" &&
                     <div className='studs_turfs'>
                         <h2>Studs & Turfs</h2>
