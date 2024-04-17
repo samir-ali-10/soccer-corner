@@ -16,7 +16,11 @@ import Swal from 'sweetalert2';
 
 export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
 
-    const [stock, setStock] = useState([]);
+    const [stock, setStock] = useState([]),
+        [isDragging, setIsDragging] = useState(false),
+        [sliderPosition, setSliderPosition] = useState(0),
+        [startX, setStartX] = useState(0),
+        sliderRef = useRef(null);
 
     let getData = () => {
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
@@ -26,6 +30,24 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
         getData();
         setAppearLoginSignup(true)
     }, [])
+
+    const handleMouseDown = (event) => {
+        setIsDragging(true);
+        setStartX(event.pageX - sliderRef.current.offsetLeft);
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    const handleMouseMove = (event) => {
+        if (!isDragging) return;
+
+        const mouseX = event.pageX - sliderRef.current.offsetLeft;
+        const deltaX = mouseX - startX;
+        setSliderPosition((prevPosition) => prevPosition + deltaX);
+        setStartX(mouseX);
+    };
 
     let addToCart = async (product) => {
         let timerInterval;

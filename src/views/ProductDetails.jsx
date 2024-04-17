@@ -17,6 +17,10 @@ export default function ProductDetails() {
         setSelectedSize(element)
     }
 
+    let handleActiveBlur = () => {
+        setSelectedSize();
+    }
+
     let getProduct = () => {
         fetch(`http://localhost:3001/api/products/code/${params.code}`).then((res) => res.json()).then((data) => setProduct(data))
     }
@@ -55,7 +59,7 @@ export default function ProductDetails() {
         getProduct();
     }, [])
 
-    console.log(product);
+    const sizes = ['xs', 's', 'm', 'l', 'xl', 'xxl', 'xxxl', 'xxxxl'];
 
 
     return (
@@ -75,15 +79,30 @@ export default function ProductDetails() {
                                 <div className="price">
                                     Price: {product.price}EGP
                                 </div>
-                                <h3 className='text-white mb-3'>Available Sizes</h3>
+                                <h3 className='text-white mb-3'>Sizes</h3>
                                 <div className="sizes d-flex justify-content-center">
                                     {
+                                        sizes.map(size => {
+                                            const isAvailable = product.availableSizes.includes(size);
+                                            return (
+                                                <button
+                                                    key={size}
+                                                    className={isAvailable ? (selectedSize === size ? "active me-2" : "me-2") : "not_available"}
+                                                    onClick={() => handleActive(size)}
+                                                    onBlur={handleActiveBlur}
+                                                >
+                                                    {size.toUpperCase()}
+                                                </button>
+                                            );
+                                        })
+                                    }
+                                    {/* {
                                         product.availableSizes.map(size =>
                                             <div key={size}>
-                                                <button className={selectedSize === size ? "active me-2" : "me-2"} onClick={() => handleActive(size)}>{size.toUpperCase()}</button>
+                                                <button className={selectedSize === size ? "active me-2" : "me-2"} onBlur={handleActiveBlur} onClick={() => handleActive(size)}>{size.toUpperCase()}</button>
                                             </div>
                                         )
-                                    }
+                                    } */}
                                 </div>
                                 <button onClick={addToCart} className='add_to_cart'>Add to cart</button>
                             </div>

@@ -84,13 +84,13 @@ export default function Archived() {
             return 'bg-danger'
         }
         else if (status === "delivered") {
-            return 'bg-info'
-        }
-        else if (status === "outForDelivery") {
             return 'bg-success'
         }
-        else if (status === "moneyCollected") {
+        else if (status === "outForDelivery") {
             return 'bg-warning'
+        }
+        else if (status === "moneyCollected") {
+            return 'bg-info'
         }
     }
 

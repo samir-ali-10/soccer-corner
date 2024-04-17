@@ -21,7 +21,12 @@ export default function ProductsAll() {
     const [stock, setStock] = useState([]),
         [activeSize, setActiveSize] = useState(null),
         [sizeSelected, setSizeSelected] = useState(),
-        [size, setSize] = useState();
+        [size, setSize] = useState(),
+        [activeButton, setActiveButton] = useState(null);
+
+    const handleClick = (size) => {
+        setActiveButton(size);
+    };
 
 
     const sizeOptions = [
@@ -127,7 +132,7 @@ export default function ProductsAll() {
     return (
         <div className='products_all'>
             <Container>
-                <div className="drop_down text-center mb-5">
+                {/* <div className="drop_down text-center mb-5">
                     <select value={sizeSelected} onChange={getProductsBySize} name="sizes" id="sizes">
                         {
                             sizeOptions.map(option =>
@@ -135,10 +140,55 @@ export default function ProductsAll() {
                             )
                         }
                     </select>
-                </div>
+                </div> */}
                 {
                     <div>
                         <h2 className=''>{params.category}</h2>
+                        <div className='filter text-uppercase mb-3'>
+                            <span className='text-capitalize text-white me-3 fs-5'>Filter By Size:</span>
+                            <button
+                                className={activeButton === 'xs' ? 'me-3 active' : 'me-3'}
+                                onClick={() => handleClick('xs')}
+                            >
+                                xs
+                            </button>
+                            <button
+                                className={activeButton === 's' ? 'me-3 active' : 'me-3'}
+                                onClick={() => handleClick('s')}
+                            >
+                                s
+                            </button>
+                            <button
+                                className={activeButton === 'm' ? 'me-3 active' : 'me-3'}
+                                onClick={() => handleClick('m')}
+                            >
+                                m
+                            </button>
+                            <button
+                                className={activeButton === 'l' ? 'me-3 active' : 'me-3'}
+                                onClick={() => handleClick('l')}
+                            >
+                                l
+                            </button>
+                            <button
+                                className={activeButton === 'xl' ? 'me-3 active' : 'me-3'}
+                                onClick={() => handleClick('xl')}
+                            >
+                                xl
+                            </button>
+                            <button
+                                className={activeButton === 'xxl' ? 'me-3 active' : 'me-3'}
+                                onClick={() => handleClick('xxl')}
+                            >
+                                xxl
+                            </button>
+                            <button
+                                className={activeButton === 'xxxl' ? 'me-3 active' : 'me-3'}
+                                onClick={() => handleClick('xxxl')}
+                            >
+                                xxxl
+                            </button>
+                        </div>
                         <div className='items_container'>
                             {
                                 stock.map(product =>

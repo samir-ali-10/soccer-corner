@@ -744,8 +744,6 @@ input:focus, textarea:focus {
 
 .slider_container {
   background-color: #333;
-  border-left: 10px solid white;
-  border-right: 10px solid white;
   padding: 30px 30px;
   gap: 40px;
   width: 90%;
@@ -898,7 +896,8 @@ input:focus, textarea:focus {
   margin-bottom: 100px;
 }
 
-.products .filter button {
+.products .filter button, 
+.products_all .filter button {
   background-color: transparent;
   color: var(--text-color);
   border: 1px solid var(--text-color);
@@ -915,11 +914,13 @@ input:focus, textarea:focus {
   -o-transition: .3s;
 }
 
-.products .filter button:hover {
+.products .filter button:hover,
+.products_all .filter button:hover {
   background-color: rgba(111, 111, 111, 0.8);
 }
 
-.products .filter button.active {
+.products .filter button.active,
+.products_all .filter button.active {
   background-color: var(--text-color);
   color: var(--primary-color);
 }
@@ -1224,11 +1225,31 @@ input:focus, textarea:focus {
   border: none;
   padding: 5px 15px;
   color: var(--text-color);
+  position: relative;
 }
 
 .product_details .product_container .infos .sizes button.active {
   background-color: var(--secondary-color);
   color: var(--primary-color);
+}
+
+.product_details .product_container .infos .sizes button.not_available {
+  pointer-events: none;
+}
+
+.product_details .product_container .infos .sizes button.not_available::before {
+  content: '';
+  position: absolute;
+  background-color: white;
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
 }
 
 .product_details .product_container .infos .sizes button:not(:last-child) {
