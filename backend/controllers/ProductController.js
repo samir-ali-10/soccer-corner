@@ -161,7 +161,7 @@ exports.getOrders = (req , res , next) => {
   });
 }
 exports.postOrder = async (req , res , next) => {
-  const name = req.body.receiverName;
+  const name = req.body.name;
   const zone = req.body.zone;
   const area = req.body.area;
   const phone = req.body.phone;
