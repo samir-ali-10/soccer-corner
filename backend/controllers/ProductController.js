@@ -115,6 +115,23 @@ exports.getTypeBrandNameCollectionNameModelSize = (req, res) => {
     });
 };
 
+exports.getByBrandNameAndSize = (req, res) => {
+  const brandName = req.params.brandName;
+  const size = req.params.size;
+
+  ProductModel.find({
+    BrandName: brandName,
+    size : size,
+  })
+    .then((products) => {
+      res.json(products);
+      console.log(products);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 
 
 
