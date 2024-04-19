@@ -256,13 +256,6 @@ export default function Stock() {
                                 )
                             }
                         </select>
-                        <select value={sizeSelected} onChange={getBySize} name="sizes" id="sizes">
-                            {
-                                sizeOptions.map(option =>
-                                    <option key={option.value} value={option.value}>{option.text}</option>
-                                )
-                            }
-                        </select>
                     </div>
                 </div>
                 <div className="delete_all text-end">

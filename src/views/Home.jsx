@@ -89,6 +89,13 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
         return salePrice.toFixed(2); // Adjust decimal places as needed
     };
 
+    const scrollToCategories = () => {
+        const categoriesSection = document.getElementById('categories');
+        if (categoriesSection) {
+            categoriesSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className='home_page'>
             <Carousel>
@@ -99,7 +106,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                         alt="First slide"
                     />
                     <Carousel.Caption>
-                        <button>Shop Now</button>
+                        <NavLink to='/products/offers/all'>Shop Now</NavLink>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -109,7 +116,7 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                         alt="Second slide"
                     />
                     <Carousel.Caption>
-                        <button>Shop Now</button>
+                        <NavLink to='/products/new/all'>Shop Now</NavLink>
                     </Carousel.Caption>
                 </Carousel.Item>
                 <Carousel.Item>
@@ -119,12 +126,12 @@ export default function Home({ appearLoginSignupm, setAppearLoginSignup }) {
                         alt="Third slide"
                     />
                     <Carousel.Caption>
-                        <button>Shop Now</button>
+                        <NavLink onClick={scrollToCategories}>Shop Now</NavLink>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
             <Container>
-                <div className="new_collection">
+                <div id='categories' className="new_collection">
                     <p>our products</p>
                     <div className="new_collection_container">
                         <div className="item smsc-w100 lgsc-w50">

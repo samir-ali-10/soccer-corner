@@ -24,11 +24,6 @@ export default function ProductsAll() {
         [size, setSize] = useState(),
         [activeButton, setActiveButton] = useState(null);
 
-    const handleClick = (size) => {
-        setActiveButton(size);
-    };
-
-
     const sizeOptions = [
         { value: '', text: '--Choose By Size--' },
         { value: 's', text: 'S' },
@@ -108,16 +103,20 @@ export default function ProductsAll() {
         fetch(`http://localhost:3001/api/products`).then((res) => res.json()).then((data) => setStock(data))
     }
 
-    let getProductsBySize = (val) => {
-        fetch(`http://localhost:3001/api/products/size/${val.target.value}`).then((res) => res.json()).then((data) => setStock(data))
+    const getByBrandAndSize = (brandName, size) => {
+        fetch(`http://localhost:3001/api/products/${brandName}/${size}`).then((res) => res.json()).then((data) => setStock(data))
     }
+
+    const handleClick = (size) => {
+        setActiveButton(size);
+    };
+
 
     const calculateSalePrice = (product) => {
         // Ensure that price and sale are valid numbers
         if (typeof product.price !== 'number' || typeof product.sale !== 'number') {
             return 'Invalid input';
         }
-
         // Calculate the sale price
         const salePrice = product.price - (product.price * product.sale) / 100;
         return salePrice.toFixed(2); // Adjust decimal places as needed
@@ -127,7 +126,7 @@ export default function ProductsAll() {
         getData();
     }, [])
 
-    console.log(params);
+    console.log(stock);
 
     return (
         <div className='products_all'>
@@ -148,43 +147,64 @@ export default function ProductsAll() {
                             <span className='text-capitalize text-white me-3 fs-5'>Filter By Size:</span>
                             <button
                                 className={activeButton === 'xs' ? 'me-3 active' : 'me-3'}
-                                onClick={() => handleClick('xs')}
+                                onClick={() => {
+                                    handleClick('xs');
+                                    getByBrandAndSize(params.category, 'xs')
+                                }}
                             >
                                 xs
                             </button>
                             <button
                                 className={activeButton === 's' ? 'me-3 active' : 'me-3'}
-                                onClick={() => handleClick('s')}
+                                onClick={() => {
+                                    handleClick('s');
+                                    getByBrandAndSize(params.category, 's')
+                                }}
                             >
                                 s
                             </button>
                             <button
                                 className={activeButton === 'm' ? 'me-3 active' : 'me-3'}
-                                onClick={() => handleClick('m')}
+                                onClick={() => {
+                                    handleClick('m');
+                                    getByBrandAndSize(params.category, 'm')
+                                }}
                             >
                                 m
                             </button>
                             <button
                                 className={activeButton === 'l' ? 'me-3 active' : 'me-3'}
-                                onClick={() => handleClick('l')}
+                                onClick={() => {
+                                    handleClick('l');
+                                    getByBrandAndSize(params.category, 'l')
+                                }}
                             >
                                 l
                             </button>
                             <button
                                 className={activeButton === 'xl' ? 'me-3 active' : 'me-3'}
-                                onClick={() => handleClick('xl')}
+                                onClick={() => {
+                                    handleClick('xl');
+                                    getByBrandAndSize(params.category, 'xl')
+                                }}
                             >
                                 xl
                             </button>
                             <button
                                 className={activeButton === 'xxl' ? 'me-3 active' : 'me-3'}
-                                onClick={() => handleClick('xxl')}
+                                onClick={() => {
+                                    handleClick('xxl');
+                                    getByBrandAndSize(params.category, 'xxl')
+                                }}
                             >
                                 xxl
                             </button>
                             <button
                                 className={activeButton === 'xxxl' ? 'me-3 active' : 'me-3'}
-                                onClick={() => handleClick('xxxl')}
+                                onClick={() => {
+                                    handleClick('xxxl');
+                                    getByBrandAndSize(params.category, 'xxxl')
+                                }}
                             >
                                 xxxl
                             </button>

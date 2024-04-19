@@ -24,10 +24,6 @@ export default function Products() {
         [leagues, setLeagues] = useState([]),
         [activeButton, setActiveButton] = useState(null);
 
-    const handleClick = (size) => {
-        setActiveButton(size);
-    };
-
     const studsTurfs = [
         {
             image: studsTurfsOne,
@@ -104,6 +100,15 @@ export default function Products() {
         fetch(`http://localhost:3001/api/products/LeagueOrBrandNames`).then((res) => res.json()).then((data) => setLeagues(data));
     }
 
+    const getByBrandAndSize = (brandName, size) => {
+        fetch(`http://localhost:3001/api/products/${brandName}/${size}`).then((res) => res.json()).then((data) => setStock(data))
+    }
+
+    const handleClick = (size) => {
+        setActiveButton(size);
+    };
+
+
     let addToCart = async (product) => {
         let timerInterval;
         Swal.fire({
@@ -166,43 +171,64 @@ export default function Products() {
                                                 <div className='filter text-uppercase'>
                                                     <button
                                                         className={activeButton === 'xs' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('xs')}
+                                                        onClick={() => {
+                                                            handleClick('xs');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'xs')
+                                                        }}
                                                     >
                                                         xs
                                                     </button>
                                                     <button
                                                         className={activeButton === 's' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('s')}
+                                                        onClick={() => {
+                                                            handleClick('s');
+                                                            getByBrandAndSize(league.leagueOrBrand, 's')
+                                                        }}
                                                     >
                                                         s
                                                     </button>
                                                     <button
                                                         className={activeButton === 'm' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('m')}
+                                                        onClick={() => {
+                                                            handleClick('m');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'm')
+                                                        }}
                                                     >
                                                         m
                                                     </button>
                                                     <button
                                                         className={activeButton === 'l' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('l')}
+                                                        onClick={() => {
+                                                            handleClick('l');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'l')
+                                                        }}
                                                     >
                                                         l
                                                     </button>
                                                     <button
                                                         className={activeButton === 'xl' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('xl')}
+                                                        onClick={() => {
+                                                            handleClick('xl');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'xl')
+                                                        }}
                                                     >
                                                         xl
                                                     </button>
                                                     <button
                                                         className={activeButton === 'xxl' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('xxl')}
+                                                        onClick={() => {
+                                                            handleClick('xxl');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'xxl')
+                                                        }}
                                                     >
                                                         xxl
                                                     </button>
                                                     <button
                                                         className={activeButton === 'xxxl' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('xxxl')}
+                                                        onClick={() => {
+                                                            handleClick('xxxl');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'xxxl')
+                                                        }}
                                                     >
                                                         xxxl
                                                     </button>
@@ -251,43 +277,64 @@ export default function Products() {
                                                     <span className='text-capitalize text-white me-3 fs-5'>Filter By Size:</span>
                                                     <button
                                                         className={activeButton === 'xs' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('xs')}
+                                                        onClick={() => {
+                                                            handleClick('xs');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'xs')
+                                                        }}
                                                     >
                                                         xs
                                                     </button>
                                                     <button
                                                         className={activeButton === 's' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('s')}
+                                                        onClick={() => {
+                                                            handleClick('s');
+                                                            getByBrandAndSize(league.leagueOrBrand, 's')
+                                                        }}
                                                     >
                                                         s
                                                     </button>
                                                     <button
                                                         className={activeButton === 'm' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('m')}
+                                                        onClick={() => {
+                                                            handleClick('m');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'm')
+                                                        }}
                                                     >
                                                         m
                                                     </button>
                                                     <button
                                                         className={activeButton === 'l' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('l')}
+                                                        onClick={() => {
+                                                            handleClick('l');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'l')
+                                                        }}
                                                     >
                                                         l
                                                     </button>
                                                     <button
                                                         className={activeButton === 'xl' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('xl')}
+                                                        onClick={() => {
+                                                            handleClick('xl');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'xl')
+                                                        }}
                                                     >
                                                         xl
                                                     </button>
                                                     <button
                                                         className={activeButton === 'xxl' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('xxl')}
+                                                        onClick={() => {
+                                                            handleClick('xxl');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'xxl')
+                                                        }}
                                                     >
                                                         xxl
                                                     </button>
                                                     <button
                                                         className={activeButton === 'xxxl' ? 'me-3 active' : 'me-3'}
-                                                        onClick={() => handleClick('xxxl')}
+                                                        onClick={() => {
+                                                            handleClick('xxxl');
+                                                            getByBrandAndSize(league.leagueOrBrand, 'xxxl')
+                                                        }}
                                                     >
                                                         xxxl
                                                     </button>

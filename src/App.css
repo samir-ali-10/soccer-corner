@@ -536,7 +536,7 @@ input:focus, textarea:focus {
   margin-bottom: 15px;
 }
 
-.home_page .carousel-caption button {
+.home_page .carousel-caption a {
   align-items: center;
   letter-spacing: 3px;
   background-color: #FFFFFF;
@@ -565,18 +565,18 @@ input:focus, textarea:focus {
   text-transform: uppercase;
 }
 
-.home_page .carousel-caption button:hover,
-.home_page .carousel-caption button:focus {
+.home_page .carousel-caption a:hover,
+.home_page .carousel-caption a:focus {
   border-color: rgba(0, 0, 0, 0.15);
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   color: rgba(0, 0, 0, 0.65);
 }
 
-.home_page .carousel-caption button:hover {
+.home_page .carousel-caption a:hover {
   transform: translateY(-1px);
 }
 
-.home_page .carousel-caption button:active {
+.home_page .carousel-caption a:active {
   background-color: #F0F0F1;
   border-color: rgba(0, 0, 0, 0.15);
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;

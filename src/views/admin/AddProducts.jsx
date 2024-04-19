@@ -84,7 +84,7 @@ export default function AddProducts() {
         if (response.ok) {
             let timerInterval;
             Swal.fire({
-                title: "Product Added To Cart",
+                title: "Product Added To Stock",
                 timer: 2000,
                 timerProgressBar: true,
                 didOpen: () => {
