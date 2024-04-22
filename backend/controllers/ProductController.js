@@ -243,12 +243,23 @@ exports.deleteOrder = (req , res , next) => {
 }
 
 exports.deleteOneProductFromNewOrder = async (req , res , next) => {
+  
   const productId = req.params.productId
   const orderId = req.params.orderId
+
+  // find the order and delete the product 
   const order = await Order.findOne({ orderId : orderId })
   order.productsOrdered = order.productsOrdered.filter(prod => prod._id.toString() !== productId);
   await order.save();
   console.log('product deleted succesfully');
+  res.json('product deleted successfully');
+
+  // check if the order has 0 products delete it
+
+  if (order.productsOrdered.length === 0){
+    await Order.findOneAndDelete({ orderId: orderId });
+    console.log('Order deleted because it has 0 product.');
+  }
 
 }
 
@@ -537,7 +548,7 @@ exports.postAddProduct = async (req, res, next) => {
   // => CHECK IF PRODUCT EXIST
 
   const existingProduct = await ProductModel.findOne({ code });
-  if (existingProduct) {  
+  if (existingProduct) {
     console.log("Product is already exist ");
     return res.json("product already exist");
   }
@@ -613,24 +624,52 @@ exports.postAddProduct = async (req, res, next) => {
     console.log("New model added:", NewModel);
   }
 
-  const product = new ProductModel({
-    code: code,
-    model: model,
-    league: league,
-    kit: kit,
-    newCollection: newCollection,
-    collectionName: collectionName,
-    BrandName: BrandName,
-    type: type,
-    sale: sale,
-    price: price,
-    quantity: quantity,
-    size: size,
-    description: description,
-    availableSizes : availableSizes
-  });
+  // add the product in the database
+  const product = new ProductModel();
+  if(code) {
+    product.code = code;
+  }
+  if(model) {
+    product.model = model;
+  }
+  if(kit) {
+    product.kit = kit;
+  }
+  if(collectionName) {
+    product.collectionName = collectionName;
+  }
+  if(type) {
+    product.type = type;
+  }
+  if(price) {
+    product.price = price;
+  }
+  if(quantity) {
+    product.quantity = quantity;
+  }
+  if(size) {
+    product.size = size;
+  }
+  if(description) {
+    product.description = description;
+  }
+  if(availableSizes) {
+    product.availableSizes = availableSizes;
+  }
+  if (sale) {
+    product.sale = sale;
+  } 
+  if (newCollection) {
+    product.newCollection = newCollection;
+  }
+  if (league) {
+    product.league = league;
+  }
+  if (BrandName) {
+    product.BrandName = BrandName;
+  }
 
-  if (req.files) {
+  if (req.files && req.files.length > 0) {
     let path = "";
     req.files.forEach(function (files, index, arr) {
       path = path + files.path + ",";
