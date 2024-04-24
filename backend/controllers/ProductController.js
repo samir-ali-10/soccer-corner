@@ -133,11 +133,6 @@ exports.getByBrandNameAndSize = (req, res) => {
 };
 
 
-
-
-
-
-
 exports.getBytype = (req, res, next) => {
   const type = req.params.type;
   ProductModel.find({ type })
@@ -543,18 +538,22 @@ exports.postAddProduct = async (req, res, next) => {
   const quantity = req.body.quantity;
   const description = req.body.description;
   let availableSizes = req.body.availableSizes;
-  availableSizes = availableSizes.split(',');
 
   // => CHECK IF PRODUCT EXIST
 
-  const existingProduct = await ProductModel.findOne({ code });
-  if (existingProduct) {
-    console.log("Product is already exist ");
-    return res.json("product already exist");
+  if (code) {
+    const existingProduct = await ProductModel.findOne({ code });
+    if (existingProduct) {
+      console.log("Product is already exist ");
+      return res.json("product already exist");
+    }  
+  } else {
+    console.log(" no code provided");
+    return res.json(" no code provided");
   }
 
   // => CHECK IF THE COLLECTIONNAME EXIST
-
+  if (collectionName) { 
   const existingCollectionName = await NameOfCollection.findOne({
     Name: collectionName,
   });
@@ -568,62 +567,68 @@ exports.postAddProduct = async (req, res, next) => {
     await newNameOfCollection.save();
     console.log("New collectionName added:", newNameOfCollection);
   }
+  }
 
   // =>  CHECK IF THE LEAGUENAME EXIST
-  const existingLeague = await LeagueOrBrand.findOne({ leagueOrBrand : league });
-
-  if (existingLeague) {
-    console.log("league is already exist");
-  } else {
-    const newLeague = new LeagueOrBrand({
-      leagueOrBrand: league,
-    });
-    await newLeague.save();
-    console.log("New league added:", newLeague);
+  if (league) {
+    const existingLeague = await LeagueOrBrand.findOne({ leagueOrBrand : league });
+    if (existingLeague) {
+      console.log("league is already exist");
+    } else {
+      const newLeague = new LeagueOrBrand({
+        leagueOrBrand: league,
+      });
+      await newLeague.save();
+      console.log("New league added:", newLeague);
+    }
   }
 
     // =>  CHECK IF THE BRANDNAME EXIST
-    const existingBrandName = await LeagueOrBrand.findOne({ leagueOrBrand : BrandName });
+
+    if(BrandName){
+      const existingBrandName = await LeagueOrBrand.findOne({ leagueOrBrand : BrandName });
   
-    if (existingBrandName) {
-      console.log("BrandName is already exist");
-    } else {
-      const newBrandName = new LeagueOrBrand({
-        leagueOrBrand: BrandName,
-      });
-      await newBrandName.save();
-      console.log("New Brandname added:", newBrandName);
+      if (existingBrandName) {
+        console.log("BrandName is already exist");
+      } else {
+        const newBrandName = new LeagueOrBrand({
+          leagueOrBrand: BrandName,
+        });
+        await newBrandName.save();
+        console.log("New Brandname added:", newBrandName);
+      }
     }
 
 
 
   // => CHECK IF THE SIZE EXIST
-  const existingSize = await Size.findOne({ size: size });
+    if(size) {
+      const existingSize = await Size.findOne({ size: size });
 
-  if (existingSize) {
-    console.log("size is already exist");
-  } else {
-    const NewSize = new Size({
-      size: size,
-    });
-    await NewSize.save();
-    console.log("New size added:", NewSize);
-  }
-
+      if (existingSize) {
+        console.log("size is already exist");
+      } else {
+        const NewSize = new Size({
+          size: size,
+        });
+        await NewSize.save();
+        console.log("New size added:", NewSize);
+      }
+    }
   // => CHECK IF THE MODEL EXIST
 
-  const existingModel = await Model.findOne({ model: model });
-
-  if (existingModel) {
-    console.log("model is already exist");
-  } else {
-    const NewModel = new Model({
-      model: model,
-    });
-    await NewModel.save();
-    console.log("New model added:", NewModel);
-  }
-
+    if(model) {
+      const existingModel = await Model.findOne({ model: model });
+      if (existingModel) {
+        console.log("model is already exist");
+      } else {
+        const NewModel = new Model({
+          model: model,
+        });
+        await NewModel.save();
+        console.log("New model added:", NewModel);
+      }
+    }
   // add the product in the database
   const product = new ProductModel();
   if(code) {
@@ -654,6 +659,7 @@ exports.postAddProduct = async (req, res, next) => {
     product.description = description;
   }
   if(availableSizes) {
+    availableSizes = availableSizes.split(',');
     product.availableSizes = availableSizes;
   }
   if (sale) {
