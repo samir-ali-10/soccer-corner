@@ -13,7 +13,10 @@ const archiveSchema = new schema({
         size : String,
         quantity : String,
         price : Number, 
-        status : String
+        status: {
+            type : String,  
+            default : "outForDelivery",
+          }, 
     }],
 })
 
