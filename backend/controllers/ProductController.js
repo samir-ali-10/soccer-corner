@@ -354,24 +354,26 @@ exports.getArchive = (req , res , next) => {
 exports.postToArchive = async (req , res , next ) => {
   
 const orderId = req.params.orderId;
-const existProductInArchive = await Archive.findOne({ orderId : orderId })
-const productInOrders = await Order.findOne({ orderId :  orderId })
+const existOrderInArchive = await Archive.findOne({ orderId : orderId })
+const orderInOrdersCollection = await Order.findOne({ orderId :  orderId })
 
-  if (existProductInArchive) {
+  if (existOrderInArchive) {
     console.log('order already exist in archive ');
     return res.json("order already exist in archive");
 
   }
-  const productToArchive = new Archive({
-    orderId : productInOrders.orderId,
-    name : productInOrders.name ,
-    phone : productInOrders.phone,
-    area : productInOrders.area ,
-    zone : productInOrders.zone ,
-    productsOrdered : productInOrders.productsOrdered
+
+
+  const OrderToArchive = new Archive({
+    orderId : orderInOrdersCollection.orderId,
+    name : orderInOrdersCollection.name ,
+    phone : orderInOrdersCollection.phone,
+    area : orderInOrdersCollection.area ,
+    zone : orderInOrdersCollection.zone ,
+    productsOrdered : orderInOrdersCollection.productsOrdered
   })
- await productToArchive.save();
- console.log('order saved in archive' , productToArchive);
+ await OrderToArchive.save();
+ console.log('order saved in archive' , OrderToArchive);
 }
 
 exports.postAllToArchive = async (req, res, next) => {
