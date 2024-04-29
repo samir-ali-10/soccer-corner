@@ -41,7 +41,7 @@ router.get('/api/orders' , ProductController.getOrders) // orders API
 router.post('/api/postOrder' , ProductController.postOrder) // post products on cart and Client info in the orders
 router.get('/api/deleteOrder/:orderId' , ProductController.deleteOrder) // delete one order
 router.get('/api/deleteAllOrders' , ProductController.deleteAllOrders)  // delete all orders
-router.get('/api/deleteProductFromOrder/:orderId/:productId' , ProductController.deleteOneProductFromNewOrder) // delete one product from an order in NewOrders
+router.get('/api/deleteProductFromOrder/:orderId/:productId/:code' , ProductController.deleteOneProductFromNewOrder) // delete one product from an order in NewOrders
 // Archive
 router.get('/api/archive' , ProductController.getArchive) // archive API
 router.post('/api/postToArchive/:orderId' , ProductController.postToArchive) // post from orders to archive

@@ -239,16 +239,46 @@ exports.deleteOrder = (req , res , next) => {
 
 exports.deleteOneProductFromNewOrder = async (req , res , next) => {
   
-  const productId = req.params.productId
-  const orderId = req.params.orderId
+  const productId = req.params.productId;
+  const orderId = req.params.orderId;
+  const productCode = req.params.code;
 
   // find the order and delete the product 
   const order = await Order.findOne({ orderId : orderId })
-  order.productsOrdered = order.productsOrdered.filter(prod => prod._id.toString() !== productId);
-  await order.save();
-  console.log('product deleted succesfully');
-  res.json('product deleted successfully');
+  if (!order) {
+    return res.status(404).json({ message: "Order not found" });
+  }
+  const productToDelete = order.productsOrdered.find(
+    (prod) => prod._id.toString() === productId
+  );
+  if (!productToDelete) {
+    return res.status(404).json({ message: "Product not found in order" });
+  }
 
+  // Retrieve the quantity of the product from the cart
+  const quantityOrdered = productToDelete.quantity;
+
+
+  // Remove the product from the order
+  order.productsOrdered = order.productsOrdered.filter(
+    (prod) => prod._id.toString() !== productId
+  );
+  await order.save();
+
+  console.log("Product deleted successfully from order");
+  res.json('Product deleted successfully from order');
+
+    // Return the quantity to the stock
+    const productInDB = await ProductModel.findOne({ code: productCode });
+    if (!productInDB) {
+      return res.status(404).json({ message: "Product not found in database" });
+    }
+// Ensure that the returned quantity is added to the existing quantity in the stock without concatenation
+    productInDB.quantity = Number(productInDB.quantity) + Number(quantityOrdered);
+    await productInDB.save();
+    console.log('product quantity returned to stock');
+
+    
   // check if the order has 0 products delete it
 
   if (order.productsOrdered.length === 0){
@@ -705,7 +735,6 @@ exports.increaseQuantity = async (req, res) => {
         await productInCart.save();
         await productInDB.save();
 
-        console.log('Product quantity increased:', productInCart);
         return res.json("Product quantity increased");
       } else {
         console.log("Product is out of stock");
@@ -736,7 +765,6 @@ exports.decreaseQuantity = async (req, res) => {
         await productInCart.save();
         await productInDB.save();
 
-        console.log('Product quantity decreased:', productInCart);
         return res.json("Product quantity decreased");
       } else {
         console.log("Product quantity in cart is already 0");
