@@ -570,7 +570,22 @@ exports.postAddProduct = async (req, res, next) => {
   const quantity = req.body.quantity;
   const description = req.body.description;
   let availableSizes = req.body.availableSizes;
-
+  const xs = req.body.xs;
+  const s = req.body.s;
+  const m = req.body.m;
+  const l = req.body.l;
+  const xl = req.body.xl;
+  const xxl = req.body.xxl;
+  const xxxl = req.body.xxxl;
+  const sizeFour = req.body.sizeFour; 
+  const sizeSix = req.body.sizeSix; 
+  const sizeEight = req.body.sizeEight; 
+  const sizeTen = req.body.sizeTen; 
+  const sizeTwelve = req.body.sizeTwelve; 
+  const sizeFourteen = req.body.sizeFourteen; 
+  const sizeSixteen = req.body.sizeSixteen;
+  const otherSize = req.body.otherSize; 
+  const quantityOfOtherSize = req.body.quantityOfOtherSize;
   // => CHECK IF PRODUCT EXIST
 
   if (code) {
@@ -705,6 +720,57 @@ exports.postAddProduct = async (req, res, next) => {
   }
   if (BrandName) {
     product.BrandName = BrandName;
+  }
+  if(xs) {
+    product.availableSizes.push(`xs : ${xs}`);
+  }
+  if(s) {
+    product.availableSizes.push(`s : ${s}`);
+  }
+  if(m) {
+    product.availableSizes.push(`m : ${m}`);
+  }
+  if(l) {
+    product.availableSizes.push(`l : ${l}`);
+  }
+  if(xl) {
+    product.availableSizes.push(`xl : ${xxl}`);
+  }
+  if(xxl) {
+    product.availableSizes.push(`xxl : ${xxl}`);
+  }
+  if(xxxl) {
+    product.availableSizes.push(`xxxl : ${xxxl}`);
+  }
+  if (sizeFour) {
+    product.availableSizes.push(`size(4) : ${sizeFour}`)
+  }
+  if (sizeSix) {
+    product.availableSizes.push(`size(6) : ${sizeSix}`)
+  }
+  if (sizeEight) {
+    product.availableSizes.push(`size(8) : ${sizeEight}`)
+  }
+  if (sizeTen) {
+    product.availableSizes.push(`size(10) : ${sizeTen}`)
+  }
+  if (sizeTwelve) {
+    product.availableSizes.push(`size(12) : ${sizeTwelve}`)
+  }
+  if (sizeFourteen) {
+    product.availableSizes.push(`size(14) : ${sizeFourteen}`)
+  }
+  if (sizeSixteen) {
+    product.availableSizes.push(`size(16) : ${sizeSixteen}`)
+  }
+  if (otherSize && quantityOfOtherSize) {
+    product.availableSizes.push(` ${otherSize} : ${quantityOfOtherSize}`)
+  }
+
+
+  if(availableSizes) {
+    availableSizes = availableSizes.split(',');
+    product.availableSizes = availableSizes;
   }
 
   if (req.files && req.files.length > 0) {
