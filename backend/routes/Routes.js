@@ -7,7 +7,6 @@ const authController = require('../controllers/authController')
 
 router.get('/api/products/type/:type' , ProductController.getBytype)
 router.get('/api/products/types' , ProductController.getTypes)
-router.get("/api/products", ProductController.getProducts); // get all products
 router.get("/api/products/collection/:collectionName",ProductController.getCollection); // get collection
 router.get("/api/products/league/:league/model/:model/collection/:collectionName/size/:size",ProductController.getCollectionAndModelAndSize); // get collection , model and size 
 router.get("/api/products/code/:code",ProductController.getSingleProduct); // get single product
@@ -22,12 +21,12 @@ router.get('/api/products/delete-products' , ProductController.deleteAllProducts
 router.post('/api/products/editProduct/:code' , ProductController.editProduct); // edit Product by code
 router.get('/api/products/sizes' , ProductController.getSizes); // get sizes
 router.get('/api/products/models' , ProductController.getModels) // get models 
+router.get('/api/products/:type/:brandName' , ProductController.getByTypeAndBrandName); // Get by type and brandname 
 router.get('/api/products/:brandName/:size' , ProductController.getByBrandNameAndSize) // Get by brandName and Size
-router.get('/api/products/:type/:brandName' ,ProductController.getByTypeAndBrandName); // Get by type and brandname 
 router.get('/api/products/:type/:brandName/:collectionName' , ProductController.getTypeBrandNameCollectionName); // Get by type , brandname and collectionName
 router.get('/api/products/:type/:brandName/:collectionName/:model' , ProductController.getTypeBrandNameCollectionNameModel); // Get by type , brandname  , collectionName and Model
 router.get('/api/products/:type/:brandName/:collectionName/:model/:size' , ProductController.getTypeBrandNameCollectionNameModelSize) // Get by type , brandname , collectionname , model and Size 
-
+router.get("/api/products", ProductController.getProducts); // get all products
 // Cart
 router.get('/api/ProductsOncart', ProductController.getProductsOnCart)
 router.post('/api/PostOncart/:code' , ProductController.postProductsOnCart);
