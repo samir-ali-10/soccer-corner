@@ -56,10 +56,10 @@ router.post('/api/postAllToArchive' , ProductController.postAllToArchive) // pos
 
 // AUTHENTICATION
 
-// router.get('/api/auth/getUsers' , authController.getUsers);
-// router.post('/api/auth/logIn' , authController.logIn)
+router.get('/api/auth/getUsers' , authController.getUsers);
+router.post('/api/auth/signUp' ,authController.signUp)
+router.post('/api/auth/logIn' , authController.logIn)
 // // router.post('/api/auth/logOut' , authController.logOut) // logout API
-// router.post('/api/auth/signUp' ,authController.signUp)
 
 // REVIEWS
 

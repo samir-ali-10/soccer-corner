@@ -56,6 +56,7 @@ exports.signUp = async (req, res, next) => {
         area: area,
         phoneNumber: phoneNumber,
         address: address,
+        cart : []
       });
   
       // Save the user to the database
@@ -79,14 +80,16 @@ exports.signUp = async (req, res, next) => {
 
         if (!user) {
             const error = new Error('A user with this email could not be found');
+            console.log('user not found');
             error.statusCode = 404; // Not Found
             throw error;
         }
-
+        // compare password with the hashed one 
         const isEqual = await bcrypt.compare(password, user.password);
 
         if (!isEqual) {
             const error = new Error('Wrong password!');
+            console.log('wrong password');
             error.statusCode = 401; // Unauthorized
             throw error;
         }
@@ -98,9 +101,7 @@ exports.signUp = async (req, res, next) => {
         }, 'somesupersecretsecret', { expiresIn: '1h' });
 
         // Send the token and userId to the client
-        res.redirect('/home');
-        // res.status(200).json({ token: token, userId: user._id });
-
+        res.status(200).json({ token: token, userId: user._id });
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
